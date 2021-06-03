@@ -1,0 +1,7 @@
+#cont-slid .carousel-inner img {
+  max-height: 80vh;
+  object-fit: cover;
+  object-position: top;
+  padding: 20px 0;
+  filter: grayscale(30%);
+}
