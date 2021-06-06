@@ -13,6 +13,6 @@ const AlumnoSchema = new Schema({
   plan: {type:String, required:true},
   //cuota: {type:Schema.Types.ObjectId,ref: cuota, requiere:true },
   //rutina
-
+  // 
 })
 module.exports = mongoose.models.Alumno || mongoose.model('Alumno', AlumnoSchema);
