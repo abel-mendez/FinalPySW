@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Pagocuota = require('./pagocuota');
 const Rutina = require('./rutina');
 const Asistencia = require('./asistencia');
+const Plan = require('./plan');
 const {Schema} = mongoose;
 const AlumnoSchema = new Schema({
   apellido: {type: String, required: true},
@@ -13,9 +14,10 @@ const AlumnoSchema = new Schema({
   correoelectronico: {type: String, required: true},
   fechainicio: {type: String, required: true},
   //hay relacion de agregacion, me refieron con schema object id
-  cuota: {type: Schema.Types.ObjectId, ref: Pagocuota, required: true},
-  rutina: {type: Schema.Types.ObjectId, ref: Rutina, required: true},
+  pagoscuotas: [{type: Schema.Types.ObjectId, ref: Pagocuota, required: true}],
+  rutinas: [{type: Schema.Types.ObjectId, ref: Rutina, required: true}],
+  plan: {type: Schema.Types.ObjectId, ref: Plan, required: true},
   //hay relacion de composicion, me refiero con object schema
-  asistencia: [{type: Asistencia.schema}]
+  asistencias: [{type: Asistencia.schema}]
 })
 module.exports = mongoose.models.Alumno || mongoose.model('Alumno', AlumnoSchema);
