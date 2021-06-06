@@ -1,0 +1,57 @@
+<div>
+  <h3 class="categorie">Listado de Alumnos</h3>
+  <form class="d-flex row">
+    <div class="col-12 col-sm-5 offset-sm-1">
+      <input
+        class="form-control me-2"
+        type="search"
+        placeholder="Buscar"
+        aria-label="Search"
+      />
+    </div>
+    <div class="col-12 col-sm-3">
+      <label class="visually-hidden" for="inlineFormSelectPref"
+        >Preference</label
+      >
+      <select class="form-select" id="inlineFormSelectPref">
+        <option value="1">DNI</option>
+        <option value="2">Nombre</option>
+      </select>
+    </div>
+    <div class="col-2">
+      <button class="btn btn-outline-green" type="button">Buscar</button>
+    </div>
+  </form>
+  <div class="d-flex justify-content-end">
+    <div class="me-5">
+      <a href="/alumnos/nuevo"
+        ><button class="btn btn-outline-green" type="button">
+          Nuevo Alumno
+        </button></a
+      >
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col" class="col-2">Nombre Y Apellido</th>
+          <th scope="col" class="col-3">DNI</th>
+          <th scope="col" class="col-3">Plan</th>
+          <th scope="col" class="col-3">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>Juan Pablo Perez</th>
+          <td>40335928</td>
+          <td>Plan Full</td>
+          <td scope="col" class="col-2">
+            <a href="#"><button class="btn-green btn">Detalles</button></a>
+            <button class="btn btn-red">Borrar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
