@@ -9,6 +9,12 @@ const PlanSchema = new Schema({
   jueves: {type: Boolean, required: true},
   viernes: {type: Boolean, required: true},
   sabado: {type: Boolean, required: true},
+  /*
+    nombre de plan,
+    cantidad de veces por semana,
+    descripcion,
+    precio,
+  */
   //hay relacion de agregacion, me refieron con schema object id
   //alumno: {type: Schema.Types.ObjectId, ref: Alumno, required: true}
 })
