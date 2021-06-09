@@ -1,102 +1,124 @@
 <main>
   <!--          Datos del alumno Luis     -->
   <section>
-    <h3 class="categorie">Datos del Alumno</h3>
-    <form class="row g-3">
-      <div class="col-md-6">
-        <label for="" class="form-label">Apellido/s</label>
-        <input type="text" class="form-control" id="" />
-      </div>
-      <div class="col-md-6">
-        <label for="" class="form-label">Nombre/s</label>
-        <input type="text" class="form-control" id="" />
-      </div>
-      <div class="col-md-6">
-        <label for="" class="form-label">Fecha de nacimiento</label>
-        <input type="date" class="form-control" id="" />
-      </div>
-      <div class="col-md-6">
-        <label for="" class="form-label">Numero de Documento</label>
-        <input type="text" class="form-control" id="" />
-      </div>
-      <div class="col-12">
-        <label for="" class="form-label">Direccion</label>
-        <input type="text" class="form-control" id="" />
-      </div>
-      <div class="col-12">
-        <label for="" class="form-label">E-mail</label>
-        <input type="text" class="form-control" id="" />
-      </div>
-      <div class="col-md-6">
-        <label for="" class="form-label">Numero de Celular</label>
-        <input type="number" class="form-control" id="" />
-      </div>
-      <div class="col-md-4">
-        <label for="inputState" class="form-label">Tipo de Plan</label>
-        <select id="inputState" class="form-select">
-          <option>Plan Basico</option>
-          <option>Plan Full</option>
-          <option value="">Pase Libre</option>
-        </select>
-      </div>
-      <div class="col-md-2">
-        <label for="" class="form-label">Fecha de inicio</label>
-        <input type="date" class="form-control" id="" />
-      </div>
-      <div class="col-12 buttons">
-        <button type="button" class="btn btn-green">Guardar</button>
-        <button class="btn btn-grey">Modificar</button>
-      </div>
-    </form>
+    <a
+      class="text-decoration-none"
+      data-bs-toggle="collapse"
+      href="#collapseDatos"
+      role="button"
+      aria-expanded="false"
+      aria-controls="collapseExample"
+    >
+      <h3 class="categorie">Datos del Alumno</h3>
+    </a>
+    <div class="collapse" id="collapseDatos">
+      <form class="row g-3">
+        <div class="col-md-6">
+          <label for="" class="form-label">Apellido/s</label>
+          <input type="text" class="form-control" id="" />
+        </div>
+        <div class="col-md-6">
+          <label for="" class="form-label">Nombre/s</label>
+          <input type="text" class="form-control" id="" />
+        </div>
+        <div class="col-md-6">
+          <label for="" class="form-label">Fecha de nacimiento</label>
+          <input type="date" class="form-control" id="" />
+        </div>
+        <div class="col-md-6">
+          <label for="" class="form-label">Numero de Documento</label>
+          <input type="text" class="form-control" id="" />
+        </div>
+        <div class="col-12">
+          <label for="" class="form-label">Direccion</label>
+          <input type="text" class="form-control" id="" />
+        </div>
+        <div class="col-12">
+          <label for="" class="form-label">E-mail</label>
+          <input type="text" class="form-control" id="" />
+        </div>
+        <div class="col-md-6">
+          <label for="" class="form-label">Numero de Celular</label>
+          <input type="number" class="form-control" id="" />
+        </div>
+        <div class="col-md-4">
+          <label for="inputState" class="form-label">Tipo de Plan</label>
+          <select id="inputState" class="form-select">
+            <option>Plan Basico</option>
+            <option>Plan Full</option>
+            <option value="">Pase Libre</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <label for="" class="form-label">Fecha de inicio</label>
+          <input type="date" class="form-control" id="" />
+        </div>
+        <div class="col-12 buttons">
+          <button type="button" class="btn btn-green">Guardar</button>
+          <button class="btn btn-grey">Modificar</button>
+        </div>
+      </form>
+    </div>
   </section>
   <!--                Datos de Pago       -->
   <section>
-    <h3 class="categorie">Historial de Pagos</h3>
-    <form class="row">
-      <div class="col-auto">
-        <label class="m-1" for="">Fecha de Pago:</label>
-        <input type="date" class="form-control" id="" />
-      </div>
-      <div class="col-auto">
-        <label class="m-1" for="">Monto</label>
-        <input type="number" class="form-control" id="" />
-      </div>
-      <div class="col-auto">
-        <label class="m-1" for="">Plan</label>
-        <select class="form-select" id="">
-          <option value="1">Plan Basico</option>
-          <option value="2">Plan Full</option>
-          <option value="3">Pase Libre</option>
-        </select>
-      </div>
+    <a
+      class="text-decoration-none"
+      data-bs-toggle="collapse"
+      href="#collapsePagos"
+      role="button"
+      aria-expanded="false"
+      aria-controls="collapseExample"
+    >
+      <h3 class="categorie">Historial de Pagos</h3>
+    </a>
+    <div class="collapse" id="collapsePagos">
+      <form class="row">
+        <div class="col-auto">
+          <label class="m-1" for="">Fecha de Pago:</label>
+          <input type="date" class="form-control" id="" />
+        </div>
+        <div class="col-auto">
+          <label class="m-1" for="">Monto</label>
+          <input type="number" class="form-control" id="" />
+        </div>
+        <div class="col-auto">
+          <label class="m-1" for="">Plan</label>
+          <select class="form-select" id="">
+            <option value="1">Plan Basico</option>
+            <option value="2">Plan Full</option>
+            <option value="3">Pase Libre</option>
+          </select>
+        </div>
 
-      <div class="col-auto align-self-end">
-        <button type="submit" class="btn btn-green">Nuevo Pago</button>
+        <div class="col-auto align-self-end">
+          <button type="submit" class="btn btn-green">Nuevo Pago</button>
+        </div>
+      </form>
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col" class="col-3">Fecha</th>
+              <th scope="col" class="col-3">Plan</th>
+              <th scope="col" class="col-3">Monto</th>
+              <th scope="col" class="col-3">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>17/03/2021</th>
+              <td>Plan Basico</td>
+              <td>$1000</td>
+              <td>
+                <button class="btn btn-green">Detalles</button>
+                <button class="btn btn-red">Borrar</button>
+                <button class="btn btn-grey">Imprimir</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-    </form>
-    <div class="table-responsive">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col" class="col-3">Fecha</th>
-            <th scope="col" class="col-3">Plan</th>
-            <th scope="col" class="col-3">Monto</th>
-            <th scope="col" class="col-3">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>17/03/2021</th>
-            <td>Plan Basico</td>
-            <td>$1000</td>
-            <td>
-              <button class="btn btn-green">Detalles</button>
-              <button class="btn btn-red">Borrar</button>
-              <button class="btn btn-grey">Imprimir</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
     </div>
   </section>
 

@@ -11,6 +11,11 @@
   margin-bottom: 10px;
   margin-right: 10px;
 }
+.btn-green:hover {
+  background-color: white;
+  border: 1px solid #2ec400;
+  color: #2ec400;
+}
 .btn-grey {
   background-color: rgb(63, 63, 63);
   color: white;
