@@ -1,8 +1,12 @@
 export class Pago {
+  _id:string;
+  id_alumno:string;
   monto:number;
-  fecha:string;
+  fecha_pago:string;
   estado:string;
-  modo_de_pago:string;
+  forma_pago:string;
+  fecha_vencimiento:string;
+  completado:Boolean;
   constructor(){
     
   }

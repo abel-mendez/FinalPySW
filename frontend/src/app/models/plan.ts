@@ -1,7 +1,7 @@
 export class Plan {
+  _id:string;
   nombre:string;
-  cantidad:string;
-  descripcion:string;
+  frecuencia:string;
   costo:number;
   constructor(){
     

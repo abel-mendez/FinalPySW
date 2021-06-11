@@ -1,7 +1,11 @@
 export class Usuario {
-  usuario:string;
+  _id:string;
+  id_alumno:string;
+  nombre_usuario:string;
   password:string;
-  nombres:string;
-  apellido:string;
   perfil:string;
+  activo:boolean;
+  constructor(){
+    
+  }
 }

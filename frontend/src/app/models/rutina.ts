@@ -1,8 +1,8 @@
 export class Rutina {
-  tipo:string;
-  durecion:string;
-  vigentente:boolean;
-  //ejercicios:;
+  _id:string;
+  id_alumno:string;
+  duracion:string;
+  grupo_muscular:boolean;
   constructor(){
     
   }
