@@ -1,17 +1,15 @@
 
 export class Alumno {
-  apellito:string;
-  nombre:string;
+  _id:String;
+  apellidos:string;
+  nombres:string;
   dni:number;
-  fechanac:string;
-  celular:string;
+  fecha_nacimiento:string;
+  telefono:string;
   domicilio:string;
-  correoelectronico:string;
-  fechainicio:string;
-  //pagoscuotas: ;
-  //rutinas:;
-  //plan:;
-  //asistencias:;
+  email:string;
+  fecha_inicio:string;
+  id_plan:string;
   constructor(){
     
   }
