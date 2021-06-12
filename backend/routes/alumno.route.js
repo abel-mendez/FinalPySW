@@ -15,14 +15,16 @@ router.delete('/:id', alumnoCtrl.deleteAlumno);
 router.post('/:id/asistencias', alumnoCtrl.addAsistencia);
 router.delete('/:id/asistencias/:idasistencia', alumnoCtrl.deleteAsistencia);
 
+
 router.post('/:id/rutinas', alumnoCtrl.addRutina);
 router.delete('/:id/rutinas/:idrutina', alumnoCtrl.deleteRutina);
+router.put('/:id/rutinas/:idrutina', alumnoCtrl.editRutina);
 
-router.post('/:id/rutinas/:idrutina/ejercicio', alumnoCtrl.addEjercicioToRutina);
+router.post('/:id/rutinas/:idrutina/ejercicios', alumnoCtrl.addEjercicioToRutina);
 
 router.post('/:id/pagos', alumnoCtrl.addPago);
 
-
+router.post('/:id/progresos', alumnoCtrl.addProgreso);
 
 //PARA ALUMNOS
 router.get('/:id/rutinas', alumnoCtrl.getRutinas);

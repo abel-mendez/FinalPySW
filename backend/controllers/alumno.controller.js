@@ -8,7 +8,7 @@ const alumnoCtrl = {}
 
 //Obtener todos los alumnos
 alumnoCtrl.getAlumnos = async (req, res) => {
-  var alumnos = await Alumno.find().populate("pagos").populate("plan");
+  var alumnos = await Alumno.find().populate("pagos").populate("plan").populate("asistencias");
   res.json(alumnos);
 }
 
@@ -151,7 +151,7 @@ alumnoCtrl.deleteProgreso = async () => {
 alumnoCtrl.addRutina = async (req, res) => {
   const rutina = new Rutina(req.body);
   const alumno = await Alumno.findById(req.params.id);
-  var rutinas = await Alumno.find().populate("plan");
+  //var rutinas = await Alumno.find().populate("plan");
   alumno.rutinas.push(rutina);
 
   try{
@@ -167,6 +167,29 @@ alumnoCtrl.addRutina = async (req, res) => {
         })
   }
 }
+
+
+//Modificación de una rutina
+// alumnoCtrl.editRutina = async (req, res) => {
+//   const alumno = await Alumno.findById(req.params.id);
+//   let rutina = await alumno.rutinas.find(r => r._id == req.params.idrutina);
+//   const vrutina = new Rutina(req.body);
+//   rutina = vrutina;
+//   try {
+//     await Rutina.updateOne(rutina, vrutina);
+//     await Alumno.updateOne({_id: req.params.id}, alumno);
+//     console.log(rutina);
+//     res.json({
+//       'status': '1',
+//       'msg': 'Rutina ACTUALIZADA'
+//     })
+//   } catch (error) {
+//     res.json({
+//       'status': '0',
+//       'msg': 'Error actualizando la rutina'
+//     })
+//   }
+// }
 
 //Baja de rutina
 alumnoCtrl.deleteRutina = async () => {
@@ -194,8 +217,7 @@ alumnoCtrl.addEjercicioToRutina = async (req, res) => {
 
   const ejercicio = new Ejercicio(req.body);
   const alumno = await Alumno.findById(req.params.id);
-  var rutinas = alumno.rutinas;
-  const rutina = await rutinas.find(r => r._id == req.params.idrutina);
+  const rutina = await alumno.rutinas.find(r => r._id == req.params.idrutina);
   rutina.ejercicios.push(ejercicio);
 
   try{
@@ -243,19 +265,20 @@ alumnoCtrl.addPago = async (req, res) => {
 
 //Obtener las rutinas de un alumno
 alumnoCtrl.getRutinas = async (req, res) => {
-  const alumno = await Alumno.findById(req.params.id);
+  const alumno = await Alumno.findById(req.params.id).populate("rutinas");
   res.json(alumno.rutinas);
 }
 
 
 //Obtener las asistencias de un alumno
 alumnoCtrl.getAsistencias = async (req, res) => {
-  const alumno = await Alumno.findById(req.params.id);
+  const alumno = await Alumno.findById(req.params.id).populate("asistencias");
   res.json(alumno.asistencias);
 }
 
+//Obtener los pagos de un alumno
 alumnoCtrl.getPagos = async (req, res) => {
-  const alumno = await Alumno.findById(req.params.id);
+  const alumno = await Alumno.findById(req.params.id).populate("pagos");
   res.json(alumno.pagos);
 }
 

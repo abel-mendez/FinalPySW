@@ -18,8 +18,8 @@ const AlumnoSchema = new Schema({
   //hay relacion de agregacion, me refieron con schema object id
   pagos: [{type: Schema.Types.ObjectId, ref: Pago}],
   plan: {type: Schema.Types.ObjectId, ref: Plan, required: true},
+  asistencias: [{type: Schema.Types.ObjectId, ref:Asistencia}],
   //hay relacion de composicion, me refiero con object schema
-  asistencias: [{type: Asistencia.schema}],
   progresos: [{type: Progreso.schema}],
   rutinas: [{type: Rutina.schema}],
   usuario: {type: Usuario.schema}
