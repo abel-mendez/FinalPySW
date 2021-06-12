@@ -1,26 +1,26 @@
-const Pagocuota = require('../models/pagocuota');
+const Pago = require('../models/pago');
 const pagoCtrl = {}
 
-//Alta de nuevo pago
-pagoCtrl.createPago = async (req, res) => {
-  var pago = new Pagocuota(req.body);
-  try {
-    await pago.save();
-    res.json({
-      'status': '1',
-      'msg': 'Pago GUARDADO'
-    })
-  } catch (error) {
-    res.json({
-      'status': '0',
-      'msg': 'Error guardando el pago.'
-    })
-  }
-}
+//Alta de nuevo pago, NO IRÍA, se hace desde el alumno
+// pagoCtrl.createPago = async (req, res) => {
+//   var pago = new Pago(req.body);
+//   try {
+//     await pago.save();
+//     res.json({
+//       'status': '1',
+//       'msg': 'Pago GUARDADO'
+//     })
+//   } catch (error) {
+//     res.json({
+//       'status': '0',
+//       'msg': 'Error guardando el pago.'
+//     })
+//   }
+// }
 
 //Recupera todos los pagos realizados
 pagoCtrl.getAllPagos = async (req, res) => {
-  var pagos = await Pagocuota.find();
+  var pagos = await Pago.find();
   res.json(pagos);
 }
 
