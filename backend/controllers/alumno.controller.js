@@ -48,63 +48,64 @@ alumnoCtrl.deleteAlumno = async (req, res) => {
 
 //Modificacion de alumno
 alumnoCtrl.editAlumno = async (req, res) => {
-    const vAlumno = new Alumno(req.body);
-    try {
-      await Alumno.updateOne({ _id: req.body._id }, vAlumno);
-      res.json({
-        'status': '1',
-        'msg': 'Alumno ACTUALIZADO'
-      })
-    } catch (error) {
-      res.json({
-        'status': '0',
-        'msg': 'Error actualizando el alumnos'
-      })
-    }
+  const vAlumno = new Alumno(req.body);
+  try {
+    await Alumno.updateOne({ _id: req.body._id }, vAlumno);
+    res.json({
+      'status': '1',
+      'msg': 'Alumno ACTUALIZADO'
+    })
+  } catch (error) {
+    res.json({
+      'status': '0',
+      'msg': 'Error actualizando el alumnos'
+    })
   }
-  
+}
 
-
-
+alumnoCtrl.getAlumnoPorDNI = async (req, res) => {
+  var alumnos = await Alumno.find().where("dni").equals(req.params.dni).populate("pagos").populate("plan").populate("asistencias");
+  res.json(alumnos);
+}
 
 //Alta de asistencia
 alumnoCtrl.addAsistencia = async (req, res) => {
-    const asistencia = new Asistencia(req.body);
-    const alumno = await Alumno.findById(req.params.id);
-    alumno.asistencias.push(asistencia);
+  const asistencia = new Asistencia(req.body);
+  const alumno = await Alumno.findById(req.params.id);
+  alumno.asistencias.push(asistencia);
 
-    try{
-      await asistencia.save();
-        await Alumno.updateOne({_id: req.params.id}, alumno);
-        res.json({
-            'status': '1',
-            'msg': 'Asistencia GUARDADA'
-        })
-    } catch(error){
-        res.json({
-            'status': '0',
-            'msg': 'Error guardando la asistencia.'
-          })
-    }
+  try {
+    await asistencia.save();
+    await Alumno.updateOne({ _id: req.params.id }, alumno);
+    res.json({
+      'status': '1',
+      'msg': 'Asistencia GUARDADA'
+    })
+  } catch (error) {
+    res.json({
+      'status': '0',
+      'msg': 'Error guardando la asistencia.'
+    })
+  }
 }
 
 //Baja de asistencia
 alumnoCtrl.deleteAsistencia = async () => {
-    const alumno = await Alumno.findById(req.params.id);
-    const idasistencia = req.params.idasistencia;
-    alumno.asistencias.pull(idasistencia);
-    try{
-        await Alumno.updateOne({_id: req.params.id}, alumno);
-        res.json({
-            'status': '1',
-            'msg': 'Asistencia ELIMINADA'
-        })
-    } catch(error){
-        res.json({
-            'status': '0',
-            'msg': 'Error eliminando la asistencia.'
-          })
-    }
+  const alumno = await Alumno.findById(req.params.id);
+  const idasistencia = req.params.idasistencia;
+  alumno.asistencias.pull(idasistencia);
+  try {
+    await Alumno.updateOne({ _id: req.params.id }, alumno);
+    res.json({
+      'status': '1',
+      'msg': 'Asistencia ELIMINADA'
+    })
+  } catch (error) {
+    res.json({
+      'status': '0',
+      'msg': 'Error eliminando la asistencia.'
+    })
+  }
 }
 
 //Alta de progreso
@@ -113,17 +114,17 @@ alumnoCtrl.addProgreso = async (req, res) => {
   const alumno = await Alumno.findById(req.params.id);
   alumno.progresos.push(progreso);
 
-  try{
-      await Alumno.updateOne({_id: req.params.id}, alumno);
-      res.json({
-          'status': '1',
-          'msg': 'Progreso GUARDADO'
-      })
-  } catch(error){
-      res.json({
-          'status': '0',
-          'msg': 'Error guardando el progreso del alumno.'
-        })
+  try {
+    await Alumno.updateOne({ _id: req.params.id }, alumno);
+    res.json({
+      'status': '1',
+      'msg': 'Progreso GUARDADO'
+    })
+  } catch (error) {
+    res.json({
+      'status': '0',
+      'msg': 'Error guardando el progreso del alumno.'
+    })
   }
 }
 
@@ -132,17 +133,17 @@ alumnoCtrl.deleteProgreso = async () => {
   const alumno = await Alumno.findById(req.params.id);
   const idprogreso = req.params.idprogreso;
   alumno.progresos.pull(idprogreso);
-  try{
-      await Alumno.updateOne({_id: req.params.id}, alumno);
-      res.json({
-          'status': '1',
-          'msg': 'Progreso ELIMINADO'
-      })
-  } catch(error){
-      res.json({
-          'status': '0',
-          'msg': 'Error eliminando el progreso.'
-        })
+  try {
+    await Alumno.updateOne({ _id: req.params.id }, alumno);
+    res.json({
+      'status': '1',
+      'msg': 'Progreso ELIMINADO'
+    })
+  } catch (error) {
+    res.json({
+      'status': '0',
+      'msg': 'Error eliminando el progreso.'
+    })
   }
 }
 
@@ -154,17 +155,17 @@ alumnoCtrl.addRutina = async (req, res) => {
   //var rutinas = await Alumno.find().populate("plan");
   alumno.rutinas.push(rutina);
 
-  try{
-      await Alumno.updateOne({_id: req.params.id}, alumno);
-      res.json({
-          'status': '1',
-          'msg': 'Rutina GUARDADA'
-      })
-  } catch(error){
-      res.json({
-          'status': '0',
-          'msg': 'Error guardando la rutina del alumno.'
-        })
+  try {
+    await Alumno.updateOne({ _id: req.params.id }, alumno);
+    res.json({
+      'status': '1',
+      'msg': 'Rutina GUARDADA'
+    })
+  } catch (error) {
+    res.json({
+      'status': '0',
+      'msg': 'Error guardando la rutina del alumno.'
+    })
   }
 }
 
@@ -196,22 +197,19 @@ alumnoCtrl.deleteRutina = async () => {
   const alumno = await Alumno.findById(req.params.id);
   const idrutina = req.params.idrutina;
   alumno.rutinas.pull(idrutina);
-  try{
-      await Alumno.updateOne({_id: req.params.id}, alumno);
-      res.json({
-          'status': '1',
-          'msg': 'Rutina ELIMINADA'
-      })
-  } catch(error){
-      res.json({
-          'status': '0',
-          'msg': 'Error eliminando la rutina.'
-        })
+  try {
+    await Alumno.updateOne({ _id: req.params.id }, alumno);
+    res.json({
+      'status': '1',
+      'msg': 'Rutina ELIMINADA'
+    })
+  } catch (error) {
+    res.json({
+      'status': '0',
+      'msg': 'Error eliminando la rutina.'
+    })
   }
 }
-
-
-
 
 alumnoCtrl.addEjercicioToRutina = async (req, res) => {
 
@@ -220,20 +218,20 @@ alumnoCtrl.addEjercicioToRutina = async (req, res) => {
   const rutina = await alumno.rutinas.find(r => r._id == req.params.idrutina);
   rutina.ejercicios.push(ejercicio);
 
-  try{
-      
-      await Rutina.updateOne({_id: req.params.idrutina}, rutina);
-      await Alumno.updateOne({_id: req.params.id}, alumno);
-      res.json({
-          'status': '1',
-          'msg': 'Ejercicio GUARDADO'
-      })
-  } catch(error){
-      res.json({
-          'status': '0',
-          'msg': 'Error guardando el ejercicio.'
-        })
-      }
+  try {
+
+    await Rutina.updateOne({ _id: req.params.idrutina }, rutina);
+    await Alumno.updateOne({ _id: req.params.id }, alumno);
+    res.json({
+      'status': '1',
+      'msg': 'Ejercicio GUARDADO'
+    })
+  } catch (error) {
+    res.json({
+      'status': '0',
+      'msg': 'Error guardando el ejercicio.'
+    })
+  }
 
 }
 
@@ -244,18 +242,18 @@ alumnoCtrl.addPago = async (req, res) => {
   const alumno = await Alumno.findById(req.params.id);
   alumno.pagos.push(pago);
 
-  try{
-      await pago.save();
-      await Alumno.updateOne({_id: req.params.id}, alumno);
-      res.json({
-          'status': '1',
-          'msg': 'Pago GUARDADO'
-      })
-  } catch(error){
-      res.json({
-          'status': '0',
-          'msg': 'Error guardando el pago.'
-        })
+  try {
+    await pago.save();
+    await Alumno.updateOne({ _id: req.params.id }, alumno);
+    res.json({
+      'status': '1',
+      'msg': 'Pago GUARDADO'
+    })
+  } catch (error) {
+    res.json({
+      'status': '0',
+      'msg': 'Error guardando el pago.'
+    })
   }
 }
 

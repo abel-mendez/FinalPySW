@@ -24,4 +24,9 @@ pagoCtrl.getAllPagos = async (req, res) => {
   res.json(pagos);
 }
 
+pagoCtrl.getPagoPorFecha = async (req, res) => {
+  const pago = await Pago.find().where("fechapago").equals(req.params.fechapago);
+  res.json(pago);
+}
+
 module.exports = pagoCtrl;
