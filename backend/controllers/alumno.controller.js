@@ -170,26 +170,26 @@ alumnoCtrl.addRutina = async (req, res) => {
 
 
 //Modificación de una rutina
-// alumnoCtrl.editRutina = async (req, res) => {
-//   const alumno = await Alumno.findById(req.params.id);
-//   let rutina = await alumno.rutinas.find(r => r._id == req.params.idrutina);
-//   const vrutina = new Rutina(req.body);
-//   rutina = vrutina;
-//   try {
-//     await Rutina.updateOne(rutina, vrutina);
-//     await Alumno.updateOne({_id: req.params.id}, alumno);
-//     console.log(rutina);
-//     res.json({
-//       'status': '1',
-//       'msg': 'Rutina ACTUALIZADA'
-//     })
-//   } catch (error) {
-//     res.json({
-//       'status': '0',
-//       'msg': 'Error actualizando la rutina'
-//     })
-//   }
-// }
+alumnoCtrl.editRutina = async (req, res) => {
+  // const alumno = await Alumno.findById(req.params.id);
+  // let rutina = await alumno.rutinas.find(r => r._id == req.params.idrutina);
+  // const vrutina = new Rutina(req.body);
+  // rutina = vrutina;
+  // try {
+  //   await Rutina.updateOne(rutina, vrutina);
+  //   await Alumno.updateOne({_id: req.params.id}, alumno);
+  //   console.log(rutina);
+  //   res.json({
+  //     'status': '1',
+  //     'msg': 'Rutina ACTUALIZADA'
+  //   })
+  // } catch (error) {
+  //   res.json({
+  //     'status': '0',
+  //     'msg': 'Error actualizando la rutina'
+  //   })
+  // }
+}
 
 //Baja de rutina
 alumnoCtrl.deleteRutina = async () => {
