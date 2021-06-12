@@ -1,4 +1,5 @@
 const Rutina = require('../models/rutina');
+const Ejercicio = require('../models/ejercicios');
 const rutinasCtrl = {}
 
 //Creacion de rutina, envio informacion de los ejercicios en body como un objeto
@@ -54,6 +55,46 @@ rutinaCtrl.editRutina = async (req, res) => {
       'status': '0',
       'msg': 'Error actualizando la rutina'
     })
+  }
+}
+
+//Alta de ejercicios
+rutinaCtrl.addEjercicio = async (req, res) => {
+  const ejercicio = new Ejercicio(req.body);
+  const rutina = await Rutina.findById(req.params.id);
+  rutina.ejercicios.push(ejercicio);
+
+  try{
+      await Rutina.updateOne({_id: req.params.id}, rutina);
+      res.json({
+          'status': '1',
+          'msg': 'Ejercicio GUARDADO'
+      })
+  } catch(error){
+      res.json({
+          'status': '0',
+          'msg': 'Error guardando el ejercicio de rutina.'
+        })
+  }
+}
+
+//Baja de asistencia
+rutinaCtrl.deleteEjercicio = async () => {
+  const rutina = await Rutina.findById(req.params.id);
+  const idejercicio = req.params.idejercicio;
+  rutina.ejercicios.pull(idejercicio)
+
+  try{
+      await Rutina.updateOne({_id: req.params.id}, rutina);
+      res.json({
+          'status': '1',
+          'msg': 'Ejercicio ELIMINADO'
+      })
+  } catch(error){
+      res.json({
+          'status': '0',
+          'msg': 'Error eliminando el ejercicio de rutina.'
+        })
   }
 }
 

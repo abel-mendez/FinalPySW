@@ -16,10 +16,10 @@ const AlumnoSchema = new Schema({
   correoelectronico: {type: String, required: true},
   //hay relacion de agregacion, me refieron con schema object id
   pagoscuotas: [{type: Schema.Types.ObjectId, ref: Pagocuota, required: true}],
-  rutinas: [{type: Schema.Types.ObjectId, ref: Rutina, required: true}],
   plan: {type: Schema.Types.ObjectId, ref: Plan, required: true},
   //hay relacion de composicion, me refiero con object schema
   asistencias: [{type: Asistencia.schema}],
-  progresos: [{type: Progreso.schema}]
+  progresos: [{type: Progreso.schema}],
+  rutinas: [{type: Rutina.schema}]
 })
 module.exports = mongoose.models.Alumno || mongoose.model('Alumno', AlumnoSchema);
