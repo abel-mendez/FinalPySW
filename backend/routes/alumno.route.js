@@ -12,6 +12,9 @@ router.post('/', alumnoCtrl.createAlumno);
 router.put('/:id', alumnoCtrl.editAlumno);
 router.delete('/:id', alumnoCtrl.deleteAlumno);
 
+router.get('/:dni', alumnoCtrl.getAlumnoPorDNI);
+router.get('/fechainicio/:fechainicio', alumnoCtrl.getAlumnoPorFechaInicio);
+
 router.post('/:id/asistencias', alumnoCtrl.addAsistencia);
 router.delete('/:id/asistencias/:idasistencia', alumnoCtrl.deleteAsistencia);
 

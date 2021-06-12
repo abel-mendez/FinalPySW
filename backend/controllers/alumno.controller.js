@@ -68,6 +68,11 @@ alumnoCtrl.getAlumnoPorDNI = async (req, res) => {
   res.json(alumnos);
 }
 
+alumnoCtrl.getAlumnoPorFechaInicio = async (req, res) => {
+  var alumnos = await Alumno.find().where("fechainicio").equals(req.params.fechainicio).populate("pagos").populate("plan").populate("asistencias");
+  res.json(alumnos);
+}
+
 //Alta de asistencia
 alumnoCtrl.addAsistencia = async (req, res) => {
   const asistencia = new Asistencia(req.body);

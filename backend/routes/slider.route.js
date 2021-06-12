@@ -1,15 +1,15 @@
 //defino controlador para el manejo de CRUD
-const pagoCtrl = require('./../controllers/pago.controller');
+const sliderCtrl = require('./../controllers/slider.controller');
 
 //creamos el manejador de rutas
 const express = require('express');
 const router = express.Router();
 
 //definimos las rutas para la gestion de alumno
-
-router.get('/', pagoCtrl.getAllPagos);
-router.get('/:fechapago', pagoCtrl.getPagoPorFecha)
-// router.post('/', planCtrl.createPlan);
+router.get('/', sliderCtrl.getSliders);
+router.post('/', sliderCtrl.addSlider);
+router.delete('/:id', sliderCtrl.deleteSlider);
+router.put('/:id', sliderCtrl.editSlider);
 
 //exportamos el modulo de rutas
 module.exports = router;
