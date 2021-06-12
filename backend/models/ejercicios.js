@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const {Schema} = mongoose;
 const EjerciciosSchema = new Schema({
-  grupoMuscular: {type: String, required: true},
+  nombre: {type: String, required: true},
   series: {type: Number, required: true},
   repeticiones: {type: Number, required:true}
 })
