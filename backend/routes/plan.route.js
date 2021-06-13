@@ -9,6 +9,7 @@ const router = express.Router();
 
 router.get('/', planCtrl.getPlanes);
 router.post('/', planCtrl.createPlan);
+router.get('/:tipo', planCtrl.getIDporTipo);
 
 //exportamos el modulo de rutas
 module.exports = router;

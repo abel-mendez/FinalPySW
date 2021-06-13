@@ -73,6 +73,18 @@ alumnoCtrl.getAlumnoPorFechaInicio = async (req, res) => {
   res.json(alumnos);
 }
 
+alumnoCtrl.getAlumnoPorPlan = async (req, res) => {
+  try{
+    var alumnos = await Alumno.find({plan : req.params.plan}).populate("pagos").populate("plan").populate("asistencias");
+  } catch (error) {
+    res.json({
+      'status': '0',
+      'msg': 'El plan ingresado no es válido.'
+    })
+  }
+  res.json(alumnos);
+}
+
 //Alta de asistencia
 alumnoCtrl.addAsistencia = async (req, res) => {
   const asistencia = new Asistencia(req.body);
