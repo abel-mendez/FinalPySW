@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
-const Ejercicios = require('./ejercicio');
+const Ejercicio = require('./ejercicio');
 const {Schema} = mongoose;
 const RutinaSchema = new Schema({
   grupomuscular: {type: String, required: true},
   duracion: {type: String, required: true},
   //hay relacion de composicion, me refiero con object schema
-  ejercicios: [{type: Ejercicios.schema}]
+  ejercicios: [{type: Ejercicio.schema}]
 })
 module.exports = mongoose.models.Rutina || mongoose.model('Rutina', RutinaSchema);

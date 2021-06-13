@@ -8,7 +8,7 @@ const router = express.Router();
 //definimos las rutas para la gestion de alumno
 
 router.get('/', pagoCtrl.getAllPagos);
-router.get('/:fechapago', pagoCtrl.getPagoPorFecha)
+router.get('/:fechapago', pagoCtrl.getPagosPorFecha)
 // router.post('/', planCtrl.createPlan);
 
 //exportamos el modulo de rutas

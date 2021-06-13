@@ -26,6 +26,7 @@ router.put('/:id/rutinas/:idrutina', alumnoCtrl.editRutina);
 //router.put('/rutinas/:idrutina', alumnoCtrl.editRutina);
 
 router.post('/:id/rutinas/:idrutina/ejercicios', alumnoCtrl.addEjercicioToRutina);
+router.put('/:id/rutinas/:idrutina/ejercicios/:idejercicio', alumnoCtrl.editEjericicio);
 
 router.post('/:id/pagos', alumnoCtrl.addPago);
 

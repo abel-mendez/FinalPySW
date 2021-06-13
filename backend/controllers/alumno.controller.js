@@ -227,6 +227,7 @@ alumnoCtrl.deleteRutina = async () => {
   }
 }
 
+//añadir un ejercicio a una rutina
 alumnoCtrl.addEjercicioToRutina = async (req, res) => {
 
   const ejercicio = new Ejercicio(req.body);
@@ -249,6 +250,31 @@ alumnoCtrl.addEjercicioToRutina = async (req, res) => {
     })
   }
 
+}
+
+//Moficicación de ejercicio
+alumnoCtrl.editEjericicio = async (req, res) => {
+  const alumno = await Alumno.findById(req.params.id);
+  const rutina = await alumno.rutinas.find(r => r._id == req.params.idrutina);
+  let ejercicio = await rutina.ejercicios.find(e => e._id == req.params.idejercicio);
+  ejercicio.set(req.body);
+  const index = rutina.ejercicios.findIndex(element => element._id == req.params.idejercicio );
+  const indexB = alumno.rutinas.findIndex(element => element._id == req.params.idrutina);
+  rutina.ejercicios.set(index, ejercicio);
+  alumno.rutinas.set(indexB, rutina);
+  try {
+    await Rutina.updateOne({ _id:req.params.idrutina}, rutina);
+    await Alumno.updateOne({ _id: req.params.id }, alumno);
+    res.json({
+      'status': '1',
+      'msg': 'Ejercicio ACTUALIZADA'
+    })
+  } catch (error) {
+    res.json({
+      'status': '0',
+      'msg': 'Error actualizando el ejercicio'
+    })
+  }
 }
 
 
