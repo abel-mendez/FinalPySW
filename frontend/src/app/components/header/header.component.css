@@ -1,3 +1,12 @@
 .header {
   background-color: #2ec400;
 }
+.nav-link,
+.navbar-brand {
+  color: white;
+}
+.active-link {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #2ec400;
+  border-radius: 5px;
+}
