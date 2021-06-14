@@ -8,7 +8,8 @@ import { TablaAlumnosComponent } from './components/tabla-alumnos/tabla-alumnos.
 import { EstadisticasComponent } from './components/estadisticas/estadisticas.component';
 
 const routes: Routes = [
-  {path:'',component:HomeComponent},
+  {path:'',redirectTo:'home',pathMatch:'full'},
+  {path:'home',component:HomeComponent},
   {path:'alumnos',component:TablaAlumnosComponent},
   {path:'login',component:LoginComponent},
   {path:'alumno',component: AlumnoComponent},

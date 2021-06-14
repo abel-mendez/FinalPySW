@@ -1,5 +1,5 @@
 <header class="header">
-  <nav class="p-0 navbar navbar-expand-lg navbar-dark">
+  <nav class="p-0 navbar navbar-expand-lg fw-bolder">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
         <img
@@ -7,34 +7,63 @@
           src="https://woodcreekathletic.net/files/2014/04/dumbbell.png"
           alt=""
         />
+        GreenGym
       </a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      <div class="navbar-dark">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="ms-auto navbar-nav mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="/">Inicio</a>
+            <a
+              class="nav-link p-2"
+              routerLink="/home"
+              routerLinkActive="active-link"
+              >Inicio</a
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/alumnos">Alumnos</a>
+            <a
+              class="nav-link p-2"
+              routerLink="/alumnos"
+              routerLinkActive="active-link"
+              >Alumnos</a
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/estadisticas">Estadisticas</a>
+            <a
+              class="nav-link p-2"
+              routerLink="/estadisticas"
+              routerLinkActive="active-link"
+              >Estadisticas</a
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/alumno">Mi Progreso</a>
+            <a
+              class="nav-link p-2"
+              routerLink="/alumno"
+              routerLinkActive="active-link"
+              >Mi Progreso</a
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/login">Login</a>
+            <a
+              class="nav-link p-2"
+              routerLink="/login"
+              routerLinkActive="active-link"
+              >Login</a
+            >
           </li>
         </ul>
       </div>
