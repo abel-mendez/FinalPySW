@@ -1,6 +1,6 @@
 export class Plan {
   _id:string;
-  nombre:string;
+  tipo:string;
   frecuencia:string;
   costo:number;
   constructor(){
