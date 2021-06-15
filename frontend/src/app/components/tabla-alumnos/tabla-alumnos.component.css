@@ -40,3 +40,6 @@
   color: white;
   background-color: #2ec400;
 }
+.cont {
+  min-height: 79vh;
+}
