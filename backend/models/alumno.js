@@ -5,6 +5,7 @@ const Usuario = require('./usuario');
 const Asistencia = require('./asistencia');
 const Progreso = require('./progreso');
 const Plan = require('./plan');
+
 const {Schema} = mongoose;
 const AlumnoSchema = new Schema({
   apellido: {type: String, required: true},
@@ -17,11 +18,12 @@ const AlumnoSchema = new Schema({
   email: {type: String, required: true},
   //hay relacion de agregacion, me refieron con schema object id
   pagos: [{type: Schema.Types.ObjectId, ref: Pago}],
-  plan: {type: Schema.Types.ObjectId, ref: Plan, required: true},
-  asistencias: [{type: Schema.Types.ObjectId, ref:Asistencia}],
+  plan: {type: Schema.Types.ObjectId, ref: Plan}, //required debe ser true
+  asistencias: [{type: Schema.Types.ObjectId, ref: Asistencia}],
+  //no debe traer esquema porque sino doy a entender que alumno podria tener muchos usuarios, debo traer object id pero se buguea
+  usuario: [{type: Schema.Types.ObjectId, ref: Usuario}],
   //hay relacion de composicion, me refiero con object schema
   progresos: [{type: Progreso.schema}],
-  rutinas: [{type: Rutina.schema}],
-  usuario: {type: Usuario.schema}
+  rutinas: [{type: Rutina.schema}]
 })
 module.exports = mongoose.models.Alumno || mongoose.model('Alumno', AlumnoSchema);

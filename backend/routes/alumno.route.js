@@ -12,6 +12,9 @@ router.post('/', alumnoCtrl.createAlumno);
 router.put('/:id', alumnoCtrl.editAlumno);
 router.delete('/:id', alumnoCtrl.deleteAlumno);
 
+//PARA CREAR USUARIO
+router.post('/:id/usuario', alumnoCtrl.createUsuario)
+
 router.get('/:dni', alumnoCtrl.getAlumnoPorDNI);
 router.get('/fechainicio/:fechainicio', alumnoCtrl.getAlumnoPorFechaInicio);
 router.get('/plan/:plan', alumnoCtrl.getAlumnoPorPlan)

@@ -4,6 +4,7 @@ const Progreso = require('../models/progreso');
 const Rutina = require('../models/rutina');
 const Ejercicio = require("../models/ejercicio");
 const Pago = require("../models/pago");
+const Usuario = require('../models/usuario');
 const alumnoCtrl = {}
 
 //Obtener todos los alumnos
@@ -322,5 +323,25 @@ alumnoCtrl.getPagos = async (req, res) => {
   res.json(alumno.pagos);
 }
 
+//Alta de usuario para alumno
+alumnoCtrl.createUsuario = async (req, res) => {
+  const alumno = await Alumno.findById(req.params.id);
+  //en req.body se espera que vengan los datos de usuario a crear
+  const usuario = new Usuario(req.body);
+  alumno.usuario = usuario;
+  try {
+    await usuario.save();
+    await Alumno.updateOne({ _id: req.params.id }, alumno);
+    res.json({
+      'status': '1',
+      'msg': 'Usuario guardado.'
+    })
+  } catch (error) {
+    res.json({
+      'status': '0',
+      'msg': 'Error procesando operacion.'
+    })
+  }
+}
 
 module.exports = alumnoCtrl;
