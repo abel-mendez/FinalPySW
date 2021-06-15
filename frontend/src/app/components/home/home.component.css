@@ -15,7 +15,8 @@
   filter: grayscale(30%);
 }
 .aboutus-title {
-  background-color: rgb(63, 63, 63);
+  /*background-color: rgb(63, 63, 63);*/
+  background-color: #2ec400;
   color: white;
   text-align: center;
   padding: 5px 0;

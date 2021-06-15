@@ -1,5 +1,5 @@
 .categorie {
-  background-color: rgb(63, 63, 63);
+  background-color: #2ec400;
   color: white;
   text-align: center;
   padding: 5px 0;
@@ -15,11 +15,22 @@
   background-color: white;
   border: 1px solid #2ec400;
   color: #2ec400;
+  display: flex;
+  align-items: center;
 }
 .buttons {
   display: flex;
   justify-content: flex-start;
 }
 .form {
-  background-color: rgb(100, 100, 100);
+  width: 500px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.5);
+}
+.container-form {
+  width: 100%;
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
