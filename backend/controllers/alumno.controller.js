@@ -64,31 +64,6 @@ alumnoCtrl.editAlumno = async (req, res) => {
   }
 }
 
-alumnoCtrl.getAlumnoPorDNI = async (req, res) => {
-  var alumnos = await Alumno.find().where("dni").equals(req.params.dni).populate("pagos").populate("plan").populate("asistencias");
-  res.json(alumnos);
-}
-
-//ESTADISTICAS
-alumnoCtrl.getAlumnosPorFechaInicio = async (req, res) => {
-  var alumnos = await Alumno.find().where("fechainicio").equals(req.params.fechainicio).populate("pagos").populate("plan").populate("asistencias");
-  res.json(alumnos);
-}
-
-//ESTADISTICAS
-//primero se debe ejecutar el metodo del plan controller para obtener el plan
-alumnoCtrl.getAlumnoPorPlan = async (req, res) => {
-  try{
-    var alumnos = await Alumno.find({plan : req.params.plan}).populate("pagos").populate("plan").populate("asistencias");
-  } catch (error) {
-    res.json({
-      'status': '0',
-      'msg': 'El plan ingresado no es válido.'
-    })
-  }
-  res.json(alumnos);
-}
-
 //Alta de asistencia
 alumnoCtrl.addAsistencia = async (req, res) => {
   const asistencia = new Asistencia(req.body);
@@ -231,7 +206,7 @@ alumnoCtrl.deleteRutina = async () => {
   }
 }
 
-//añadir un ejercicio a una rutina
+//Alta de ejercicio a una rutina
 alumnoCtrl.addEjercicioToRutina = async (req, res) => {
 
   const ejercicio = new Ejercicio(req.body);
@@ -257,7 +232,7 @@ alumnoCtrl.addEjercicioToRutina = async (req, res) => {
 }
 
 //Moficicación de ejercicio
-alumnoCtrl.editEjericicio = async (req, res) => {
+alumnoCtrl.editEjercicio = async (req, res) => {
   const alumno = await Alumno.findById(req.params.id);
   const rutina = await alumno.rutinas.find(r => r._id == req.params.idrutina);
   let ejercicio = await rutina.ejercicios.find(e => e._id == req.params.idejercicio);
@@ -271,7 +246,7 @@ alumnoCtrl.editEjericicio = async (req, res) => {
     await Alumno.updateOne({ _id: req.params.id }, alumno);
     res.json({
       'status': '1',
-      'msg': 'Ejercicio ACTUALIZADA'
+      'msg': 'Ejercicio ACTUALIZADO'
     })
   } catch (error) {
     res.json({
@@ -281,6 +256,27 @@ alumnoCtrl.editEjericicio = async (req, res) => {
   }
 }
 
+
+//Baja de ejercicio
+alumnoCtrl.deleteEjercicio = async (req, res) => {
+  const alumno = await Alumno.findById(req.params.id);
+  const rutina = await alumno.rutinas.find(r => r._id == req.params.idrutina);
+  let ejercicio = await rutina.ejercicios.find(e => e._id == req.params.idejercicio);
+  rutina.ejercicios.pull(ejercicio);
+  try {
+    await Rutina.updateOne({ _id:req.params.idrutina}, rutina);
+    await Alumno.updateOne({ _id: req.params.id }, alumno);
+    res.json({
+      'status': '1',
+      'msg': 'Ejercicio ELIMINADO'
+    })
+  } catch (error) {
+    res.json({
+      'status': '0',
+      'msg': 'Error eliminando el ejercicio'
+    })
+  }
+}
 
 //Alta de pago
 alumnoCtrl.addPago = async (req, res) => {
@@ -301,29 +297,6 @@ alumnoCtrl.addPago = async (req, res) => {
       'msg': 'Error guardando el pago.'
     })
   }
-}
-
-
-
-//PARA ALUMNOS
-
-//Obtener las rutinas de un alumno
-alumnoCtrl.getRutinas = async (req, res) => {
-  const alumno = await Alumno.findById(req.params.id).populate("rutinas");
-  res.json(alumno.rutinas);
-}
-
-
-//Obtener las asistencias de un alumno
-alumnoCtrl.getAsistencias = async (req, res) => {
-  const alumno = await Alumno.findById(req.params.id).populate("asistencias");
-  res.json(alumno.asistencias);
-}
-
-//Obtener los pagos de un alumno
-alumnoCtrl.getPagos = async (req, res) => {
-  const alumno = await Alumno.findById(req.params.id).populate("pagos");
-  res.json(alumno.pagos);
 }
 
 //USUARIO
@@ -347,5 +320,52 @@ alumnoCtrl.createUsuario = async (req, res) => {
     })
   }
 }
+
+//Buscar alumno por DNI
+alumnoCtrl.getAlumnoPorDNI = async (req, res) => {
+  var alumnos = await Alumno.find().where("dni").equals(req.params.dni).populate("pagos").populate("plan").populate("asistencias");
+  res.json(alumnos);
+}
+
+//ESTADISTICAS
+alumnoCtrl.getAlumnosPorFechaInicio = async (req, res) => {
+  var alumnos = await Alumno.find().where("fechainicio").equals(req.params.fechainicio).populate("pagos").populate("plan").populate("asistencias");
+  res.json(alumnos);
+}
+
+//ESTADISTICAS
+//primero se debe ejecutar el metodo del plan controller para obtener el plan
+alumnoCtrl.getAlumnoPorPlan = async (req, res) => {
+  try{
+    var alumnos = await Alumno.find({plan : req.params.plan}).populate("pagos").populate("plan").populate("asistencias");
+  } catch (error) {
+    res.json({
+      'status': '0',
+      'msg': 'El plan ingresado no es válido.'
+    })
+  }
+  res.json(alumnos);
+}
+
+
+//PARA LOS ALUMNOS
+//Obtener las rutinas de un alumno
+alumnoCtrl.getRutinas = async (req, res) => {
+  const alumno = await Alumno.findById(req.params.id).populate("rutinas");
+  res.json(alumno.rutinas);
+}
+
+//Obtener las asistencias de un alumno
+alumnoCtrl.getAsistencias = async (req, res) => {
+  const alumno = await Alumno.findById(req.params.id).populate("asistencias");
+  res.json(alumno.asistencias);
+}
+
+//Obtener los pagos de un alumno
+alumnoCtrl.getPagos = async (req, res) => {
+  const alumno = await Alumno.findById(req.params.id).populate("pagos");
+  res.json(alumno.pagos);
+}
+
 
 module.exports = alumnoCtrl;
