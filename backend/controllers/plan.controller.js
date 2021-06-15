@@ -7,7 +7,7 @@ planCtrl.getPlanes = async (req, res) => {
   res.json(planes);
 }
 
-//Obtener id de plan por tipo
+//ESTADISTICAS Obtener id de plan por tipo
 //FUNCIONA EN CONJUNTO CON GET ALUMNO POR PLAN DE ALUMNO CONTROLLER PARA OBTENER ALUMNOS POR PLAN
 planCtrl.getIDporTipo = async (req, res) => {
   var plan = await Plan.find().where("tipo").equals(req.params.tipo);

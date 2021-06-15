@@ -69,11 +69,14 @@ alumnoCtrl.getAlumnoPorDNI = async (req, res) => {
   res.json(alumnos);
 }
 
-alumnoCtrl.getAlumnoPorFechaInicio = async (req, res) => {
+//ESTADISTICAS
+alumnoCtrl.getAlumnosPorFechaInicio = async (req, res) => {
   var alumnos = await Alumno.find().where("fechainicio").equals(req.params.fechainicio).populate("pagos").populate("plan").populate("asistencias");
   res.json(alumnos);
 }
 
+//ESTADISTICAS
+//primero se debe ejecutar el metodo del plan controller para obtener el plan
 alumnoCtrl.getAlumnoPorPlan = async (req, res) => {
   try{
     var alumnos = await Alumno.find({plan : req.params.plan}).populate("pagos").populate("plan").populate("asistencias");
@@ -323,6 +326,7 @@ alumnoCtrl.getPagos = async (req, res) => {
   res.json(alumno.pagos);
 }
 
+//USUARIO
 //Alta de usuario para alumno
 alumnoCtrl.createUsuario = async (req, res) => {
   const alumno = await Alumno.findById(req.params.id);

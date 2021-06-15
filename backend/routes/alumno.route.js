@@ -16,7 +16,7 @@ router.delete('/:id', alumnoCtrl.deleteAlumno);
 router.post('/:id/usuario', alumnoCtrl.createUsuario)
 
 router.get('/:dni', alumnoCtrl.getAlumnoPorDNI);
-router.get('/fechainicio/:fechainicio', alumnoCtrl.getAlumnoPorFechaInicio);
+router.get('/fechainicio/:fechainicio', alumnoCtrl.getAlumnosPorFechaInicio);
 router.get('/plan/:plan', alumnoCtrl.getAlumnoPorPlan)
 
 router.post('/:id/asistencias', alumnoCtrl.addAsistencia);
