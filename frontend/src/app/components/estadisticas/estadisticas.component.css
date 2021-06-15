@@ -8,3 +8,14 @@
 .main {
   min-height: 79vh;
 }
+.estadisticas {
+  overflow: scroll;
+  width: 70%;
+  margin: auto;
+}
+
+@media screen and (max-width: 600px) {
+  .estadisticas {
+    width: 100%;
+  }
+}

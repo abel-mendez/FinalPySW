@@ -1,6 +1,6 @@
-<main class="main p-5">
+<main class="main">
   <h3 class="categorie mb-3">Estadisticas</h3>
-  <div class="w-75 m-auto d-flex align-items-start">
+  <div class="m-auto d-flex align-items-start estadisticas">
     <div
       class="nav flex-column nav-pills me-3"
       id="v-pills-tab"
@@ -62,13 +62,17 @@
         id="v-pills-home"
         role="tabpanel"
         aria-labelledby="v-pills-home-tab"
-      ></div>
+      >
+        <app-statplan></app-statplan>
+      </div>
       <div
         class="tab-pane fade"
         id="v-pills-profile"
         role="tabpanel"
         aria-labelledby="v-pills-profile-tab"
-      ></div>
+      >
+        <app-statasistencias></app-statasistencias>
+      </div>
       <div
         class="tab-pane fade"
         id="v-pills-messages"
@@ -83,7 +87,7 @@
         role="tabpanel"
         aria-labelledby="v-pills-settings-tab"
       >
-        ...
+        <app-stathorarios></app-stathorarios>
       </div>
     </div>
   </div>
