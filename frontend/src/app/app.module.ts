@@ -18,6 +18,7 @@ import { ChartsModule } from 'ng2-charts';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { StatasistenciasComponent } from './components/statasistencias/statasistencias.component';
 import { StathorariosComponent } from './components/stathorarios/stathorarios.component';
+import * as printJS from 'print-js';
 
 
 @NgModule({
@@ -41,7 +42,7 @@ import { StathorariosComponent } from './components/stathorarios/stathorarios.co
     HttpClientModule,
     ReactiveFormsModule,
     ColorPickerModule,
-    ChartsModule
+    ChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
