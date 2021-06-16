@@ -19,6 +19,7 @@ export class StatplanComponent implements OnInit {
       }
     }
   };
+  public barChartLabels: Label[] = ['cantidad de personas'];
  //public barChartLabels: Label[] = ['Plan Basico', 'Plan Full','Pase Libre'];
   //Tipo de grafico que queremos: ejem: line, bar, radar
   public barChartType: ChartType = 'bar';
@@ -38,12 +39,13 @@ export class StatplanComponent implements OnInit {
   private colores = [];
 
   constructor() {
+    
     this.datos=[['10'],['9'],['5'],['0']];
     //this.datos=[['10','0','0'],['0','9','0'],['0','0','7']];
     //this.datos=[['1','10','20'],['6','8','9'],['4','5','10']];
     //this.nombreCategoria=['Plan Basico','Plan Full','Pase Libre'];
     this.nombreCategoria=['Plan Basico','Plan Full','Pase Libre'];
-    this.colores=['blue','red','green'];
+    this.colores=['rgba(255,0,0,0.7)','rgba(0,255,0,0.7)','rgba(0,0,255,0.7)'];
     this.barChartData = [];
     this.chartColors = [];
     
