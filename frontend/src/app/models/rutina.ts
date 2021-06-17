@@ -1,8 +1,10 @@
+import { Ejercicio } from "./ejercicio";
+
 export class Rutina {
   _id:string;
-  id_alumno:string;
   duracion:string;
-  grupo_muscular:boolean;
+  grupomuscular:boolean;
+  ejercicios:Array<Ejercicio>;
   constructor(){
     
   }
