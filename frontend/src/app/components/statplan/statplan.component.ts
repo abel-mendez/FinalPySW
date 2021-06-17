@@ -45,7 +45,7 @@ export class StatplanComponent implements OnInit {
     //this.datos=[['1','10','20'],['6','8','9'],['4','5','10']];
     //this.nombreCategoria=['Plan Basico','Plan Full','Pase Libre'];
     this.nombreCategoria=['Plan Basico','Plan Full','Pase Libre'];
-    this.colores=['rgba(255,0,0,0.7)','rgba(0,255,0,0.7)','rgba(0,0,255,0.7)'];
+    this.colores=['rgba(255,0,0,0.7)','rgba(0,255,0,0.7)','rgba(0,0,255,0.7)','rgba(255,255,0,0.7)','rgba(0,255,255,0.7)','rgba(255,0,255,0.7)'];
     this.barChartData = [];
     this.chartColors = [];
     
