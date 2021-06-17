@@ -19,6 +19,7 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { StatasistenciasComponent } from './components/statasistencias/statasistencias.component';
 import { StathorariosComponent } from './components/stathorarios/stathorarios.component';
 import * as printJS from 'print-js';
+import { TablaSliderComponent } from './components/tabla-slider/tabla-slider.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import * as printJS from 'print-js';
     EstadisticasComponent,
     StatplanComponent,
     StatasistenciasComponent,
-    StathorariosComponent
+    StathorariosComponent,
+    TablaSliderComponent
   ],
   imports: [
     BrowserModule,

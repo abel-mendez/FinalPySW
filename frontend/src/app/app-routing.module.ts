@@ -6,6 +6,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AlumnoComponent } from './components/alumno/alumno.component';
 import { TablaAlumnosComponent } from './components/tabla-alumnos/tabla-alumnos.component';
 import { EstadisticasComponent } from './components/estadisticas/estadisticas.component';
+import { TablaSliderComponent } from './components/tabla-slider/tabla-slider.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'home',pathMatch:'full'},
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path:'alumnos/nuevo',component: IngresoComponent},
   {path:'alumnos/:id',component: IngresoComponent},
   {path:'estadisticas',component: EstadisticasComponent},
+  {path:'gestionarSlider',component: TablaSliderComponent}
 ];
 
 @NgModule({

@@ -1,0 +1,109 @@
+<div class="col-10 offset-1">
+    <button class="btn-green btn mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#modalAgregarSlider">Agregar</button>
+
+    <!-- modal Agregar Slider -->
+    <div class="modal fade" id="modalAgregarSlider" tabindex="-1" aria-labelledby="modalLabelAgregarSlider"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabelAgregarSlider">Agregar Slider</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid col-10 offset-1 mb-3">
+
+                        <div class="col-12 mb-3">
+                            <label for="" class="form-label"><b>Agregar Imagen del Slider</b></label>
+                            <input type="file" class="form-control" id="" />
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label for="" class="form-label"><b>Descripcion</b></label>
+                            <textarea type="text" class="form-control" id="" rows="5"></textarea>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-green">Guardar</button>
+                    <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla Sliders -->
+    <div class="table-responsive mb-5">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col" class="col-4">Imagen</th>
+                    <th scope="col" class="col-5">Descripcion</th>
+                    <th scope="col" class="col-3">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>imagen</th>
+                    <td>Entrena en greengym</td>
+                    <td scope="col" class="col-2">
+                        <button class="btn-green btn" data-bs-toggle="modal" data-bs-target="#modalModificarSlider">Modificar</button>
+                        <button class="btn-grey btn" data-bs-toggle="modal" data-bs-target="#modalEliminarSlider">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modificar Slider -->
+    <div class="modal fade" id="modalModificarSlider" tabindex="-1" aria-labelledby="modalLabelModificarSlider"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabelModificarSlider">Modificar Slider</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid col-10 offset-1 mb-3">
+
+                        <div class="col-12 mb-3">
+                            <label for="" class="form-label"><b>Modificar Imagen del Slider</b></label>
+                            <input type="file" class="form-control" id="" />
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label for="" class="form-label"><b>Descripcion</b></label>
+                            <textarea type="text" class="form-control" id="" rows="5"></textarea>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-green">Guardar Cambios</button>
+                    <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Eliminar Slider -->
+    <div class="modal fade" id="modalEliminarSlider" tabindex="-1" aria-labelledby="modalLabelEliminarSlider"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabelEliminarSlider">Eliminar Slider</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid col-10 offset-1 mb-3">
+                            <p>Slider Eliminado Correctamente</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
