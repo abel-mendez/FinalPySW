@@ -17,7 +17,7 @@ const routes: Routes = [
   {path:'alumno',component: AlumnoComponent},
   {path:'alumno-form',component: AlumnoFormComponent},
   {path:'estadisticas',component: EstadisticasComponent},
-  {path:'ingreso',component: IngresoComponent},
+  {path:'alumno-detalles/:id',component: IngresoComponent},
   {path:'gestionarSlider',component: TablaSliderComponent}
 ];
 

@@ -52,4 +52,16 @@ export class AlumnoService {
      
    }
 
+   getAsistencias(idAlumno:string):Observable<any>{
+    let option = {
+      headers: new HttpHeaders({
+
+      }),
+      params: new HttpParams({
+
+      })
+    }
+    return this._http.get(this.urlbase+"alumno/"+idAlumno+"/asistencias", option);
+   }
+
 }

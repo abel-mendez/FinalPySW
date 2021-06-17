@@ -42,8 +42,8 @@ export class TablaAlumnosComponent implements OnInit {
     this.router.navigate(["alumno-form"]);
   }
 
-  actualizarUsuario(){
-    this.router.navigate(["ingreso"]);
+  actualizarAlumno(alum:Alumno){
+    this.router.navigate(["alumno-detalles/",alum._id]);
   }
 
   buscarAlumno(){

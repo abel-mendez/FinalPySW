@@ -314,28 +314,33 @@
             <h3 class="categorie">Asistencia del Alumno</h3>
           </a>
           <div class="collapse show" id="collapseAsistencia">
-            <div class="table-responsive">
-              <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th scope="col" class="col-2">Fecha</th>
-                    <th scope="col" class="col-3">Dia</th>
-                    <th scope="col" class="col-2">Hora</th>
-                    <th scope="col" class="col-2">Asistencia</th>
-                    <th scope="col" class="col-3">Rutina</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th>17/03/2021</th>
-                    <th>Lunes</th>
-                    <td>10:00 am</td>
-                    <td>si</td>
-                    <td>Pecho y Biceps</td>
-                  </tr>
-                </tbody>
+            <div class="card-body table-responsive-sm">
+              <table class="table table-striped" [mfData]="asistencias" #mf="mfDataTable" [mfRowsOnPage]="5">
+                  <thead>
+                      <tr>
+                          <th style="width: 50%">
+                              <mfDefaultSorter by="dia">Día</mfDefaultSorter>
+                          </th>
+                          <th style="width: 50%">
+                              <mfDefaultSorter by="hora">Hora</mfDefaultSorter>
+                          </th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let asist of mf.data">
+                          <td>{{asist.dia}}</td>
+                          <td>{{asist.hora}}</td>
+                      </tr>
+                  </tbody>
+                  <tfoot>
+                      <tr>
+                          <td colspan="4">
+                              <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+                          </td>
+                      </tr>
+                  </tfoot>
               </table>
-            </div>
+          </div>
           </div>
         </section>
       </div>
