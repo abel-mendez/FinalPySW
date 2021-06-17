@@ -11,11 +11,34 @@
 .estadisticas {
   overflow: scroll;
   width: 70%;
+  min-height: 400px;
   margin: auto;
 }
 
+.btn-green {
+  background-color: #2ec400;
+  color: white;
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+.btn-green:hover {
+  background-color: white;
+  border: 1px solid #2ec400;
+  color: #2ec400;
+}
+.active {
+  background-color: white;
+  border: 1px solid #2ec400 !important;
+  color: #2ec400 !important;
+}
+.btn-check:focus + .btn,
+.btn:focus {
+  box-shadow: none;
+  outline: none;
+}
 @media screen and (max-width: 600px) {
   .estadisticas {
     width: 100%;
+    min-height: 400px;
   }
 }
