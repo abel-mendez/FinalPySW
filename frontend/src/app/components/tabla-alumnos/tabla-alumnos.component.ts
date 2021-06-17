@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Alumno } from 'src/app/models/alumno';
+import { AlumnoService } from 'src/app/services/alumnos/alumno.service';
 
 @Component({
   selector: 'app-tabla-alumnos',
@@ -7,9 +10,58 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TablaAlumnosComponent implements OnInit {
 
-  constructor() { }
+  alumnos: Array<Alumno> = new Array<Alumno>();
+  dniIng: number;
+
+  constructor(private alumnoService:AlumnoService,
+              private router:Router) { }
 
   ngOnInit(): void {
+    this.getAlumnos();
   }
 
+  getAlumnos(){
+    this.alumnos = new Array<Alumno>();
+    this.alumnoService.getAllAlumnos().subscribe(
+      result=>{
+        result.forEach(element => {
+          let vAlumno = new Alumno();
+          Object.assign(vAlumno,element);
+          this.alumnos.push(vAlumno);
+          console.log(result);
+        });
+      },
+      error=>{
+        console.log(error);
+        alert("Error al cargar los Alumnos");
+      }
+    )
+  }
+
+  agregarAlumno(){
+    this.router.navigate(["alumno-form"]);
+  }
+
+  actualizarUsuario(){
+    this.router.navigate(["ingreso"]);
+  }
+
+  buscarAlumno(){
+    console.log(this.dniIng);
+    this.alumnos = new Array<Alumno>();
+    this.alumnoService.getAlumnoByDNI(this.dniIng).subscribe(
+      result=>{
+        result.forEach(element => {
+          let vAlumno = new Alumno();
+          Object.assign(vAlumno,element);
+          this.alumnos.push(vAlumno);
+          console.log(result);
+        });
+      },
+      error=>{
+        console.log(error);
+        alert("Error al cargar los Alumnos");
+      }
+    )
+  }
 }

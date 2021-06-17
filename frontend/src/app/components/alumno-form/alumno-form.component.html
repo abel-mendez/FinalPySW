@@ -1,0 +1,58 @@
+<section>
+    <a
+      class="text-decoration-none"
+      data-bs-toggle="collapse"
+      href="#collapseDatos"
+      role="button"
+      aria-expanded="false"
+      aria-controls="collapseExample"
+    >
+      <h3 class="categorie">Datos del Alumno</h3>
+    </a>
+    <div class="collapse show" id="collapseDatos">
+      <form class="row g-3">
+        <div class="col-md-6">
+          <label for="" class="form-label">Apellido/s</label>
+          <input type="text" class="form-control" id="" name="apellido" [(ngModel)]="alumno.apellido"/>
+        </div>
+        <div class="col-md-6">
+          <label for="" class="form-label">Nombre/s</label>
+          <input type="text" class="form-control" id="" name="nombre" [(ngModel)]="alumno.nombre"/>
+        </div>
+        <div class="col-md-6">
+          <label for="" class="form-label">Fecha de nacimiento</label>
+          <input type="date" class="form-control" id="" name="fechanac" [(ngModel)]="alumno.fechanac"/>
+        </div>
+        <div class="col-md-6">
+          <label for="" class="form-label">Numero de Documento</label>
+          <input type="number" class="form-control" id="" name="dni" [(ngModel)]="alumno.dni"/>
+        </div>
+        <div class="col-12">
+          <label for="" class="form-label">Domicilio</label>
+          <input type="text" class="form-control" id="" name="domicilio" [(ngModel)]="alumno.domicilio"/>
+        </div>
+        <div class="col-12">
+          <label for="" class="form-label">E-mail</label>
+          <input type="text" class="form-control" id="" name="email" [(ngModel)]="alumno.email"/>
+        </div>
+        <div class="col-md-6">
+          <label for="" class="form-label">Numero de Celular</label>
+          <input type="number" class="form-control" id="" name="celular" [(ngModel)]="alumno.celular"/>
+        </div>
+        <div class="col-md-4">
+          <label for="inputState" class="form-label">Tipo de Plan</label>
+          <select class="form-select" name="plan" [(ngModel)]="alumno.plan">
+            <option *ngFor="let p of planes" [ngValue]="p">{{p.tipo}} - {{p.frecuencia}}</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <label for="" class="form-label">Fecha de inicio</label>
+          <input type="date" class="form-control" id="" name="fechainicio" [(ngModel)]="alumno.fechainicio"/>
+        </div>
+        <div class="col-12 buttons">
+          <button type="button" class="btn btn-green" (click)="agregarAlumno()" >Guardar</button>
+          <button class="btn btn-red" (click)="volver()">Volver</button>
+        </div>
+      </form>
+    </div>
+  </section>

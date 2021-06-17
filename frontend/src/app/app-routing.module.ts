@@ -7,6 +7,7 @@ import { AlumnoComponent } from './components/alumno/alumno.component';
 import { TablaAlumnosComponent } from './components/tabla-alumnos/tabla-alumnos.component';
 import { EstadisticasComponent } from './components/estadisticas/estadisticas.component';
 import { TablaSliderComponent } from './components/tabla-slider/tabla-slider.component';
+import { AlumnoFormComponent } from './components/alumno-form/alumno-form.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'home',pathMatch:'full'},
@@ -14,9 +15,9 @@ const routes: Routes = [
   {path:'alumnos',component:TablaAlumnosComponent},
   {path:'login',component:LoginComponent},
   {path:'alumno',component: AlumnoComponent},
-  {path:'alumnos/nuevo',component: IngresoComponent},
-  {path:'alumnos/:id',component: IngresoComponent},
+  {path:'alumno-form',component: AlumnoFormComponent},
   {path:'estadisticas',component: EstadisticasComponent},
+  {path:'ingreso',component: IngresoComponent},
   {path:'gestionarSlider',component: TablaSliderComponent}
 ];
 

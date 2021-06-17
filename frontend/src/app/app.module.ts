@@ -13,14 +13,15 @@ import { TablaAlumnosComponent } from './components/tabla-alumnos/tabla-alumnos.
 import { EstadisticasComponent } from './components/estadisticas/estadisticas.component';
 import { StatplanComponent } from './components/statplan/statplan.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { StatasistenciasComponent } from './components/statasistencias/statasistencias.component';
 import { StathorariosComponent } from './components/stathorarios/stathorarios.component';
 import * as printJS from 'print-js';
 import { TablaSliderComponent } from './components/tabla-slider/tabla-slider.component';
-
+import { AlumnoFormComponent } from './components/alumno-form/alumno-form.component';
+import { NgxDataTableModule} from "angular-9-datatable";
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { TablaSliderComponent } from './components/tabla-slider/tabla-slider.com
     StatplanComponent,
     StatasistenciasComponent,
     StathorariosComponent,
-    TablaSliderComponent
+    TablaSliderComponent,
+    AlumnoFormComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +47,8 @@ import { TablaSliderComponent } from './components/tabla-slider/tabla-slider.com
     ReactiveFormsModule,
     ColorPickerModule,
     ChartsModule,
+    NgxDataTableModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

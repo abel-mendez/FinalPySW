@@ -1,350 +1,386 @@
 <main>
-  <!--          Datos del alumno     -->
-  <section>
-    <a
-      class="text-decoration-none"
-      data-bs-toggle="collapse"
-      href="#collapseDatos"
-      role="button"
-      aria-expanded="false"
-      aria-controls="collapseExample"
-    >
-      <h3 class="categorie">Datos del Alumno</h3>
-    </a>
-    <div class="collapse show" id="collapseDatos">
-      <form class="row g-3">
-        <div class="col-md-6">
-          <label for="" class="form-label">Apellido/s</label>
-          <input type="text" class="form-control" id="" />
-        </div>
-        <div class="col-md-6">
-          <label for="" class="form-label">Nombre/s</label>
-          <input type="text" class="form-control" id="" />
-        </div>
-        <div class="col-md-6">
-          <label for="" class="form-label">Fecha de nacimiento</label>
-          <input type="date" class="form-control" id="" />
-        </div>
-        <div class="col-md-6">
-          <label for="" class="form-label">Numero de Documento</label>
-          <input type="text" class="form-control" id="" />
-        </div>
-        <div class="col-12">
-          <label for="" class="form-label">Direccion</label>
-          <input type="text" class="form-control" id="" />
-        </div>
-        <div class="col-12">
-          <label for="" class="form-label">E-mail</label>
-          <input type="text" class="form-control" id="" />
-        </div>
-        <div class="col-md-6">
-          <label for="" class="form-label">Numero de Celular</label>
-          <input type="number" class="form-control" id="" />
-        </div>
-        <div class="col-md-4">
-          <label for="inputState" class="form-label">Tipo de Plan</label>
-          <select id="inputState" class="form-select">
-            <option>Plan Basico</option>
-            <option>Plan Full</option>
-            <option value="">Pase Libre</option>
-          </select>
-        </div>
-        <div class="col-md-2">
-          <label for="" class="form-label">Fecha de inicio</label>
-          <input type="date" class="form-control" id="" />
-        </div>
-        <div class="col-12 buttons">
-          <button type="button" class="btn btn-green">Guardar</button>
-          <button class="btn btn-grey">Modificar</button>
-        </div>
-      </form>
-    </div>
-  </section>
-  <!--                Datos de Pago       -->
-  <section>
-    <a
-      class="text-decoration-none"
-      data-bs-toggle="collapse"
-      href="#collapsePagos"
-      role="button"
-      aria-expanded="false"
-      aria-controls="collapseExample"
-    >
-      <h3 class="categorie">Historial de Pagos</h3>
-    </a>
-    <div class="collapse" id="collapsePagos">
-      <form class="row">
-        <div class="col-auto">
-          <label class="m-1" for="">Fecha de Pago:</label>
-          <input type="date" class="form-control" id="" />
-        </div>
-        <div class="col-auto">
-          <label class="m-1" for="">Monto</label>
-          <input type="number" class="form-control" id="" />
-        </div>
-        <div class="col-auto">
-          <label class="m-1" for="">Plan</label>
-          <select class="form-select" id="">
-            <option value="1">Plan Basico</option>
-            <option value="2">Plan Full</option>
-            <option value="3">Pase Libre</option>
-          </select>
-        </div>
-
-        <div class="col-auto align-self-end">
-          <button type="submit" class="btn btn-green">Nuevo Pago</button>
-        </div>
-      </form>
-      <div class="table-responsive">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col" class="col-3">Fecha</th>
-              <th scope="col" class="col-3">Plan</th>
-              <th scope="col" class="col-3">Monto</th>
-              <th scope="col" class="col-3">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>17/03/2021</th>
-              <td>Plan Basico</td>
-              <td>$1000</td>
-              <td>
-                <button class="btn btn-green">Detalles</button>
-                <button class="btn btn-red">Borrar</button>
-                <button class="btn btn-grey">Imprimir</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <!--       Rutina             -->
-  <section>
-    <a
-      class="text-decoration-none"
-      data-bs-toggle="collapse"
-      href="#collapseRutina"
-      role="button"
-      aria-expanded="false"
-      aria-controls="collapseExample"
-    >
-      <h3 class="categorie">Rutina</h3>
-    </a>
-    <div class="collapse" id="collapseRutina">
-      <div class="w-50 m-auto">
-        <div class="mb-3">
-          <label for="" class="form-label">Enfoque</label>
-          <input type="text" class="form-control" id="" />
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="">Día</label>
-          <select class="form-select" name="" id="">
-            <option value="">Lunes</option>
-            <option value="">Martes</option>
-            <option value="">Miercoles</option>
-            <option value="">Jueves</option>
-            <option value="">Viernes</option>
-            <option value="">Sabado</option>
-          </select>
-        </div>
-        <div class="mb-3">
-          <label for="formGroupExampleInput2" class="form-label"
-            >Ejercicios</label
+  <section class="mt-4">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active text-dark" id="datos-tab" data-bs-toggle="tab" data-bs-target="#datos" type="button" role="tab" aria-controls="home" aria-selected="true">Alumno</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link text-dark" id="pagos-tab" data-bs-toggle="tab" data-bs-target="#pagos" type="button" role="tab" aria-controls="pagos" aria-selected="false">Pagos</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link text-dark" id="rutinas-tab" data-bs-toggle="tab" data-bs-target="#rutinas" type="button" role="tab" aria-controls="rutinas" aria-selected="false">Rutinas</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link text-dark" id="progreso-tab" data-bs-toggle="tab" data-bs-target="#progreso" type="button" role="tab" aria-controls="progreso" aria-selected="false">Progreso</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link text-dark" id="asistencias-tab" data-bs-toggle="tab" data-bs-target="#asistencias" type="button" role="tab" aria-controls="asistencias" aria-selected="false">Asistencias</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link text-dark" id="usuario-tab" data-bs-toggle="tab" data-bs-target="#usuario" type="button" role="tab" aria-controls="usuario" aria-selected="false">Usuario</button>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="datos" role="tabpanel" aria-labelledby="datos-tab">
+        <!--          Datos del alumno     -->
+        <section>
+          <a
+            class="text-decoration-none"
+            data-bs-toggle="collapse"
+            href="#collapseDatos"
+            role="button"
+            aria-expanded="false"
+            aria-controls="collapseExample"
           >
-          <br />
-          <textarea name="" id="" class="w-100" rows="5"></textarea>
-        </div>
-      </div>
-      <div class="table-responsive">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col" class="col-2">Dia</th>
-              <th scope="col" class="col-3">Rutina</th>
-              <th scope="col" class="col-2">Repeticiones</th>
-              <th scope="col" class="col-2">Series</th>
-              <th scope="col" class="col-3">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>Lunes 17</th>
-              <td>Levantamiento de Mancuernas</td>
-              <td>10</td>
-              <td>3</td>
-              <td>
-                <!-- Agregar template Detalles -->
-                <button class="btn btn-green">Detalles</button>
-                <button class="btn btn-red">Borrar</button>
-                <button class="btn btn-grey">Imprimir</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-  <!--           Seccion Progreso            -->
-  <section>
-    <a
-      class="text-decoration-none"
-      data-bs-toggle="collapse"
-      href="#collapseProgreso"
-      role="button"
-      aria-expanded="false"
-      aria-controls="collapseExample"
-    >
-      <h3 class="categorie">Progreso</h3>
-    </a>
-    <div class="collapse" id="collapseProgreso">
-      <form class="row g-3">
-        <div class="col-md-4">
-          <label for="" class="form-label">Fecha</label>
-          <input type="date" class="form-control" id="" />
-        </div>
-        <div class="col-md-4">
-          <label for="" class="form-label">Control de peso</label>
-          <input
-            type="text"
-            class="form-control"
-            id=""
-            placeholder="peso en Kg"
-          />
-        </div>
-
-        <div class="col-md-4">
-          <label for="" class="form-label">Evolucion del aspecto fisico</label>
-          <input type="file" class="form-control" id="" name="" />
-        </div>
-        <div class="col-md-6">
-          <label for="" class="form-label">Tipo de dieta</label>
-          <textarea
-            class="form-control w-100"
-            name=""
-            id=""
-            cols="30"
-            rows="3"
-          ></textarea>
-        </div>
-        <div class="col-md-6">
-          <label for="" class="form-label">Observaciones</label>
-          <textarea
-            class="w-100 form-control"
-            name=""
-            id=""
-            cols="10"
-            rows="3"
-          ></textarea>
-        </div>
-        <div class="col-12 buttons">
-          <button type="button" class="btn btn-green">Guardar</button>
-          <button class="btn btn-grey">Modificar</button>
-        </div>
-      </form>
-      <div class="table-responsive">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col" class="col-2">Fecha</th>
-              <th scope="col" class="col-3">Observaciones</th>
-              <th scope="col" class="col-3">Dieta</th>
-              <th scope="col" class="col-3">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>17/03/2021</th>
-              <td>Se observa una mejoria en la potencia y fuerza del alumno</td>
-              <td></td>
-              <td scope="col" class="col-2">
-                <button class="btn-green btn">Ver</button>
-                <button class="btn btn-red">Borrar</button>
+            <h3 class="categorie">Datos del Alumno</h3>
+          </a>
+          <div class="collapse show" id="collapseDatos">
+            <form class="row g-3">
+              <div class="col-md-6">
+                <label for="" class="form-label">Apellido/s</label>
+                <input type="text" class="form-control" id="" />
+              </div>
+              <div class="col-md-6">
+                <label for="" class="form-label">Nombre/s</label>
+                <input type="text" class="form-control" id="" />
+              </div>
+              <div class="col-md-6">
+                <label for="" class="form-label">Fecha de nacimiento</label>
+                <input type="date" class="form-control" id="" />
+              </div>
+              <div class="col-md-6">
+                <label for="" class="form-label">Numero de Documento</label>
+                <input type="text" class="form-control" id="" />
+              </div>
+              <div class="col-12">
+                <label for="" class="form-label">Direccion</label>
+                <input type="text" class="form-control" id="" />
+              </div>
+              <div class="col-12">
+                <label for="" class="form-label">E-mail</label>
+                <input type="text" class="form-control" id="" />
+              </div>
+              <div class="col-md-6">
+                <label for="" class="form-label">Numero de Celular</label>
+                <input type="number" class="form-control" id="" />
+              </div>
+              <div class="col-md-4">
+                <label for="inputState" class="form-label">Tipo de Plan</label>
+                <select id="inputState" class="form-select">
+                  <option>Plan Basico</option>
+                  <option>Plan Full</option>
+                  <option value="">Pase Libre</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <label for="" class="form-label">Fecha de inicio</label>
+                <input type="date" class="form-control" id="" />
+              </div>
+              <div class="col-12 buttons">
+                <button type="button" class="btn btn-green">Guardar</button>
                 <button class="btn btn-grey">Modificar</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+              </div>
+            </form>
+          </div>
+        </section>
       </div>
+      <div class="tab-pane fade" id="pagos" role="tabpanel" aria-labelledby="pagos-tab">
+        <!--                Datos de Pago       -->
+        <section>
+          <a
+            class="text-decoration-none"
+            data-bs-toggle="collapse"
+            href="#collapsePagos"
+            role="button"
+            aria-expanded="false"
+            aria-controls="collapseExample"
+          >
+            <h3 class="categorie">Historial de Pagos</h3>
+          </a>
+          <div class="collapse show" id="collapsePagos">
+            <form class="row">
+              <div class="col-auto">
+                <label class="m-1" for="">Fecha de Pago:</label>
+                <input type="date" class="form-control" id="" />
+              </div>
+              <div class="col-auto">
+                <label class="m-1" for="">Monto</label>
+                <input type="number" class="form-control" id="" />
+              </div>
+              <div class="col-auto">
+                <label class="m-1" for="">Plan</label>
+                <select class="form-select" id="">
+                  <option value="1">Plan Basico</option>
+                  <option value="2">Plan Full</option>
+                  <option value="3">Pase Libre</option>
+                </select>
+              </div>
+
+              <div class="col-auto align-self-end">
+                <button type="submit" class="btn btn-green">Nuevo Pago</button>
+              </div>
+            </form>
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col" class="col-3">Fecha</th>
+                    <th scope="col" class="col-3">Plan</th>
+                    <th scope="col" class="col-3">Monto</th>
+                    <th scope="col" class="col-3">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>17/03/2021</th>
+                    <td>Plan Basico</td>
+                    <td>$1000</td>
+                    <td>
+                      <button class="btn btn-green">Detalles</button>
+                      <button class="btn btn-red">Borrar</button>
+                      <button class="btn btn-grey">Imprimir</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="tab-pane fade" id="rutinas" role="tabpanel" aria-labelledby="rutinas-tab">
+        <!--       Rutina             -->
+        <section>
+          <a
+            class="text-decoration-none"
+            data-bs-toggle="collapse"
+            href="#collapseRutina"
+            role="button"
+            aria-expanded="false"
+            aria-controls="collapseExample"
+          >
+            <h3 class="categorie">Rutina</h3>
+          </a>
+          <div class="collapse show" id="collapseRutina">
+            <div class="w-50 m-auto">
+              <div class="mb-3">
+                <label for="" class="form-label">Enfoque</label>
+                <input type="text" class="form-control" id="" />
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="">Día</label>
+                <select class="form-select" name="" id="">
+                  <option value="">Lunes</option>
+                  <option value="">Martes</option>
+                  <option value="">Miercoles</option>
+                  <option value="">Jueves</option>
+                  <option value="">Viernes</option>
+                  <option value="">Sabado</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="formGroupExampleInput2" class="form-label"
+                  >Ejercicios</label
+                >
+                <br />
+                <textarea name="" id="" class="w-100" rows="5"></textarea>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col" class="col-2">Dia</th>
+                    <th scope="col" class="col-3">Rutina</th>
+                    <th scope="col" class="col-2">Repeticiones</th>
+                    <th scope="col" class="col-2">Series</th>
+                    <th scope="col" class="col-3">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>Lunes 17</th>
+                    <td>Levantamiento de Mancuernas</td>
+                    <td>10</td>
+                    <td>3</td>
+                    <td>
+                      <!-- Agregar template Detalles -->
+                      <button class="btn btn-green">Detalles</button>
+                      <button class="btn btn-red">Borrar</button>
+                      <button class="btn btn-grey">Imprimir</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="tab-pane fade" id="progreso" role="tabpanel" aria-labelledby="progreso-tab">
+        <!--           Seccion Progreso            -->
+        <section>
+          <a
+            class="text-decoration-none"
+            data-bs-toggle="collapse"
+            href="#collapseProgreso"
+            role="button"
+            aria-expanded="false"
+            aria-controls="collapseExample"
+          >
+            <h3 class="categorie">Progreso</h3>
+          </a>
+          <div class="collapse show" id="collapseProgreso">
+            <form class="row g-3">
+              <div class="col-md-4">
+                <label for="" class="form-label">Fecha</label>
+                <input type="date" class="form-control" id="" />
+              </div>
+              <div class="col-md-4">
+                <label for="" class="form-label">Control de peso</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id=""
+                  placeholder="peso en Kg"
+                />
+              </div>
+
+              <div class="col-md-4">
+                <label for="" class="form-label">Evolucion del aspecto fisico</label>
+                <input type="file" class="form-control" id="" name="" />
+              </div>
+              <div class="col-md-6">
+                <label for="" class="form-label">Tipo de dieta</label>
+                <textarea
+                  class="form-control w-100"
+                  name=""
+                  id=""
+                  cols="30"
+                  rows="3"
+                ></textarea>
+              </div>
+              <div class="col-md-6">
+                <label for="" class="form-label">Observaciones</label>
+                <textarea
+                  class="w-100 form-control"
+                  name=""
+                  id=""
+                  cols="10"
+                  rows="3"
+                ></textarea>
+              </div>
+              <div class="col-12 buttons">
+                <button type="button" class="btn btn-green">Guardar</button>
+                <button class="btn btn-grey">Modificar</button>
+              </div>
+            </form>
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col" class="col-2">Fecha</th>
+                    <th scope="col" class="col-3">Observaciones</th>
+                    <th scope="col" class="col-3">Dieta</th>
+                    <th scope="col" class="col-3">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>17/03/2021</th>
+                    <td>Se observa una mejoria en la potencia y fuerza del alumno</td>
+                    <td></td>
+                    <td scope="col" class="col-2">
+                      <button class="btn-green btn">Ver</button>
+                      <button class="btn btn-red">Borrar</button>
+                      <button class="btn btn-grey">Modificar</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="tab-pane fade" id="asistencias" role="tabpanel" aria-labelledby="asistencias-tab">
+        <!--          ver asistencia del alumno      -->
+        <section>
+          <a
+            class="text-decoration-none"
+            data-bs-toggle="collapse"
+            href="#collapseAsistencia"
+            role="button"
+            aria-expanded="false"
+            aria-controls="collapseExample"
+          >
+            <h3 class="categorie">Asistencia del Alumno</h3>
+          </a>
+          <div class="collapse show" id="collapseAsistencia">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col" class="col-2">Fecha</th>
+                    <th scope="col" class="col-3">Dia</th>
+                    <th scope="col" class="col-2">Hora</th>
+                    <th scope="col" class="col-2">Asistencia</th>
+                    <th scope="col" class="col-3">Rutina</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>17/03/2021</th>
+                    <th>Lunes</th>
+                    <td>10:00 am</td>
+                    <td>si</td>
+                    <td>Pecho y Biceps</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="tab-pane fade" id="usuario" role="tabpanel" aria-labelledby="usuario-tab">
+        <!--       Seccion usuario      -->
+        <section>
+          <a
+            class="text-decoration-none"
+            data-bs-toggle="collapse"
+            href="#collapseUsuario"
+            role="button"
+            aria-expanded="false"
+            aria-controls="collapseExample"
+          >
+            <h3 class="categorie">Usuario</h3>
+          </a>
+          <div class="collapse show" id="collapseUsuario">
+            <form class="row g-3">
+              <div class="col-md-6">
+                <label for="" class="form-label">Usuario</label>
+                <input type="text" class="form-control" id="" />
+              </div>
+              <div class="col-md-6">
+                <label for="" class="form-label">Password</label>
+                <input type="text" class="form-control" id="" />
+              </div>
+              <div class="col-md-6">
+                <label for="" class="form-label">Perfil</label>
+                <input type="text" class="form-control" id="" />
+              </div>
+              <div class="col-md-6">
+                <label for="" class="form-label">Activo</label>
+                <input type="text" class="form-control" id="" />
+              </div>
+
+              <div class="col-12 buttons">
+                <button type="button" class="btn btn-green">Guardar</button>
+                <button class="btn btn-grey">Modificar</button>
+              </div>
+            </form>
+          </div>
+        </section>
+      </div>
+
     </div>
   </section>
 
-  <!--          ver asistencia del alumno      -->
-  <section>
-    <a
-      class="text-decoration-none"
-      data-bs-toggle="collapse"
-      href="#collapseAsistencia"
-      role="button"
-      aria-expanded="false"
-      aria-controls="collapseExample"
-    >
-      <h3 class="categorie">Asistencia del Alumno</h3>
-    </a>
-    <div class="collapse" id="collapseAsistencia">
-      <div class="table-responsive">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col" class="col-2">Fecha</th>
-              <th scope="col" class="col-3">Dia</th>
-              <th scope="col" class="col-2">Hora</th>
-              <th scope="col" class="col-2">Asistencia</th>
-              <th scope="col" class="col-3">Rutina</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>17/03/2021</th>
-              <th>Lunes</th>
-              <td>10:00 am</td>
-              <td>si</td>
-              <td>Pecho y Biceps</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-  <!--       Seccion usuario      -->
-  <section>
-    <a
-      class="text-decoration-none"
-      data-bs-toggle="collapse"
-      href="#collapseUsuario"
-      role="button"
-      aria-expanded="false"
-      aria-controls="collapseExample"
-    >
-      <h3 class="categorie">Usuario</h3>
-    </a>
-    <div class="collapse" id="collapseUsuario">
-      <form class="row g-3">
-        <div class="col-md-6">
-          <label for="" class="form-label">Usuario</label>
-          <input type="text" class="form-control" id="" />
-        </div>
-        <div class="col-md-6">
-          <label for="" class="form-label">Password</label>
-          <input type="text" class="form-control" id="" />
-        </div>
-        <div class="col-md-6">
-          <label for="" class="form-label">Perfil</label>
-          <input type="text" class="form-control" id="" />
-        </div>
-        <div class="col-md-6">
-          <label for="" class="form-label">Activo</label>
-          <input type="text" class="form-control" id="" />
-        </div>
-
-        <div class="col-12 buttons">
-          <button type="button" class="btn btn-green">Guardar</button>
-          <button class="btn btn-grey">Modificar</button>
-        </div>
-      </form>
-    </div>
-  </section>
 </main>
