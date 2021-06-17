@@ -5,6 +5,7 @@ export class Pago {
   estado:string;
   modopago:string;
   fechavencimiento:string;
+
   completado:Boolean;
   constructor(){
     

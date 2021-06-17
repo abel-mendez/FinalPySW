@@ -21,7 +21,7 @@ export class Alumno {
   asistencias:Array<Asistencia>;
   progresos:Array<Progreso>;
   rutinas:Array<Rutina>;
-  
+
   constructor(){
     this.pagos= new Array<Pago>();
     this.asistencias = new Array<Asistencia>();
