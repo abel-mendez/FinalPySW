@@ -106,4 +106,122 @@
             </div>
         </div>
     </div>
+    
+    <button class="btn-green btn mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#modalAgregarPlan">Agregar</button>
+
+    <!-- modal Agregar Plan -->
+    <div class="modal fade" id="modalAgregarPlan" tabindex="-1" aria-labelledby="modalLabelAgregarPlan"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabelAgregarPlan">Agregar Plan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid col-10 offset-1 mb-3">
+
+                        <div class="col-12 mb-3">
+                            <label for="" class="form-label"><b>Tipo Plan</b></label>
+                            <input type="text" class="form-control" id="" rows="5"/>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label for="" class="form-label"><b>Costo</b></label>
+                            <input type="number" class="form-control" id="" rows="5"/>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label for="" class="form-label"><b>Frecuencia</b></label>
+                            <input type="text" class="form-control" id="" rows="5"/>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-green" >Guardar</button>
+                    <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla Plan -->
+    <div class="table-responsive mb-5">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col" class="col-3">Tipo</th>
+                    <th scope="col" class="col-3">Costo</th>
+                    <th scope="col" class="col-3">Frecuencia</th>
+                    <th scope="col" class="col-3">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>full</th>
+                    <th>$1250</th>
+                    <td>3 dias por semana</td>
+                    <td scope="col" class="col-2">
+                        <button class="btn-green btn" data-bs-toggle="modal" data-bs-target="#modalModificarPlan">Modificar</button>
+                        <button class="btn-grey btn" data-bs-toggle="modal" data-bs-target="#modalEliminarPlan">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modificar Plan -->
+    <div class="modal fade" id="modalModificarPlan" tabindex="-1" aria-labelledby="modalLabelModificarPlan"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabelModificarPlan">Modificar Plan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid col-10 offset-1 mb-3">
+
+                        <div class="col-12 mb-3">
+                            <label for="" class="form-label"><b>Tipo Plan</b></label>
+                            <input type="text" class="form-control" id="" rows="5"/>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label for="" class="form-label"><b>Costo</b></label>
+                            <input type="number" class="form-control" id="" rows="5"/>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label for="" class="form-label"><b>Frecuencia</b></label>
+                            <input type="text" class="form-control" id="" rows="5"/>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-green">Guardar Cambios</button>
+                    <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Eliminar Plan -->
+    <div class="modal fade" id="modalEliminarPlan" tabindex="-1" aria-labelledby="modalLabelEliminarPlan"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabelEliminarPlan">Eliminar Slider</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid col-10 offset-1 mb-3">
+                            <p>Plan Eliminado Correctamente</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
