@@ -101,26 +101,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="text">
-          <th scope="row">Plan Basico</th>
-          <td>3 Veces x Semana</td>
+        <tr *ngFor="let plan of planes" class="text">
+          <th scope="row">{{ plan.tipo }}</th>
+          <td>{{ plan.frecuencia }}</td>
           <td>Acceso a nuestra Plataforma</td>
           <td>Entrenamiento Personalizado</td>
-          <td>$1000</td>
-        </tr>
-        <tr class="text">
-          <th scope="row">Plan Full</th>
-          <td>5 Veces x Semana</td>
-          <td>Acceso a nuestra Plataforma</td>
-          <td>Entrenamiento Personalizado</td>
-          <td>$1200</td>
-        </tr>
-        <tr class="text">
-          <th scope="row">Pase Libre</th>
-          <td>Sin Limites</td>
-          <td>Acceso a nuestra Plataforma</td>
-          <td>Entrenamiento Personalizado</td>
-          <td>$1500</td>
+          <td>{{ plan.costo }}</td>
         </tr>
       </tbody>
     </table>

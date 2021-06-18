@@ -7,64 +7,87 @@
           class="form-control me-2"
           type="number"
           placeholder="Ingrese DNI del alumno"
-          aria-label="Search" [(ngModel)]="dniIng" name="dniIng"
+          aria-label="Search"
+          [(ngModel)]="dniIng"
+          name="dniIng"
         />
       </div>
       <div class="col-md-2 mb-2">
-        <button class="btn btn-outline-green" type="button" (click)="buscarAlumno()">Buscar</button>
+        <button
+          class="btn btn-outline-green"
+          type="button"
+          (click)="buscarAlumno()"
+        >
+          Buscar
+        </button>
       </div>
     </form>
     <div class="d-flex justify-content-end col-12 col-md-4">
-      
-          <button class="btn btn-outline-green" type="button" (click)="agregarAlumno()">
-            Nuevo Alumno
-          </button>
-      
+      <button
+        class="btn btn-outline-green"
+        type="button"
+        (click)="agregarAlumno()"
+      >
+        Nuevo Alumno
+      </button>
     </div>
   </div>
   <div class="card-body table-responsive-sm">
-    <table class="table table-striped" [mfData]="alumnos" #mf="mfDataTable" [mfRowsOnPage]="5">
-        <thead>
-            <tr>
-                <th style="width: 15%">
-                    <mfDefaultSorter by="apellido">Apellido</mfDefaultSorter>
-                </th>
-                <th style="width: 15%">
-                    <mfDefaultSorter by="nombre">Nombre</mfDefaultSorter>
-                </th>
-                <th style="width: 15%">
-                    <mfDefaultSorter by="dni">DNI</mfDefaultSorter>
-                </th>
-                <th style="width: 15%">
-                    <mfDefaultSorter by="celular">Celular</mfDefaultSorter>
-                </th>
-                <th style="width: 15%">
-                  <mfDefaultSorter by="email">Email</mfDefaultSorter>
-                </th>
-                <th style="width: 15%">
-                  <mfDefaultSorter by="acciones"></mfDefaultSorter>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let alum of mf.data">
-                <td>{{alum.apellido}}</td>
-                <td>{{alum.nombre}}</td>
-                <td>{{alum.dni}}</td>
-                <td>{{alum.celular}}</td>
-                <td>{{alum.email}}</td>
-                <td>
-                  <button type="button" class="btn btn-primary mb-2" (click)="actualizarAlumno(alum)">Ver detalles</button>
-                </td>
-            </tr>
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="4">
-                    <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
-                </td>
-            </tr>
-        </tfoot>
+    <table
+      class="table table-striped"
+      [mfData]="alumnos"
+      #mf="mfDataTable"
+      [mfRowsOnPage]="5"
+    >
+      <thead>
+        <tr>
+          <th style="width: 15%">
+            <mfDefaultSorter by="apellido">Apellido</mfDefaultSorter>
+          </th>
+          <th style="width: 15%">
+            <mfDefaultSorter by="nombre">Nombre</mfDefaultSorter>
+          </th>
+          <th style="width: 15%">
+            <mfDefaultSorter by="dni">DNI</mfDefaultSorter>
+          </th>
+          <th style="width: 15%">
+            <mfDefaultSorter by="celular">Celular</mfDefaultSorter>
+          </th>
+          <th style="width: 15%">
+            <mfDefaultSorter by="email">Email</mfDefaultSorter>
+          </th>
+          <th style="width: 15%">
+            <mfDefaultSorter by="acciones"></mfDefaultSorter>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let alum of mf.data">
+          <td>{{ alum.apellido }}</td>
+          <td>{{ alum.nombre }}</td>
+          <td>{{ alum.dni }}</td>
+          <td>{{ alum.celular }}</td>
+          <td>{{ alum.email }}</td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-green mb-2"
+              (click)="actualizarAlumno(alum)"
+            >
+              Ver detalles
+            </button>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="4">
+            <mfBootstrapPaginator
+              [rowsOnPageSet]="[5, 10, 25]"
+            ></mfBootstrapPaginator>
+          </td>
+        </tr>
+      </tfoot>
     </table>
-</div>
+  </div>
 </div>
