@@ -3,6 +3,8 @@ export class Progreso {
   fecha:string;
   peso:number;
   foto:string;
+  dieta:string;
+  observaciones:string;
   constructor(){
     
   }

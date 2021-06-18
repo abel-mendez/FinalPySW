@@ -24,6 +24,7 @@ import { AlumnoFormComponent } from './components/alumno-form/alumno-form.compon
 import { NgxDataTableModule} from "angular-9-datatable";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { AlifeFileToBase64Module } from 'alife-file-to-base64';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { ToastrModule } from 'ngx-toastr';
     NgxDataTableModule,
     FormsModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    AlifeFileToBase64Module
   ],
   providers: [],
   bootstrap: [AppComponent]
