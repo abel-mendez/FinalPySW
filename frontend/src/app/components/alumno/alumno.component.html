@@ -1,65 +1,152 @@
+<!--    Progreso del Alumno   -->
 <main>
-  <!--    Progreso del Alumno   -->
-  <section>
-    <h3 class="categorie">Tu Progreso</h3>
-    <div class="table-responsive">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col" class="col-2">Fecha</th>
-            <th scope="col" class="col-3">Observaciones</th>
-            <th scope="col" class="col-3">Dieta</th>
-            <th scope="col" class="col-3">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>17/03/2021</th>
-            <td>Se observa una mejoria en la potencia y fuerza del alumno</td>
-            <td></td>
-            <td scope="col" class="col-2">
-              <button type="button" class="btn-green btn" data-bs-toggle="modal" data-bs-target="#modalVerProgreso">
-                Ver Imagen
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- Modal RegistrarProgreso -->
-  <div class="modal fade" id="modalVerProgreso" tabindex="-1" aria-labelledby="modalLabelVerProgreso"
-    aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalLabelVerProgreso">Tu Progreso</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="container-fluid col-10 offset-1 mb-3">
-            <div class="row mb-3">
-              <div class="col-md-4 text-init"><b>Fecha</b></div>
-              <div class="col-md-8 text-end">12/10/2020</div>
-            </div>
-            <div class="row mb-3">
-              <div class="col-md-4 text-init"><b>Peso: </b></div>
-              <div class="col-md-8 text-end">120 Kg</div>
-            </div>
-            <div class="row mb-3">
-              <div class="col-md-4 text-center"><b>Observaciones: </b></div>
-              <div class="col-md-8 text-end">Se observa mejoria en el aspecto fisico del alumno, logró cambios
-                significativos en poco tiempo</div>
-            </div>
+  <h3 class="categorie mb-3">Tus Datos</h3>
+  <div>
+    <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <button
+          class="btn btn-green nav-link active"
+          id="nav-home-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#nav-home"
+          type="button"
+          role="tab"
+          aria-controls="nav-home"
+          aria-selected="true"
+        >
+          Tu Progreso
+        </button>
+        <button
+          class="btn nav-link btn-green"
+          id="nav-profile-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#nav-profile"
+          type="button"
+          role="tab"
+          aria-controls="nav-profile"
+          aria-selected="false"
+        >
+          Tu Asistencia
+        </button>
+        <button
+          class="btn nav-link btn-green"
+          id="nav-contact-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#nav-contact"
+          type="button"
+          role="tab"
+          aria-controls="nav-contact"
+          aria-selected="false"
+        >
+          Tus Rutinas
+        </button>
+        <button
+          class="btn nav-link btn-green"
+          id="nav-contact-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#nav-pago"
+          type="button"
+          role="tab"
+          aria-controls="nav-pago"
+          aria-selected="false"
+        >
+          Tus Pagos
+        </button>
+      </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+      <div
+        class="tab-pane fade show active cont"
+        id="nav-home"
+        role="tabpanel"
+        aria-labelledby="nav-home-tab"
+      >
+        <section>
+          <h3 class="categorie">Tu Progreso</h3>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col" class="col-2">Fecha</th>
+                  <th scope="col" class="col-3">Observaciones</th>
+                  <th scope="col" class="col-3">Dieta</th>
+                  <th scope="col" class="col-3">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>17/03/2021</th>
+                  <td>
+                    Se observa una mejoria en la potencia y fuerza del alumno
+                  </td>
+                  <td></td>
+                  <td scope="col" class="col-2">
+                    <button
+                      type="button"
+                      class="btn-green btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalVerProgreso"
+                    >
+                      Ver Imagen
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <div class="col-5 offset-4 mb-3">
-            <div class="col-md-4" style="width: 100%;"><img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStnsfMnETCJRaP7ZUn3-7dUjKKmAgEAO2kJA&usqp=CAU"
-                alt=""></div>
-          </div>
+        </section>
 
-          <!--<div class="col-12 mb-3">
+        <!-- Modal RegistrarProgreso -->
+        <div
+          class="modal fade"
+          id="modalVerProgreso"
+          tabindex="-1"
+          aria-labelledby="modalLabelVerProgreso"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalLabelVerProgreso">
+                  Tu Progreso
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <div class="container-fluid col-10 offset-1 mb-3">
+                  <div class="row mb-3">
+                    <div class="col-md-4 text-init"><b>Fecha</b></div>
+                    <div class="col-md-8 text-end">12/10/2020</div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-4 text-init"><b>Peso: </b></div>
+                    <div class="col-md-8 text-end">120 Kg</div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-4 text-center">
+                      <b>Observaciones: </b>
+                    </div>
+                    <div class="col-md-8 text-end">
+                      Se observa mejoria en el aspecto fisico del alumno, logró
+                      cambios significativos en poco tiempo
+                    </div>
+                  </div>
+                </div>
+                <div class="col-5 offset-4 mb-3">
+                  <div class="col-md-4" style="width: 100%">
+                    <img
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStnsfMnETCJRaP7ZUn3-7dUjKKmAgEAO2kJA&usqp=CAU"
+                      alt=""
+                    />
+                  </div>
+                </div>
+
+                <!--<div class="col-12 mb-3">
             <label for="" class="form-label">Fecha</label>
             <input type="date" class="form-control" id="" />
           </div>
@@ -75,224 +162,334 @@
             <label for="" class="form-label">Agregar Imagen del Progreso</label>
             <input type="file" class="form-control" id="" />
           </div>-->
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!--          ver asistencia del alumno      -->
-  <section>
-    <h3 class="categorie">Tu Asistencia</h3>
-    <div class="table-responsive">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col" class="col-2">Fecha</th>
-            <th scope="col" class="col-1">Dia</th>
-            <th scope="col" class="col-2">Hora</th>
-            <th scope="col" class="col-2">Asistencia</th>
-            <th scope="col" class="col-3">Rutina</th>
-            <th scope="col" class="col-2">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>17/03/2021</th>
-            <th>Lunes</th>
-            <td>10:00 am</td>
-            <td>si</td>
-            <td>Pecho y Biceps</td>
-            <td scope="col" class="col-2">
-              <button type="button" class="btn-green btn" data-bs-toggle="modal" data-bs-target="#modalVerAsistencia">Ver</button>
-              <button class="btn btn-grey">Imprimir</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- Modal Ver Asistencia -->
-  <div class="modal fade" id="modalVerAsistencia" tabindex="-1" aria-labelledby="modalLabelVerAsistencia"
-    aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalLabelVerAsistencia">Tu Asistencia</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="container-fluid col-10 offset-1 mb-3">
-            <div class="row mb-3">
-              <div class="col-md-4 text-init"><b>Fecha</b></div>
-              <div class="col-md-8 text-end">12/10/2020</div>
-            </div>
-            <div class="row mb-3">
-              <div class="col-md-4 text-init"><b>Dia: </b></div>
-              <div class="col-md-8 text-end">Lunes</div>
-            </div>
-            <div class="row mb-3">
-              <div class="col-md-4 text-init"><b>Hora: </b></div>
-              <div class="col-md-8 text-end">12:20</div>
-            </div>
-            <div class="row mb-3">
-              <div class="col-md-4 text-init"><b>Asistencia: </b></div>
-              <div class="col-md-8 text-end">Si</div>
-            </div>
-            <div class="row mb-3">
-              <div class="col-md-4 text-init"><b>Rutina: </b></div>
-              <div class="col-md-8 text-end">Pecho y Biceps</div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-grey"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
             </div>
           </div>
-          <!--<div class="col-5 offset-4 mb-3">
+        </div>
+      </div>
+      <div
+        class="tab-pane fade cont"
+        id="nav-profile"
+        role="tabpanel"
+        aria-labelledby="nav-profile-tab"
+      >
+        <!--          ver asistencia del alumno      -->
+        <section>
+          <h3 class="categorie">Tu Asistencia</h3>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col" class="col-2">Fecha</th>
+                  <th scope="col" class="col-1">Dia</th>
+                  <th scope="col" class="col-2">Hora</th>
+                  <th scope="col" class="col-2">Asistencia</th>
+                  <th scope="col" class="col-3">Rutina</th>
+                  <th scope="col" class="col-2">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>17/03/2021</th>
+                  <th>Lunes</th>
+                  <td>10:00 am</td>
+                  <td>si</td>
+                  <td>Pecho y Biceps</td>
+                  <td scope="col" class="col-2">
+                    <button
+                      type="button"
+                      class="btn-green btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalVerAsistencia"
+                    >
+                      Ver
+                    </button>
+                    <button class="btn btn-grey">Imprimir</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Modal Ver Asistencia -->
+        <div
+          class="modal fade"
+          id="modalVerAsistencia"
+          tabindex="-1"
+          aria-labelledby="modalLabelVerAsistencia"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalLabelVerAsistencia">
+                  Tu Asistencia
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <div class="container-fluid col-10 offset-1 mb-3">
+                  <div class="row mb-3">
+                    <div class="col-md-4 text-init"><b>Fecha</b></div>
+                    <div class="col-md-8 text-end">12/10/2020</div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-4 text-init"><b>Dia: </b></div>
+                    <div class="col-md-8 text-end">Lunes</div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-4 text-init"><b>Hora: </b></div>
+                    <div class="col-md-8 text-end">12:20</div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-4 text-init"><b>Asistencia: </b></div>
+                    <div class="col-md-8 text-end">Si</div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-4 text-init"><b>Rutina: </b></div>
+                    <div class="col-md-8 text-end">Pecho y Biceps</div>
+                  </div>
+                </div>
+                <!--<div class="col-5 offset-4 mb-3">
             <div class="col-md-4" style="width: 100%;"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStnsfMnETCJRaP7ZUn3-7dUjKKmAgEAO2kJA&usqp=CAU" alt=""></div>
           </div>-->
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-grey"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Close</button>
+      </div>
+      <div
+        class="tab-pane fade cont"
+        id="nav-contact"
+        role="tabpanel"
+        aria-labelledby="nav-contact-tab"
+      >
+        <!--          ver rutinas del alumno      -->
+        <section>
+          <h3 class="categorie">Tus rutinas</h3>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col" class="col-2">Dia</th>
+                  <th scope="col" class="col-3">Rutina</th>
+                  <th scope="col" class="col-2">Repeticiones</th>
+                  <th scope="col" class="col-2">Series</th>
+                  <th scope="col" class="col-3">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>Lunes 17</th>
+                  <td>Levantamiento de Mancuernas</td>
+                  <td>10</td>
+                  <td>3</td>
+                  <td>
+                    <button
+                      class="btn btn-green"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalVerRutina"
+                    >
+                      Detalles
+                    </button>
+                    <button class="btn btn-grey">Imprimir</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Modal ver Rutinas -->
+        <div
+          class="modal fade"
+          id="modalVerRutina"
+          tabindex="-1"
+          aria-labelledby="modalLabelVerRutina"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalLabelVerRutina">
+                  Tus Rutinas
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <div class="container-fluid col-10 offset-1 mb-3">
+                  <div class="row mb-3">
+                    <div class="col-md-5 text-init">
+                      <b>Grupo Muscular: </b>
+                    </div>
+                    <div class="col-md-7 text-end">Piernas</div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-4 text-init"><b>Duración: </b></div>
+                    <div class="col-md-8 text-end">40 min</div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-4 text-init"><b>Ejercicio: </b></div>
+                    <div class="col-md-8 text-end">Sentadillas</div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-4 text-init"><b>Series: </b></div>
+                    <div class="col-md-8 text-end">5 series</div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-4 text-init">
+                      <b>Repeticiones: </b>
+                    </div>
+                    <div class="col-md-8 text-end">10 repeticiones</div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-grey"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="tab-pane fade cont"
+        id="nav-pago"
+        role="tabpanel"
+        aria-labelledby="nav-pago-tab"
+      >
+        <!--          ver pago de cuotas del alumno     -->
+        <section>
+          <h3 class="categorie">Tus Pagos</h3>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col" class="col-2">Fecha</th>
+                  <th scope="col" class="col-2">Plan</th>
+                  <th scope="col" class="col-2">Monto</th>
+                  <th scope="col" class="col-3">Pago</th>
+                  <th scope="col" class="col-3">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>17/03/2021</th>
+                  <td>Plan Basico</td>
+                  <td>$1000</td>
+                  <td>Realizado con tarjeta de credito Visa</td>
+                  <td>
+                    <button
+                      class="btn btn-green"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalVerPago"
+                    >
+                      Detalles
+                    </button>
+                    <button class="btn btn-grey">Imprimir</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Modal ver Pago -->
+        <div
+          class="modal fade"
+          id="modalVerPago"
+          tabindex="-1"
+          aria-labelledby="modalLabelVerpago"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalLabelVerPago">Tus Pagos</h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <div class="container-fluid col-10 offset-1 mb-3">
+                  <div class="row mb-3">
+                    <div class="col-md-5 text-init"><b>Monto: </b></div>
+                    <div class="col-md-7 text-end">$ 1000</div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-4 text-init">
+                      <b>Modo de Pago: </b>
+                    </div>
+                    <div class="col-md-8 text-end">Tarjeta de Crédito Visa</div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-4 text-init">
+                      <b>Fecha de Pago: </b>
+                    </div>
+                    <div class="col-md-8 text-end">16/06/2021</div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-4 text-init">
+                      <b>Fecha Vencimiento: </b>
+                    </div>
+                    <div class="col-md-8 text-end">19/06/2021</div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-4 text-init"><b>Completado: </b></div>
+                    <div class="col-md-8 text-end">Si</div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-grey"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-
-  <!--          ver rutinas del alumno      -->
-  <section>
-    <h3 class="categorie">Tus rutinas</h3>
-    <div class="table-responsive">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col" class="col-2">Dia</th>
-            <th scope="col" class="col-3">Rutina</th>
-            <th scope="col" class="col-2">Repeticiones</th>
-            <th scope="col" class="col-2">Series</th>
-            <th scope="col" class="col-3">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>Lunes 17</th>
-            <td>Levantamiento de Mancuernas</td>
-            <td>10</td>
-            <td>3</td>
-            <td>
-              <button class="btn btn-green" data-bs-toggle="modal" data-bs-target="#modalVerRutina">Detalles</button>
-              <button class="btn btn-grey">Imprimir</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- Modal ver Rutinas -->
-  <div class="modal fade" id="modalVerRutina" tabindex="-1" aria-labelledby="modalLabelVerRutina" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalLabelVerRutina">Tus Rutinas</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="container-fluid col-10 offset-1 mb-3">
-            <div class="row mb-3">
-              <div class="col-md-5 text-init"><b>Grupo Muscular: </b></div>
-              <div class="col-md-7 text-end">Piernas</div>
-            </div>
-            <div class="row mb-3">
-              <div class="col-md-4 text-init"><b>Duración: </b></div>
-              <div class="col-md-8 text-end">40 min</div>
-            </div>
-            <div class="row mb-3">
-              <div class="col-md-4 text-init"><b>Ejercicio: </b></div>
-              <div class="col-md-8 text-end">Sentadillas</div>
-            </div>
-            <div class="row mb-3">
-              <div class="col-md-4 text-init"><b>Series: </b></div>
-              <div class="col-md-8 text-end">5 series</div>
-            </div>
-            <div class="row mb-3">
-              <div class="col-md-4 text-init"><b>Repeticiones: </b></div>
-              <div class="col-md-8 text-end">10 repeticiones</div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!--          ver pago de cuotas del alumno     -->
-  <section>
-    <h3 class="categorie">Tus Pagos</h3>
-    <div class="table-responsive">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col" class="col-2">Fecha</th>
-            <th scope="col" class="col-2">Plan</th>
-            <th scope="col" class="col-2">Monto</th>
-            <th scope="col" class="col-3">Pago</th>
-            <th scope="col" class="col-3">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>17/03/2021</th>
-            <td>Plan Basico</td>
-            <td>$1000</td>
-            <td>Realizado con tarjeta de credito Visa</td>
-            <td>
-              <button class="btn btn-green" data-bs-toggle="modal" data-bs-target="#modalVerPago">Detalles</button>
-              <button class="btn btn-grey">Imprimir</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-    <!-- Modal ver Pago -->
-    <div class="modal fade" id="modalVerPago" tabindex="-1" aria-labelledby="modalLabelVerpago" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modalLabelVerPago">Tus Pagos</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="container-fluid col-10 offset-1 mb-3">
-              <div class="row mb-3">
-                <div class="col-md-5 text-init"><b>Monto: </b></div>
-                <div class="col-md-7 text-end">$ 1000</div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-4 text-init"><b>Modo de Pago: </b></div>
-                <div class="col-md-8 text-end">Tarjeta de Crédito Visa</div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-4 text-init"><b>Fecha de Pago: </b></div>
-                <div class="col-md-8 text-end">16/06/2021</div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-4 text-init"><b>Fecha Vencimiento: </b></div>
-                <div class="col-md-8 text-end">19/06/2021</div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-4 text-init"><b>Completado: </b></div>
-                <div class="col-md-8 text-end">Si</div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
 </main>

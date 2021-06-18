@@ -36,6 +36,11 @@
   box-shadow: none;
   outline: none;
 }
+.cont {
+  color: rgb(63, 63, 63) !important;
+  border: none !important;
+}
+
 @media screen and (max-width: 600px) {
   .estadisticas {
     width: 100%;
