@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Plan } from 'src/app/models/plan';
+import { Slider } from 'src/app/models/slider';
 import { PlanService } from 'src/app/services/home/plan.service';
+import { SliderService } from 'src/app/services/home/slider.service';
 
 @Component({
   selector: 'app-home',
@@ -9,10 +11,12 @@ import { PlanService } from 'src/app/services/home/plan.service';
 })
 export class HomeComponent implements OnInit {
   planes: Array<Plan> = new Array<Plan>();
-  constructor(private planService:PlanService) { }
+  sliders: Array<Slider> = new Array<Slider>();
+  constructor(private planService:PlanService,private sliderService:SliderService) { }
 
   ngOnInit(): void {
     this.getPlanes();
+    this.getSliders();
   }
 
   getPlanes(){
@@ -29,6 +33,23 @@ export class HomeComponent implements OnInit {
       error=>{
         console.log(error);
         alert("Error al cargar los planes");
+      }
+    )
+  }
+  getSliders(){
+    this.sliders = new Array<Slider>();
+    this.sliderService.getSliders().subscribe(
+      result=>{
+        result.forEach(element => {
+          let vSlider = new Slider();
+          Object.assign(vSlider,element);
+          this.sliders.push(vSlider);
+          console.log(result);
+        });
+      },
+      error=>{
+        console.log(error);
+        alert("Error al cargar los Sliders");
       }
     )
   }
