@@ -13,6 +13,12 @@ alumnoCtrl.getAlumnos = async (req, res) => {
   res.json(alumnos);
 }
 
+//Obtener alumno
+alumnoCtrl.getAlumno = async (req, res) => {
+  const alumno = await Alumno.findById(req.params.id).populate("plan");
+  res.json(alumno);
+}
+
 //Alta de alumno
 alumnoCtrl.createAlumno = async (req, res) => {
   var alumno = new Alumno(req.body);

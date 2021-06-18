@@ -85,6 +85,21 @@
           Usuario
         </button>
       </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link btn btn-red"
+          id="usuario-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#usuario"
+          type="button"
+          role="tab"
+          aria-controls="usuario"
+          aria-selected="false"
+          (click)="volver()"
+        >
+          VOLVER
+        </button>
+      </li>
     </ul>
     <div class="tab-content cont" id="myTabContent">
       <div
@@ -109,39 +124,37 @@
             <form class="row g-3">
               <div class="col-md-6">
                 <label for="" class="form-label">Apellido/s</label>
-                <input type="text" class="form-control" id="" />
+                <input type="text" class="form-control" id="" name="apellido" [(ngModel)]="alumno.apellido"/>
               </div>
               <div class="col-md-6">
                 <label for="" class="form-label">Nombre/s</label>
-                <input type="text" class="form-control" id="" />
+                <input type="text" class="form-control" id="" name="nombre" [(ngModel)]="alumno.nombre"/>
               </div>
               <div class="col-md-6">
                 <label for="" class="form-label">Fecha de nacimiento</label>
-                <input type="date" class="form-control" id="" />
+                <input type="date" class="form-control" id="" name="fechanac" [(ngModel)]="alumno.fechanac"/>
               </div>
               <div class="col-md-6">
                 <label for="" class="form-label">Numero de Documento</label>
-                <input type="text" class="form-control" id="" />
+                <input type="number" class="form-control" id="" name="dni" [(ngModel)]="alumno.dni"/>
               </div>
               <div class="col-12">
-                <label for="" class="form-label">Direccion</label>
-                <input type="text" class="form-control" id="" />
+                <label for="" class="form-label">Domicilio</label>
+                <input type="text" class="form-control" id="" name="domicilio" [(ngModel)]="alumno.domicilio"/>
               </div>
               <div class="col-12">
                 <label for="" class="form-label">E-mail</label>
-                <input type="text" class="form-control" id="" />
+                <input type="text" class="form-control" id="" name="email" [(ngModel)]="alumno.email"/>
               </div>
               <div class="col-md-6">
                 <label for="" class="form-label">Numero de Celular</label>
-                <input type="number" class="form-control" id="" />
+                <input type="number" class="form-control" id="" name="celular" [(ngModel)]="alumno.celular"/>
               </div>
               <div class="col-md-4">
                 <label for="inputState" class="form-label">Tipo de Plan</label>
-                <select id="inputState" class="form-select">
-                  <option>Plan Basico</option>
-                  <option>Plan Full</option>
-                  <option value="">Pase Libre</option>
-                </select>
+                  <select class="form-select" name="plan" [(ngModel)]="alumno.plan">
+                    <option *ngFor="let p of planes" [ngValue]="p">{{p.tipo}} - {{p.frecuencia}}</option>
+                  </select>
               </div>
               <div class="col-md-2">
                 <label for="" class="form-label">Fecha de inicio</label>
@@ -409,7 +422,7 @@
             <h3 class="categorie">Asistencia del Alumno</h3>
           </a>
           <div class="collapse show" id="collapseAsistencia">
-            <div class="card-body table-responsive-sm">
+            <div class="card-body table-responsive-sm col-md-8 offset-md-2">
               <table
                 class="table table-striped"
                 [mfData]="asistencias"
@@ -428,7 +441,7 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let asist of mf.data">
-                    <td>{{ asist.dia }}</td>
+                    <td>{{ asist.fecha}}</td>
                     <td>{{ asist.hora }}</td>
                   </tr>
                 </tbody>
@@ -491,6 +504,7 @@
           </div>
         </section>
       </div>
+      
     </div>
   </section>
 </main>

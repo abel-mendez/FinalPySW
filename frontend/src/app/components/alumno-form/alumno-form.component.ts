@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Alumno } from 'src/app/models/alumno';
 import { Plan } from 'src/app/models/plan';
 import { AlumnoService } from 'src/app/services/alumnos/alumno.service';
@@ -17,7 +18,8 @@ export class AlumnoFormComponent implements OnInit {
 
   constructor(private planService:PlanService,
               private alumnoService:AlumnoService,
-              private router:Router) { }
+              private router:Router,
+              private toastr:ToastrService) { }
 
   ngOnInit(): void {
     this.getPlanes();
@@ -46,7 +48,7 @@ export class AlumnoFormComponent implements OnInit {
     this.alumnoService.addAlumno(this.alumno).subscribe(
       result=>{
         if(result.status=="1"){
-          alert("El alumno se agregó correctamente");
+          this.toastr.success("El alumno se agregó correctamente", "Operación exitosa");
           this.router.navigate(["alumnos"]);
         }
         console.log(result);

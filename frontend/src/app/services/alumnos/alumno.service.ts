@@ -32,7 +32,7 @@ export class AlumnoService {
 
       })
     }
-    return this._http.get(this.urlbase+"alumno/"+dni, option); 
+    return this._http.get(this.urlbase+"alumno/dni/"+dni, option); 
    }
 
    addAlumno(alumno:Alumno):Observable<any>{
@@ -63,5 +63,17 @@ export class AlumnoService {
     }
     return this._http.get(this.urlbase+"alumno/"+idAlumno+"/asistencias", option);
    }
+
+   getAlumno(id:string):Observable<any>{
+    let option = {
+      headers: new HttpHeaders({
+      }),
+      params: new HttpParams({
+
+      })
+    }
+    return this._http.get(this.urlbase+"alumno/"+id, option); 
+   }
+
 
 }

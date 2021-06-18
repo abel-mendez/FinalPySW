@@ -8,6 +8,7 @@ const router = express.Router();
 //definimos las rutas para la gestion de alumno
 
 router.get('/', alumnoCtrl.getAlumnos);
+router.get('/:id', alumnoCtrl.getAlumno);
 router.post('/', alumnoCtrl.createAlumno);
 router.put('/:id', alumnoCtrl.editAlumno);
 router.delete('/:id', alumnoCtrl.deleteAlumno);
@@ -31,7 +32,7 @@ router.post('/:id/pagos', alumnoCtrl.addPago);
 router.post('/:id/progresos', alumnoCtrl.addProgreso);
 
 //ESTADISTICAS
-router.get('/:dni', alumnoCtrl.getAlumnoPorDNI);
+router.get('/dni/:dni', alumnoCtrl.getAlumnoPorDNI);
 router.get('/fechainicio/:fechainicio', alumnoCtrl.getAlumnosPorFechaInicio);
 router.get('/plan/:plan', alumnoCtrl.getAlumnoPorPlan)
 

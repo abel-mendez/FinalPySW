@@ -22,6 +22,8 @@ import * as printJS from 'print-js';
 import { TablaSliderComponent } from './components/tabla-slider/tabla-slider.component';
 import { AlumnoFormComponent } from './components/alumno-form/alumno-form.component';
 import { NgxDataTableModule} from "angular-9-datatable";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { NgxDataTableModule} from "angular-9-datatable";
     ColorPickerModule,
     ChartsModule,
     NgxDataTableModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
