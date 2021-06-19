@@ -320,84 +320,106 @@
           <a
             class="text-decoration-none"
             data-bs-toggle="collapse"
-            href="#collapseProgreso"
+            href="#collapseProgreso2"
             role="button"
             aria-expanded="false"
             aria-controls="collapseExample"
           >
             <h3 class="categorie">Progreso</h3>
           </a>
-          <div class="collapse show" id="collapseProgreso">
-            <form class="row g-3">
-              <div class="col-md-4">
-                <label for="" class="form-label">Fecha</label>
-                <input type="date" class="form-control" id="" />
+          <div class="collapse show" id="collapseProgreso2">
+            <div class="accordion col-md-10 offset-md-1" id="accordionExample2">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button bg-light text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    AGREGAR PROGRESO
+                  </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample2">
+                  <div class="accordion-body">
+                    <form class="row g-3">
+                      <div class="col-md-4">
+                        <label for="" class="form-label">Fecha</label>
+                        <input type="date" class="form-control" id="" name="fechaProgreso" [(ngModel)]="progreso.fecha"/>
+                      </div>
+                      <div class="col-md-4">
+                        <label for="" class="form-label">Control de peso</label>
+                        <input
+                          type="text" class="form-control" id="" placeholder="peso en Kg" 
+                          name="pesoProgreso" [(ngModel)]="progreso.peso"
+                        />
+                      </div>        
+                      <div class="col-md-4">
+                        <label for="" class="form-label">Evolucion del aspecto fisico</label>
+                        <input type="file" class="form-control" id="" name="" 
+                        name="pesoProgreso" [(ngModel)]="progreso.peso"/>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="" class="form-label">Tipo de dieta</label>
+                        <textarea class="form-control w-100" name="" id="" cols="30" rows="3" 
+                        name="dietaProgreso" [(ngModel)]="progreso.dieta"
+                        ></textarea>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="" class="form-label">Observaciones</label>
+                        <textarea class="form-control w-100" name="" id="" cols="30" rows="3"
+                        name="observacionesProgreso" [(ngModel)]="progreso.observaciones"
+                        ></textarea>
+                      </div>
+                      <div class="col-12 buttons">
+                        <button type="button" class="btn btn-green">Guardar</button>
+                        <button class="btn btn-grey">Modificar</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
               </div>
-              <div class="col-md-4">
-                <label for="" class="form-label">Control de peso</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id=""
-                  placeholder="peso en Kg"
-                />
-              </div>
-
-              <div class="col-md-4">
-                <label for="" class="form-label"
-                  >Evolucion del aspecto fisico</label
-                >
-                <input type="file" class="form-control" id="" name="" />
-              </div>
-              <div class="col-md-6">
-                <label for="" class="form-label">Tipo de dieta</label>
-                <textarea
-                  class="form-control w-100"
-                  name=""
-                  id=""
-                  cols="30"
-                  rows="3"
-                ></textarea>
-              </div>
-              <div class="col-md-6">
-                <label for="" class="form-label">Observaciones</label>
-                <textarea
-                  class="w-100 form-control"
-                  name=""
-                  id=""
-                  cols="10"
-                  rows="3"
-                ></textarea>
-              </div>
-              <div class="col-12 buttons">
-                <button type="button" class="btn btn-green">Guardar</button>
-                <button class="btn btn-grey">Modificar</button>
-              </div>
-            </form>
-            <div class="table-responsive">
-              <table class="table table-hover">
+            </div>
+            <br />
+            <div class="card-body table-responsive-sm col-md-10 offset-md-1">
+              <table
+                class="table table-striped"
+                [mfData]="progresos"
+                #mf2="mfDataTable"
+                [mfRowsOnPage]="5"
+              >
                 <thead>
                   <tr>
-                    <th scope="col" class="col-2">Fecha</th>
-                    <th scope="col" class="col-3">Observaciones</th>
-                    <th scope="col" class="col-3">Dieta</th>
-                    <th scope="col" class="col-3">Acciones</th>
+                    <th style="width: 10%">
+                      <mfDefaultSorter by="fechaProg">Fecha</mfDefaultSorter>
+                    </th>
+                    <th style="width: 10%">
+                      <mfDefaultSorter by="pesoProg">Peso</mfDefaultSorter>
+                    </th>
+                    <th style="width: 20%">
+                      <mfDefaultSorter by="dietaProg">Dieta</mfDefaultSorter>
+                    </th>
+                    <th style="width: 30%">
+                      <mfDefaultSorter by="observacionesProg">Observaciones</mfDefaultSorter>
+                    </th>
+                    <th style="width: 30%">
+                      <mfDefaultSorter by="fotoProg">Foto</mfDefaultSorter>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th>17/03/2021</th>
-                    <td>
-                      Se observa una mejoria en la potencia y fuerza del alumno
-                    </td>
-                    <td></td>
-                    <td scope="col" class="col-2">
-                      <button class="btn-green btn">Ver</button>
-                      <button class="btn btn-red">Borrar</button>
-                      <button class="btn btn-grey">Modificar</button>
-                    </td>
+                  <tr *ngFor="let p of mf2.data">
+                    <td>{{ p.fecha}}</td>
+                    <td>{{ p.peso }}</td>
+                    <td>{{ p.dieta}}</td>
+                    <td>{{ p.observaciones }}</td>
+                    <td>{{ p.foto}}</td>
                   </tr>
                 </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="4">
+                      <mfBootstrapPaginator
+                        [rowsOnPageSet]="[5, 10, 25]"
+                      ></mfBootstrapPaginator>
+                    </td>
+                  </tr>
+                </tfoot>
               </table>
             </div>
           </div>
@@ -422,6 +444,33 @@
             <h3 class="categorie">Asistencia del Alumno</h3>
           </a>
           <div class="collapse show" id="collapseAsistencia">
+            <div class="accordion col-md-4 offset-md-4" id="accordionExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button bg-light text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    AGREGAR ASISTENCIA
+                  </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <form class="row g-3" #asistenciaForm="ngForm">
+                      <div class="col-md-6">
+                        <label for="" class="form-label">Fecha</label>
+                        <input type="date" class="form-control" id="" name="asistfecha" [(ngModel)]="asistencia.fecha"/>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="" class="form-label">Hora</label>
+                        <input type="time" class="form-control" id="" name="asisthora" [(ngModel)]="asistencia.hora"/>
+                      </div>
+                      <div class="col-12 buttons">
+                        <button type="button" class="btn btn-green" (click)="agregarAsistencia(asistenciaForm)">Guardar</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br />
             <div class="card-body table-responsive-sm col-md-8 offset-md-2">
               <table
                 class="table table-striped"

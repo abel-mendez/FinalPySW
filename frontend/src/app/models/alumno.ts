@@ -6,7 +6,7 @@ import { Rutina } from "./rutina";
 import { Usuario } from "./usuario";
 
 export class Alumno {
-  _id:String;
+  _id:string;
   apellido:string;
   nombre:string;
   dni:number;
