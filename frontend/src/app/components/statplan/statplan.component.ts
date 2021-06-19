@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
+import { Alumno } from 'src/app/models/alumno';
+import { Plan } from 'src/app/models/plan';
+import { AlumnoService } from 'src/app/services/alumnos/alumno.service';
+import { PlanService } from 'src/app/services/home/plan.service';
 @Component({
   selector: 'app-statplan',
   templateUrl: './statplan.component.html',
@@ -37,27 +41,82 @@ export class StatplanComponent implements OnInit {
   private nombreCategoria = [];
   //Arreglo de los colores que vamos a pasar
   private colores = [];
+  alumnos:Array<Alumno>=new Array<Alumno>();
+  planes:Array<Plan> = new Array<Plan>();
+  constructor(private alumnoService:AlumnoService,private planService:PlanService) {
+    this.getAlumnos();
+  }
 
-  constructor() {
-    
-    this.datos=[['10'],['9'],['5'],['0']];
-    //this.datos=[['10','0','0'],['0','9','0'],['0','0','7']];
-    //this.datos=[['1','10','20'],['6','8','9'],['4','5','10']];
-    //this.nombreCategoria=['Plan Basico','Plan Full','Pase Libre'];
-    this.nombreCategoria=['Plan Basico','Plan Full','Pase Libre'];
+  ngOnInit() {
+
+  }
+
+  generarEstadisticas(){
+    for(let p of this.planes){
+      this.nombreCategoria.push(p.tipo);
+    }
+    this.obtenerDatos();
+    this.datos.push(['0']);
     this.colores=['rgba(255,0,0,0.7)','rgba(0,255,0,0.7)','rgba(0,0,255,0.7)','rgba(255,255,0,0.7)','rgba(0,255,255,0.7)','rgba(255,0,255,0.7)'];
     this.barChartData = [];
     this.chartColors = [];
     
     for (const index in this.datos) {
+      console.log(this.datos[index]);
+      console.log(this.nombreCategoria[index]);
       this.barChartData.push({ data: this.datos[index], label: this.nombreCategoria[index] });
       this.chartColors.push({backgroundColor: this.colores[index]});
     }
   }
-
-  ngOnInit() {
+  obtenerDatos(){
+    let count:Array<number>=new Array<number>();
+    for(let a of this.alumnos){
+      for(let i=0; i< this.nombreCategoria.length;i++){
+        if (count[i]==null){
+          count[i]=0;
+        }
+        if(a.plan.tipo==this.nombreCategoria[i]){
+          count[i]+=1;
+        }
+      }
+    }
+    for(let i=0; i< count.length;i++){
+      this.datos[i]=[count[i].toString()];
+    }
   }
+  getAlumnos(){
+    this.alumnos = new Array<Alumno>();
+    this.alumnoService.getAllAlumnos().subscribe(
+      result=>{
+        result.forEach(element => {
+          let vAlumno = new Alumno();
+          Object.assign(vAlumno,element);
+          this.alumnos.push(vAlumno);
+        });
+        this.getPlanes();
+      },
+      error=>{
+        alert("Error al cargar los Alumnos");
+      }
+    )
+  }
+  getPlanes(){
+    this.planes = new Array<Plan>();
+    this.planService.getPlanes().subscribe(
+      result=>{
 
+        result.forEach(element => {
+          let vPlan = new Plan();
+          Object.assign(vPlan,element);
+          this.planes.push(vPlan);
+        });
+        this.generarEstadisticas();
+      },
+      error=>{
+        alert("Error al cargar los planes");
+      }
+    )
+  }
 }
 
 
