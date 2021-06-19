@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Alumno } from 'src/app/models/alumno';
+import { Asistencia } from 'src/app/models/asistencia';
 
 @Injectable({
   providedIn: 'root'
@@ -52,6 +53,31 @@ export class AlumnoService {
      
    }
 
+   getAlumno(id:string):Observable<any>{
+    let option = {
+      headers: new HttpHeaders({
+      }),
+      params: new HttpParams({
+
+      })
+    }
+    return this._http.get(this.urlbase+"alumno/"+id, option); 
+   }
+
+   //asistencias
+   addAsistencia(id:string, asistencia:Asistencia):Observable<any>{
+    let option = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      }),
+      params: new HttpParams({
+
+      })
+    }
+    let body = JSON.stringify(asistencia);
+    return this._http.post(this.urlbase+"alumno/"+id+"/asistencias", body, option);
+   }
+
    getAsistencias(idAlumno:string):Observable<any>{
     let option = {
       headers: new HttpHeaders({
@@ -62,17 +88,6 @@ export class AlumnoService {
       })
     }
     return this._http.get(this.urlbase+"alumno/"+idAlumno+"/asistencias", option);
-   }
-
-   getAlumno(id:string):Observable<any>{
-    let option = {
-      headers: new HttpHeaders({
-      }),
-      params: new HttpParams({
-
-      })
-    }
-    return this._http.get(this.urlbase+"alumno/"+id, option); 
    }
 
 
