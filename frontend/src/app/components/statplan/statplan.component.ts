@@ -14,7 +14,6 @@ export class StatplanComponent implements OnInit {
 
   public barChartOptions: ChartOptions = {
     responsive: true,
-    // We use these empty structures as placeholders for dynamic theming.
     scales: { xAxes: [{}], yAxes: [{}] },
     plugins: {
       datalabels: {
@@ -24,17 +23,12 @@ export class StatplanComponent implements OnInit {
     }
   };
   public barChartLabels: Label[] = ['cantidad de personas'];
- //public barChartLabels: Label[] = ['Plan Basico', 'Plan Full','Pase Libre'];
   //Tipo de grafico que queremos: ejem: line, bar, radar
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
-  //public barChartPlugins = [pluginDataLabels];
   //Datos que vamos a cargar en las graficas 
   public barChartData: ChartDataSets[];
   public chartColors;
-
-  private categoria;
-  private dato: string;
   //Arreglo de los datos que vamos a pasar
   private datos = [];
   //Arreglo de las categorias que vamos a pasar
@@ -72,6 +66,7 @@ export class StatplanComponent implements OnInit {
     let count:Array<number>=new Array<number>();
     for(let a of this.alumnos){
       for(let i=0; i< this.nombreCategoria.length;i++){
+        //inicia los contadores en 0
         if (count[i]==null){
           count[i]=0;
         }
@@ -80,6 +75,7 @@ export class StatplanComponent implements OnInit {
         }
       }
     }
+    //convierte los contadores en array de string
     for(let i=0; i< count.length;i++){
       this.datos[i]=[count[i].toString()];
     }
