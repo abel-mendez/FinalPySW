@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Alumno } from 'src/app/models/alumno';
 import { Asistencia } from 'src/app/models/asistencia';
+import { Progreso } from 'src/app/models/progreso';
 
 @Injectable({
   providedIn: 'root'
@@ -65,7 +66,7 @@ export class AlumnoService {
    }
 
    //asistencias
-   addAsistencia(id:string, asistencia:Asistencia):Observable<any>{
+   addAsistencia(idAlumno:string, asistencia:Asistencia):Observable<any>{
     let option = {
       headers: new HttpHeaders({
         "Content-Type": "application/json"
@@ -75,10 +76,10 @@ export class AlumnoService {
       })
     }
     let body = JSON.stringify(asistencia);
-    return this._http.post(this.urlbase+"alumno/"+id+"/asistencias", body, option);
+    return this._http.post(this.urlbase+"alumno/"+idAlumno+"/asistencias", body, option);
    }
 
-   getAsistencias(idAlumno:string):Observable<any>{
+   getAsistencias(id:string):Observable<any>{
     let option = {
       headers: new HttpHeaders({
 
@@ -87,8 +88,34 @@ export class AlumnoService {
 
       })
     }
-    return this._http.get(this.urlbase+"alumno/"+idAlumno+"/asistencias", option);
+    return this._http.get(this.urlbase+"alumno/"+id+"/asistencias", option);
+    
    }
 
+   //progresos
+   addProgreso(idAlumno:string, progreso:Progreso):Observable<any>{
+    let option = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      }),
+      params: new HttpParams({
+
+      })
+    }
+    let body = JSON.stringify(progreso);
+    return this._http.post(this.urlbase+"alumno/"+idAlumno+"/progresos", body, option);
+   }
+
+   getProgresos(idAlumno:string):Observable<any>{
+    let option = {
+      headers: new HttpHeaders({
+
+      }),
+      params: new HttpParams({
+
+      })
+    }
+    return this._http.get(this.urlbase+"alumno/"+idAlumno+"/progresos", option);
+   }
 
 }

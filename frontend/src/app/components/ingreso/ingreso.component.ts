@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Alumno } from 'src/app/models/alumno';
 import { Asistencia } from 'src/app/models/asistencia';
 import { Plan } from 'src/app/models/plan';
+import { Progreso } from 'src/app/models/progreso';
 import { AlumnoService } from 'src/app/services/alumnos/alumno.service';
 import { PlanService } from 'src/app/services/home/plan.service';
 
@@ -15,6 +16,8 @@ import { PlanService } from 'src/app/services/home/plan.service';
 })
 export class IngresoComponent implements OnInit {
 
+  progreso: Progreso = new Progreso();
+  progresos:Array<Progreso> = new Array<Progreso>();
   planes: Array<Plan> = new Array<Plan>();
   alumno:Alumno= new Alumno();
   asistencias: Array<Asistencia> = new Array<Asistencia>();
@@ -30,6 +33,7 @@ export class IngresoComponent implements OnInit {
     this.activatedRoute.params.subscribe(
       params => {
           this.getPlanes();
+          this.getProgresos(params.id);
           this.getAsistencias(params.id);
           this.cargarAlumno(params.id);
     });
@@ -98,11 +102,30 @@ export class IngresoComponent implements OnInit {
           Object.assign(vAsistencia,element);
           this.asistencias.push(vAsistencia);
           console.log(result);
+          console.log(this.asistencias);
         });
       },
       error=>{
         console.log(error);
         alert("Error al cargar las asistencias");
+      }
+    )
+  }
+
+  getProgresos(id:string){
+    this.progresos = new Array<Progreso>();
+    this.alumnoService.getProgresos(id).subscribe(
+      result=>{
+        result.forEach(element => {
+          let vProgreso = new Progreso();
+          Object.assign(vProgreso,element);
+          this.progresos.push(vProgreso);
+          console.log(result);
+        });
+      },
+      error=>{
+        console.log(error);
+        alert("Error al cargar los progresos");
       }
     )
   }

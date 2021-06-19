@@ -373,5 +373,10 @@ alumnoCtrl.getPagos = async (req, res) => {
   res.json(alumno.pagos);
 }
 
+//Obtener los progresos de un alumno
+alumnoCtrl.getProgresos = async (req, res) => {
+  const alumno = await Alumno.findById(req.params.id).populate("progresos");
+  res.json(alumno.progresos);
+}
 
 module.exports = alumnoCtrl;
