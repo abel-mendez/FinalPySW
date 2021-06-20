@@ -42,42 +42,71 @@
           </li>
           <li class="nav-item">
             <a
+            *ngIf="loginService.userLoggedIn()"
               class="nav-link p-2"
               routerLink="/alumnos"
               routerLinkActive="active-link"
               >Alumnos</a
             >
+            <a
+            *ngIf="!loginService.userLoggedIn()"
+              class="nav-link p-2 d-none"></a
+            >
           </li>
           <li class="nav-item">
             <a
+            *ngIf="loginService.userLoggedIn()"
               class="nav-link p-2"
               routerLink="/estadisticas"
               routerLinkActive="active-link"
               >Estadisticas</a
             >
+            <a
+            *ngIf="!loginService.userLoggedIn()"
+              class="nav-link p-2 d-none"></a
+            >
           </li>
           <li class="nav-item">
             <a
+            *ngIf="loginService.userLoggedIn()"
               class="nav-link p-2"
               routerLink="/configuracion"
               routerLinkActive="active-link"
               >Sitio Web</a
             >
+            <a
+            *ngIf="!loginService.userLoggedIn()"
+              class="nav-link p-2 d-none"></a
+            >
           </li>
           <li class="nav-item">
             <a
+            *ngIf="loginService.userLoggedIn()"
               class="nav-link p-2"
               routerLink="/alumno"
               routerLinkActive="active-link"
               >Mi Progreso</a
             >
+            <a
+            *ngIf="!loginService.userLoggedIn()"
+              class="nav-link p-2 d-none"></a
+            >
           </li>
           <li class="nav-item">
             <a
+            *ngIf="!loginService.userLoggedIn()"
               class="nav-link p-2"
               routerLink="/login"
               routerLinkActive="active-link"
               >Login</a
+            >
+            <a
+            *ngIf="loginService.userLoggedIn()"
+              class="nav-link p-2"
+              routerLink="/login"
+              routerLinkActive="active-link"
+              (click)="logout()"
+              >Logout ({{loginService.userLogged()}})</a
             >
           </li>
         </ul>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
   selector: 'app-alumno',
@@ -7,7 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AlumnoComponent implements OnInit {
 
-  constructor() { }
+  constructor(public loginService:LoginService,
+    public router:Router) {
+    if(this.loginService.userLoggedIn()==true){
+      alert("Debe Loguearse para continuar")
+      router.navigate(['login']);
+    }else{
+      
+    }
+   }
 
   ngOnInit(): void {
   }
