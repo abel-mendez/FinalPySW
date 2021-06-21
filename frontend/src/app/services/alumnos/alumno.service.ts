@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Alumno } from 'src/app/models/alumno';
 import { Asistencia } from 'src/app/models/asistencia';
 import { Progreso } from 'src/app/models/progreso';
+import { Rutina } from 'src/app/models/rutina';
 
 @Injectable({
   providedIn: 'root'
@@ -116,6 +117,32 @@ export class AlumnoService {
       })
     }
     return this._http.get(this.urlbase+"alumno/"+idAlumno+"/progresos", option);
+   }
+
+   //rutinas
+   addRutina(idAlumno:string, rutina:Rutina):Observable<any>{
+    let option = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      }),
+      params: new HttpParams({
+
+      })
+    }
+    let body = JSON.stringify(rutina);
+    return this._http.post(this.urlbase+"alumno/"+idAlumno+"/rutinas", body, option);
+   }
+
+   getRutinas(idAlumno:string):Observable<any>{
+    let option = {
+      headers: new HttpHeaders({
+
+      }),
+      params: new HttpParams({
+
+      })
+    }
+    return this._http.get(this.urlbase+"alumno/"+idAlumno+"/rutinas", option);
    }
 
 }
