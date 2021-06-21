@@ -43,12 +43,11 @@ export class TablaSliderComponent implements OnInit {
     this.sliderService.postSlider(this.slider).subscribe(
       result => {
         this.toastr.success("El Slider se agregó correctamente", "Operación exitosa");
-        console.log(result);
         this.sliders = new Array<Slider>();
         this.cargarSliders();
       },
       error => {
-        console.log(error);
+       // console.log(error);
       });
   }
 
@@ -59,11 +58,10 @@ export class TablaSliderComponent implements OnInit {
           var slider = new Slider();
           Object.assign(slider, element);
           this.sliders.push(slider);
-          console.log(result)
         });
       },
       error => {
-        console.log(error);
+       alert('Error al cargar los Sliders')
       }
     )
   }
@@ -72,12 +70,10 @@ export class TablaSliderComponent implements OnInit {
     this.sliderService.getSlider(slider).subscribe(
       result => {
             Object.assign(this.slider, result);
-            this.slider = this.sliders.find(p=>(p._id == this.slider._id));
-            console.log(this.slider);
-        
+            this.slider = this.sliders.find(p=>(p._id == this.slider._id));     
       },
       error => {
-        console.log(error);
+        alert('Error al cargar los Sliders')
       }
     )
   }
@@ -101,7 +97,6 @@ export class TablaSliderComponent implements OnInit {
     this.cargarSlider(slider);
     this.sliderService.modificarSlider(slider).subscribe(
       result => {
-        console.log(result);
         this.toastr.info("Pasaje fue actualizado correctamente","Operacion Exitosa")
       },
       error => {
@@ -115,7 +110,6 @@ export class TablaSliderComponent implements OnInit {
     this.planService.postPlan(this.plan).subscribe(
       result => {
         this.toastr.success("El Plan se agregó correctamente", "Operación exitosa");
-        console.log(result);
         this.planes = new Array<Plan>();
         this.cargarPlanes();
       },
@@ -131,11 +125,11 @@ export class TablaSliderComponent implements OnInit {
           var plan = new Plan();
           Object.assign(plan, element);
           this.planes.push(plan);
-          console.log(result)
+        
         });
       },
       error => {
-        console.log(error);
+
       }
     )
   }

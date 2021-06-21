@@ -27,11 +27,9 @@ export class HomeComponent implements OnInit {
           let vPlan = new Plan();
           Object.assign(vPlan,element);
           this.planes.push(vPlan);
-          console.log(result);
         });
       },
       error=>{
-        console.log(error);
         alert("Error al cargar los planes");
       }
     )
@@ -44,11 +42,9 @@ export class HomeComponent implements OnInit {
           let vSlider = new Slider();
           Object.assign(vSlider,element);
           this.sliders.push(vSlider);
-          console.log(result);
         });
       },
       error=>{
-        console.log(error);
         alert("Error al cargar los Sliders");
       }
     )
