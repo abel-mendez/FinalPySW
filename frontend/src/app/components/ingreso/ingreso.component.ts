@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Alumno } from 'src/app/models/alumno';
 import { Asistencia } from 'src/app/models/asistencia';
+import { Ejercicio } from 'src/app/models/ejercicio';
 import { Plan } from 'src/app/models/plan';
 import { Progreso } from 'src/app/models/progreso';
 import { Rutina } from 'src/app/models/rutina';
@@ -17,6 +18,7 @@ import { PlanService } from 'src/app/services/home/plan.service';
 })
 export class IngresoComponent implements OnInit {
 
+  accion:string="new";
   progreso: Progreso = new Progreso();
   progresos:Array<Progreso> = new Array<Progreso>();
   planes: Array<Plan> = new Array<Plan>();
@@ -25,6 +27,8 @@ export class IngresoComponent implements OnInit {
   asistencia:Asistencia = new Asistencia();
   rutina: Rutina = new Rutina();
   rutinas:Array<Rutina> = new Array<Rutina>();
+  ejercicios:Array<Ejercicio> = new Array<Ejercicio>();
+  ejercicio:Ejercicio = new Ejercicio();
 
   constructor(private activatedRoute: ActivatedRoute,
               private router:Router,
@@ -163,6 +167,11 @@ export class IngresoComponent implements OnInit {
 
 
   //rutinas
+  nuevaRutina(){
+    this.rutina=new Rutina();
+    this.accion="new";
+  }
+
   agregarRutina(form:NgForm){
       this.alumnoService.addRutina(this.alumno._id,this.rutina).subscribe(
         result=>{
@@ -194,6 +203,79 @@ export class IngresoComponent implements OnInit {
       error=>{
         console.log(error);
         alert("Error al cargar las rutinas");
+      }
+    )
+  }
+
+  cargarRutina(idRutina:string){
+    this.getEjercicios(idRutina);
+    this.accion="update";
+    this.alumnoService.getRutina(this.alumno._id,idRutina).subscribe(
+      result=>{
+        Object.assign(this.rutina,result);
+        console.log(this.rutina);
+
+      },
+      error=>{
+        console.log(error);
+      }
+    )
+  }
+
+  updateRutina(form:NgForm){
+    console.log(this.rutina);
+    this.alumnoService.updateRutina(this.alumno._id, this.rutina).subscribe(
+      result=>{
+        if(result.status=="1"){
+          this.toastr.success("La rutina se modificó correctamente", "Operación exitosa");
+          this.getRutinas(this.alumno._id);
+          form.reset();
+        }
+      },
+      error=>{
+        console.log(error);
+        this.toastr.error("Error al modificar la rutina", "Operación fallida");
+      }
+    )
+  }
+
+  usarRutinaSeleccionada(rutina:Rutina){
+    this.rutina=rutina;
+  }
+
+//ejercicios
+  getEjercicios(idRutina:string){
+    this.ejercicios = new Array<Ejercicio>();
+    this.alumnoService.getEjercicios(this.alumno._id, idRutina).subscribe(
+      result=>{
+        result.forEach(element => {
+          let vEjercicio = new Ejercicio();
+          Object.assign(vEjercicio,element);
+          this.ejercicios.push(vEjercicio);
+          console.log(result);
+          console.log(this.ejercicios);
+        });
+      },
+      error=>{
+        console.log(error);
+        alert("Error al cargar los ejercicios");
+      }
+    )
+  }
+
+  agregarEjercicio(form:NgForm){
+    console.log(this.rutina);
+    this.alumnoService.addEjercicio(this.alumno._id,this.rutina._id,this.ejercicio).subscribe(
+      result=>{
+        if(result.status=="1"){
+          this.toastr.success("Ejercicio agregado correctamente", "Operación exitosa");
+          this.getEjercicios(this.rutina._id);
+          form.reset();
+        }
+      },
+      error=>{
+        console.log(error);
+        this.toastr.error("Error al agregar el ejercicio", "Operación fallida");
       }
     )
   }

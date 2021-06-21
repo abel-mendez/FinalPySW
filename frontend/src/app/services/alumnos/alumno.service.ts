@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Alumno } from 'src/app/models/alumno';
 import { Asistencia } from 'src/app/models/asistencia';
+import { Ejercicio } from 'src/app/models/ejercicio';
 import { Progreso } from 'src/app/models/progreso';
 import { Rutina } from 'src/app/models/rutina';
 
@@ -143,6 +144,57 @@ export class AlumnoService {
       })
     }
     return this._http.get(this.urlbase+"alumno/"+idAlumno+"/rutinas", option);
+   }
+
+   
+   getRutina(idAlumno:string, idRutina):Observable<any>{
+    let option = {
+      headers: new HttpHeaders({
+      }),
+      params: new HttpParams({
+
+      })
+    }
+    return this._http.get(this.urlbase+"alumno/"+idAlumno+"/rutinas/"+idRutina, option); 
+   }
+
+   updateRutina(idAlumno:string, rutina:Rutina):Observable<any>{
+    let option = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      }),
+      params: new HttpParams({
+
+      })
+    }
+    let body = JSON.stringify(rutina);
+    return this._http.put(this.urlbase+"alumno/"+idAlumno+"/rutinas/"+rutina._id, body, option);
+  }
+
+   //ejercicios
+   getEjercicios(idAlumno:string, idRutina):Observable<any>{
+    let option = {
+      headers: new HttpHeaders({
+
+      }),
+      params: new HttpParams({
+
+      })
+    }
+    return this._http.get(this.urlbase+"alumno/"+idAlumno+"/rutinas/"+idRutina+"/ejercicios", option);
+   }
+
+   addEjercicio(idAlumno:string, idRutina:string, ejercicio:Ejercicio):Observable<any>{
+    let option = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      }),
+      params: new HttpParams({
+
+      })
+    }
+    let body = JSON.stringify(ejercicio);
+    return this._http.post(this.urlbase+"alumno/"+idAlumno+"/rutinas/"+idRutina+"/ejercicios", body, option);
    }
 
 }

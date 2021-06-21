@@ -41,7 +41,7 @@ import { AlifeFileToBase64Module } from 'alife-file-to-base64';
     StatasistenciasComponent,
     StathorariosComponent,
     TablaSliderComponent,
-    AlumnoFormComponent
+    AlumnoFormComponent,
   ],
   imports: [
     BrowserModule,
