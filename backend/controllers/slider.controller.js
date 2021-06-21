@@ -7,6 +7,12 @@ sliderCtrl.getSliders = async (req, res) => {
   res.json(sliders);
 }
 
+//Obtener slider por ID
+sliderCtrl.getSlider = async (req, res) => {
+  const slider = await Pasaje.findById(req.params.id);
+  res.json(slider);
+}
+
 //Alta de slider
 sliderCtrl.addSlider = async (req, res) => {
   var slider = new Slider(req.body);

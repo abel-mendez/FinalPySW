@@ -4,63 +4,26 @@
   <div>
     <nav>
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <button
-          class="btn btn-green nav-link active"
-          id="nav-home-tab"
-          data-bs-toggle="tab"
-          data-bs-target="#nav-home"
-          type="button"
-          role="tab"
-          aria-controls="nav-home"
-          aria-selected="true"
-        >
+        <button class="btn btn-green nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
+          type="button" role="tab" aria-controls="nav-home" aria-selected="true">
           Tu Progreso
         </button>
-        <button
-          class="btn nav-link btn-green"
-          id="nav-profile-tab"
-          data-bs-toggle="tab"
-          data-bs-target="#nav-profile"
-          type="button"
-          role="tab"
-          aria-controls="nav-profile"
-          aria-selected="false"
-        >
+        <button class="btn nav-link btn-green" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
+          type="button" role="tab" aria-controls="nav-profile" aria-selected="false">
           Tu Asistencia
         </button>
-        <button
-          class="btn nav-link btn-green"
-          id="nav-contact-tab"
-          data-bs-toggle="tab"
-          data-bs-target="#nav-contact"
-          type="button"
-          role="tab"
-          aria-controls="nav-contact"
-          aria-selected="false"
-        >
+        <button class="btn nav-link btn-green" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact"
+          type="button" role="tab" aria-controls="nav-contact" aria-selected="false">
           Tus Rutinas
         </button>
-        <button
-          class="btn nav-link btn-green"
-          id="nav-contact-tab"
-          data-bs-toggle="tab"
-          data-bs-target="#nav-pago"
-          type="button"
-          role="tab"
-          aria-controls="nav-pago"
-          aria-selected="false"
-        >
+        <button class="btn nav-link btn-green" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-pago"
+          type="button" role="tab" aria-controls="nav-pago" aria-selected="false">
           Tus Pagos
         </button>
       </div>
     </nav>
     <div class="tab-content" id="nav-tabContent">
-      <div
-        class="tab-pane fade show active cont"
-        id="nav-home"
-        role="tabpanel"
-        aria-labelledby="nav-home-tab"
-      >
+      <div class="tab-pane fade show active cont" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
         <section>
           <h3 class="categorie">Tu Progreso</h3>
           <div class="table-responsive">
@@ -81,12 +44,8 @@
                   </td>
                   <td></td>
                   <td scope="col" class="col-2">
-                    <button
-                      type="button"
-                      class="btn-green btn"
-                      data-bs-toggle="modal"
-                      data-bs-target="#modalVerProgreso"
-                    >
+                    <button type="button" class="btn-green btn" data-bs-toggle="modal"
+                      data-bs-target="#modalVerProgreso">
                       Ver Imagen
                     </button>
                   </td>
@@ -96,26 +55,16 @@
           </div>
         </section>
 
-        <!-- Modal RegistrarProgreso -->
-        <div
-          class="modal fade"
-          id="modalVerProgreso"
-          tabindex="-1"
-          aria-labelledby="modalLabelVerProgreso"
-          aria-hidden="true"
-        >
+        <!-- Modal Ver  Progreso -->
+        <div class="modal fade" id="modalVerProgreso" tabindex="-1" aria-labelledby="modalLabelVerProgreso"
+          aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="modalLabelVerProgreso">
                   Tu Progreso
                 </h5>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
                 <div class="container-fluid col-10 offset-1 mb-3">
@@ -141,8 +90,7 @@
                   <div class="col-md-4" style="width: 100%">
                     <img
                       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStnsfMnETCJRaP7ZUn3-7dUjKKmAgEAO2kJA&usqp=CAU"
-                      alt=""
-                    />
+                      alt="" />
                   </div>
                 </div>
 
@@ -164,11 +112,7 @@
           </div>-->
               </div>
               <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-grey"
-                  data-bs-dismiss="modal"
-                >
+                <button type="button" class="btn btn-grey" data-bs-dismiss="modal">
                   Close
                 </button>
               </div>
@@ -176,71 +120,60 @@
           </div>
         </div>
       </div>
-      <div
-        class="tab-pane fade cont"
-        id="nav-profile"
-        role="tabpanel"
-        aria-labelledby="nav-profile-tab"
-      >
+      <div class="tab-pane fade cont" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
         <!--          ver asistencia del alumno      -->
         <section>
           <h3 class="categorie">Tu Asistencia</h3>
           <div class="table-responsive">
-            <table class="table table-hover">
+            <table class="table table-striped" [mfData]="asistencias" #mf="mfDataTable" [mfRowsOnPage]="5">
               <thead>
                 <tr>
-                  <th scope="col" class="col-2">Fecha</th>
-                  <th scope="col" class="col-1">Dia</th>
-                  <th scope="col" class="col-2">Hora</th>
-                  <th scope="col" class="col-2">Asistencia</th>
-                  <th scope="col" class="col-3">Rutina</th>
-                  <th scope="col" class="col-2">Acciones</th>
+                  <th>
+                    <mfDefaultSorter by="fecha">Fecha</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="hora">Hora</mfDefaultSorter>
+                  </th>
+                  <th>
+                    Opciones
+                  </th>
+
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th>17/03/2021</th>
-                  <th>Lunes</th>
-                  <td>10:00 am</td>
-                  <td>si</td>
-                  <td>Pecho y Biceps</td>
-                  <td scope="col" class="col-2">
-                    <button
-                      type="button"
-                      class="btn-green btn"
-                      data-bs-toggle="modal"
-                      data-bs-target="#modalVerAsistencia"
-                    >
+                <tr *ngFor="let asistencia of mf.data">
+                  <td class="text-right">{{asistencia.fecha | date: 'dd/MM/yyyy'}}</td>
+                  <td>{{asistencia.hora | currency}}</td>
+                  <td>
+                    <button type="button" class="btn-green btn" data-bs-toggle="modal"
+                      data-bs-target="#modalVerAsistencia">
                       Ver
                     </button>
                     <button class="btn btn-grey">Imprimir</button>
                   </td>
                 </tr>
               </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="4">
+                    <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+                  </td>
+                </tr>
+              </tfoot>
             </table>
           </div>
         </section>
 
         <!-- Modal Ver Asistencia -->
-        <div
-          class="modal fade"
-          id="modalVerAsistencia"
-          tabindex="-1"
-          aria-labelledby="modalLabelVerAsistencia"
-          aria-hidden="true"
-        >
+        <div class="modal fade" id="modalVerAsistencia" tabindex="-1" aria-labelledby="modalLabelVerAsistencia"
+          aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="modalLabelVerAsistencia">
                   Tu Asistencia
                 </h5>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
                 <div class="container-fluid col-10 offset-1 mb-3">
@@ -270,11 +203,7 @@
           </div>-->
               </div>
               <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-grey"
-                  data-bs-dismiss="modal"
-                >
+                <button type="button" class="btn btn-grey" data-bs-dismiss="modal">
                   Close
                 </button>
               </div>
@@ -282,12 +211,7 @@
           </div>
         </div>
       </div>
-      <div
-        class="tab-pane fade cont"
-        id="nav-contact"
-        role="tabpanel"
-        aria-labelledby="nav-contact-tab"
-      >
+      <div class="tab-pane fade cont" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
         <!--          ver rutinas del alumno      -->
         <section>
           <h3 class="categorie">Tus rutinas</h3>
@@ -309,11 +233,7 @@
                   <td>10</td>
                   <td>3</td>
                   <td>
-                    <button
-                      class="btn btn-green"
-                      data-bs-toggle="modal"
-                      data-bs-target="#modalVerRutina"
-                    >
+                    <button class="btn btn-green" data-bs-toggle="modal" data-bs-target="#modalVerRutina">
                       Detalles
                     </button>
                     <button class="btn btn-grey">Imprimir</button>
@@ -325,25 +245,15 @@
         </section>
 
         <!-- Modal ver Rutinas -->
-        <div
-          class="modal fade"
-          id="modalVerRutina"
-          tabindex="-1"
-          aria-labelledby="modalLabelVerRutina"
-          aria-hidden="true"
-        >
+        <div class="modal fade" id="modalVerRutina" tabindex="-1" aria-labelledby="modalLabelVerRutina"
+          aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="modalLabelVerRutina">
                   Tus Rutinas
                 </h5>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
                 <div class="container-fluid col-10 offset-1 mb-3">
@@ -374,11 +284,7 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-grey"
-                  data-bs-dismiss="modal"
-                >
+                <button type="button" class="btn btn-grey" data-bs-dismiss="modal">
                   Close
                 </button>
               </div>
@@ -386,12 +292,7 @@
           </div>
         </div>
       </div>
-      <div
-        class="tab-pane fade cont"
-        id="nav-pago"
-        role="tabpanel"
-        aria-labelledby="nav-pago-tab"
-      >
+      <div class="tab-pane fade cont" id="nav-pago" role="tabpanel" aria-labelledby="nav-pago-tab">
         <!--          ver pago de cuotas del alumno     -->
         <section>
           <h3 class="categorie">Tus Pagos</h3>
@@ -413,11 +314,7 @@
                   <td>$1000</td>
                   <td>Realizado con tarjeta de credito Visa</td>
                   <td>
-                    <button
-                      class="btn btn-green"
-                      data-bs-toggle="modal"
-                      data-bs-target="#modalVerPago"
-                    >
+                    <button class="btn btn-green" data-bs-toggle="modal" data-bs-target="#modalVerPago">
                       Detalles
                     </button>
                     <button class="btn btn-grey">Imprimir</button>
@@ -429,23 +326,12 @@
         </section>
 
         <!-- Modal ver Pago -->
-        <div
-          class="modal fade"
-          id="modalVerPago"
-          tabindex="-1"
-          aria-labelledby="modalLabelVerpago"
-          aria-hidden="true"
-        >
+        <div class="modal fade" id="modalVerPago" tabindex="-1" aria-labelledby="modalLabelVerpago" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="modalLabelVerPago">Tus Pagos</h5>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
                 <div class="container-fluid col-10 offset-1 mb-3">
@@ -478,11 +364,7 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-grey"
-                  data-bs-dismiss="modal"
-                >
+                <button type="button" class="btn btn-grey" data-bs-dismiss="modal">
                   Close
                 </button>
               </div>

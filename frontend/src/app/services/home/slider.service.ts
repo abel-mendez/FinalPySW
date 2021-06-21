@@ -25,6 +25,19 @@ export class SliderService {
      return this._http.get(url,httpOptions);
   }
 
+  getSlider(slider:Slider):Observable<any>{
+    const url=this.urlBase+"slider/"+slider._id;
+    const httpOptions= {
+      headers: new HttpHeaders({
+
+      }),
+      params: new HttpParams({
+        
+      })
+    }
+     return this._http.get(url,httpOptions);
+  }
+
   postSlider(slider:Slider):Observable <any>{
     const url=this.urlBase+"slider";
     const httpOptions= {
@@ -40,7 +53,7 @@ export class SliderService {
 
   }
   deleteSlider(slider:Slider):Observable <any>{
-    const url=this.urlBase+"slider";
+    const url=this.urlBase+"slider/"+slider._id;
     const httpOptions= {
       headers: new HttpHeaders({
   
@@ -49,11 +62,11 @@ export class SliderService {
         
       })
     }
-    return this._http.delete(`${url}${slider._id}`,httpOptions);
+    return this._http.delete(url,httpOptions);
 
   }
   modificarSlider(slider:Slider):Observable<any>{
-    const url="http://localhost:3000/api/slider/";
+    const url="http://localhost:3000/api/slider/"+slider._id;
     const httpOptions= {
       headers: new HttpHeaders({
 
@@ -63,7 +76,7 @@ export class SliderService {
       })
     };
     let body= slider;
-    return this._http.put(`${url}${slider._id}`,body,httpOptions);
+    return this._http.put(url,body,httpOptions);
 
   }
  
