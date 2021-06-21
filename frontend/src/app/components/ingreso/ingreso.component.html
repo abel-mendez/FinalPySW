@@ -187,50 +187,113 @@
             <h3 class="categorie">Historial de Pagos</h3>
           </a>
           <div class="collapse show" id="collapsePagos">
-            <form class="row">
-              <div class="col-auto">
-                <label class="m-1" for="">Fecha de Pago:</label>
-                <input type="date" class="form-control" id="" />
-              </div>
-              <div class="col-auto">
-                <label class="m-1" for="">Monto</label>
-                <input type="number" class="form-control" id="" />
-              </div>
-              <div class="col-auto">
-                <label class="m-1" for="">Plan</label>
-                <select class="form-select" id="">
-                  <option value="1">Plan Basico</option>
-                  <option value="2">Plan Full</option>
-                  <option value="3">Pase Libre</option>
-                </select>
-              </div>
+            <div class="text-center">
+              <button class="btn-green btn mt-2 mb-2" data-bs-toggle="modal"
+              data-bs-target="#modalAgregarPago">Agregar Pago</button>  
+            </div>
+            <!-- modal Agregar pago -->
+            <div class="modal fade" id="modalAgregarPago" tabindex="-1" aria-labelledby="modalLabelAgregarPago"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header text-white bg-dark">
+                        <h5 class="modal-title" id="modalLabelAgregarPago">Nuevo Pago</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid col-10 offset-1 mb-3">
 
-              <div class="col-auto align-self-end">
-                <button type="submit" class="btn btn-green">Nuevo Pago</button>
-              </div>
-            </form>
-            <div class="table-responsive">
-              <table class="table table-hover">
+                          <form class="row g-3" #pagoForm="ngForm">
+                            <div class="col-md-6">
+                              <label for="" class="form-label">Monto</label>
+                              <input type="number" class="form-control" id="" name="pagomonto" [(ngModel)]="pago.monto"/>
+                            </div>
+                            <div class="col-md-6">
+                              <label for="" class="form-label">Fecha de pago efectuado</label>
+                              <input type="date" class="form-control" id="" name="pagofecha" [(ngModel)]="pago.fechapago"/>
+                            </div>
+                            <div class="col-md-6">
+                              <label for="" class="form-label">Modo de pago</label>
+                              <select name="modopago" class="form-select" [(ngModel)]="pago.modopago">
+                                <option *ngFor="let item of mediospago" [ngValue]="item">{{ item }}</option>
+                              </select>
+
+                              
+                              <!--<input type="text" class="form-control" id="" name="pagomodo" [(ngModel)]="pago.modopago"/>-->
+                            </div>
+                            <div class="col-md-6">
+                              <label for="" class="form-label">Fecha de vencimiento de cuota</label>
+                              <input type="date" class="form-control" id="" name="pagofechavencimiento" [(ngModel)]="pago.fechavencimiento"/>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="pagocompletado" [(ngModel)]="pago.completado">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                  Completado
+                                </label>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-green"
+                            data-bs-dismiss="modal" (click)="agregarPago(pagoForm)">Guardar</button>
+                        <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+
+
+
+
+
+            <div class="card-body table-responsive-sm col-md-8 offset-md-2">
+              <table
+                class="table table-striped"
+                [mfData]="pagos"
+                #mf="mfDataTable"
+                [mfRowsOnPage]="5"
+              >
                 <thead>
                   <tr>
-                    <th scope="col" class="col-3">Fecha</th>
-                    <th scope="col" class="col-3">Plan</th>
-                    <th scope="col" class="col-3">Monto</th>
-                    <th scope="col" class="col-3">Acciones</th>
+                    <th style="width: 50%">
+                      <mfDefaultSorter by="monto">Monto</mfDefaultSorter>
+                    </th>
+                    <th style="width: 50%">
+                      <mfDefaultSorter by="fechapago">Fecha del pago</mfDefaultSorter>
+                    </th>
+                    <th style="width: 50%">
+                      <mfDefaultSorter by="modopago">Modo de pago</mfDefaultSorter>
+                    </th>
+                    <th style="width: 50%">
+                      <mfDefaultSorter by="fechavencimiento">Fecha de vencimiento</mfDefaultSorter>
+                    </th>
+                    <th style="width: 50%">
+                      <mfDefaultSorter by="completado">Completado</mfDefaultSorter>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th>17/03/2021</th>
-                    <td>Plan Basico</td>
-                    <td>$1000</td>
-                    <td>
-                      <button class="btn btn-green">Detalles</button>
-                      <button class="btn btn-red">Borrar</button>
-                      <button class="btn btn-grey">Imprimir</button>
-                    </td>
+                  <tr *ngFor="let pag of mf.data">
+                    <td>{{ pag.monto}}</td>
+                    <td>{{ pag.fechapago }}</td>
+                    <td>{{ pag.modopago }}</td>
+                    <td>{{ pag.fechavencimiento }}</td>
+                    <td>{{ pag.completado }}</td>
                   </tr>
                 </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="4">
+                      <mfBootstrapPaginator
+                        [rowsOnPageSet]="[5, 10, 25]"
+                      ></mfBootstrapPaginator>
+                    </td>
+                  </tr>
+                </tfoot>
               </table>
             </div>
           </div>

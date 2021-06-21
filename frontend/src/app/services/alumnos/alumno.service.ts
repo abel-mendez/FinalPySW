@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Alumno } from 'src/app/models/alumno';
 import { Asistencia } from 'src/app/models/asistencia';
 import { Ejercicio } from 'src/app/models/ejercicio';
+import { Pago } from 'src/app/models/pago';
 import { Progreso } from 'src/app/models/progreso';
 import { Rutina } from 'src/app/models/rutina';
 
@@ -92,6 +93,33 @@ export class AlumnoService {
     }
     return this._http.get(this.urlbase+"alumno/"+id+"/asistencias", option);
     
+   }
+
+   //Pagos
+
+   getPagos(id: string):Observable<any>{
+     let option = {
+       headers: new HttpHeaders({
+
+       }),
+       params: new HttpParams({
+
+       })
+     }
+     return this._http.get(this.urlbase + "alumno/" + id + "/pagos", option);
+   }
+
+   addPago(idalumno: string, pago:Pago):Observable<any>{
+     let option = {
+       headers: new HttpHeaders({
+        "Content-Type": "application/json"
+       }),
+       params: new HttpParams({
+
+       })
+     }
+     let body = JSON.stringify(pago);
+     return this._http.post(this.urlbase + "alumno/" + idalumno + "/pagos", body, option);
    }
 
    //progresos

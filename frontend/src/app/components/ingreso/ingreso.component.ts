@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Alumno } from 'src/app/models/alumno';
 import { Asistencia } from 'src/app/models/asistencia';
 import { Ejercicio } from 'src/app/models/ejercicio';
+import { Pago } from 'src/app/models/pago';
 import { Plan } from 'src/app/models/plan';
 import { Progreso } from 'src/app/models/progreso';
 import { Rutina } from 'src/app/models/rutina';
@@ -25,6 +26,9 @@ export class IngresoComponent implements OnInit {
   alumno:Alumno= new Alumno();
   asistencias: Array<Asistencia> = new Array<Asistencia>();
   asistencia:Asistencia = new Asistencia();
+  pagos: Array<Pago> = new Array<Pago>();
+  pago: Pago = new Pago();
+  mediospago: string[] = ["Efectivo", "Transferencia bancaria", "Tarjeta de Crédito", "Tarjeta de débito"];
   rutina: Rutina = new Rutina();
   rutinas:Array<Rutina> = new Array<Rutina>();
   ejercicios:Array<Ejercicio> = new Array<Ejercicio>();
@@ -44,6 +48,7 @@ export class IngresoComponent implements OnInit {
           this.getAsistencias(params.id);
           this.cargarAlumno(params.id);
           this.getRutinas(params.id);
+          this.getPagos(params.id);
     });
   }
 
@@ -101,6 +106,45 @@ export class IngresoComponent implements OnInit {
     )
   }
 
+  //Pagos
+
+  agregarPago(form: NgForm){
+    this.alumnoService.addPago(this.alumno._id, this.pago).subscribe(
+      result => {
+        if(result.status == "1"){
+          this.toastr.success("El pago se agregó correctamente", "Operación exitosa");
+          this.getPagos(this.alumno._id);
+          form.reset();
+        }
+        console.log(result);
+      },
+      error => {
+        console.log(error);
+      }
+
+
+
+    )
+  }
+
+  getPagos(id: string){
+    this.pagos = new Array<Pago>();
+    this.alumnoService.getPagos(id).subscribe(
+      result => {
+        result.forEach(element => {
+          let vPago = new Pago();
+          Object.assign(vPago, element);
+          this.pagos.push(vPago);
+        });
+      },
+      error => {
+        console.log(error);
+        alert("Error al cargar los pagos");
+      }
+    )
+  }
+
+
   getAsistencias(id:string){
     this.asistencias = new Array<Asistencia>();
     this.alumnoService.getAsistencias(id).subscribe(
@@ -119,6 +163,8 @@ export class IngresoComponent implements OnInit {
       }
     )
   }
+
+  
 
   getProgresos(id:string){
     this.progresos = new Array<Progreso>();
