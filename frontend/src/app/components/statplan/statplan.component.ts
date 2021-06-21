@@ -56,8 +56,6 @@ export class StatplanComponent implements OnInit {
     this.chartColors = [];
     
     for (const index in this.datos) {
-      console.log(this.datos[index]);
-      console.log(this.nombreCategoria[index]);
       this.barChartData.push({ data: this.datos[index], label: this.nombreCategoria[index] });
       this.chartColors.push({backgroundColor: this.colores[index]});
     }
