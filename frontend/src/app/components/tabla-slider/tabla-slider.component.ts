@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
   selector: 'app-tabla-slider',
@@ -7,7 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TablaSliderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router:Router,
+    private loginService:LoginService) { 
+    if(this.loginService.userLoggedIn()==true){
+      if(sessionStorage.getItem("perfil")== "entrenador"){
+
+      }else{
+        alert("No posee los permisos necesarios")
+      this.router.navigate(['home']);
+      }
+    }else{
+      alert("Debe Loguearse para continuar")
+      this.router.navigate(['login']);
+    }
+  }
 
   ngOnInit(): void {
   }

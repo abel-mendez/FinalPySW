@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { Alumno } from 'src/app/models/alumno';
 import { Plan } from 'src/app/models/plan';
 import { AlumnoService } from 'src/app/services/alumnos/alumno.service';
 import { PlanService } from 'src/app/services/home/plan.service';
+import { LoginService } from 'src/app/services/login/login.service';
 @Component({
   selector: 'app-statplan',
   templateUrl: './statplan.component.html',

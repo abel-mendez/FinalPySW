@@ -9,13 +9,18 @@ import { LoginService } from 'src/app/services/login/login.service';
 })
 export class AlumnoComponent implements OnInit {
 
-  constructor(public loginService:LoginService,
-    public router:Router) {
+  constructor(private loginService:LoginService,
+    private router:Router) {
     if(this.loginService.userLoggedIn()==true){
-      alert("Debe Loguearse para continuar")
-      router.navigate(['login']);
+      if(sessionStorage.getItem("perfil")== "alumno"){
+
+      }else{
+        alert("No posee los permisos necesarios")
+      this.router.navigate(['home']);
+      }
     }else{
-      
+      alert("Debe Loguearse para continuar")
+      this.router.navigate(['login']);
     }
    }
 
