@@ -25,6 +25,7 @@ import { NgxDataTableModule} from "angular-9-datatable";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { AlifeFileToBase64Module } from 'alife-file-to-base64';
+import { LoginService } from './services/login/login.service';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,7 @@ import { AlifeFileToBase64Module } from 'alife-file-to-base64';
     ToastrModule.forRoot(),
     AlifeFileToBase64Module
   ],
-  providers: [],
+  providers: [LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

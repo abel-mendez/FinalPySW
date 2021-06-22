@@ -40,44 +40,62 @@
               >Inicio</a
             >
           </li>
-          <li class="nav-item">
+          <li class="nav-item"
+          *ngIf="loginService.userLoggedIn()&&perfil=='entrenador'">
             <a
+            
               class="nav-link p-2"
               routerLink="/alumnos"
               routerLinkActive="active-link"
               >Alumnos</a
             >
           </li>
-          <li class="nav-item">
+          <li class="nav-item"
+          *ngIf="loginService.userLoggedIn()&&perfil=='entrenador'">
             <a
+            [routerLink]="['estadisticas']"
               class="nav-link p-2"
-              routerLink="/estadisticas"
+             
               routerLinkActive="active-link"
               >Estadisticas</a
             >
           </li>
-          <li class="nav-item">
+          <li class="nav-item"
+          *ngIf="loginService.userLoggedIn() && perfil == 'entrenador'">
             <a
+            
               class="nav-link p-2"
               routerLink="/configuracion"
               routerLinkActive="active-link"
               >Sitio Web</a
             >
           </li>
-          <li class="nav-item">
+          <li class="nav-item"
+          *ngIf="loginService.userLoggedIn() && perfil == 'alumno'">
             <a
+            
               class="nav-link p-2"
               routerLink="/alumno"
               routerLinkActive="active-link"
               >Mi Progreso</a
             >
           </li>
-          <li class="nav-item">
+          <li class="nav-item"
+          >
             <a
+            *ngIf="!loginService.userLoggedIn()"
               class="nav-link p-2"
               routerLink="/login"
               routerLinkActive="active-link"
               >Login</a
+            >
+            <a
+            *ngIf="loginService.userLoggedIn()"
+              class="nav-link p-2"
+              routerLink="/login"
+              routerLinkActive="active-link"
+              (click)="logout()"
+              >Logout ({{loginService.userLogged()}})</a
             >
           </li>
         </ul>
