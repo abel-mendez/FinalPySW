@@ -31,6 +31,11 @@ export class TablaSliderComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  seleccionar(slider){
+   
+    this.slider=slider;
+    console.log(this.slider);
+  }
 
   onFileChanged(e) {
     console.log(e);
@@ -95,7 +100,7 @@ export class TablaSliderComponent implements OnInit {
     )
   }*/
 
-  /*modificarSlider(slider: Slider) {
+  modificarSlider(slider: Slider) {
     this.cargarSliders();
    this.sliderService.modificarSlider(slider).subscribe(
     result=>{
@@ -105,7 +110,7 @@ export class TablaSliderComponent implements OnInit {
       console.log(error);
     }
    )
-  }*/
+  }
 
   //Plan
   agregarPlan() {
