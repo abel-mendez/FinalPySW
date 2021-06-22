@@ -18,7 +18,6 @@ export class LoginService {
       })
     }
     let body = { username: usuario, password: password };
-    console.log(body);
     return this.http.post(this.urlbase + 'usuarios/login', body, httpOption);
   }
   public logout() {
@@ -30,6 +29,7 @@ export class LoginService {
   public userLoggedIn() {
     var resultado = false;
     var usuario = sessionStorage.getItem("user");
+    //var perfil = sessionStorage.getItem("perfil");
     if (usuario != null) {
       resultado = true;
     }

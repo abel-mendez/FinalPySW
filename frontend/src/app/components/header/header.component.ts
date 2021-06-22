@@ -8,16 +8,23 @@ import { LoginService } from 'src/app/services/login/login.service';
 })
 export class HeaderComponent implements OnInit {
 
-  perfil:string=sessionStorage.getItem("perfil");
+  perfil:string;
+  usuario:string;
 
   constructor(public loginService: LoginService) {
+    this.usuario = loginService.userLogged();
+    console.log(this.usuario);
+    
  }
 
   ngOnInit(): void {
-    
+    this.perfil = sessionStorage.getItem("perfil");
   }
 
+
+
+
   logout(){
-    this.loginService.logout();
+    this.loginService.logout(); 
   }
 }
