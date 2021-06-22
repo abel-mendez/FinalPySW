@@ -12,7 +12,10 @@ import { SliderService } from 'src/app/services/home/slider.service';
 export class HomeComponent implements OnInit {
   planes: Array<Plan> = new Array<Plan>();
   sliders: Array<Slider> = new Array<Slider>();
-  constructor(private planService:PlanService,private sliderService:SliderService) { }
+  constructor(private planService:PlanService,private sliderService:SliderService) {
+    this.getPlanes();
+    this.getSliders();
+   }
 
   ngOnInit(): void {
     this.getPlanes();
