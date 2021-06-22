@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Alumno } from 'src/app/models/alumno';
 import { Asistencia } from 'src/app/models/asistencia';
+import { Pago } from 'src/app/models/pago';
 import { AlumnoService } from 'src/app/services/alumnos/alumno.service';
 
 @Component({
@@ -13,9 +14,16 @@ export class AlumnoComponent implements OnInit {
   asistencias:Array<Asistencia> = Array<Asistencia>();
   alumno:Alumno = new Alumno();
 
+  pago:Pago = new Pago();
+  pagos:Array<Pago> = Array<Pago>();
+
   constructor(private alumnoService:AlumnoService) { }
 
   ngOnInit(): void {
+  }
+
+  cargarPagos(){
+    
   }
 
   getAsistencias(id:string){
