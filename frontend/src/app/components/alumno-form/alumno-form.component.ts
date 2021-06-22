@@ -5,6 +5,7 @@ import { Alumno } from 'src/app/models/alumno';
 import { Plan } from 'src/app/models/plan';
 import { AlumnoService } from 'src/app/services/alumnos/alumno.service';
 import { PlanService } from 'src/app/services/home/plan.service';
+import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
   selector: 'app-alumno-form',
@@ -19,7 +20,20 @@ export class AlumnoFormComponent implements OnInit {
   constructor(private planService:PlanService,
               private alumnoService:AlumnoService,
               private router:Router,
-              private toastr:ToastrService) { }
+              private toastr:ToastrService,
+              private loginService:LoginService) { 
+                if(this.loginService.userLoggedIn()==true){
+                  if(sessionStorage.getItem("perfil")== "entrenador"){
+
+                  }else{
+                    alert("No posee los permisos necesarios")
+                  this.router.navigate(['home']);
+                  }
+                }else{
+                  alert("Debe Loguearse para continuar")
+                  this.router.navigate(['login']);
+                }
+              }
 
   ngOnInit(): void {
     this.getPlanes();

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Plan } from 'src/app/models/plan';
 import { Slider } from 'src/app/models/slider';
 import { PlanService } from 'src/app/services/home/plan.service';
@@ -12,15 +13,13 @@ import { SliderService } from 'src/app/services/home/slider.service';
 export class HomeComponent implements OnInit {
   planes: Array<Plan> = new Array<Plan>();
   sliders: Array<Slider> = new Array<Slider>();
-  constructor(private planService:PlanService,private sliderService:SliderService) {
-    this.getPlanes();
-    this.getSliders();
-   }
+
+  constructor(private planService:PlanService,private sliderService:SliderService,private router:Router) { }
 
   ngOnInit(): void {
     this.getPlanes();
     this.getSliders();
-  }
+   }
 
   getPlanes(){
     this.planes = new Array<Plan>();
@@ -53,4 +52,5 @@ export class HomeComponent implements OnInit {
     )
   }
 
+  
 }

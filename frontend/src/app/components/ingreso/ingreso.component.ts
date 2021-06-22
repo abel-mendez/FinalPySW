@@ -12,6 +12,7 @@ import { Rutina } from 'src/app/models/rutina';
 import { Usuario } from 'src/app/models/usuario';
 import { AlumnoService } from 'src/app/services/alumnos/alumno.service';
 import { PlanService } from 'src/app/services/home/plan.service';
+import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
   selector: 'app-ingreso',
@@ -42,7 +43,20 @@ export class IngresoComponent implements OnInit {
               private router:Router,
               private alumnoService:AlumnoService,
               private planService:PlanService,
-              private toastr: ToastrService) { }
+              private toastr: ToastrService,
+              private loginService:LoginService ) {
+                if(this.loginService.userLoggedIn()==true){
+                  if(sessionStorage.getItem("perfil")== "entrenador"){
+
+                  }else{
+                    alert("No posee los permisos necesarios")
+                  this.router.navigate(['home']);
+                  }
+                }else{
+                  alert("Debe Loguearse para continuar")
+                  this.router.navigate(['login']);
+                }
+               }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(
@@ -53,6 +67,10 @@ export class IngresoComponent implements OnInit {
           this.cargarAlumno(params.id);
           this.getRutinas(params.id);
           this.getPagos(params.id);
+          this.pago.completado = true;
+          this.usuario.activo = true;
+          this.pago.modopago = "Efectivo";
+          this.usuario.perfil = "Alumno";
     });
   }
 
@@ -81,6 +99,21 @@ export class IngresoComponent implements OnInit {
       },
       error=>{
         console.log(error);
+      }
+    )
+  }
+
+  actualizarAlumno(form: NgForm){
+    this.alumnoService.updateAlumno(this.alumno).subscribe(
+      result => {
+        if (result.status == "1"){
+          this.toastr.info("El alumno se modificó correctamente", "Operación exitosa");
+          this.cargarAlumno(this.alumno._id);
+        }
+      },
+      error => {
+        console.log(error);
+        this.toastr.error("Error al modificar el alumno", "Operación fallida");
       }
     )
   }
@@ -208,13 +241,15 @@ export class IngresoComponent implements OnInit {
         if(result.status == "1"){
           this.toastr.success("El pago se agregó correctamente", "Operación exitosa");
           this.getPagos(this.alumno._id);
-          form.reset();
+          form.reset();  //no deberia ir form reset ni en agregar pago ni en agregar 
+          //alumno, explicar bug
         }
         console.log(result);
       },
       error => {
         console.log(error);
       }
+      
 
 
 

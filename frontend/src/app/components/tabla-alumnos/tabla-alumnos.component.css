@@ -1,5 +1,9 @@
+main {
+  width: 100%;
+  min-height: 80vh;
+}
 .categorie {
-  background-color: #292b2c;
+  background-color: rgb(63, 63, 63);
   color: white;
   text-align: center;
   padding: 5px 0;

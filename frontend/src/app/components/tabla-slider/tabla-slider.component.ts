@@ -5,6 +5,7 @@ import { Plan } from 'src/app/models/plan';
 import { Slider } from 'src/app/models/slider';
 import { PlanService } from 'src/app/services/home/plan.service';
 import { SliderService } from 'src/app/services/home/slider.service';
+import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
   selector: 'app-tabla-slider',
@@ -21,12 +22,24 @@ export class TablaSliderComponent implements OnInit {
   constructor(private sliderService: SliderService,
     private router: Router,
     private toastr: ToastrService,
-    private planService:PlanService
-  ) {
+    private planService:PlanService,
+    private loginService:LoginService){
+
     this.sliders = new Array<Slider>();
     this.cargarSliders();
     this.planes = new Array<Plan>();
     this.cargarPlanes();
+      if(this.loginService.userLoggedIn()==true){
+        if(sessionStorage.getItem("perfil")== "entrenador"){
+  
+        }else{
+          alert("No posee los permisos necesarios")
+        this.router.navigate(['home']);
+        }
+      }else{
+        alert("Debe Loguearse para continuar")
+        this.router.navigate(['login']);
+      }
   }
 
   ngOnInit(): void {

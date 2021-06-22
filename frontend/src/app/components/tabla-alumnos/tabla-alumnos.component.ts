@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Alumno } from 'src/app/models/alumno';
 import { AlumnoService } from 'src/app/services/alumnos/alumno.service';
+import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
   selector: 'app-tabla-alumnos',
@@ -14,7 +15,20 @@ export class TablaAlumnosComponent implements OnInit {
   dniIng: number;
 
   constructor(private alumnoService:AlumnoService,
-              private router:Router) { }
+              private router:Router,
+              private loginService:LoginService) { 
+                if(this.loginService.userLoggedIn()==true){
+                  if(sessionStorage.getItem("perfil")== "entrenador"){
+
+                  }else{
+                    alert("No posee los permisos necesarios")
+                  this.router.navigate(['home']);
+                  }
+                }else{
+                  alert("Debe Loguearse para continuar")
+                  this.router.navigate(['login']);
+                }
+              }
 
   ngOnInit(): void {
     this.getAlumnos();

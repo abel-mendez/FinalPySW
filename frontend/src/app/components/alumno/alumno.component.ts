@@ -3,6 +3,8 @@ import { Alumno } from 'src/app/models/alumno';
 import { Asistencia } from 'src/app/models/asistencia';
 import { Pago } from 'src/app/models/pago';
 import { AlumnoService } from 'src/app/services/alumnos/alumno.service';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
   selector: 'app-alumno',
@@ -10,22 +12,30 @@ import { AlumnoService } from 'src/app/services/alumnos/alumno.service';
   styleUrls: ['./alumno.component.css']
 })
 export class AlumnoComponent implements OnInit {
-
   asistencias:Array<Asistencia> = Array<Asistencia>();
   alumno:Alumno = new Alumno();
-
   pago:Pago = new Pago();
   pagos:Array<Pago> = Array<Pago>();
 
-  constructor(private alumnoService:AlumnoService) { }
+  constructor(private loginService:LoginService,
+    private router:Router,
+    private alumnoService:AlumnoService) {
+    if(this.loginService.userLoggedIn()==true){
+      if(sessionStorage.getItem("perfil")== "alumno"){
+
+      }else{
+        alert("No posee los permisos necesarios")
+      this.router.navigate(['home']);
+      }
+    }else{
+      alert("Debe Loguearse para continuar")
+      this.router.navigate(['login']);
+    }
+   }
 
   ngOnInit(): void {
   }
-
-  cargarPagos(){
-    
-  }
-
+/*
   getAsistencias(id:string){
     this.alumnoService.getAsistencias(id).subscribe(
       result=>{
@@ -37,5 +47,5 @@ export class AlumnoComponent implements OnInit {
         });
       }
     )
-  }
+  }*/
 }

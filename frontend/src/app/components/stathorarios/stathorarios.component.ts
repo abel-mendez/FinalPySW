@@ -62,7 +62,6 @@ export class StathorariosComponent implements OnInit {
           this.asistencias.push(vAsistencia);
         });
         this.getLabels();
-        console.log(this.asistencias);
       },
       error=>{
         alert("Error al cargar las Asistencias");
@@ -82,7 +81,6 @@ export class StathorariosComponent implements OnInit {
   }
 
   obtenerDatos(){
-    console.log(this.labelsHora);
     let count:Array<number>=new Array<number>();
     this.labelsHora=['06', '07', '08','09', '10', '11','12', '13', '14','15', '16', '17','18', '19', '20','21', '22', '23','00', '01', '02','03', '04', '05',];
     for(let a of this.asistencias){
@@ -100,7 +98,6 @@ export class StathorariosComponent implements OnInit {
     for(let i=0; i< count.length;i++){
       this.datos.push(count[i].toString());
     }
-    console.log("datos obetenidos", this.datos);
     this.generar();
   }
 
