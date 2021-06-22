@@ -7,6 +7,7 @@ import { Ejercicio } from 'src/app/models/ejercicio';
 import { Pago } from 'src/app/models/pago';
 import { Progreso } from 'src/app/models/progreso';
 import { Rutina } from 'src/app/models/rutina';
+import { Usuario } from 'src/app/models/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -67,6 +68,22 @@ export class AlumnoService {
     }
     return this._http.get(this.urlbase+"alumno/"+id, option); 
    }
+
+   //usuario
+   addUsuario(idAlumno: string, usuario: Usuario):Observable<any>{
+     let option = {
+       headers: new HttpHeaders({
+         "Content-Type": "application/json"
+       }),
+       params: new HttpParams({
+
+       })
+     }
+     let body = JSON.stringify(usuario);
+     return this._http.post(this.urlbase + "alumno/" + idAlumno + "/usuario", body, option);
+   
+   
+    }
 
    //asistencias
    addAsistencia(idAlumno:string, asistencia:Asistencia):Observable<any>{

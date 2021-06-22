@@ -9,6 +9,7 @@ import { Pago } from 'src/app/models/pago';
 import { Plan } from 'src/app/models/plan';
 import { Progreso } from 'src/app/models/progreso';
 import { Rutina } from 'src/app/models/rutina';
+import { Usuario } from 'src/app/models/usuario';
 import { AlumnoService } from 'src/app/services/alumnos/alumno.service';
 import { PlanService } from 'src/app/services/home/plan.service';
 
@@ -26,6 +27,7 @@ export class IngresoComponent implements OnInit {
   alumno:Alumno= new Alumno();
   asistencias: Array<Asistencia> = new Array<Asistencia>();
   asistencia:Asistencia = new Asistencia();
+  usuario: Usuario = new Usuario();
   pagos: Array<Pago> = new Array<Pago>();
   pago: Pago = new Pago();
   mediospago: string[] = ["Efectivo", "Transferencia bancaria", "Tarjeta de Crédito", "Tarjeta de débito"];
@@ -103,6 +105,22 @@ export class IngresoComponent implements OnInit {
         console.log(error);
       }
 
+    )
+  }
+
+  //Usuario
+
+  agregarUsuario(form: NgForm){
+    this.alumnoService.addUsuario(this.alumno._id, this.usuario).subscribe(
+      result => {
+        if (result.status == "1"){
+          this.toastr.success("El usuario se agregó correctamente", "Operación exitosa");
+          form.reset();
+        }
+      },
+      error => {
+        console.log(error);
+      }
     )
   }
 
