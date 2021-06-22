@@ -254,7 +254,7 @@
               <table
                 class="table table-striped"
                 [mfData]="pagos"
-                #mf="mfDataTable"
+                #mf6="mfDataTable"
                 [mfRowsOnPage]="5"
               >
                 <thead>
@@ -277,7 +277,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let pag of mf.data">
+                  <tr *ngFor="let pag of mf6.data">
                     <td>{{ pag.monto}}</td>
                     <td>{{ pag.fechapago }}</td>
                     <td>{{ pag.modopago }}</td>
@@ -397,7 +397,8 @@
                     <td>
                       <button class="btn btn-green" data-bs-toggle="modal"
                       data-bs-target="#modalAgregarRutina" (click)="cargarRutina(r._id)" >Modificar rutina</button>
-                      <button class="btn btn-red">Borrar</button></td>
+                      <button class="btn btn-red" data-bs-toggle="modal"
+                      data-bs-target="#modalEliminarRutina" (click)="usarRutinaSeleccionada(r)">Eliminar</button></td>
                   </tr>
                 </tbody>
                 <tfoot>
@@ -425,7 +426,7 @@
                         
                       <div class="text-center">
                         <button class="btn-green btn mt-2 mb-2" data-bs-toggle="modal"
-                        data-bs-target="#modalAgregarEjercicio">Agregar Ejercicio</button>
+                        data-bs-target="#modalAgregarEjercicio" (click)="nuevoEjercicio()">Agregar Ejercicio</button>
                       </div>
 
                       <div class="table-responsive">
@@ -437,7 +438,7 @@
                         >
                           <thead>
                             <tr>
-                              <th style="width: 35%">
+                              <th style="width: 30%">
                                 <mfDefaultSorter by="nombre">Nombre</mfDefaultSorter>
                               </th>
                               <th style="width: 10%">
@@ -446,7 +447,7 @@
                               <th style="width: 20%">
                                 <mfDefaultSorter by="repeticiones">Repeticiones</mfDefaultSorter>
                               </th>
-                              <th style="width: 35%">
+                              <th style="width: 40%">
                                 <mfDefaultSorter by="accionesEjercicios">Acciones</mfDefaultSorter>
                               </th>
                             </tr>
@@ -457,8 +458,10 @@
                               <td>{{ e.series }}</td>
                               <td>{{ e.repeticiones}}</td>
                               <td>
-                                <button class="btn btn-green" >Modificar Ejercicio</button>
-                                <button class="btn btn-red">Borrar</button></td>
+                                <button class="btn btn-green" (click)="cargarEjercicio(e._id)"data-bs-toggle="modal"
+                                data-bs-target="#modalAgregarEjercicio" >Modificar Ejercicio</button>
+                                <button class="btn btn-red" (click)="usarEjercicioSeleccionado(e)" data-bs-toggle="modal"
+                                data-bs-target="#modalEliminarEjercicio">Eliminar</button></td>
                             </tr>
                           </tbody>
                           <tfoot>
@@ -482,13 +485,14 @@
             </div>
 
 
-            <!-- modal agregar ejercicio -->
+            <!-- modal agregar/modificar ejercicio -->
             <div class="modal fade" id="modalAgregarEjercicio" tabindex="-1" aria-labelledby="modalLabelAgregarEjercicio"
             aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header bg-light text-dark">
-                        <h5 class="modal-title" id="modalLabelEjercicio">Nuevo Ejercicio</h5>
+                        <h5 class="modal-title" id="modalLabelEjercicio" *ngIf="accionEj=='new'">Nuevo Ejercicio</h5>
+                        <h5 class="modal-title" id="modalLabelEjercicio" *ngIf="accionEj=='update'">Modificar Ejercicio</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -512,14 +516,65 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-green"
-                            data-bs-dismiss="modal" (click)="agregarEjercicio(ejercicioForm)">Guardar</button>
+                        <button type="button" class="btn btn-green" *ngIf="accionEj=='new'"
+                            data-bs-dismiss="modal" (click)="agregarEjercicio(ejercicioForm)" >Guardar</button>
+                        <button type="button" class="btn btn-green" *ngIf="accionEj=='update'"
+                            data-bs-dismiss="modal" (click)="updateEjercicio(ejercicioForm)">Modificar</button>
                         <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
             </div>
 
+             <!-- modal eliminar rutina-->
+             <div class="modal fade" id="modalEliminarRutina" tabindex="-1" aria-labelledby="modalLabelEliminarRutina"
+             aria-hidden="true">
+             <div class="modal-dialog">
+                 <div class="modal-content">
+                     <div class="modal-header bg-dark text-white">
+                         <h5 class="modal-title" id="modalLabelEliminarRutina">Eliminar Rutina</h5>
+                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                     </div>
+                     <div class="modal-body">
+                         <div class="container-fluid col-10 offset-1 mb-3">
+                             <div class="col-12">
+                              <h6>¿Está seguro/a de que desea eliminar la rutina?</h6>
+                            </div>
+                         </div>
+                     </div>
+                     <div class="modal-footer">
+                         <button type="button" class="btn btn-red"
+                             data-bs-dismiss="modal" (click)="eliminarRutina()">Eliminar</button>
+                         <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Close</button>
+                     </div>
+                 </div>
+             </div>
+             </div>
+
+             <!-- modal eliminar ejercicio-->
+             <div class="modal fade" id="modalEliminarEjercicio" tabindex="-1" aria-labelledby="modalLabelEliminarEjercicio"
+             aria-hidden="true">
+             <div class="modal-dialog">
+                 <div class="modal-content">
+                     <div class="modal-header bg-light text-dark">
+                         <h5 class="modal-title" id="modalLabelEliminarEjercicio">Eliminar Ejercicio</h5>
+                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                     </div>
+                     <div class="modal-body">
+                         <div class="container-fluid col-10 offset-1 mb-3">
+                             <div class="col-12">
+                              <h6>¿Está seguro/a de que desea eliminar el ejercicio?</h6>
+                            </div>
+                         </div>
+                     </div>
+                     <div class="modal-footer">
+                         <button type="button" class="btn btn-red"
+                             data-bs-dismiss="modal" (click)="eliminarEjercicio()">Eliminar</button>
+                         <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Close</button>
+                     </div>
+                 </div>
+             </div>
+             </div>
 
           </div>
         </section>

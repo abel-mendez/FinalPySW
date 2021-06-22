@@ -192,7 +192,7 @@ export class AlumnoService {
    }
 
    
-   getRutina(idAlumno:string, idRutina):Observable<any>{
+   getRutina(idAlumno:string, idRutina:string):Observable<any>{
     let option = {
       headers: new HttpHeaders({
       }),
@@ -216,6 +216,18 @@ export class AlumnoService {
     return this._http.put(this.urlbase+"alumno/"+idAlumno+"/rutinas/"+rutina._id, body, option);
   }
 
+  deleteRutina(idAlumno:string, idRutina:string):Observable<any>{
+    let option = {
+      headers: new HttpHeaders({
+      }),
+      params: new HttpParams({
+
+      })
+    }
+    return this._http.delete(this.urlbase+"alumno/"+idAlumno+"/rutinas/"+idRutina, option);
+   }
+
+
    //ejercicios
    getEjercicios(idAlumno:string, idRutina):Observable<any>{
     let option = {
@@ -227,6 +239,17 @@ export class AlumnoService {
       })
     }
     return this._http.get(this.urlbase+"alumno/"+idAlumno+"/rutinas/"+idRutina+"/ejercicios", option);
+   }
+
+   getEjercicio(idAlumno:string, idRutina:string, idEjercicio:string):Observable<any>{
+    let option = {
+      headers: new HttpHeaders({
+      }),
+      params: new HttpParams({
+
+      })
+    }
+    return this._http.get(this.urlbase+"alumno/"+idAlumno+"/rutinas/"+idRutina+"/ejercicios/"+idEjercicio, option); 
    }
 
    addEjercicio(idAlumno:string, idRutina:string, ejercicio:Ejercicio):Observable<any>{
@@ -241,5 +264,30 @@ export class AlumnoService {
     let body = JSON.stringify(ejercicio);
     return this._http.post(this.urlbase+"alumno/"+idAlumno+"/rutinas/"+idRutina+"/ejercicios", body, option);
    }
+
+   updateEjercicio(idAlumno:string, idRutina:string, ejercicio:Ejercicio):Observable<any>{
+    let option = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      }),
+      params: new HttpParams({
+
+      })
+    }
+    let body = JSON.stringify(ejercicio);
+    return this._http.put(this.urlbase+"alumno/"+idAlumno+"/rutinas/"+idRutina+"/ejercicios/"+ejercicio._id, body, option);
+  }
+
+  deleteEjercicio(idAlumno:string, idRutina:string, idEjercicio:string):Observable<any>{
+    let option = {
+      headers: new HttpHeaders({
+      }),
+      params: new HttpParams({
+
+      })
+    }
+    return this._http.delete(this.urlbase+"alumno/"+idAlumno+"/rutinas/"+idRutina+"/ejercicios/"+idEjercicio, option);
+   }
+
 
 }

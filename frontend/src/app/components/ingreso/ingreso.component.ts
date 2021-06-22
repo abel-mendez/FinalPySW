@@ -21,6 +21,7 @@ import { PlanService } from 'src/app/services/home/plan.service';
 export class IngresoComponent implements OnInit {
 
   accion:string="new";
+  accionEj:string="new";
   progreso: Progreso = new Progreso();
   progresos:Array<Progreso> = new Array<Progreso>();
   planes: Array<Plan> = new Array<Plan>();
@@ -307,7 +308,35 @@ export class IngresoComponent implements OnInit {
     this.rutina=rutina;
   }
 
+
+  eliminarRutina(){
+    this.alumnoService.deleteRutina(this.alumno._id, this.rutina._id).subscribe(
+      result=>{
+        if(result.status=="1"){
+          this.toastr.info("Rutina eliminada correctamente","Operación exitosa");
+          this.getRutinas(this.alumno._id);
+        }
+      },
+      error=>{
+        console.log(error);
+        this.toastr.error("Error al eliminar la rutina","Operación fallida");
+      }
+    )
+
+  }
+
+  
+
 //ejercicios
+nuevoEjercicio(){
+  this.ejercicio=new Ejercicio();
+  this.accionEj="new";
+}
+
+usarEjercicioSeleccionado(ejercicio:Ejercicio){
+  this.ejercicio=ejercicio;
+}
+
   getEjercicios(idRutina:string){
     this.ejercicios = new Array<Ejercicio>();
     this.alumnoService.getEjercicios(this.alumno._id, idRutina).subscribe(
@@ -340,6 +369,52 @@ export class IngresoComponent implements OnInit {
       error=>{
         console.log(error);
         this.toastr.error("Error al agregar el ejercicio", "Operación fallida");
+      }
+    )
+  }
+
+  cargarEjercicio(idEjercicio:string){
+    this.accionEj="update";
+    this.alumnoService.getEjercicio(this.alumno._id,this.rutina._id, idEjercicio).subscribe(
+      result=>{
+        Object.assign(this.ejercicio,result);
+        console.log(this.ejercicio);
+      },
+      error=>{
+        console.log(error);
+      }
+    )
+  }
+
+  updateEjercicio(form:NgForm){
+    console.log(this.rutina);
+    this.alumnoService.updateEjercicio(this.alumno._id, this.rutina._id, this.ejercicio).subscribe(
+      result=>{
+        if(result.status=="1"){
+          this.toastr.success("El ejercicio se modificó correctamente", "Operación exitosa");
+          this.getEjercicios(this.rutina._id);
+          form.reset();
+        }
+      },
+      error=>{
+        console.log(error);
+        this.toastr.error("Error al modificar el ejercicio", "Operación fallida");
+      }
+    )
+  }
+
+  eliminarEjercicio(){
+    console.log(this.rutina, this.ejercicio);
+    this.alumnoService.deleteEjercicio(this.alumno._id, this.rutina._id, this.ejercicio._id).subscribe(
+      result=>{
+        if(result.status=="1"){
+          this.toastr.info("Ejercicio eliminado correctamente","Operación exitosa");
+          this.getEjercicios(this.rutina._id);
+        }
+      },
+      error=>{
+        console.log(error);
+        this.toastr.error("Error al eliminar el ejercicio","Operación fallida");
       }
     )
   }

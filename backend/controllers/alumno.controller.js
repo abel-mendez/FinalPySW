@@ -201,7 +201,7 @@ alumnoCtrl.editRutina = async (req, res) => {
 }
 
 //Baja de rutina
-alumnoCtrl.deleteRutina = async () => {
+alumnoCtrl.deleteRutina = async (req, res) => {
   const alumno = await Alumno.findById(req.params.id);
   const idrutina = req.params.idrutina;
   alumno.rutinas.pull(idrutina);
@@ -249,6 +249,15 @@ alumnoCtrl.getEjercicios = async (req, res) => {
   const alumno = await Alumno.findById(req.params.id).populate("rutinas");
   let rutina = await alumno.rutinas.find(r => r._id == req.params.idrutina);
   res.json(rutina.ejercicios);
+}
+
+
+//Obtener ejercicio
+alumnoCtrl.getEjercicio = async (req, res) => {
+  const alumno = await Alumno.findById(req.params.id).populate("plan");
+  let rutina = await alumno.rutinas.find(r => r._id == req.params.idrutina);
+  let ejercicio = await rutina.ejercicios.find(e => e._id == req.params.idejercicio);
+  res.json(ejercicio);
 }
 
 //Moficicación de ejercicio
