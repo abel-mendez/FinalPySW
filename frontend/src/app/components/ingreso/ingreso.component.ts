@@ -89,6 +89,21 @@ export class IngresoComponent implements OnInit {
     )
   }
 
+  actualizarAlumno(form: NgForm){
+    this.alumnoService.updateAlumno(this.alumno).subscribe(
+      result => {
+        if (result.status == "1"){
+          this.toastr.info("El alumno se modificó correctamente", "Operación exitosa");
+          this.cargarAlumno(this.alumno._id);
+        }
+      },
+      error => {
+        console.log(error);
+        this.toastr.error("Error al modificar el alumno", "Operación fallida");
+      }
+    )
+  }
+
   volver(){
     this.router.navigate(["alumnos"]);
   }
@@ -212,7 +227,8 @@ export class IngresoComponent implements OnInit {
         if(result.status == "1"){
           this.toastr.success("El pago se agregó correctamente", "Operación exitosa");
           this.getPagos(this.alumno._id);
-          form.reset();  
+          form.reset();  //no deberia ir form reset ni en agregar pago ni en agregar 
+          //alumno, explicar bug
         }
         console.log(result);
       },

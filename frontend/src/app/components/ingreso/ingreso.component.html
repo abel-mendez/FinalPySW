@@ -121,7 +121,7 @@
             <h3 class="categorie">Datos del Alumno</h3>
           </a>
           <div class="collapse show" id="collapseDatos">
-            <form class="row g-3">
+            <form class="row g-3" #modAluForm="ngForm">
               <div class="col-md-6">
                 <label for="" class="form-label">Apellido/s</label>
                 <input type="text" class="form-control" id="" name="apellido" [(ngModel)]="alumno.apellido"/>
@@ -161,8 +161,7 @@
                 <input type="date" class="form-control" id="" />
               </div>
               <div class="col-12 buttons">
-                <button type="button" class="btn btn-green">Guardar</button>
-                <button class="btn btn-grey">Modificar</button>
+                <button type="button" class="btn btn-green" (click)="actualizarAlumno(modAluForm)">Modificar</button>
               </div>
             </form>
           </div>

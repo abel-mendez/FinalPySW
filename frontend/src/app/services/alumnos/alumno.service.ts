@@ -54,8 +54,17 @@ export class AlumnoService {
     return this._http.post(this.urlbase+"alumno", body, option);
    }
 
-   updateAlumno(){
-     
+   updateAlumno(alumno: Alumno):Observable<any>{
+     let option = {
+       headers: new HttpHeaders({
+         "Content-Type": "application/json"
+       }),
+       params: new HttpParams({
+
+       })
+     }
+     let body = JSON.stringify(alumno);
+     return this._http.put(this.urlbase + "alumno/" + alumno._id, body, option);
    }
 
    getAlumno(id:string):Observable<any>{
