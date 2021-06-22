@@ -1,12 +1,12 @@
 .categorie {
-  background-color: #2ec400;
+  background-color: rgb(63, 63, 63);
   color: white;
   text-align: center;
   padding: 5px 0;
   margin: 20px 0;
 }
 .main {
-  min-height: 79vh;
+  min-height: 80vh;
 }
 .estadisticas {
   overflow: scroll;
