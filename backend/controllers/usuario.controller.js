@@ -1,6 +1,23 @@
 const Usuario = require('../models/usuario')
 const usuarioCtrl = {}
 
+//Create Usuario
+usuarioCtrl.createUsuario = async (req, res) => {
+  var usuario = new Usuario(req.body);
+  try {
+    await usuario.save();
+    res.json({
+      'status': '1',
+      'msg': 'Usuario AGREGADO'
+    })
+  } catch (error) {
+    res.json({
+      'status': '0',
+      'msg': 'Error guardando Usuario.'
+    })
+  }
+}
+
 usuarioCtrl.loginUsuario = async (req, res) => {
   //en req.body se espera que vengan las credenciales de login
   //defino los criterios de busqueda en base al username y password recibidos
