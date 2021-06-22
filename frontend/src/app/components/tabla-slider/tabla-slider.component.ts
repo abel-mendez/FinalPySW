@@ -47,7 +47,7 @@ export class TablaSliderComponent implements OnInit {
         this.cargarSliders();
       },
       error => {
-       // console.log(error);
+       console.log(error);
       });
   }
 
@@ -66,18 +66,6 @@ export class TablaSliderComponent implements OnInit {
     )
   }
 
-  cargarSlider(slider:Slider) {
-    this.sliderService.getSlider(slider).subscribe(
-      result => {
-            Object.assign(this.slider, result);
-            this.slider = this.sliders.find(p=>(p._id == this.slider._id));     
-      },
-      error => {
-        alert('Error al cargar los Sliders')
-      }
-    )
-  }
-
   eliminarSlider(slider: Slider) {
     this.sliderService.deleteSlider(slider).subscribe(
       result => {
@@ -92,18 +80,32 @@ export class TablaSliderComponent implements OnInit {
     );
   }
 
-  modificarSlider(slider: Slider) {
-    this.slider = new Slider();
-    this.cargarSlider(slider);
-    this.sliderService.modificarSlider(slider).subscribe(
-      result => {
-        this.toastr.info("Pasaje fue actualizado correctamente","Operacion Exitosa")
+  /*cargarSlider(slider:Slider) {
+    this.sliderService.getSlider(slider).subscribe(
+      result=>{
+          let slider = new Slider();
+          Object.assign(slider);
+          this.sliders.push(slider);
+          console.log("aaaaaa"+result);
       },
-      error => {
-
+      error=>{
+        console.log(error);
+        alert("Error al cargar los Alumnos");
       }
     )
-  }
+  }*/
+
+  /*modificarSlider(slider: Slider) {
+    this.cargarSliders();
+   this.sliderService.modificarSlider(slider).subscribe(
+    result=>{
+      this.toastr.info("El Slider se modificó correctamente", "Operación exitosa");
+    },
+    error=>{
+      console.log(error);
+    }
+   )
+  }*/
 
   //Plan
   agregarPlan() {
@@ -132,6 +134,21 @@ export class TablaSliderComponent implements OnInit {
 
       }
     )
+  }
+
+  eliminarPlan(plan: Plan) {
+    this.planService.deletePlan(plan).subscribe(
+      result => {
+        console.log(result);
+        this.toastr.info("El Plan se eliminó correctamente", "Operación exitosa");
+        this.planes = new Array<Plan>();
+        this.cargarPlanes();
+      },
+      error => {
+        console.log(error)
+        console.log("el plan no se ha podido eliminar")
+      }
+    );
   }
 
 }

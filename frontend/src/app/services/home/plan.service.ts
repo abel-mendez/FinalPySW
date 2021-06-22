@@ -24,6 +24,19 @@ export class PlanService {
      return this._http.get(url,httpOptions);
   }
 
+  getPlan(plan:Plan):Observable<any>{
+    const url=this.urlBase+"plan/"+plan._id;
+    const httpOptions= {
+      headers: new HttpHeaders({
+
+      }),
+      params: new HttpParams({
+        
+      })
+    }
+     return this._http.get(url,httpOptions);
+  }
+
   postPlan(plan:Plan):Observable <any>{
     const url=this.urlBase+"plan";
     const httpOptions= {
@@ -38,8 +51,9 @@ export class PlanService {
     return this._http.post(url,body,httpOptions);
 
   }
+  
   deletePlan(plan:Plan):Observable <any>{
-    const url=this.urlBase+"plan";
+    const url=this.urlBase+"plan/"+plan._id;
     const httpOptions= {
       headers: new HttpHeaders({
   
@@ -48,11 +62,12 @@ export class PlanService {
         
       })
     }
-    return this._http.delete(`${url}${plan._id}`,httpOptions);
+    return this._http.delete(url,httpOptions);
 
   }
-  modificarSlider(plan:Plan):Observable<any>{
-    const url="http://localhost:3000/api/plan/";
+
+  modificarPlan(plan:Plan):Observable<any>{
+    const url="http://localhost:3000/api/plan/"+plan._id;
     const httpOptions= {
       headers: new HttpHeaders({
 
@@ -62,7 +77,7 @@ export class PlanService {
       })
     };
     let body= plan;
-    return this._http.put(`${url}${plan._id}`,body,httpOptions);
+    return this._http.put(url,body,httpOptions);
 
   }
 }
