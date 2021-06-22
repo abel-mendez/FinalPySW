@@ -730,16 +730,17 @@
           <div class="collapse show" id="collapseAsistencia">
             <div class="text-center">
               <button class="btn-green btn mt-2 mb-2" data-bs-toggle="modal"
-              data-bs-target="#modalAgregarAsistencia">Agregar asistencia</button>  
+              data-bs-target="#modalAgregarAsistencia" (click)="nuevaAsistencia()">Agregar asistencia</button>  
             </div>
             
-            <!-- modal Agregar asistencia -->
+            <!-- modal Agregar/modificar asistencia -->
             <div class="modal fade" id="modalAgregarAsistencia" tabindex="-1" aria-labelledby="modalLabelAgregarAsistencia"
             aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header text-white bg-dark">
-                        <h5 class="modal-title" id="modalLabelAgregarAsistencia">Nueva Asistencia</h5>
+                        <h5 class="modal-title" id="modalLabelAgregarAsistencia" *ngIf="accionAsist=='new'">Nueva Asistencia</h5>
+                        <h5 class="modal-title" id="modalLabelAgregarAsistencia" *ngIf="accionAsist=='update'">Modificar Asistencia</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -760,14 +761,41 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-green"
+                        <button type="button" class="btn btn-green" *ngIf="accionAsist=='new'"
                             data-bs-dismiss="modal" (click)="agregarAsistencia(asistenciaForm)">Guardar</button>
+                        <button type="button" class="btn btn-green" *ngIf="accionAsist=='update'"
+                            data-bs-dismiss="modal" (click)="updateAsistencia(asistenciaForm)">Modificar</button>
                         <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
             </div>
 
+            <!-- modal eliminar asistencia-->
+            <div class="modal fade" id="modalEliminarAsistencia" tabindex="-1" aria-labelledby="modalLabelEliminarAsistencia"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-dark text-white">
+                        <h5 class="modal-title" id="modalLabelEliminarAsistencia">Eliminar Asistencia</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid col-10 offset-1 mb-3">
+                            <div class="col-12">
+                             <h6>¿Está seguro/a de que desea eliminar la asistencia?</h6>
+                           </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-red"
+                            data-bs-dismiss="modal" (click)="eliminarAsistencia()">Eliminar</button>
+                        <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+            </div>
+            
             <div class="card-body table-responsive-sm col-md-8 offset-md-2">
               <table
                 class="table table-striped"
@@ -777,11 +805,14 @@
               >
                 <thead>
                   <tr>
-                    <th style="width: 50%">
+                    <th style="width: 30%">
                       <mfDefaultSorter by="fecha">Día</mfDefaultSorter>
                     </th>
-                    <th style="width: 50%">
+                    <th style="width: 30%">
                       <mfDefaultSorter by="hora">Hora</mfDefaultSorter>
+                    </th>
+                    <th style="width: 30%">
+                      <mfDefaultSorter by="acciones">Acciones</mfDefaultSorter>
                     </th>
                   </tr>
                 </thead>
@@ -789,6 +820,11 @@
                   <tr *ngFor="let asist of mf.data">
                     <td>{{ asist.fecha}}</td>
                     <td>{{ asist.hora }}</td>
+                    <td>
+                      <button type="button" class="btn btn-green" data-bs-toggle="modal"
+                      data-bs-target="#modalAgregarAsistencia" (click)="cargarAsistencia(asist._id)">Modificar</button>
+                      <button class="btn btn-red" (click)="usarAsistenciaSeleccionada(asist)" data-bs-toggle="modal"
+                      data-bs-target="#modalEliminarAsistencia">Eliminar</button></td>
                   </tr>
                 </tbody>
                 <tfoot>

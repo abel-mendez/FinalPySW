@@ -99,6 +99,17 @@ export class AlumnoService {
     return this._http.post(this.urlbase+"alumno/"+idAlumno+"/asistencias", body, option);
    }
 
+   getAsistencia(idAsistencia:string):Observable<any>{
+    let option = {
+      headers: new HttpHeaders({
+      }),
+      params: new HttpParams({
+
+      })
+    }
+    return this._http.get(this.urlbase+"asistencia/asistencias/"+idAsistencia, option); 
+   }
+
    getAsistencias(id:string):Observable<any>{
     let option = {
       headers: new HttpHeaders({
@@ -110,6 +121,30 @@ export class AlumnoService {
     }
     return this._http.get(this.urlbase+"alumno/"+id+"/asistencias", option);
     
+   }
+
+   updateAsistencia(asistencia:Asistencia):Observable<any>{
+    let option = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      }),
+      params: new HttpParams({
+
+      })
+    }
+    let body = JSON.stringify(asistencia);
+    return this._http.put(this.urlbase+"asistencia/asistencias/"+asistencia._id, body, option);
+  }
+
+  deleteAsistencia(idAsistencia:string):Observable<any>{
+    let option = {
+      headers: new HttpHeaders({
+      }),
+      params: new HttpParams({
+
+      })
+    }
+    return this._http.delete(this.urlbase+"asistencia/"+idAsistencia, option);
    }
 
    //Pagos

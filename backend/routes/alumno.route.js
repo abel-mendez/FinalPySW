@@ -17,7 +17,6 @@ router.delete('/:id', alumnoCtrl.deleteAlumno);
 router.post('/:id/usuario', alumnoCtrl.createUsuario)
 
 router.post('/:id/asistencias', alumnoCtrl.addAsistencia);
-router.delete('/:id/asistencias/:idasistencia', alumnoCtrl.deleteAsistencia);
 
 router.post('/:id/rutinas', alumnoCtrl.addRutina);
 router.get('/:id/rutinas/:idrutina', alumnoCtrl.getRutina);

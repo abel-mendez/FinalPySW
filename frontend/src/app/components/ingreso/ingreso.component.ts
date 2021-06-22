@@ -22,6 +22,7 @@ export class IngresoComponent implements OnInit {
 
   accion:string="new";
   accionEj:string="new";
+  accionAsist:string="new";
   progreso: Progreso = new Progreso();
   progresos:Array<Progreso> = new Array<Progreso>();
   planes: Array<Plan> = new Array<Plan>();
@@ -91,6 +92,11 @@ export class IngresoComponent implements OnInit {
 
   //asistencias
   
+  nuevaAsistencia(){
+    this.asistencia=new Asistencia();
+    this.accionAsist="new";
+  }
+
   agregarAsistencia(form: NgForm){
     console.log(this.alumno._id);
     this.alumnoService.addAsistencia(this.alumno._id,this.asistencia).subscribe(
@@ -106,6 +112,75 @@ export class IngresoComponent implements OnInit {
         console.log(error);
       }
 
+    )
+  }
+
+
+  updateAsistencia(form:NgForm){
+    this.alumnoService.updateAsistencia(this.asistencia).subscribe(
+      result=>{
+        if(result.status=="1"){
+          this.toastr.success("La asistencia se modificó correctamente", "Operación exitosa");
+          this.getAsistencias(this.alumno._id);
+          form.reset();
+        }
+      },
+      error=>{
+        console.log(error);
+        this.toastr.error("Error al modificar la asistencia", "Operación fallida");
+      }
+    )
+  }
+
+  cargarAsistencia(idAsistencia:string){
+    this.accionAsist="update";
+    this.alumnoService.getAsistencia(idAsistencia).subscribe(
+      result=>{
+        Object.assign(this.asistencia,result);
+        console.log(this.asistencia);
+      },
+      error=>{
+        console.log(error);
+      }
+    )
+  }
+
+  
+  getAsistencias(id:string){
+    this.asistencias = new Array<Asistencia>();
+    this.alumnoService.getAsistencias(id).subscribe(
+      result=>{
+        result.forEach(element => {
+          let vAsistencia = new Asistencia();
+          Object.assign(vAsistencia,element);
+          this.asistencias.push(vAsistencia);
+          console.log(result);
+          console.log(this.asistencias);
+        });
+      },
+      error=>{
+        console.log(error);
+        alert("Error al cargar las asistencias");
+      }
+    )
+  }
+
+  usarAsistenciaSeleccionada(asistencia:Asistencia){
+    this.asistencia= asistencia;
+  }
+
+  eliminarAsistencia(){
+    this.alumnoService.deleteAsistencia(this.asistencia._id).subscribe(
+      result=>{
+        if(result.status=="1"){
+          this.toastr.info("Asistencia eliminada correctamente","Operación exitosa");
+          this.getAsistencias(this.alumno._id);
+        }
+      },
+      error=>{
+        console.log(error);
+        this.toastr.error("Error al eliminar la asistencia","Operación fallida");
+      }
     )
   }
 
@@ -164,24 +239,6 @@ export class IngresoComponent implements OnInit {
   }
 
 
-  getAsistencias(id:string){
-    this.asistencias = new Array<Asistencia>();
-    this.alumnoService.getAsistencias(id).subscribe(
-      result=>{
-        result.forEach(element => {
-          let vAsistencia = new Asistencia();
-          Object.assign(vAsistencia,element);
-          this.asistencias.push(vAsistencia);
-          console.log(result);
-          console.log(this.asistencias);
-        });
-      },
-      error=>{
-        console.log(error);
-        alert("Error al cargar las asistencias");
-      }
-    )
-  }
 
   
 

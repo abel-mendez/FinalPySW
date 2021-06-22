@@ -15,7 +15,7 @@ alumnoCtrl.getAlumnos = async (req, res) => {
 
 //Obtener alumno
 alumnoCtrl.getAlumno = async (req, res) => {
-  const alumno = await Alumno.findById(req.params.id).populate("plan");
+  const alumno = await Alumno.findById(req.params.id).populate("asistencias");
   res.json(alumno);
 }
 
@@ -91,24 +91,6 @@ alumnoCtrl.addAsistencia = async (req, res) => {
   }
 }
 
-//Baja de asistencia
-alumnoCtrl.deleteAsistencia = async () => {
-  const alumno = await Alumno.findById(req.params.id);
-  const idasistencia = req.params.idasistencia;
-  alumno.asistencias.pull(idasistencia);
-  try {
-    await Alumno.updateOne({ _id: req.params.id }, alumno);
-    res.json({
-      'status': '1',
-      'msg': 'Asistencia ELIMINADA'
-    })
-  } catch (error) {
-    res.json({
-      'status': '0',
-      'msg': 'Error eliminando la asistencia.'
-    })
-  }
-}
 
 //Alta de progreso
 alumnoCtrl.addProgreso = async (req, res) => {
