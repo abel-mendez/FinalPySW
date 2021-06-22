@@ -101,10 +101,12 @@ export class TablaSliderComponent implements OnInit {
   }*/
 
   modificarSlider(slider: Slider) {
-    this.cargarSliders();
    this.sliderService.modificarSlider(slider).subscribe(
     result=>{
       this.toastr.info("El Slider se modificó correctamente", "Operación exitosa");
+      this.sliders = new Array<Slider>();
+      this.cargarSliders();
+      this.slider = new Slider();
     },
     error=>{
       console.log(error);
