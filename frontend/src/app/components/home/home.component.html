@@ -5,22 +5,12 @@
 </h1>
 <section id="cont-slid">
   <div
-    id="carouselExampleDark"
-    class="carousel carousel-dark slide"
+    id="carouselExampleControls"
+    class="carousel carousel-dark carousel-fade slide"
     data-bs-ride="carousel"
     data-bs-pause="false"
   >
     <div class="carousel-inner">
-      <!-- <div class="carousel-item active" data-bs-interval="2500">
-        <img
-          src="https://i.blogs.es/d3b01f/21383/1366_2000.jpg"
-          class="d-block w-100"
-          alt="..."
-        />
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Entrenamieto con pesas</h5>
-        </div>
-      </div> -->
       <div
         *ngFor="let slid of sliders"
         [ngClass]="{ active: slid == sliders[0] }"
@@ -33,6 +23,24 @@
         </div>
       </div>
     </div>
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#carouselExampleControls"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#carouselExampleControls"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
   </div>
 </section>
 <section class="aboutus">
