@@ -37,6 +37,12 @@ export class TablaSliderComponent implements OnInit {
     console.log(this.slider);
   }
 
+  seleccionarPlan(plan){
+   
+    this.plan=plan;
+    console.log(this.plan);
+  }
+
   onFileChanged(e) {
     console.log(e);
     this.slider.img = e[0].base64;
@@ -121,6 +127,7 @@ export class TablaSliderComponent implements OnInit {
         this.toastr.success("El Plan se agregó correctamente", "Operación exitosa");
         this.planes = new Array<Plan>();
         this.cargarPlanes();
+        this.plan = new Plan();
       },
       error => {
         console.log(error);
@@ -143,7 +150,21 @@ export class TablaSliderComponent implements OnInit {
     )
   }
 
-  eliminarPlan(plan: Plan) {
+  modificarPlan(plan:Plan) {
+    this.planService.modificarPlan(plan).subscribe(
+     result=>{
+       this.toastr.info("El Plan se modificó correctamente", "Operación exitosa");
+       this.planes = new Array<Plan>();
+       this.cargarPlanes();
+       this.plan = new Plan();
+     },
+     error=>{
+       console.log(error);
+     }
+    )
+   }
+
+  eliminarPlan(plan:Plan) {
     this.planService.deletePlan(plan).subscribe(
       result => {
         console.log(result);

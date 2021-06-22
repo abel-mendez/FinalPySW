@@ -409,6 +409,7 @@
                   class="btn-green btn"
                   data-bs-toggle="modal"
                   data-bs-target="#modalModificarPlan"
+                  (click)="seleccionarPlan(plan)"
                 >
                   Modificar
                 </button>
@@ -416,139 +417,11 @@
                   class="btn-grey btn"
                   data-bs-toggle="modal"
                   data-bs-target="#modalEliminarPlan"
+                  (click)="seleccionarPlan(plan)"
                 >
                   Eliminar
                 </button>
               </td>
-
-              <!-- Eliminar Plan -->
-              <div
-                class="modal fade"
-                id="modalEliminarPlan"
-                tabindex="-1"
-                aria-labelledby="modalLabelEliminarPlan"
-                aria-hidden="true"
-              >
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="modalLabelEliminarPlan">
-                        Eliminar Slider
-                      </h5>
-                      <button
-                        type="button"
-                        class="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                      ></button>
-                    </div>
-                    <div class="modal-body">
-                      <div class="container-fluid col-10 offset-1 mb-3">
-                        <p>Estas a punto de eliminar un slider</p>
-                      </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button
-                        type="button"
-                        class="btn btn-green"
-                        (click)="eliminarPlan(plan)"
-                        data-bs-dismiss="modal"
-                      >
-                        Eliminar
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-grey"
-                        data-bs-dismiss="modal"
-                      >
-                        Close
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Modificar Plan -->
-              <div
-                class="modal fade"
-                id="modalModificarPlan"
-                tabindex="-1"
-                aria-labelledby="modalLabelModificarPlan"
-                aria-hidden="true"
-              >
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="modalLabelModificarPlan">
-                        Modificar Plan
-                      </h5>
-                      <button
-                        type="button"
-                        class="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                      ></button>
-                    </div>
-                    <div class="modal-body">
-                      <div class="container-fluid col-10 offset-1 mb-3">
-                        <div class="col-12 mb-3">
-                          <label for="tipo" class="form-label"
-                            ><b>Tipo Plan</b></label
-                          >
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="tipo"
-                            name="plan"
-                            [(ngModel)]="plan.tipo"
-                          />
-                        </div>
-                        <div class="col-12 mb-3">
-                          <label for="costo" class="form-label"
-                            ><b>Costo</b></label
-                          >
-                          <input
-                            type="number"
-                            class="form-control"
-                            id="costo"
-                            name="costo"
-                            [(ngModel)]="plan.costo"
-                          />
-                        </div>
-                        <div class="col-12 mb-3">
-                          <label for="" class="form-label"
-                            ><b>Frecuencia</b></label
-                          >
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="frecuencia"
-                            name="frecuencia"
-                            [(ngModel)]="plan.frecuencia"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button
-                        type="button"
-                        class="btn btn-green"
-                        (click)="modificarPlan(plan)"
-                        data-bs-dismiss="modal"
-                      >
-                        Guardar Cambios
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-grey"
-                        data-bs-dismiss="modal"
-                      >
-                        Close
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </tr>
           </tbody>
           <tfoot>
@@ -563,5 +436,133 @@
         </table>
       </div>
     </div>
+    <!-- Eliminar Plan -->
+    <div
+    class="modal fade"
+    id="modalEliminarPlan"
+    tabindex="-1"
+    aria-labelledby="modalLabelEliminarPlan"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalLabelEliminarPlan">
+            Eliminar Slider
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid col-10 offset-1 mb-3">
+            <p>Estas a punto de eliminar un slider</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-green"
+            (click)="eliminarPlan(plan)"
+            data-bs-dismiss="modal"
+          >
+            Eliminar
+          </button>
+          <button
+            type="button"
+            class="btn btn-grey"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modificar Plan -->
+  <div
+    class="modal fade"
+    id="modalModificarPlan"
+    tabindex="-1"
+    aria-labelledby="modalLabelModificarPlan"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalLabelModificarPlan">
+            Modificar Plan
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid col-10 offset-1 mb-3">
+            <div class="col-12 mb-3">
+              <label for="tipo" class="form-label"
+                ><b>Tipo Plan</b></label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="tipo"
+                name="plan"
+                [(ngModel)]="plan.tipo"
+              />
+            </div>
+            <div class="col-12 mb-3">
+              <label for="costo" class="form-label"
+                ><b>Costo</b></label
+              >
+              <input
+                type="number"
+                class="form-control"
+                id="costo"
+                name="costo"
+                [(ngModel)]="plan.costo"
+              />
+            </div>
+            <div class="col-12 mb-3">
+              <label for="" class="form-label"
+                ><b>Frecuencia</b></label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="frecuencia"
+                name="frecuencia"
+                [(ngModel)]="plan.frecuencia"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-green"
+            (click)="modificarPlan(plan)"
+            data-bs-dismiss="modal"
+          >
+            Guardar Cambios
+          </button>
+          <button
+            type="button"
+            class="btn btn-grey"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
   </div>
 </main>
