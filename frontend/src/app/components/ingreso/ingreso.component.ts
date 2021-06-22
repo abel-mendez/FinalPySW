@@ -53,6 +53,10 @@ export class IngresoComponent implements OnInit {
           this.cargarAlumno(params.id);
           this.getRutinas(params.id);
           this.getPagos(params.id);
+          this.pago.completado = true;
+          this.usuario.activo = true;
+          this.pago.modopago = "Efectivo";
+          this.usuario.perfil = "Alumno";
     });
   }
 
@@ -81,6 +85,21 @@ export class IngresoComponent implements OnInit {
       },
       error=>{
         console.log(error);
+      }
+    )
+  }
+
+  actualizarAlumno(form: NgForm){
+    this.alumnoService.updateAlumno(this.alumno).subscribe(
+      result => {
+        if (result.status == "1"){
+          this.toastr.info("El alumno se modificó correctamente", "Operación exitosa");
+          this.cargarAlumno(this.alumno._id);
+        }
+      },
+      error => {
+        console.log(error);
+        this.toastr.error("Error al modificar el alumno", "Operación fallida");
       }
     )
   }
@@ -208,13 +227,15 @@ export class IngresoComponent implements OnInit {
         if(result.status == "1"){
           this.toastr.success("El pago se agregó correctamente", "Operación exitosa");
           this.getPagos(this.alumno._id);
-          form.reset();
+          form.reset();  //no deberia ir form reset ni en agregar pago ni en agregar 
+          //alumno, explicar bug
         }
         console.log(result);
       },
       error => {
         console.log(error);
       }
+      
 
 
 
