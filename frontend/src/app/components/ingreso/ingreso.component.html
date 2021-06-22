@@ -227,8 +227,8 @@
                             </div>
                             <div class="col-md-6">
                               <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="pagocompletado" [(ngModel)]="pago.completado">
-                                <label class="form-check-label" for="flexCheckDefault">
+                                <input class="form-check-input" type="checkbox" value="" id="" name="pagocompletado" [(ngModel)]="pago.completado">
+                                <label class="form-check-label" for="">
                                   Completado
                                 </label>
                               </div>
@@ -869,14 +869,19 @@
                 <label for="" class="form-label">Contraseña</label>
                 <input type="password" class="form-control" id="" name="usuariopwd" [(ngModel)]="usuario.password"/>
               </div>
-              <div class="col-md-6">
+              <!--<div class="col-md-6">
                 <label for="" class="form-label">Tipo de perfil</label>
                 <input type="text" class="form-control" id="" name="usuarioperfil" [(ngModel)]="usuario.perfil"/>
+              </div>-->
+              <div class="col-md-6">
+                <select class="form-select" aria-label="Disabled select example" id="" name="usuarioperfil" [(ngModel)]="usuario.perfil" disabled>
+                  <option value="Alumno">Alumno</option>
+                </select>
               </div>
               <div class="col-md-12">
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="usuarioactivo" [(ngModel)]="usuario.activo">
-                  <label class="form-check-label" for="flexCheckDefault">
+                  <input class="form-check-input" type="checkbox" value="" id="" name="usuarioactivo" [(ngModel)]="usuario.activo">
+                  <label class="form-check-label" for="">
                     Activo
                   </label>
                 </div>

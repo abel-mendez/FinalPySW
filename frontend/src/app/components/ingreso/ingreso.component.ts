@@ -53,6 +53,10 @@ export class IngresoComponent implements OnInit {
           this.cargarAlumno(params.id);
           this.getRutinas(params.id);
           this.getPagos(params.id);
+          this.pago.completado = true;
+          this.usuario.activo = true;
+          this.pago.modopago = "Efectivo";
+          this.usuario.perfil = "Alumno";
     });
   }
 
@@ -208,13 +212,14 @@ export class IngresoComponent implements OnInit {
         if(result.status == "1"){
           this.toastr.success("El pago se agregó correctamente", "Operación exitosa");
           this.getPagos(this.alumno._id);
-          form.reset();
+          form.reset();  
         }
         console.log(result);
       },
       error => {
         console.log(error);
       }
+      
 
 
 
