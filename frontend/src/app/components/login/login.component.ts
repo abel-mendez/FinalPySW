@@ -35,8 +35,8 @@ export class LoginComponent implements OnInit {
           if (user.status == 1) {
             //guardamos el user en cookies en el cliente
             sessionStorage.setItem("user", user.usuario);
-            sessionStorage.setItem("userid", user.userid);
             sessionStorage.setItem("perfil", user.perfil);
+            sessionStorage.setItem("user_id", user._id);
             //redirigimos a home o a pagina que llamo
             this.router.navigateByUrl(this.returnUrl)
             .then(() => {
@@ -56,6 +56,7 @@ export class LoginComponent implements OnInit {
           //  this.router.navigateByUrl(this.returnUrl);
          //}
          this.router.navigateByUrl(this.returnUrl1);
+         console.log(result)
         },
         error => {
           alert("Error de conexion");

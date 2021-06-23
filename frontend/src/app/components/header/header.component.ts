@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(public loginService: LoginService) {
     this.usuario = loginService.userLogged();
-    console.log(this.usuario);
+    //console.log(this.usuario);
     
  }
 

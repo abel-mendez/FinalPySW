@@ -24,7 +24,7 @@ export class LoginService {
     //borro el vble almacenado mediante el storage
     sessionStorage.removeItem("user");
     sessionStorage.removeItem("perfil");
-    sessionStorage.removeItem("userid");
+    sessionStorage.removeItem("user_id");
   }
   public userLoggedIn() {
     var resultado = false;
@@ -40,7 +40,7 @@ export class LoginService {
     return usuario;
   }
   public idLogged() {
-    var id = sessionStorage.getItem("userid");
+    var id = sessionStorage.getItem("user_id");
     return id;
   }
 }

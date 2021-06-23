@@ -44,7 +44,9 @@ usuarioCtrl.loginUsuario = async (req, res) => {
         status: 1,
         msg: "success",
         usuario: user.usuario,
-        perfil: user.perfil
+        perfil: user.perfil,
+        //algo asi seria pero no se como
+        user_id:user._id
       });
     }
   })

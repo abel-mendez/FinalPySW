@@ -27,6 +27,53 @@
         <section>
           <h3 class="categorie">Tu Progreso</h3>
           <div class="table-responsive">
+            <table class="table table-striped" [mfData]="progresos" #mf="mfDataTable" [mfRowsOnPage]="5">
+              <thead>
+                <tr>
+                  <th>
+                    <mfDefaultSorter by="fecha">Fecha</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="peso">Peso</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="foto">Foto</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="dieta">Dieta</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="observaciones">Observaciones</mfDefaultSorter>
+                  </th>
+                  <th>
+                    Opciones
+                  </th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let progreso of mf.data">
+                  <td class="text-right">{{progreso.fecha | date: 'dd/MM/yyyy'}}</td>
+                  <td>{{progreso.peso}} Kg</td>
+                  <td><img src="{{ asistencia.foto }}" alt="" width="50%" /></td>
+                  <td>{{progreso.dieta}}</td>
+                  <td>{{progreso.observaciones}}</td>
+                  <td>
+                    <button type="button" class="btn-green btn" data-bs-toggle="modal"
+                      data-bs-target="#modalVerProgreso" (click)="mostrarIdAlumno()">
+                      Ver Imagen
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="4">
+                    <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
             <table class="table table-hover">
               <thead>
                 <tr>
@@ -45,7 +92,7 @@
                   <td></td>
                   <td scope="col" class="col-2">
                     <button type="button" class="btn-green btn" data-bs-toggle="modal"
-                      data-bs-target="#modalVerProgreso">
+                      data-bs-target="#modalVerProgreso" (click)="mostrarIdAlumno()">
                       Ver Imagen
                     </button>
                   </td>
@@ -69,27 +116,30 @@
               <div class="modal-body">
                 <div class="container-fluid col-10 offset-1 mb-3">
                   <div class="row mb-3">
-                    <div class="col-md-4 text-init"><b>Fecha</b></div>
-                    <div class="col-md-8 text-end">12/10/2020</div>
+                    <div class="col-md-4 text-init"><b>Fecha: </b></div>
+                    <div class="col-md-8 text-end">{{progreso.fecha}}</div>
                   </div>
                   <div class="row mb-3">
                     <div class="col-md-4 text-init"><b>Peso: </b></div>
-                    <div class="col-md-8 text-end">120 Kg</div>
+                    <div class="col-md-8 text-end">{{progreso.peso}}</div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-4 text-init"><b>Dieta: </b></div>
+                    <div class="col-md-8 text-end">{{progreso.dieta}}</div>
                   </div>
                   <div class="row mb-3">
                     <div class="col-md-4 text-center">
                       <b>Observaciones: </b>
                     </div>
                     <div class="col-md-8 text-end">
-                      Se observa mejoria en el aspecto fisico del alumno, logró
-                      cambios significativos en poco tiempo
+                      {{progreso.observaciones}}
                     </div>
                   </div>
                 </div>
                 <div class="col-5 offset-4 mb-3">
-                  <div class="col-md-4" style="width: 100%">
+                  <div class="col-md-4" style="width: 50%">
                     <img
-                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStnsfMnETCJRaP7ZUn3-7dUjKKmAgEAO2kJA&usqp=CAU"
+                      src="{{progreso.foto}}"
                       alt="" />
                   </div>
                 </div>
@@ -125,7 +175,7 @@
         <section>
           <h3 class="categorie">Tu Asistencia</h3>
           <div class="table-responsive">
-            <table class="table table-striped" [mfData]="asistencias" #mf="mfDataTable" [mfRowsOnPage]="5">
+            <table class="table table-striped" [mfData]="asistencias" #mf1="mfDataTable" [mfRowsOnPage]="5">
               <thead>
                 <tr>
                   <th>
@@ -141,7 +191,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let asistencia of mf.data">
+                <tr *ngFor="let asistencia of mf1.data">
                   <td class="text-right">{{asistencia.fecha | date: 'dd/MM/yyyy'}}</td>
                   <td>{{asistencia.hora | currency}}</td>
                   <td>
@@ -149,7 +199,7 @@
                       data-bs-target="#modalVerAsistencia">
                       Ver
                     </button>
-                    <button class="btn btn-grey">Imprimir</button>
+                    <button class="btn btn-grey" (click)="imprimirAsistencia()">Imprimir</button>
                   </td>
                 </tr>
               </tbody>
@@ -178,24 +228,12 @@
               <div class="modal-body">
                 <div class="container-fluid col-10 offset-1 mb-3">
                   <div class="row mb-3">
-                    <div class="col-md-4 text-init"><b>Fecha</b></div>
-                    <div class="col-md-8 text-end">12/10/2020</div>
-                  </div>
-                  <div class="row mb-3">
-                    <div class="col-md-4 text-init"><b>Dia: </b></div>
-                    <div class="col-md-8 text-end">Lunes</div>
+                    <div class="col-md-4 text-init"><b>Fecha: </b></div>
+                    <div class="col-md-8 text-end">{{asistencia.fecha}}</div>
                   </div>
                   <div class="row mb-3">
                     <div class="col-md-4 text-init"><b>Hora: </b></div>
-                    <div class="col-md-8 text-end">12:20</div>
-                  </div>
-                  <div class="row mb-3">
-                    <div class="col-md-4 text-init"><b>Asistencia: </b></div>
-                    <div class="col-md-8 text-end">Si</div>
-                  </div>
-                  <div class="row mb-3">
-                    <div class="col-md-4 text-init"><b>Rutina: </b></div>
-                    <div class="col-md-8 text-end">Pecho y Biceps</div>
+                    <div class="col-md-8 text-end">{{asistencia.hora}}</div>
                   </div>
                 </div>
                 <!--<div class="col-5 offset-4 mb-3">
@@ -216,6 +254,91 @@
         <section>
           <h3 class="categorie">Tus rutinas</h3>
           <div class="table-responsive">
+            <div class="card-body table-responsive-sm col-md-10 offset-md-1">
+              <table
+                class="table table-striped"
+                [mfData]="rutinas"
+                #mf3="mfDataTable"
+                [mfRowsOnPage]="5"
+              >
+                <thead>
+                  <tr>
+                    <th style="width: 15%">
+                      <mfDefaultSorter by="duracion">Duración</mfDefaultSorter>
+                    </th>
+                    <th style="width: 25%">
+                      <mfDefaultSorter by="grupomuscular">Grupo muscular</mfDefaultSorter>
+                    </th>
+                    <th style="width: 20%">
+                      <mfDefaultSorter by="ejercicios">Ejercicios</mfDefaultSorter>
+                    </th>
+                    <th style="width: 40%">
+                      <mfDefaultSorter by="acciones">Acciones</mfDefaultSorter>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let r of mf3.data">
+                    <td>{{ r.duracion}}</td>
+                    <td>{{ r.grupomuscular }}</td>
+                    <td>
+                      <button class="btn btn-dark" data-bs-toggle="modal"
+                      data-bs-target="#modalMostrarEjercicios" (click)="getEjercicios(r._id)" (click)="usarRutinaSeleccionada(r)">Ver ejercicios</button>  
+                    </td>
+                    <td>
+                      <button class="btn btn-green" data-bs-toggle="modal"
+                      data-bs-target="#modalAgregarRutina" (click)="cargarRutina(r._id)" >Ver</button>
+                      <button class="btn btn-red" data-bs-toggle="modal"
+                      data-bs-target="#modalEliminarRutina" (click)="usarRutinaSeleccionada(r)">Eliminar</button></td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="4">
+                      <mfBootstrapPaginator
+                        [rowsOnPageSet]="[5, 10, 25]"
+                      ></mfBootstrapPaginator>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+            <table
+                          class="table table-striped"
+                          [mfData]="ejercicios"
+                          #mf4="mfDataTable"
+                          [mfRowsOnPage]="5"
+                        >
+                          <thead>
+                            <tr>
+                              <th style="width: 30%">
+                                <mfDefaultSorter by="nombre">Nombre</mfDefaultSorter>
+                              </th>
+                              <th style="width: 10%">
+                                <mfDefaultSorter by="series">Series</mfDefaultSorter>
+                              </th>
+                              <th style="width: 20%">
+                                <mfDefaultSorter by="repeticiones">Repeticiones</mfDefaultSorter>
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let e of mf4.data">
+                              <td>{{ e.nombre}}</td>
+                              <td>{{ e.series }}</td>
+                              <td>{{ e.repeticiones}}</td>
+                            </tr>
+                          </tbody>
+                          <tfoot>
+                            <tr>
+                              <td colspan="4">
+                                <mfBootstrapPaginator
+                                  [rowsOnPageSet]="[5, 10, 25]"
+                                ></mfBootstrapPaginator>
+                              </td>
+                            </tr>
+                          </tfoot>
+                        </table>
             <table class="table table-hover">
               <thead>
                 <tr>
@@ -293,10 +416,58 @@
         </div>
       </div>
       <div class="tab-pane fade cont" id="nav-pago" role="tabpanel" aria-labelledby="nav-pago-tab">
+
         <!--          ver pago de cuotas del alumno     -->
         <section>
           <h3 class="categorie">Tus Pagos</h3>
           <div class="table-responsive">
+            <table class="table table-striped" [mfData]="pagos" #mf5="mfDataTable" [mfRowsOnPage]="5">
+              <thead>
+                <tr>
+                  <th>
+                    <mfDefaultSorter by="monto">Monto</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="fechapago">Fecha Pago</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="modopago">Modo de Pago</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="fechavencimiento">Fecha Vencimiento</mfDefaultSorter>
+                  </th>
+                  <th>
+                    <mfDefaultSorter by="completado">Completado</mfDefaultSorter>
+                  </th>
+                  <th>
+                    Opciones
+                  </th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let pago of mf5.data">
+                  <td>{{pago.monto}}</td>
+                  <td class="text-right">{{pago.fechapago | date: 'dd/MM/yyyy'}}</td>
+                  <td>{{pago.modopago}}</td>
+                  <td class="text-right">{{pago.fechavencimiento | date: 'dd/MM/yyyy'}}</td>
+                  <td>{{pago.completado}}</td>
+                  <td>
+                    <button type="button" class="btn-grey btn" data-bs-toggle="modal"
+                      data-bs-target="#modalVerProgreso" (click)="imprimirPago()">
+                      Ver Imagen
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="4">
+                    <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
             <table class="table table-hover">
               <thead>
                 <tr>
@@ -337,29 +508,29 @@
                 <div class="container-fluid col-10 offset-1 mb-3">
                   <div class="row mb-3">
                     <div class="col-md-5 text-init"><b>Monto: </b></div>
-                    <div class="col-md-7 text-end">$ 1000</div>
+                    <div class="col-md-7 text-end">{{pago.monto}}</div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-md-4 text-init"><b>Fecha de Pago: </b></div>
+                    <div class="col-md-8 text-end">{{pago.fechapago}}</div>
                   </div>
                   <div class="row mb-3">
                     <div class="col-md-4 text-init">
                       <b>Modo de Pago: </b>
                     </div>
-                    <div class="col-md-8 text-end">Tarjeta de Crédito Visa</div>
+                    <div class="col-md-8 text-end">{{pago.modopago}}</div>
                   </div>
                   <div class="row mb-3">
                     <div class="col-md-4 text-init">
-                      <b>Fecha de Pago: </b>
+                      <b>Fecha de Vencimiento: </b>
                     </div>
-                    <div class="col-md-8 text-end">16/06/2021</div>
+                    <div class="col-md-8 text-end">{{pago.fechavencimiento}}</div>
                   </div>
                   <div class="row mb-3">
                     <div class="col-md-4 text-init">
-                      <b>Fecha Vencimiento: </b>
+                      <b>Pago Completado: </b>
                     </div>
-                    <div class="col-md-8 text-end">19/06/2021</div>
-                  </div>
-                  <div class="row mb-3">
-                    <div class="col-md-4 text-init"><b>Completado: </b></div>
-                    <div class="col-md-8 text-end">Si</div>
+                    <div class="col-md-8 text-end">{{pago.completado}}</div>
                   </div>
                 </div>
               </div>
