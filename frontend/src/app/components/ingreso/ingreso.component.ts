@@ -21,6 +21,7 @@ import { LoginService } from 'src/app/services/login/login.service';
 })
 export class IngresoComponent implements OnInit {
 
+  alumnos:Array<Alumno>;
   accion:string="new";
   accionEj:string="new";
   accionAsist:string="new";
@@ -95,7 +96,7 @@ export class IngresoComponent implements OnInit {
   }
 
   verificarUsuario(){
-    this.alumnoService.verificarUsuario(this.usuario.usuario).subscribe(
+    this.alumnoService.verificarUsuario(sessionStorage.getItem("user")).subscribe(
       result => {
         if (result.toString() == "true"){
           this.usernamedisp = false;

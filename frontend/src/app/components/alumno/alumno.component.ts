@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Progreso } from 'src/app/models/progreso';
 import { Rutina } from 'src/app/models/rutina';
 import { Ejercicio } from 'src/app/models/ejercicio';
+import { Usuario } from 'src/app/models/usuario';
 
 @Component({
   selector: 'app-alumno',
@@ -17,6 +18,7 @@ import { Ejercicio } from 'src/app/models/ejercicio';
 })
 export class AlumnoComponent implements OnInit {
 
+  usuario: Usuario = new Usuario();
   ejercicios: Array<Ejercicio> = Array<Ejercicio>();
   ejercicio: Ejercicio = new Ejercicio();
   rutinas:Array<Rutina> = Array<Rutina>();
@@ -30,7 +32,8 @@ export class AlumnoComponent implements OnInit {
   pago: Pago = new Pago();
   pagos: Array<Pago> = new Array<Pago>();
   id:string;
-  usuarioAlumno:string=sessionStorage.getItem("user")
+  user:string=sessionStorage.getItem("user")
+  usernamedisp: boolean;
 
   constructor(private loginService: LoginService,
     private router: Router,
@@ -51,35 +54,20 @@ export class AlumnoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //console.log(this.id);
-    
-    
+    this.getAlumno();
+
   }
 
-  mostrarIdAlumno(){
-    console.log(this.usuarioAlumno+ "    sesionstorag");
-    //console.log(this.getAllAlumnos());
-    console.log(this.alumnos[0].usuario.usuario)
-    //if(this.usuarioAlumno == this.alumnoService.){
-
-    //}
-  }
-
-  getAllAlumnos(){
+  getAlumno(){
     this.alumnos = new Array<Alumno>();
-    this.alumnoService.getAllAlumnos().subscribe(
-      result=>{
-        result.forEach(element => {
-          let vAlumno = new Alumno();
-          Object.assign(vAlumno,element);
-          this.alumnos.push(vAlumno);
-          console.log(result);
-          console.log("usuarioAlumno"+vAlumno.usuario.usuario)
-        });
+    this.alumnoService.getAlumnoPorUsuario(this.user).subscribe(
+      result => {
+        Object.assign(this.alumno,result);
+        this.alumnos.push(this.alumno);
+        console.log(this.alumno)
       },
-      error=>{
-        console.log(error);
-        alert("Error al cargar los Alumnos");
+      error => {
+
       }
     )
   }
@@ -102,7 +90,78 @@ export class AlumnoComponent implements OnInit {
   }
 
   imprimirPago(){
-    
+
   }
 
+  getPagos(id: string){
+    this.pagos = new Array<Pago>();
+    this.alumnoService.getPagos(id).subscribe(
+      result => {
+        result.forEach(element => {
+          let vPago = new Pago();
+          Object.assign(vPago, element);
+          this.pagos.push(vPago);
+        });
+      },
+      error => {
+        console.log(error);
+        alert("Error al cargar los pagos");
+      }
+    )
+  }
+
+  getProgresos(id:string){
+    this.progresos = new Array<Progreso>();
+    this.alumnoService.getProgresos(id).subscribe(
+      result=>{
+        result.forEach(element => {
+          let vProgreso = new Progreso();
+          Object.assign(vProgreso,element);
+          this.progresos.push(vProgreso);
+          console.log(result);
+        });
+      },
+      error=>{
+        console.log(error);
+        alert("Error al cargar los progresos");
+      }
+    )
+  }
+
+  getRutinas(user:string){
+    this.rutinas = new Array<Rutina>();
+    this.alumnoService.getRutinas(user).subscribe(
+      result=>{
+        result.forEach(element => {
+          let vRutina = new Rutina();
+          Object.assign(vRutina,element);
+          this.rutinas.push(vRutina);
+          console.log(result);
+        });
+      },
+      error=>{
+        console.log(error);
+        alert("Error al cargar las rutinas");
+      }
+    )
+  }
+
+  getEjercicios(idRutina:string){
+    this.ejercicios = new Array<Ejercicio>();
+    this.alumnoService.getEjercicios(this.alumno._id, idRutina).subscribe(
+      result=>{
+        result.forEach(element => {
+          let vEjercicio = new Ejercicio();
+          Object.assign(vEjercicio,element);
+          this.ejercicios.push(vEjercicio);
+          console.log(result);
+          console.log(this.ejercicios);
+        });
+      },
+      error=>{
+        console.log(error);
+        alert("Error al cargar los ejercicios");
+      }
+    )
+  }
 }

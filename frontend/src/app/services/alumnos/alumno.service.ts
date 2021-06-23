@@ -259,7 +259,7 @@ export class AlumnoService {
     return this._http.post(this.urlbase+"alumno/"+idAlumno+"/rutinas", body, option);
    }
 
-   getRutinas(idAlumno:string):Observable<any>{
+   getRutinas(usuario:string):Observable<any>{
     let option = {
       headers: new HttpHeaders({
 
@@ -268,7 +268,7 @@ export class AlumnoService {
 
       })
     }
-    return this._http.get(this.urlbase+"alumno/"+idAlumno+"/rutinas", option);
+    return this._http.get(this.urlbase+"alumno/"+usuario+"/rutinas", option);
    }
 
    
@@ -379,5 +379,12 @@ export class AlumnoService {
     return this._http.post(this.urlbase + 'usuarios/nombre', body, httpOption);
    }
 
-
+   getAlumnoPorUsuario(usuario:string){
+    const httpOption = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    }
+    return this._http.post(this.urlbase + 'alumno/usuario/'+usuario, httpOption);
+   }
 }
