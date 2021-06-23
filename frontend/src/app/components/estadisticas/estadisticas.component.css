@@ -43,7 +43,11 @@
 
 @media screen and (max-width: 600px) {
   .estadisticas {
+    height: 100%;
     width: 100%;
+  }
+  .grafic {
+    min-width: 500px;
     min-height: 400px;
   }
 }
