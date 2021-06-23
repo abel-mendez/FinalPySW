@@ -366,6 +366,14 @@ alumnoCtrl.getAlumnoPorDNI = async (req, res) => {
   res.json(alumnos);
 }
 
+//Buscar alumno por Usuario
+alumnoCtrl.getAlumnoPorUsuario = async (req, res) => {
+var usuario= await Usuario.find({usuario:req.params.usuario})
+var alumno= await Alumno.find({usuario: usuario}).populate("pagos").populate("plan").populate("asistencias").populate("rutina").populate("ejercicio").populate("progreso");
+  res.json(alumno);
+} 
+
+
 //ESTADISTICAS
 alumnoCtrl.getAlumnosPorFechaInicio = async (req, res) => {
   var alumnos = await Alumno.find().where("fechainicio").equals(req.params.fechainicio).populate("pagos").populate("plan").populate("asistencias");

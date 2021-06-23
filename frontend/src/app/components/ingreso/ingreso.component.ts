@@ -96,7 +96,7 @@ export class IngresoComponent implements OnInit {
   }
 
   verificarUsuario(){
-    this.alumnoService.verificarUsuario(this.usuario.usuario).subscribe(
+    this.alumnoService.verificarUsuario(sessionStorage.getItem("user")).subscribe(
       result => {
         if (result.toString() == "true"){
           this.usernamedisp = false;

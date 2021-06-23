@@ -1,3 +1,4 @@
+const alumno = require('../models/alumno');
 const Usuario = require('../models/usuario')
 const usuarioCtrl = {}
 
@@ -31,6 +32,25 @@ usuarioCtrl.getUsuario = async (req, res) => {
 
   
   res.json(existe);
+}
+
+usuarioCtrl.getUsuarioCom = async (req, res) => {
+  var alumno = await alumno.find({usuario : req.body.alumno.usuario.usuario});
+  var usuarios = await Usuario.find({usuario : req.body.usuario});
+  if (usuarios != ""){
+    existe = true;
+    if(usuarios == alumno){
+      var msg="correcti";
+    }
+    //alumno = await Alumno.find().where("usuario").equals(req.params.usuario);
+  }else
+  {
+    existe = false;
+  }
+  
+
+  
+  res.json(msg);
 }
 
 usuarioCtrl.loginUsuario = async (req, res) => {

@@ -46,6 +46,7 @@ router.get('/:id/rutinas', alumnoCtrl.getRutinas);
 router.get('/:id/asistencias', alumnoCtrl.getAsistencias);
 router.get('/:id/pagos', alumnoCtrl.getPagos);
 router.get('/:id/progresos', alumnoCtrl.getProgresos);
+router.get('/usuario/:usuario', alumnoCtrl.getAlumnoPorUsuario);
 
 //exportamos el modulo de rutas
 module.exports = router;

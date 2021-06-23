@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Progreso } from 'src/app/models/progreso';
 import { Rutina } from 'src/app/models/rutina';
 import { Ejercicio } from 'src/app/models/ejercicio';
+import { Usuario } from 'src/app/models/usuario';
 
 @Component({
   selector: 'app-alumno',
@@ -17,6 +18,7 @@ import { Ejercicio } from 'src/app/models/ejercicio';
 })
 export class AlumnoComponent implements OnInit {
 
+  usuario: Usuario = new Usuario();
   ejercicios: Array<Ejercicio> = Array<Ejercicio>();
   ejercicio: Ejercicio = new Ejercicio();
   rutinas:Array<Rutina> = Array<Rutina>();
@@ -30,7 +32,8 @@ export class AlumnoComponent implements OnInit {
   pago: Pago = new Pago();
   pagos: Array<Pago> = new Array<Pago>();
   id:string;
-  usuarioAlumno:string=sessionStorage.getItem("user")
+  user:string=sessionStorage.getItem("user")
+  usernamedisp: boolean;
 
   constructor(private loginService: LoginService,
     private router: Router,
@@ -51,35 +54,20 @@ export class AlumnoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //console.log(this.id);
-    
-    
+    this.getAlumno()
+
   }
 
-  mostrarIdAlumno(){
-    console.log(this.usuarioAlumno+ "    sesionstorag");
-    //console.log(this.getAllAlumnos());
-    console.log(this.alumnos[0].usuario.usuario)
-    //if(this.usuarioAlumno == this.alumnoService.){
-
-    //}
-  }
-
-  getAllAlumnos(){
+  getAlumno(){
     this.alumnos = new Array<Alumno>();
-    this.alumnoService.getAllAlumnos().subscribe(
-      result=>{
-        result.forEach(element => {
-          let vAlumno = new Alumno();
-          Object.assign(vAlumno,element);
-          this.alumnos.push(vAlumno);
-          console.log(result);
-          console.log("usuarioAlumno"+vAlumno.usuario.usuario)
-        });
+    this.alumnoService.getAlumnoPorUsuario(this.user).subscribe(
+      result => {
+        Object.assign(this.alumno,result);
+        this.alumnos.push(this.alumno);
+        console.log(this.alumno)
       },
-      error=>{
-        console.log(error);
-        alert("Error al cargar los Alumnos");
+      error => {
+
       }
     )
   }
@@ -140,9 +128,9 @@ export class AlumnoComponent implements OnInit {
     )
   }
 
-  getRutinas(id:string){
+  getRutinas(user:string){
     this.rutinas = new Array<Rutina>();
-    this.alumnoService.getRutinas(id).subscribe(
+    this.alumnoService.getRutinas(user).subscribe(
       result=>{
         result.forEach(element => {
           let vRutina = new Rutina();
