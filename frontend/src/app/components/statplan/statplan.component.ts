@@ -95,7 +95,7 @@ export class StatplanComponent implements OnInit {
         this.getPlanes();
       },
       error=>{
-        alert("Error al cargar los Alumnos");
+        
       }
     )
   }
@@ -112,7 +112,7 @@ export class StatplanComponent implements OnInit {
         this.generarEstadisticas();
       },
       error=>{
-        alert("Error al cargar los planes");
+        
       }
     )
   }

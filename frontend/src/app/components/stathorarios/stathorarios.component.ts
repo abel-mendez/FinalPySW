@@ -64,7 +64,7 @@ export class StathorariosComponent implements OnInit {
         this.getLabels();
       },
       error=>{
-        alert("Error al cargar las Asistencias");
+   
       }
     )
   }

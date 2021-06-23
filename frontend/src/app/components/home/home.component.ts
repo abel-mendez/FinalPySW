@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
         });
       },
       error=>{
-        alert("Error al cargar los planes");
+       
       }
     )
   }
@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit {
         });
       },
       error=>{
-        alert("Error al cargar los Sliders");
+        
       }
     )
   }
