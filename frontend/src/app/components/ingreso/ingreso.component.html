@@ -320,7 +320,7 @@
 
             <div class="text-center">
               <button class="btn-green btn mt-2 mb-2" data-bs-toggle="modal"
-              data-bs-target="#modalAgregarRutina" (click)="nuevaRutina()">Agregar Rutina</button>  
+              data-bs-target="#modalAgregarRutina" (click)="nuevaRutina(rutinaForm)">Agregar Rutina</button>  
             </div>
             
             <!-- modal Agregar/modificar rutina -->
@@ -338,12 +338,23 @@
 
                           <form class="row g-3" #rutinaForm="ngForm">
                             <div class="col-md-6">
-                              <label for="" class="form-label">Duración</label>
-                              <input type="text" class="form-control" id="" name="rutinaDuracion" [(ngModel)]="rutina.duracion"/>
+                              <label for="" class="form-label">Duración (minutos)</label>
+                              <input type="number" class="form-control" id="" name="rutinaDuracion" 
+                              #duracionRutina="ngModel" [(ngModel)]="rutina.duracion" control-duracion required/>
+                              <div *ngIf="duracionRutina.invalid && (duracionRutina.touched || duracionRutina.dirty)" class="alert alert-danger">
+                                <div *ngIf="duracionRutina.errors.controlDeDuracion"> Debe ingresar una duración en el rango [5-99] </div>
+                                <div *ngIf="duracionRutina.errors.required"> La duración es requerida </div>
+                            </div>
                             </div>
                             <div class="col-md-6">
                               <label for="" class="form-label">Grupo muscular</label>
-                              <input type="text" class="form-control" id="" name="rutinaGrupoM" [(ngModel)]="rutina.grupomuscular"/>
+                              <input type="text" class="form-control" id="" name="rutinaGrupoM" 
+                              #grupoMuscRutina="ngModel" [(ngModel)]="rutina.grupomuscular" 
+                              minlength="3" required/>
+                              <div *ngIf="grupoMuscRutina.invalid && (grupoMuscRutina.touched || grupoMuscRutina.dirty)" class="alert alert-danger">
+                                <div *ngIf="grupoMuscRutina.errors.required"> El grupo muscular es requerido </div>
+                                <div *ngIf="grupoMuscRutina.errors.minlength"> Se requiere al menos {{grupoMuscRutina.errors.minlength.requiredLength}} caracteres </div>
+                            </div>
                             </div>
                           </form>
                         </div>
@@ -351,9 +362,11 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-green"
-                            data-bs-dismiss="modal" (click)="agregarRutina(rutinaForm)" *ngIf="accion=='new'">Guardar</button>
+                            data-bs-dismiss="modal" (click)="agregarRutina(rutinaForm)"
+                            *ngIf="accion=='new'" [disabled]="rutinaForm.invalid">Guardar</button>
                         <button type="button" class="btn btn-green"
-                            data-bs-dismiss="modal" (click)="updateRutina(rutinaForm)" *ngIf="accion=='update'">Modificar</button>
+                            data-bs-dismiss="modal" (click)="updateRutina(rutinaForm)" 
+                            *ngIf="accion=='update'" [disabled]="rutinaForm.invalid">Modificar</button>
                         <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
@@ -387,7 +400,7 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let r of mf3.data">
-                    <td>{{ r.duracion}}</td>
+                    <td>{{ r.duracion}} minutos</td>
                     <td>{{ r.grupomuscular }}</td>
                     <td>
                       <button class="btn btn-dark" data-bs-toggle="modal"
@@ -395,7 +408,7 @@
                     </td>
                     <td>
                       <button class="btn btn-green" data-bs-toggle="modal"
-                      data-bs-target="#modalAgregarRutina" (click)="cargarRutina(r._id)" >Modificar rutina</button>
+                      data-bs-target="#modalAgregarRutina" (click)="cargarRutina(r)" >Modificar rutina</button>
                       <button class="btn btn-red" data-bs-toggle="modal"
                       data-bs-target="#modalEliminarRutina" (click)="usarRutinaSeleccionada(r)">Eliminar</button></td>
                   </tr>
@@ -415,7 +428,7 @@
             <!-- modal ver ejercicios de rutina -->
             <div class="modal fade" id="modalMostrarEjercicios" tabindex="-1" aria-labelledby="modalLabelMostrarEjercicios"
             aria-hidden="true">
-            <div class="modal-dialog modal-lg">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header bg-dark text-white">
                         <h5 class="modal-title" id="modalLabelMostrarEjercicios">Ejercicios de rutina</h5>
@@ -425,7 +438,7 @@
                         
                       <div class="text-center">
                         <button class="btn-green btn mt-2 mb-2" data-bs-toggle="modal"
-                        data-bs-target="#modalAgregarEjercicio" (click)="nuevoEjercicio()">Agregar Ejercicio</button>
+                        data-bs-target="#modalAgregarEjercicio" (click)="nuevoEjercicio(ejercicioForm)">Agregar Ejercicio</button>
                       </div>
 
                       <div class="table-responsive">
@@ -500,15 +513,31 @@
                           <form class="row g-3" #ejercicioForm="ngForm">
                             <div class="col-md-12">
                               <label for="" class="form-label">Nombre</label>
-                              <input type="text" class="form-control" id="" name="ejercicioNombre" [(ngModel)]="ejercicio.nombre"/>
+                              <input type="text" class="form-control" id="" name="ejercicioNombre" 
+                              #nombreEjercicio="ngModel" [(ngModel)]="ejercicio.nombre" 
+                              minlength="3" required/>
+                              <div *ngIf="nombreEjercicio.invalid && (nombreEjercicio.touched || nombreEjercicio.dirty)" class="alert alert-danger">
+                                <div *ngIf="nombreEjercicio.errors.required"> El nombre es requerido </div>
+                                <div *ngIf="nombreEjercicio.errors.minlength"> Se requiere al menos {{nombreEjercicio.errors.minlength.requiredLength}} caracteres </div>
+                            </div>
                             </div>
                             <div class="col-md-6">
                               <label for="" class="form-label">Series</label>
-                              <input type="number" class="form-control" id="" name="ejercicioSeries" [(ngModel)]="ejercicio.series"/>
+                              <input type="number" class="form-control" id="" name="ejercicioSeries" 
+                              #seriesEjercicio="ngModel" [(ngModel)]="ejercicio.series" control-seriesrep required/>
+                              <div *ngIf="seriesEjercicio.invalid && (seriesEjercicio.touched || seriesEjercicio.dirty)" class="alert alert-danger">
+                                <div *ngIf="seriesEjercicio.errors.controlDeSeriesRep"> Debe ingresar un numero de series dentro del rango [1-30] </div>
+                                <div *ngIf="seriesEjercicio.errors.required"> El número de series es requerido </div>
+                            </div>
                             </div>
                             <div class="col-md-6">
                               <label for="" class="form-label">Repeticiones</label>
-                              <input type="number" class="form-control" id="" name="ejerciciosRep" [(ngModel)]="ejercicio.repeticiones"/>
+                              <input type="number" class="form-control" id="" name="ejerciciosRep" 
+                              #repeticionesEjercicio="ngModel" [(ngModel)]="ejercicio.repeticiones" control-seriesrep required/>
+                              <div *ngIf="repeticionesEjercicio.invalid && (repeticionesEjercicio.touched || repeticionesEjercicio.dirty)" class="alert alert-danger">
+                                <div *ngIf="repeticionesEjercicio.errors.controlDeSeriesRep"> Debe ingresar un numero de repeticiones dentro del rango [1-30] </div>
+                                <div *ngIf="repeticionesEjercicio.errors.required"> El número de repeticiones es requerido </div>
+                            </div>
                             </div>
                           </form>
                         </div>
@@ -516,9 +545,11 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-green" *ngIf="accionEj=='new'"
-                            data-bs-dismiss="modal" (click)="agregarEjercicio(ejercicioForm)" >Guardar</button>
+                            data-bs-dismiss="modal" (click)="agregarEjercicio(ejercicioForm)"
+                            [disabled]="ejercicioForm.invalid" >Guardar</button>
                         <button type="button" class="btn btn-green" *ngIf="accionEj=='update'"
-                            data-bs-dismiss="modal" (click)="updateEjercicio(ejercicioForm)">Modificar</button>
+                            data-bs-dismiss="modal" (click)="updateEjercicio(ejercicioForm)"
+                            [disabled]="ejercicioForm.invalid">Modificar</button>
                         <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
@@ -601,13 +632,13 @@
               
                 <div class="text-center">
                   <button class="btn-green btn mt-2 mb-2" data-bs-toggle="modal"
-                  data-bs-target="#modalAgregarProgreso" (click)="nuevoProgreso()">Agregar progreso</button>  
+                  data-bs-target="#modalAgregarProgreso" (click)="nuevoProgreso(progresoForm)">Agregar progreso</button>  
                 </div>
                 
                 <!-- modal Agregar/modificar progreso -->
                 <div class="modal fade" id="modalAgregarProgreso" tabindex="-1" aria-labelledby="modalLabelAgregarProgreso"
                 aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-lg  modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header bg-dark text-white">
                             <h5 class="modal-title" id="modalLabelAgregarProgreso" *ngIf="accionProg=='new'">Nuevo Progreso</h5>
@@ -620,31 +651,46 @@
                               <form class="row g-3" #progresoForm="ngForm">
                                 <div class="col-md-6">
                                   <label for="" class="form-label">Fecha</label>
-                                  <input type="date" class="form-control" id="" name="fechaProgreso" [(ngModel)]="progreso.fecha"/>
+                                  <input type="date" class="form-control" id="" name="fechaProg" 
+                                  #fechaProgreso="ngModel" [(ngModel)]="progreso.fecha" required/>
+                                  <div *ngIf="fechaProgreso.invalid && (fechaProgreso.touched || fechaProgreso.dirty)" class="alert alert-danger">
+                                    <div *ngIf="fechaProgreso.errors.required"> La fecha es requerida </div>
+                                </div>
                                 </div>
                                 <div class="col-md-6">
                                   <label for="" class="form-label">Control de peso</label>
                                   <input
-                                    type="number" class="form-control" id="" placeholder="Peso en Kg" 
-                                    name="pesoProgreso" [(ngModel)]="progreso.peso"
-                                  />
+                                    type="number" class="form-control" id="" placeholder="Peso en Kg" name="pesoProg" 
+                                    #pesoProgreso="ngModel" [(ngModel)]="progreso.peso" control-peso required/>
+                                    <div *ngIf="pesoProgreso.invalid && (pesoProgreso.touched || pesoProgreso.dirty)" class="alert alert-danger">
+                                      <div *ngIf="pesoProgreso.errors.controlDePeso"> Debe ingresar un peso en el rango [30-199] </div>
+                                      <div *ngIf="pesoProgreso.errors.required"> El peso es requerido </div>
+                                  </div>
                                 </div>        
                                 <div class="col-12">
                                   <label for="" class="form-label">Evolucion del aspecto fisico</label>
                                   <input id="" type="file" class="form-control" alife-file-to-base64 accept=".png, .jpg" (onFileChanged)="onFileChanged($event)" 
-                                  name="imagenProgreso"/>
+                                  name="imagenProgreso" required/>
                                 </div>
                                 <div class="col-12">
                                   <label for="" class="form-label">Tipo de dieta</label>
                                   <textarea class="form-control w-100" name="" id="" cols="30" rows="3" 
-                                  name="dietaProgreso" [(ngModel)]="progreso.dieta"
-                                  ></textarea>
+                                  name="dietaProg" [(ngModel)]="progreso.dieta" #dietaProgreso="ngModel" 
+                                  minlength="5" required></textarea>
+                                  <div *ngIf="dietaProgreso.invalid && (dietaProgreso.touched || dietaProgreso.dirty)" class="alert alert-danger">
+                                    <div *ngIf="dietaProgreso.errors.required"> La dieta es requerida </div>
+                                    <div *ngIf="dietaProgreso.errors.minlength"> Se requiere al menos {{dietaProgreso.errors.minlength.requiredLength}} caracteres </div>
+                                </div>
                                 </div>
                                 <div class="col-12">
                                   <label for="" class="form-label">Observaciones</label>
                                   <textarea class="form-control w-100" name="" id="" cols="30" rows="3"
-                                  name="observacionesProgreso" [(ngModel)]="progreso.observaciones"
-                                  ></textarea>
+                                  name="observacionesProg" [(ngModel)]="progreso.observaciones"
+                                  #observacionesProgreso="ngModel" minlength="5" required></textarea>
+                                  <div *ngIf="observacionesProgreso.invalid && (observacionesProgreso.touched || observacionesProgreso.dirty)" class="alert alert-danger">
+                                    <div *ngIf="observacionesProgreso.errors.required"> Las observaciones son requeridas </div>
+                                    <div *ngIf="observacionesProgreso.errors.minlength"> Se requiere al menos {{observacionesProgreso.errors.minlength.requiredLength}} caracteres </div>
+                                </div>
                                 </div>
                                
                               </form>
@@ -653,9 +699,11 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-green" *ngIf="accionProg=='new'"
-                                data-bs-dismiss="modal" (click)="agregarProgreso(progresoForm)" >Guardar</button>
+                                data-bs-dismiss="modal" (click)="agregarProgreso(progresoForm)" 
+                                [disabled]="progresoForm.invalid || imgIng==false" >Guardar</button>
                             <button type="button" class="btn btn-green" *ngIf="accionProg=='update'"
-                                data-bs-dismiss="modal" (click)="updateProgreso(progresoForm)" >Modificar</button>
+                                data-bs-dismiss="modal" (click)="updateProgreso(progresoForm)"
+                                [disabled]="progresoForm.invalid">Modificar</button>
                             <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Close</button>
                         </div>
                     </div>
@@ -693,8 +741,8 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let p of mf2.data">
-                    <td>{{ p.fecha}}</td>
-                    <td>{{ p.peso }}</td>
+                    <td>{{ p.fecha | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{ p.peso}} kg</td>
                     <td>{{ p.dieta}}</td>
                     <td>{{ p.observaciones }}</td>
                     <td><img src="{{p.foto}}" style="width: 100%;" alt=""></td>
@@ -766,7 +814,7 @@
           <div class="collapse show" id="collapseAsistencia">
             <div class="text-center">
               <button class="btn-green btn mt-2 mb-2" data-bs-toggle="modal"
-              data-bs-target="#modalAgregarAsistencia" (click)="nuevaAsistencia()">Agregar asistencia</button>  
+              data-bs-target="#modalAgregarAsistencia" (click)="nuevaAsistencia(asistenciaForm)">Agregar asistencia</button>  
             </div>
             
             <!-- modal Agregar/modificar asistencia -->
@@ -785,11 +833,19 @@
                           <form class="row g-3" #asistenciaForm="ngForm">
                             <div class="col-md-6">
                               <label for="" class="form-label">Fecha</label>
-                              <input type="date" class="form-control" id="" name="asistfecha" [(ngModel)]="asistencia.fecha"/>
+                              <input type="date" class="form-control" id="" name="asistfecha" 
+                              #fechaAsistencia="ngModel" [(ngModel)]="asistencia.fecha" required/>
+                              <div *ngIf="fechaAsistencia.invalid && (fechaAsistencia.touched || fechaAsistencia.dirty)" class="alert alert-danger">
+                                <div *ngIf="fechaAsistencia.errors.required"> La fecha es requerida </div>
+                            </div>
                             </div>
                             <div class="col-md-6">
                               <label for="" class="form-label">Hora</label>
-                              <input type="time" class="form-control" id="" name="asisthora" [(ngModel)]="asistencia.hora"/>
+                              <input type="time" class="form-control" id="" name="asisthora" 
+                              #horaAsistencia="ngModel" [(ngModel)]="asistencia.hora" required/>
+                              <div *ngIf="horaAsistencia.invalid && (horaAsistencia.touched || horaAsistencia.dirty)" class="alert alert-danger">
+                                <div *ngIf="horaAsistencia.errors.required"> La hora es requerida </div>
+                            </div>
                             </div>
                             
                           </form>
@@ -798,9 +854,11 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-green" *ngIf="accionAsist=='new'"
-                            data-bs-dismiss="modal" (click)="agregarAsistencia(asistenciaForm)">Guardar</button>
+                            data-bs-dismiss="modal" (click)="agregarAsistencia(asistenciaForm)"
+                            [disabled]="asistenciaForm.invalid">Guardar</button>
                         <button type="button" class="btn btn-green" *ngIf="accionAsist=='update'"
-                            data-bs-dismiss="modal" (click)="updateAsistencia(asistenciaForm)">Modificar</button>
+                            data-bs-dismiss="modal" (click)="updateAsistencia(asistenciaForm)"
+                            [disabled]="asistenciaForm.invalid">Modificar</button>
                         <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
@@ -854,7 +912,7 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let asist of mf.data">
-                    <td>{{ asist.fecha}}</td>
+                    <td>{{ asist.fecha | date: 'dd/MM/yyyy'}}</td>
                     <td>{{ asist.hora }}</td>
                     <td>
                       <button type="button" class="btn btn-green" data-bs-toggle="modal"

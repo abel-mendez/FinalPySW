@@ -26,6 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { AlifeFileToBase64Module } from 'alife-file-to-base64';
 import { LoginService } from './services/login/login.service';
+import { ControlPeso, ControlDuracion, ControlSeriesRep } from './directivas/validacion.directive';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,9 @@ import { LoginService } from './services/login/login.service';
     StathorariosComponent,
     TablaSliderComponent,
     AlumnoFormComponent,
+    ControlPeso,
+    ControlDuracion,
+    ControlSeriesRep
   ],
   imports: [
     BrowserModule,

@@ -2,7 +2,7 @@ import { Ejercicio } from "./ejercicio";
 
 export class Rutina {
   _id:string;
-  duracion:string;
+  duracion:number;
   grupomuscular:string;
   ejercicios:Array<Ejercicio>;
   constructor(){

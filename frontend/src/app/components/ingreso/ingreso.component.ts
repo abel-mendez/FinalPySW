@@ -39,6 +39,8 @@ export class IngresoComponent implements OnInit {
   rutinas:Array<Rutina> = new Array<Rutina>();
   ejercicios:Array<Ejercicio> = new Array<Ejercicio>();
   ejercicio:Ejercicio = new Ejercicio();
+  imgIng:boolean=false;
+  controlFecha:boolean;
 
   constructor(private activatedRoute: ActivatedRoute,
               private router:Router,
@@ -126,7 +128,8 @@ export class IngresoComponent implements OnInit {
 
   //asistencias
   
-  nuevaAsistencia(){
+  nuevaAsistencia(form:NgForm){
+    form.reset();
     this.asistencia=new Asistencia();
     this.accionAsist="new";
   }
@@ -276,7 +279,8 @@ export class IngresoComponent implements OnInit {
 
 //progresos
 
-nuevoProgreso(){
+nuevoProgreso(form:NgForm){
+  form.reset();
   this.progreso=new Progreso();
   this.accionProg="new";
 }
@@ -302,6 +306,7 @@ nuevoProgreso(){
   onFileChanged(file){
     this.progreso.foto = file[0].base64
     console.log(this.progreso);
+    this.imgIng=true;
   }
 
   agregarProgreso(form:NgForm){
@@ -383,7 +388,8 @@ nuevoProgreso(){
 
 
   //rutinas
-  nuevaRutina(){
+  nuevaRutina(form:NgForm){
+    form.reset();
     this.rutina=new Rutina();
     this.accion="new";
   }
@@ -423,14 +429,14 @@ nuevoProgreso(){
     )
   }
 
-  cargarRutina(idRutina:string){
-    this.getEjercicios(idRutina);
+  cargarRutina(rutina:Rutina){
+    this.rutina = new Rutina();
+    this.getEjercicios(rutina._id);
     this.accion="update";
-    this.alumnoService.getRutina(this.alumno._id,idRutina).subscribe(
+    this.alumnoService.getRutina(this.alumno._id,rutina._id).subscribe(
       result=>{
         Object.assign(this.rutina,result);
         console.log(this.rutina);
-
       },
       error=>{
         console.log(error);
@@ -479,7 +485,8 @@ nuevoProgreso(){
   
 
 //ejercicios
-nuevoEjercicio(){
+nuevoEjercicio(form:NgForm){
+  form.reset();
   this.ejercicio=new Ejercicio();
   this.accionEj="new";
 }
