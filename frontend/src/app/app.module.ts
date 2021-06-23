@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FacebookModule } from 'ngx-fb';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -59,7 +59,8 @@ import { ControlPeso, ControlDuracion, ControlSeriesRep } from './directivas/val
     FormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    AlifeFileToBase64Module
+    AlifeFileToBase64Module,
+    FacebookModule.forRoot(),
   ],
   providers: [LoginService],
   bootstrap: [AppComponent]
