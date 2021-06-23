@@ -6,6 +6,8 @@ const router = express.Router();
 
 // definiendo rutas
 router.post('/', usuarioCtrl.createUsuario);
+router.get('/nombres', usuarioCtrl.getUsuarios);
+router.post('/nombre', usuarioCtrl.getUsuario);
 router.post('/login', usuarioCtrl.loginUsuario);
 
 //exportacion del modulo de rutas

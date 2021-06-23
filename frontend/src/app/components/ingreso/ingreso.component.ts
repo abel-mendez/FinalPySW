@@ -21,6 +21,7 @@ import { LoginService } from 'src/app/services/login/login.service';
 })
 export class IngresoComponent implements OnInit {
 
+  alumnos:Array<Alumno>;
   accion:string="new";
   accionEj:string="new";
   accionAsist:string="new";

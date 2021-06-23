@@ -102,7 +102,78 @@ export class AlumnoComponent implements OnInit {
   }
 
   imprimirPago(){
-    
+
   }
 
+  getPagos(id: string){
+    this.pagos = new Array<Pago>();
+    this.alumnoService.getPagos(id).subscribe(
+      result => {
+        result.forEach(element => {
+          let vPago = new Pago();
+          Object.assign(vPago, element);
+          this.pagos.push(vPago);
+        });
+      },
+      error => {
+        console.log(error);
+        alert("Error al cargar los pagos");
+      }
+    )
+  }
+
+  getProgresos(id:string){
+    this.progresos = new Array<Progreso>();
+    this.alumnoService.getProgresos(id).subscribe(
+      result=>{
+        result.forEach(element => {
+          let vProgreso = new Progreso();
+          Object.assign(vProgreso,element);
+          this.progresos.push(vProgreso);
+          console.log(result);
+        });
+      },
+      error=>{
+        console.log(error);
+        alert("Error al cargar los progresos");
+      }
+    )
+  }
+
+  getRutinas(id:string){
+    this.rutinas = new Array<Rutina>();
+    this.alumnoService.getRutinas(id).subscribe(
+      result=>{
+        result.forEach(element => {
+          let vRutina = new Rutina();
+          Object.assign(vRutina,element);
+          this.rutinas.push(vRutina);
+          console.log(result);
+        });
+      },
+      error=>{
+        console.log(error);
+        alert("Error al cargar las rutinas");
+      }
+    )
+  }
+
+  getEjercicios(idRutina:string){
+    this.ejercicios = new Array<Ejercicio>();
+    this.alumnoService.getEjercicios(this.alumno._id, idRutina).subscribe(
+      result=>{
+        result.forEach(element => {
+          let vEjercicio = new Ejercicio();
+          Object.assign(vEjercicio,element);
+          this.ejercicios.push(vEjercicio);
+          console.log(result);
+          console.log(this.ejercicios);
+        });
+      },
+      error=>{
+        console.log(error);
+        alert("Error al cargar los ejercicios");
+      }
+    )
+  }
 }
