@@ -41,6 +41,7 @@ export class IngresoComponent implements OnInit {
   ejercicio:Ejercicio = new Ejercicio();
   imgIng:boolean=false;
   controlFecha:boolean;
+  usernamedisp: boolean;
 
   constructor(private activatedRoute: ActivatedRoute,
               private router:Router,
@@ -89,6 +90,23 @@ export class IngresoComponent implements OnInit {
       },
       error=>{
         this.toastr.error("Error al cargar los planes", "Operación fallida");
+      }
+    )
+  }
+
+  verificarUsuario(){
+    this.alumnoService.verificarUsuario(this.usuario.usuario).subscribe(
+      result => {
+        if (result.toString() == "true"){
+          this.usernamedisp = false;
+        }else{
+          if (result.toString() == "false"){
+            this.usernamedisp = true;
+          }
+        }
+      },
+      error => {
+
       }
     )
   }
@@ -214,17 +232,23 @@ export class IngresoComponent implements OnInit {
   //Usuario
 
   agregarUsuario(form: NgForm){
-    this.alumnoService.addUsuario(this.alumno._id, this.usuario).subscribe(
-      result => {
-        if (result.status == "1"){
-          this.toastr.success("El usuario se agregó correctamente", "Operación exitosa");
-          form.reset();
+    this.verificarUsuario();
+    if (this. usernamedisp){
+      this.alumnoService.addUsuario(this.alumno._id, this.usuario).subscribe(
+        result => {
+          if (result.status == "1"){
+            this.toastr.success("El usuario se agregó correctamente", "Operación exitosa");
+            form.reset();
+          }
+        },
+        error => {
+          this.toastr.error("Error al agregar el usuario", "Operación fallida");
         }
-      },
-      error => {
-        this.toastr.error("Error al agregar el usuario", "Operación fallida");
-      }
-    )
+      )
+    }else{
+      this.toastr.error("El nombre de usuario ya existe", "Operación fallida");
+    }
+    
   }
 
   //Pagos
