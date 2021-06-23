@@ -18,6 +18,21 @@ usuarioCtrl.createUsuario = async (req, res) => {
   }
 }
 
+//Pregunta si ya existe el nombre de usuario
+usuarioCtrl.getUsuario = async (req, res) => {
+  var usuarios = await Usuario.find({usuario : req.body.usuario});
+  if (usuarios != ""){
+    existe = true;
+  }else
+  {
+    existe = false;
+  }
+  
+
+  
+  res.json(existe);
+}
+
 usuarioCtrl.loginUsuario = async (req, res) => {
   //en req.body se espera que vengan las credenciales de login
   //defino los criterios de busqueda en base al username y password recibidos

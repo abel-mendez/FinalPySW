@@ -47,28 +47,24 @@ export class AlumnoFormComponent implements OnInit {
           let vPlan = new Plan();
           Object.assign(vPlan,element);
           this.planes.push(vPlan);
-          console.log(result);
         });
       },
       error=>{
-        console.log(error);
-        alert("Error al cargar los planes");
+        this.toastr.error("Error al cargar los planes" ,"Operación fallida");
       }
     )
   }
 
   agregarAlumno(){
-    console.log(this.alumno);
     this.alumnoService.addAlumno(this.alumno).subscribe(
       result=>{
         if(result.status=="1"){
           this.toastr.success("El alumno se agregó correctamente", "Operación exitosa");
           this.router.navigate(["alumnos"]);
         }
-        console.log(result);
       },
       error=>{
-        console.log(error);
+        this.toastr.error("Error al agregar el alumno", "Operación fallida");
       }
 
     )

@@ -23,11 +23,9 @@ export class StatasistenciasComponent implements OnInit {
     }
   };
   public barChartLabels: Label[] = ['Dia de la Semana'];
- //public barChartLabels: Label[] = ['Plan Basico', 'Plan Full','Pase Libre'];
   //Tipo de grafico que queremos: ejem: line, bar, radar
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
-  //public barChartPlugins = [pluginDataLabels];
   //Datos que vamos a cargar en las graficas 
   public barChartData: ChartDataSets[];
   public chartColors;
@@ -55,7 +53,6 @@ export class StatasistenciasComponent implements OnInit {
         this.obtenerDatos();
       },
       error=>{
-        alert("Error al cargar las Asistencias");
       }
     )
   }

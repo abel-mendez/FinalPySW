@@ -6,7 +6,8 @@ import { Slider } from 'src/app/models/slider';
 import { PlanService } from 'src/app/services/home/plan.service';
 import { SliderService } from 'src/app/services/home/slider.service';
 import { LoginService } from 'src/app/services/login/login.service';
-
+import { FacebookService, InitParams, LoginResponse } from 'ngx-fb';
+import { ApiMethod } from 'ngx-fb/dist/esm/providers/facebook';
 @Component({
   selector: 'app-tabla-slider',
   templateUrl: './tabla-slider.component.html',
@@ -23,8 +24,9 @@ export class TablaSliderComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private planService:PlanService,
-    private loginService:LoginService){
-
+    private loginService:LoginService,
+    private fb: FacebookService){
+    this.iniciarFb();
     this.sliders = new Array<Slider>();
     this.cargarSliders();
     this.planes = new Array<Plan>();
@@ -43,6 +45,23 @@ export class TablaSliderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+  postFb(){
+    var apiMethod: ApiMethod = "post";
+    this.fb.api('/108446041487303/feed', apiMethod,
+    {
+    "message":this.slider.descripcion,
+    "access_token":"EAAcRRBuZBYRQBAP9oEgSr69tsTavQtYM5GK5X7YqUSZAF2o00X9hJpW9GnhG1C4ZCQeIhfl4m6v6KAhCbsIS8DvHQgQ1pbNho2X7zC1sEmRtSQlwJMYtPLjht3lEC53v02ALg9eDTn2dF6J6uBZBx7wAchP7LbZC0Bsk4Ya3RrbSKY57fmIQp7tGysZC7OYlv6nOliZBaVCBiDDoMK7VIcYfyBQlbHZCw8cZD"
+    });
+  }
+  iniciarFb(){
+    let initParams: InitParams = {
+    appId: '1989309057884436',
+    autoLogAppEvents : true,
+    xfbml : true,
+    version : 'v7.0'
+    };
+    this.fb.init(initParams);
   }
   seleccionar(slider){
    
@@ -69,6 +88,7 @@ export class TablaSliderComponent implements OnInit {
         this.toastr.success("El Slider se agregó correctamente", "Operación exitosa");
         this.sliders = new Array<Slider>();
         this.cargarSliders();
+        this.postFb();
         this.slider=new Slider();
       },
       error => {

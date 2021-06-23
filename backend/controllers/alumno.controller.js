@@ -112,8 +112,36 @@ alumnoCtrl.addProgreso = async (req, res) => {
   }
 }
 
+//Obtener progreso
+alumnoCtrl.getProgreso = async (req, res) => {
+  const alumno = await Alumno.findById(req.params.id);
+  let progreso = await alumno.progresos.find(p => p._id == req.params.idprogreso);
+  res.json(progreso);
+}
+
+//Modificación de progreso
+alumnoCtrl.editProgreso = async (req, res) => {
+  const alumno = await Alumno.findById(req.params.id);
+  let progreso = await alumno.progresos.find(p => p._id == req.params.idprogreso);
+  progreso.set(req.body);
+  const index = alumno.progresos.findIndex(element => element._id == req.params.idprogreso );
+  alumno.progresos.set(index, progreso);
+  try {
+    await Alumno.updateOne({ _id: req.params.id }, alumno);
+    res.json({
+      'status': '1',
+      'msg': 'Progreso ACTUALIZADO'
+    })
+  } catch (error) {
+    res.json({
+      'status': '0',
+      'msg': 'Error actualizando el progreso'
+    })
+  }
+}
+
 //Baja de progreso
-alumnoCtrl.deleteProgreso = async () => {
+alumnoCtrl.deleteProgreso = async (req, res) => {
   const alumno = await Alumno.findById(req.params.id);
   const idprogreso = req.params.idprogreso;
   alumno.progresos.pull(idprogreso);

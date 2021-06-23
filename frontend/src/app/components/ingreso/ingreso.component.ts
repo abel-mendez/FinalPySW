@@ -25,6 +25,7 @@ export class IngresoComponent implements OnInit {
   accion:string="new";
   accionEj:string="new";
   accionAsist:string="new";
+  accionProg:string="new";
   progreso: Progreso = new Progreso();
   progresos:Array<Progreso> = new Array<Progreso>();
   planes: Array<Plan> = new Array<Plan>();
@@ -39,6 +40,8 @@ export class IngresoComponent implements OnInit {
   rutinas:Array<Rutina> = new Array<Rutina>();
   ejercicios:Array<Ejercicio> = new Array<Ejercicio>();
   ejercicio:Ejercicio = new Ejercicio();
+  imgIng:boolean=false;
+  controlFecha:boolean;
 
   constructor(private activatedRoute: ActivatedRoute,
               private router:Router,
@@ -86,8 +89,7 @@ export class IngresoComponent implements OnInit {
         });
       },
       error=>{
-        console.log(error);
-        alert("Error al cargar los planes");
+        this.toastr.error("Error al cargar los planes", "Operación fallida");
       }
     )
   }
@@ -96,10 +98,10 @@ export class IngresoComponent implements OnInit {
     this.alumnoService.getAlumno(id).subscribe(
       result=>{
         Object.assign(this.alumno,result);
-        this.alumno.plan = this.planes.find(p=>(p._id == this.alumno.plan._id))
+        //this.alumno.plan = this.planes.find(p=>(p._id == this.alumno.plan._id))
       },
       error=>{
-        console.log(error);
+        this.toastr.error("Error al cargar el alumno", "Operación fallida");
       }
     )
   }
@@ -113,7 +115,6 @@ export class IngresoComponent implements OnInit {
         }
       },
       error => {
-        console.log(error);
         this.toastr.error("Error al modificar el alumno", "Operación fallida");
       }
     )
@@ -126,13 +127,13 @@ export class IngresoComponent implements OnInit {
 
   //asistencias
   
-  nuevaAsistencia(){
+  nuevaAsistencia(form:NgForm){
+    form.reset();
     this.asistencia=new Asistencia();
     this.accionAsist="new";
   }
 
   agregarAsistencia(form: NgForm){
-    console.log(this.alumno._id);
     this.alumnoService.addAsistencia(this.alumno._id,this.asistencia).subscribe(
       result=>{
         if(result.status=="1"){
@@ -140,10 +141,9 @@ export class IngresoComponent implements OnInit {
           this.getAsistencias(this.alumno._id);
           form.reset();
         }
-        console.log(result);
       },
       error=>{
-        console.log(error);
+        this.toastr.error("Error al agregar la asistencia", "Operación fallida");
       }
 
     )
@@ -160,7 +160,6 @@ export class IngresoComponent implements OnInit {
         }
       },
       error=>{
-        console.log(error);
         this.toastr.error("Error al modificar la asistencia", "Operación fallida");
       }
     )
@@ -171,10 +170,9 @@ export class IngresoComponent implements OnInit {
     this.alumnoService.getAsistencia(idAsistencia).subscribe(
       result=>{
         Object.assign(this.asistencia,result);
-        console.log(this.asistencia);
       },
       error=>{
-        console.log(error);
+        this.toastr.error("Error al cargar la asistencia", "Operación fallida");
       }
     )
   }
@@ -188,13 +186,10 @@ export class IngresoComponent implements OnInit {
           let vAsistencia = new Asistencia();
           Object.assign(vAsistencia,element);
           this.asistencias.push(vAsistencia);
-          console.log(result);
-          console.log(this.asistencias);
         });
       },
       error=>{
-        console.log(error);
-        alert("Error al cargar las asistencias");
+        this.toastr.error("Error al cargar las asistencias", "Operación fallida");
       }
     )
   }
@@ -212,7 +207,6 @@ export class IngresoComponent implements OnInit {
         }
       },
       error=>{
-        console.log(error);
         this.toastr.error("Error al eliminar la asistencia","Operación fallida");
       }
     )
@@ -229,7 +223,7 @@ export class IngresoComponent implements OnInit {
         }
       },
       error => {
-        console.log(error);
+        this.toastr.error("Error al agregar el usuario", "Operación fallida");
       }
     )
   }
@@ -245,10 +239,9 @@ export class IngresoComponent implements OnInit {
           form.reset();  //no deberia ir form reset ni en agregar pago ni en agregar 
           //alumno, explicar bug
         }
-        console.log(result);
       },
       error => {
-        console.log(error);
+        this.toastr.error("Error al agregar el pago", "Operación fallida");
       }
       
 
@@ -268,15 +261,18 @@ export class IngresoComponent implements OnInit {
         });
       },
       error => {
-        console.log(error);
-        alert("Error al cargar los pagos");
+        this.toastr.error("Error al cargar los pagos", "Operación fallida");
       }
     )
   }
 
+//progresos
 
-
-  
+nuevoProgreso(form:NgForm){
+  form.reset();
+  this.progreso=new Progreso();
+  this.accionProg="new";
+}
 
   getProgresos(id:string){
     this.progresos = new Array<Progreso>();
@@ -286,19 +282,17 @@ export class IngresoComponent implements OnInit {
           let vProgreso = new Progreso();
           Object.assign(vProgreso,element);
           this.progresos.push(vProgreso);
-          console.log(result);
         });
       },
       error=>{
-        console.log(error);
-        alert("Error al cargar los progresos");
+        this.toastr.error("Error al cargar los progresos", "Operación fallida");
       }
     )
   }
 
   onFileChanged(file){
     this.progreso.foto = file[0].base64
-    console.log(this.progreso);
+    this.imgIng=true;
   }
 
   agregarProgreso(form:NgForm){
@@ -312,7 +306,6 @@ export class IngresoComponent implements OnInit {
           }
         },
         error=>{
-          console.log(error);
           this.toastr.error("Error al cargar el progreso", "Operación fallida");
         }
       )
@@ -324,8 +317,60 @@ export class IngresoComponent implements OnInit {
   }
 
 
+  cargarProgreso(idProgreso:string){
+
+    this.getEjercicios(idProgreso);
+    this.accionProg="update";
+    this.alumnoService.getProgreso(this.alumno._id,idProgreso).subscribe(
+      result=>{
+        Object.assign(this.progreso,result);
+
+      },
+      error=>{
+        this.toastr.error("Error al agregar el progreso", "Operación fallida");
+      }
+    )
+  }
+
+
+  updateProgreso(form:NgForm){
+    this.alumnoService.updateProgreso(this.alumno._id, this.progreso).subscribe(
+      result=>{
+        if(result.status=="1"){
+          this.toastr.success("El progreso se modificó correctamente", "Operación exitosa");
+          this.getProgresos(this.alumno._id);
+          form.reset();
+        }
+      },
+      error=>{
+        this.toastr.error("Error al modificar el progreso", "Operación fallida");
+      }
+    )
+  }
+
+  usarProgresoSeleccionado(progreso:Progreso){
+    this.progreso=progreso;
+  }
+
+  eliminarProgreso(){
+    this.alumnoService.deleteProgreso(this.alumno._id, this.progreso._id).subscribe(
+      result=>{
+        if(result.status=="1"){
+          this.toastr.info("Progreso eliminado correctamente","Operación exitosa");
+          this.getProgresos(this.alumno._id);
+        }
+      },
+      error=>{
+        this.toastr.error("Error al eliminar el progreso","Operación fallida");
+      }
+    )
+
+  }
+
+
   //rutinas
-  nuevaRutina(){
+  nuevaRutina(form:NgForm){
+    form.reset();
     this.rutina=new Rutina();
     this.accion="new";
   }
@@ -340,7 +385,6 @@ export class IngresoComponent implements OnInit {
           }
         },
         error=>{
-          console.log(error);
           this.toastr.error("Error al agregar la rutina", "Operación fallida");
         }
       )
@@ -355,33 +399,30 @@ export class IngresoComponent implements OnInit {
           let vRutina = new Rutina();
           Object.assign(vRutina,element);
           this.rutinas.push(vRutina);
-          console.log(result);
         });
       },
       error=>{
         console.log(error);
-        alert("Error al cargar las rutinas");
+        this.toastr.error("Error al cargar las rutinas", "Operación fallida");
       }
     )
   }
 
-  cargarRutina(idRutina:string){
-    this.getEjercicios(idRutina);
+  cargarRutina(rutina:Rutina){
+    this.rutina = new Rutina();
+    this.getEjercicios(rutina._id);
     this.accion="update";
-    this.alumnoService.getRutina(this.alumno._id,idRutina).subscribe(
+    this.alumnoService.getRutina(this.alumno._id,rutina._id).subscribe(
       result=>{
         Object.assign(this.rutina,result);
-        console.log(this.rutina);
-
       },
       error=>{
-        console.log(error);
+        this.toastr.error("Error al cargar la rutina", "Operación fallida");
       }
     )
   }
 
   updateRutina(form:NgForm){
-    console.log(this.rutina);
     this.alumnoService.updateRutina(this.alumno._id, this.rutina).subscribe(
       result=>{
         if(result.status=="1"){
@@ -391,7 +432,6 @@ export class IngresoComponent implements OnInit {
         }
       },
       error=>{
-        console.log(error);
         this.toastr.error("Error al modificar la rutina", "Operación fallida");
       }
     )
@@ -411,7 +451,6 @@ export class IngresoComponent implements OnInit {
         }
       },
       error=>{
-        console.log(error);
         this.toastr.error("Error al eliminar la rutina","Operación fallida");
       }
     )
@@ -421,7 +460,8 @@ export class IngresoComponent implements OnInit {
   
 
 //ejercicios
-nuevoEjercicio(){
+nuevoEjercicio(form:NgForm){
+  form.reset();
   this.ejercicio=new Ejercicio();
   this.accionEj="new";
 }
@@ -438,19 +478,15 @@ usarEjercicioSeleccionado(ejercicio:Ejercicio){
           let vEjercicio = new Ejercicio();
           Object.assign(vEjercicio,element);
           this.ejercicios.push(vEjercicio);
-          console.log(result);
-          console.log(this.ejercicios);
         });
       },
       error=>{
-        console.log(error);
-        alert("Error al cargar los ejercicios");
+        this.toastr.error("Error al cargar los ejercicios","Operación fallida");
       }
     )
   }
 
   agregarEjercicio(form:NgForm){
-    console.log(this.rutina);
     this.alumnoService.addEjercicio(this.alumno._id,this.rutina._id,this.ejercicio).subscribe(
       result=>{
         if(result.status=="1"){
@@ -460,7 +496,6 @@ usarEjercicioSeleccionado(ejercicio:Ejercicio){
         }
       },
       error=>{
-        console.log(error);
         this.toastr.error("Error al agregar el ejercicio", "Operación fallida");
       }
     )
@@ -474,13 +509,12 @@ usarEjercicioSeleccionado(ejercicio:Ejercicio){
         console.log(this.ejercicio);
       },
       error=>{
-        console.log(error);
+        this.toastr.error("Error al cargar el ejercicio","Operación fallida");
       }
     )
   }
 
   updateEjercicio(form:NgForm){
-    console.log(this.rutina);
     this.alumnoService.updateEjercicio(this.alumno._id, this.rutina._id, this.ejercicio).subscribe(
       result=>{
         if(result.status=="1"){
@@ -490,14 +524,12 @@ usarEjercicioSeleccionado(ejercicio:Ejercicio){
         }
       },
       error=>{
-        console.log(error);
         this.toastr.error("Error al modificar el ejercicio", "Operación fallida");
       }
     )
   }
 
   eliminarEjercicio(){
-    console.log(this.rutina, this.ejercicio);
     this.alumnoService.deleteEjercicio(this.alumno._id, this.rutina._id, this.ejercicio._id).subscribe(
       result=>{
         if(result.status=="1"){
@@ -506,7 +538,6 @@ usarEjercicioSeleccionado(ejercicio:Ejercicio){
         }
       },
       error=>{
-        console.log(error);
         this.toastr.error("Error al eliminar el ejercicio","Operación fallida");
       }
     )

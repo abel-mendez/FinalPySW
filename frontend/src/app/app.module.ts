@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FacebookModule } from 'ngx-fb';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -26,6 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { AlifeFileToBase64Module } from 'alife-file-to-base64';
 import { LoginService } from './services/login/login.service';
+import { ControlPeso, ControlDuracion, ControlSeriesRep } from './directivas/validacion.directive';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,9 @@ import { LoginService } from './services/login/login.service';
     StathorariosComponent,
     TablaSliderComponent,
     AlumnoFormComponent,
+    ControlPeso,
+    ControlDuracion,
+    ControlSeriesRep
   ],
   imports: [
     BrowserModule,
@@ -55,7 +59,8 @@ import { LoginService } from './services/login/login.service';
     FormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    AlifeFileToBase64Module
+    AlifeFileToBase64Module,
+    FacebookModule.forRoot(),
   ],
   providers: [LoginService],
   bootstrap: [AppComponent]

@@ -32,6 +32,9 @@ router.delete('/:id/rutinas/:idrutina/ejercicios/:idejercicio', alumnoCtrl.delet
 router.post('/:id/pagos', alumnoCtrl.addPago);
 
 router.post('/:id/progresos', alumnoCtrl.addProgreso);
+router.get('/:id/progresos/:idprogreso', alumnoCtrl.getProgreso);
+router.delete('/:id/progresos/:idprogreso', alumnoCtrl.deleteProgreso);
+router.put('/:id/progresos/:idprogreso', alumnoCtrl.editProgreso);
 
 //ESTADISTICAS
 router.get('/dni/:dni', alumnoCtrl.getAlumnoPorDNI);
