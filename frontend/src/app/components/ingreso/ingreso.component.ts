@@ -74,7 +74,7 @@ export class IngresoComponent implements OnInit {
           this.pago.completado = true;
           this.usuario.activo = true;
           this.pago.modopago = "Efectivo";
-          this.usuario.perfil = "Alumno";
+          this.usuario.perfil = "alumno";
     });
   }
 
@@ -233,12 +233,12 @@ export class IngresoComponent implements OnInit {
 
   agregarUsuario(form: NgForm){
     this.verificarUsuario();
-    if (this. usernamedisp){
+    if (this.usernamedisp){
       this.alumnoService.addUsuario(this.alumno._id, this.usuario).subscribe(
         result => {
           if (result.status == "1"){
             this.toastr.success("El usuario se agregó correctamente", "Operación exitosa");
-            form.reset();
+            //form.reset();
           }
         },
         error => {
