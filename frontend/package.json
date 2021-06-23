@@ -26,6 +26,7 @@
     "chartjs-plugin-annotation": "^1.0.2",
     "ng2-charts": "^2.2.3",
     "ngx-color-picker": "^11.0.0",
+    "ngx-fb": "^1.0.1",
     "ngx-toastr": "^14.0.0",
     "print-js": "^1.6.0",
     "rxjs": "~6.6.0",
