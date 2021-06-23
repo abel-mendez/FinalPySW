@@ -30,7 +30,11 @@
   color: rgb(63, 63, 63) !important;
   border: none !important;
 }
-
+.btn-grey:hover {
+  background-color: white;
+  color: red;
+  border: 1px solid red;
+}
 .btn-grey {
   background-color: rgb(63, 63, 63);
   color: white;
