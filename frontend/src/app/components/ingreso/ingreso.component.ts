@@ -24,6 +24,7 @@ export class IngresoComponent implements OnInit {
   accion:string="new";
   accionEj:string="new";
   accionAsist:string="new";
+  accionProg:string="new";
   progreso: Progreso = new Progreso();
   progresos:Array<Progreso> = new Array<Progreso>();
   planes: Array<Plan> = new Array<Plan>();
@@ -273,9 +274,12 @@ export class IngresoComponent implements OnInit {
     )
   }
 
+//progresos
 
-
-  
+nuevoProgreso(){
+  this.progreso=new Progreso();
+  this.accionProg="new";
+}
 
   getProgresos(id:string){
     this.progresos = new Array<Progreso>();
@@ -320,6 +324,61 @@ export class IngresoComponent implements OnInit {
       this.toastr.error("Error al cargar el progreso, debe cargar una imagen", "Operación fallida");
     }
     
+  }
+
+
+  cargarProgreso(idProgreso:string){
+
+    this.getEjercicios(idProgreso);
+    this.accionProg="update";
+    this.alumnoService.getProgreso(this.alumno._id,idProgreso).subscribe(
+      result=>{
+        Object.assign(this.progreso,result);
+        console.log(this.progreso);
+
+      },
+      error=>{
+        console.log(error);
+      }
+    )
+  }
+
+
+  updateProgreso(form:NgForm){
+    console.log(this.progreso);
+    this.alumnoService.updateProgreso(this.alumno._id, this.progreso).subscribe(
+      result=>{
+        if(result.status=="1"){
+          this.toastr.success("El progreso se modificó correctamente", "Operación exitosa");
+          this.getProgresos(this.alumno._id);
+          form.reset();
+        }
+      },
+      error=>{
+        console.log(error);
+        this.toastr.error("Error al modificar el progreso", "Operación fallida");
+      }
+    )
+  }
+
+  usarProgresoSeleccionado(progreso:Progreso){
+    this.progreso=progreso;
+  }
+
+  eliminarProgreso(){
+    this.alumnoService.deleteProgreso(this.alumno._id, this.progreso._id).subscribe(
+      result=>{
+        if(result.status=="1"){
+          this.toastr.info("Progreso eliminado correctamente","Operación exitosa");
+          this.getProgresos(this.alumno._id);
+        }
+      },
+      error=>{
+        console.log(error);
+        this.toastr.error("Error al eliminar el progreso","Operación fallida");
+      }
+    )
+
   }
 
 

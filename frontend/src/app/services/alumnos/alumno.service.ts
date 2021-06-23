@@ -209,6 +209,42 @@ export class AlumnoService {
     return this._http.get(this.urlbase+"alumno/"+idAlumno+"/progresos", option);
    }
 
+   getProgreso(idAlumno:string, idProgreso:string):Observable<any>{
+    let option = {
+      headers: new HttpHeaders({
+      }),
+      params: new HttpParams({
+
+      })
+    }
+    return this._http.get(this.urlbase+"alumno/"+idAlumno+"/progresos/"+idProgreso, option); 
+   }
+
+   updateProgreso(idAlumno:string, progreso:Progreso):Observable<any>{
+    let option = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      }),
+      params: new HttpParams({
+
+      })
+    }
+    let body = JSON.stringify(progreso);
+    return this._http.put(this.urlbase+"alumno/"+idAlumno+"/progresos/"+progreso._id, body, option);
+  }
+
+  deleteProgreso(idAlumno:string, idProgreso:string):Observable<any>{
+    let option = {
+      headers: new HttpHeaders({
+      }),
+      params: new HttpParams({
+
+      })
+    }
+    return this._http.delete(this.urlbase+"alumno/"+idAlumno+"/progresos/"+idProgreso, option);
+   }
+
+
    //rutinas
    addRutina(idAlumno:string, rutina:Rutina):Observable<any>{
     let option = {

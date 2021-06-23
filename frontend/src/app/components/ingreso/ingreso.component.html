@@ -601,16 +601,17 @@
               
                 <div class="text-center">
                   <button class="btn-green btn mt-2 mb-2" data-bs-toggle="modal"
-                  data-bs-target="#modalAgregarProgreso">Agregar progreso</button>  
+                  data-bs-target="#modalAgregarProgreso" (click)="nuevoProgreso()">Agregar progreso</button>  
                 </div>
                 
-                <!-- modal Agregar progreso -->
+                <!-- modal Agregar/modificar progreso -->
                 <div class="modal fade" id="modalAgregarProgreso" tabindex="-1" aria-labelledby="modalLabelAgregarProgreso"
                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header bg-dark text-white">
-                            <h5 class="modal-title" id="modalLabelAgregarProgreso">Nuevo Progreso</h5>
+                            <h5 class="modal-title" id="modalLabelAgregarProgreso" *ngIf="accionProg=='new'">Nuevo Progreso</h5>
+                            <h5 class="modal-title" id="modalLabelAgregarProgreso" *ngIf="accionProg=='update'">Modificar Progreso</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -651,15 +652,17 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-green"
-                                data-bs-dismiss="modal" (click)="agregarProgreso(progresoForm)">Guardar</button>
+                            <button type="button" class="btn btn-green" *ngIf="accionProg=='new'"
+                                data-bs-dismiss="modal" (click)="agregarProgreso(progresoForm)" >Guardar</button>
+                            <button type="button" class="btn btn-green" *ngIf="accionProg=='update'"
+                                data-bs-dismiss="modal" (click)="updateProgreso(progresoForm)" >Modificar</button>
                             <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
                 </div>
   
-            <div class="card-body table-responsive-sm col-md-10 offset-md-1">
+            <div class="card-body table-responsive-sm col-md-12">
               <table
                 class="table table-striped"
                 [mfData]="progresos"
@@ -677,11 +680,14 @@
                     <th style="width: 20%">
                       <mfDefaultSorter by="dieta">Dieta</mfDefaultSorter>
                     </th>
-                    <th style="width: 30%">
+                    <th style="width: 20%">
                       <mfDefaultSorter by="observaciones">Observaciones</mfDefaultSorter>
                     </th>
-                    <th style="width: 30%">
+                    <th style="width: 20%">
                       <mfDefaultSorter by="foto">Foto</mfDefaultSorter>
+                    </th>
+                    <th style="width: 20%">
+                      <mfDefaultSorter by="acciones">Acciones</mfDefaultSorter>
                     </th>
                   </tr>
                 </thead>
@@ -692,6 +698,12 @@
                     <td>{{ p.dieta}}</td>
                     <td>{{ p.observaciones }}</td>
                     <td><img src="{{p.foto}}" style="width: 100%;" alt=""></td>
+                    <td>
+                      <button class="btn btn-green" data-bs-toggle="modal"
+                      data-bs-target="#modalAgregarProgreso" (click)="cargarProgreso(p._id)" >Modificar</button>
+                      <button class="btn btn-red" data-bs-toggle="modal"
+                      data-bs-target="#modalEliminarProgreso" (click)="usarProgresoSeleccionado(p)">Eliminar</button>
+                    </td>
                   </tr>
                 </tbody>
                 <tfoot>
@@ -704,6 +716,31 @@
                   </tr>
                 </tfoot>
               </table>
+
+              <!-- modal eliminar progreso-->
+             <div class="modal fade" id="modalEliminarProgreso" tabindex="-1" aria-labelledby="modalLabelEliminarProgreso"
+             aria-hidden="true">
+             <div class="modal-dialog">
+                 <div class="modal-content">
+                     <div class="modal-header bg-dark text-white">
+                         <h5 class="modal-title" id="modalLabelEliminarProgreso">Eliminar Progreso</h5>
+                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                     </div>
+                     <div class="modal-body">
+                         <div class="container-fluid col-10 offset-1 mb-3">
+                             <div class="col-12">
+                              <h6>¿Está seguro/a de que desea eliminar el progreso?</h6>
+                            </div>
+                         </div>
+                     </div>
+                     <div class="modal-footer">
+                         <button type="button" class="btn btn-red"
+                             data-bs-dismiss="modal" (click)="eliminarProgreso()">Eliminar</button>
+                         <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Close</button>
+                     </div>
+                 </div>
+             </div>
+             </div>
             </div>
           </div>
         </section>
