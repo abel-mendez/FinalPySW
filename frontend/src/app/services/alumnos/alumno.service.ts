@@ -369,5 +369,15 @@ export class AlumnoService {
     return this._http.delete(this.urlbase+"alumno/"+idAlumno+"/rutinas/"+idRutina+"/ejercicios/"+idEjercicio, option);
    }
 
+   verificarUsuario(usuario: string){
+    const httpOption = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    }
+    let body = { username: usuario};
+    return this._http.post(this.urlbase + 'usuarios/nombre', body, httpOption);
+   }
+
 
 }
