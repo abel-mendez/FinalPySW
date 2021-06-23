@@ -22,7 +22,7 @@ usuarioCtrl.createUsuario = async (req, res) => {
 //Pregunta si ya existe el nombre de usuario
 usuarioCtrl.getUsuario = async (req, res) => {
   var usuarios = await Usuario.find({usuario : req.body.usuario});
-  if (usuarios != ""){
+  if (usuarios != ""){ 
     existe = true;
   }else
   {

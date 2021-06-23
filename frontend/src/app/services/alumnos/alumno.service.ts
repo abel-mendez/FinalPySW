@@ -375,8 +375,8 @@ export class AlumnoService {
         'Content-Type': 'application/json'
       })
     }
-    let body = { username: usuario};
-    return this._http.post(this.urlbase + 'usuarios/nombre', body, httpOption);
+    let body = { usuario: usuario};
+    return this._http.post(this.urlbase + "usuarios/nombre", body, httpOption);
    }
 
    getAlumnoPorUsuario(usuario:string){

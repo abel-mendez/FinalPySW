@@ -42,7 +42,7 @@ export class IngresoComponent implements OnInit {
   ejercicio:Ejercicio = new Ejercicio();
   imgIng:boolean=false;
   controlFecha:boolean;
-  usernamedisp: boolean;
+  //usernamedisp: boolean; 
 
   constructor(private activatedRoute: ActivatedRoute,
               private router:Router,
@@ -95,21 +95,43 @@ export class IngresoComponent implements OnInit {
     )
   }
 
-  verificarUsuario(){
-    this.alumnoService.verificarUsuario(sessionStorage.getItem("user")).subscribe(
+  agregarUsuario (form: NgForm){
+    this.alumnoService.verificarUsuario(this.usuario.usuario).subscribe(
       result => {
-        if (result.toString() == "true"){
-          this.usernamedisp = false;
+        if (result == true){
+          //this.usernamedisp = false;
+          console.log(result);
+          this.toastr.error("El nombre de usuario ya existe", "Operación fallida");
+          //console.log(this.usuario.usuario);
+          //console.log(this.usernamedisp);
         }else{
-          if (result.toString() == "false"){
-            this.usernamedisp = true;
-          }
+            //this.usernamedisp = true;
+            console.log(result);
+            //if (this.usernamedisp == true){
+              this.alumnoService.addUsuario(this.alumno._id, this.usuario).subscribe(
+                result => {
+                  if (result.status == "1"){
+                    this.toastr.success("El usuario se agregó correctamente", "Operación exitosa");
+                    //form.reset();
+                  }
+                },
+                error => {
+                  this.toastr.error("Error al agregar el usuario", "Operación fallida");
+                }
+              )
+            //}else{
+              //this.toastr.error("El nombre de usuario ya existe", "Operación fallida");
+            //}
+            //console.log(this.usuario.usuario);
+            //console.log(this.usernamedisp);
+          
         }
       },
       error => {
 
       }
     )
+    
   }
 
   cargarAlumno(id:string){
@@ -232,25 +254,7 @@ export class IngresoComponent implements OnInit {
 
   //Usuario
 
-  agregarUsuario(form: NgForm){
-    this.verificarUsuario();
-    if (this.usernamedisp){
-      this.alumnoService.addUsuario(this.alumno._id, this.usuario).subscribe(
-        result => {
-          if (result.status == "1"){
-            this.toastr.success("El usuario se agregó correctamente", "Operación exitosa");
-            //form.reset();
-          }
-        },
-        error => {
-          this.toastr.error("Error al agregar el usuario", "Operación fallida");
-        }
-      )
-    }else{
-      this.toastr.error("El nombre de usuario ya existe", "Operación fallida");
-    }
-    
-  }
+ 
 
   //Pagos
 
