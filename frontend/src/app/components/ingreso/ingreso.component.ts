@@ -97,7 +97,7 @@ export class IngresoComponent implements OnInit {
     this.alumnoService.getAlumno(id).subscribe(
       result=>{
         Object.assign(this.alumno,result);
-        this.alumno.plan = this.planes.find(p=>(p._id == this.alumno.plan._id))
+        //this.alumno.plan = this.planes.find(p=>(p._id == this.alumno.plan._id))
       },
       error=>{
         this.toastr.error("Error al cargar el alumno", "Operación fallida");

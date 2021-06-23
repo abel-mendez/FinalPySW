@@ -153,12 +153,12 @@
               <div class="col-md-4">
                 <label for="inputState" class="form-label">Tipo de Plan</label>
                   <select class="form-select" name="plan" [(ngModel)]="alumno.plan">
-                    <option *ngFor="let p of planes" [ngValue]="p">{{p.tipo}} - {{p.frecuencia}}</option>
+                    <option *ngFor="let p of planes" value="{{ p._id }}">{{p.tipo}} - {{p.frecuencia}}</option>
                   </select>
               </div>
               <div class="col-md-2">
                 <label for="" class="form-label">Fecha de inicio</label>
-                <input type="date" class="form-control" id="" />
+                <input type="date" class="form-control" id="" name="fechainicio" [(ngModel)]="alumno.fechainicio"/>
               </div>
               <div class="col-12 buttons">
                 <button type="button" class="btn btn-green" (click)="actualizarAlumno(modAluForm)">Modificar</button>
