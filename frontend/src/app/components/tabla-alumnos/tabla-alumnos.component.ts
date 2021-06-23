@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Alumno } from 'src/app/models/alumno';
 import { AlumnoService } from 'src/app/services/alumnos/alumno.service';
 import { LoginService } from 'src/app/services/login/login.service';
@@ -16,6 +17,7 @@ export class TablaAlumnosComponent implements OnInit {
 
   constructor(private alumnoService:AlumnoService,
               private router:Router,
+              private toastr:ToastrService,
               private loginService:LoginService) { 
                 if(this.loginService.userLoggedIn()==true){
                   if(sessionStorage.getItem("perfil")== "entrenador"){
@@ -42,12 +44,10 @@ export class TablaAlumnosComponent implements OnInit {
           let vAlumno = new Alumno();
           Object.assign(vAlumno,element);
           this.alumnos.push(vAlumno);
-          console.log(result);
         });
       },
       error=>{
-        console.log(error);
-        alert("Error al cargar los Alumnos");
+        this.toastr.error("Error al cargar los alumnos", "Operación fallida");
       }
     )
   }
@@ -61,7 +61,6 @@ export class TablaAlumnosComponent implements OnInit {
   }
 
   buscarAlumno(){
-    console.log(this.dniIng);
     this.alumnos = new Array<Alumno>();
     this.alumnoService.getAlumnoByDNI(this.dniIng).subscribe(
       result=>{
@@ -69,12 +68,10 @@ export class TablaAlumnosComponent implements OnInit {
           let vAlumno = new Alumno();
           Object.assign(vAlumno,element);
           this.alumnos.push(vAlumno);
-          console.log(result);
         });
       },
       error=>{
-        console.log(error);
-        alert("Error al cargar los Alumnos");
+        this.toastr.error("Error al buscar el alumno", "Operación fallida");
       }
     )
   }
