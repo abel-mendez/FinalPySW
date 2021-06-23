@@ -68,13 +68,15 @@ export class StatplanComponent implements OnInit {
   obtenerDatos(){
     let count:Array<number>=new Array<number>();
     for(let a of this.alumnos){
-      for(let i=0; i< this.nombreCategoria.length;i++){
-        //inicia los contadores en 0
-        if (count[i]==null){
-          count[i]=0;
-        }
-        if(a.plan.tipo==this.nombreCategoria[i]){
-          count[i]+=1;
+      if( a.plan!=null){
+        for(let i=0; i< this.nombreCategoria.length;i++){
+          //inicia los contadores en 0
+          if (count[i]==null){
+            count[i]=0;
+          }
+          if(a.plan.tipo==this.nombreCategoria[i]){
+            count[i]+=1;
+          }
         }
       }
     }
