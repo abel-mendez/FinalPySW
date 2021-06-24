@@ -21,8 +21,8 @@ export class AlumnoComponent implements OnInit {
   usuario: Usuario = new Usuario();
   ejercicios: Array<Ejercicio> = Array<Ejercicio>();
   ejercicio: Ejercicio = new Ejercicio();
-  rutinas:Array<Rutina> = Array<Rutina>();
-  rutina:Rutina = new Rutina();
+  rutinas: Array<Rutina> = Array<Rutina>();
+  rutina: Rutina = new Rutina();
   progreso: Progreso = new Progreso();
   progresos: Array<Progreso> = new Array<Progreso>();
   asistencia: Asistencia = new Asistencia();
@@ -31,16 +31,18 @@ export class AlumnoComponent implements OnInit {
   alumnos: Array<Alumno> = new Array<Alumno>();
   pago: Pago = new Pago();
   pagos: Array<Pago> = new Array<Pago>();
-  id:string;
-  user:string=sessionStorage.getItem("user")
+  id: string;
+  user: string = sessionStorage.getItem("user")
   usernamedisp: boolean;
 
   constructor(private loginService: LoginService,
     private router: Router,
     private alumnoService: AlumnoService,
     private toast: ToastrService) {
+      
     if (this.loginService.userLoggedIn() == true) {
       if (sessionStorage.getItem("perfil") == "alumno") {
+
       } else {
         this.toast.warning("No posee los permisos necesarios", "Error")
         //alert("No posee los permisos necesarios")
@@ -51,6 +53,7 @@ export class AlumnoComponent implements OnInit {
       //alert("Debe Loguearse para continuar")
       this.router.navigate(['login']);
     }
+    
   }
 
   ngOnInit(): void {
@@ -58,42 +61,55 @@ export class AlumnoComponent implements OnInit {
 
   }
 
-  getAlumno(){
+  getAlumno() {
     this.alumnos = new Array<Alumno>();
-    this.alumnoService.getAlumnoPorUsuario(this.user).subscribe(
+    this.alumnoService.getAlumnoPorUsuario(this.loginService.userLogged()).subscribe(
       result => {
-        Object.assign(this.alumno,result);
-        this.alumnos.push(this.alumno);
-        console.log(this.alumno)
+        Object.assign(this.alumno, result);
+        console.log(this.alumno[0]._id);
+        this.getPagos(this.alumno[0]._id);
+        this.getAsistencias(this.alumno[0]._id);
+        this.getProgresos(this.alumno[0]._id);
+        this.getRutinas(this.alumno[0]._id);
+        this.getEjercicios(this.alumno[0]._id);
       },
       error => {
-
+        
       }
+     
     )
+    
   }
 
-  getAsistencias(id: string) {
+  getAsistencias(id:string) {
+   
+    this.asistencias = new Array<Asistencia>();
     this.alumnoService.getAsistencias(id).subscribe(
       result => {
         result.forEach(element => {
           let vAsistencia = new Asistencia();
           Object.assign(vAsistencia, element);
           this.asistencias.push(vAsistencia);
-          console.log(result);
+          
         });
+        console.log("asitencias "+result);
+      },
+      error=>{
+        console.log(error)
+        console.log(id)
       }
     )
   }
 
-  imprimirAsistencia(){
+  imprimirAsistencia() {
 
   }
 
-  imprimirPago(){
+  imprimirPago() {
 
   }
 
-  getPagos(id: string){
+  getPagos(id: string) {
     this.pagos = new Array<Pago>();
     this.alumnoService.getPagos(id).subscribe(
       result => {
@@ -110,58 +126,68 @@ export class AlumnoComponent implements OnInit {
     )
   }
 
-  getProgresos(id:string){
+  getProgresos(id: string) {
     this.progresos = new Array<Progreso>();
     this.alumnoService.getProgresos(id).subscribe(
-      result=>{
+      result => {
         result.forEach(element => {
           let vProgreso = new Progreso();
-          Object.assign(vProgreso,element);
+          Object.assign(vProgreso, element);
           this.progresos.push(vProgreso);
           console.log(result);
         });
       },
-      error=>{
+      error => {
         console.log(error);
         alert("Error al cargar los progresos");
       }
     )
   }
 
-  getRutinas(user:string){
+  getRutinas(user: string) {
     this.rutinas = new Array<Rutina>();
     this.alumnoService.getRutinas(user).subscribe(
-      result=>{
+      result => {
         result.forEach(element => {
           let vRutina = new Rutina();
-          Object.assign(vRutina,element);
+          Object.assign(vRutina, element);
           this.rutinas.push(vRutina);
           console.log(result);
         });
       },
-      error=>{
+      error => {
         console.log(error);
         alert("Error al cargar las rutinas");
       }
     )
   }
 
-  getEjercicios(idRutina:string){
+  getEjercicios(idRutina: string) {
     this.ejercicios = new Array<Ejercicio>();
-    this.alumnoService.getEjercicios(this.alumno._id, idRutina).subscribe(
-      result=>{
+    this.alumnoService.getEjercicios(this.alumno[0]._id, idRutina).subscribe(
+      result => {
         result.forEach(element => {
           let vEjercicio = new Ejercicio();
-          Object.assign(vEjercicio,element);
+          Object.assign(vEjercicio, element);
           this.ejercicios.push(vEjercicio);
           console.log(result);
           console.log(this.ejercicios);
         });
       },
-      error=>{
+      error => {
         console.log(error);
         alert("Error al cargar los ejercicios");
       }
     )
   }
+
+
+  //modales
+  usarRutinaSeleccionada(rutina:Rutina){
+    this.rutina=rutina;
+  }
+
+  //usarRutinaSeleccionada(rutina:Rutina){
+   // this.rutina=rutina;
+  //}
 }

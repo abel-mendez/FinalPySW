@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AppComponent } from 'src/app/app.component';
 import { Usuario } from 'src/app/models/usuario';
 import { LoginService } from 'src/app/services/login/login.service';
@@ -14,17 +15,16 @@ export class LoginComponent implements OnInit {
 
   userform: Usuario = new Usuario(); //usuario mapeado al formulario
   returnUrl: string;
-  returnUrl1: string;
   msglogin: string; // mensaje que indica si no paso el loguin
   home:AppComponent = new AppComponent();
 
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private loginService: LoginService) { }
+    private loginService: LoginService,
+    private toast:ToastrService) { }
 
   ngOnInit(): void {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
-    this.returnUrl1 = this.route.snapshot.queryParams['returnUrl'] || '/home';
   }
 
   login() {
@@ -43,19 +43,20 @@ export class LoginComponent implements OnInit {
               window.location.reload();
             });
             //pruebas
-
+            
             //this.router.navigateByUrl('/DummyComponent');
             //this.router.navigate(["header"]);
             //this.router.navigate(["home"]);
             //this.home.ngOnInit();
           } else {
             //usuario no encontrado muestro mensaje en la vista
-            this.msglogin = "Credenciales incorrectas..";
+            this.toast.warning("Credenciales incorrectas..", "Error")
+            //this.msglogin = "Credenciales incorrectas..";
           }
+          //this.toast.success("Acceso concedido", "Bienvenido"+sessionStorage.getItem("user"));
           //if(sessionStorage.getItem("perfil")=="alumno"){
           //  this.router.navigateByUrl(this.returnUrl);
          //}
-         this.router.navigateByUrl(this.returnUrl1);
          console.log(result)
         },
         error => {

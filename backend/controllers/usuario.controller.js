@@ -28,9 +28,6 @@ usuarioCtrl.getUsuario = async (req, res) => {
   {
     existe = false;
   }
-  
-
-  
   res.json(existe);
 }
 

@@ -385,6 +385,6 @@ export class AlumnoService {
         'Content-Type': 'application/json'
       })
     }
-    return this._http.post(this.urlbase + 'alumno/usuario/'+usuario, httpOption);
+    return this._http.get(this.urlbase + 'alumno/usuario/'+usuario, httpOption);
    }
 }
