@@ -13,6 +13,7 @@ import { Usuario } from 'src/app/models/usuario';
 import { AlumnoService } from 'src/app/services/alumnos/alumno.service';
 import { PlanService } from 'src/app/services/home/plan.service';
 import { LoginService } from 'src/app/services/login/login.service';
+import * as printJS from 'print-js';
 
 @Component({
   selector: 'app-ingreso',
@@ -42,6 +43,7 @@ export class IngresoComponent implements OnInit {
   ejercicio:Ejercicio = new Ejercicio();
   imgIng:boolean=false;
   controlFecha:boolean;
+  //comprobantepago: JSON;
   //usernamedisp: boolean; 
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -261,10 +263,12 @@ export class IngresoComponent implements OnInit {
   agregarPago(form: NgForm){
     this.alumnoService.addPago(this.alumno._id, this.pago).subscribe(
       result => {
+        
         if(result.status == "1"){
           this.toastr.success("El pago se agregó correctamente", "Operación exitosa");
+          //this.comprobantepago = result;
           this.getPagos(this.alumno._id);
-          form.reset();  //no deberia ir form reset ni en agregar pago ni en agregar 
+          //form.reset();  //no deberia ir form reset ni en agregar pago ni en agregar 
           //alumno, explicar bug
         }
       },
@@ -287,6 +291,7 @@ export class IngresoComponent implements OnInit {
           Object.assign(vPago, element);
           this.pagos.push(vPago);
         });
+        //this.comprobantepago = result;
       },
       error => {
         this.toastr.error("Error al cargar los pagos", "Operación fallida");
@@ -570,5 +575,31 @@ usarEjercicioSeleccionado(ejercicio:Ejercicio){
       }
     )
   }
+  
+  /*imprimirComprobante(){
+    printJS({
+      printable: this.comprobantepago,
+      properties: [
+        {
+        field: 'monto', displayName: 'Monto'
+        },
+        {
+        field: 'fechapago', displayName: 'Fecha del pago'
+        },
+        {
+        field: 'modopago', displayName: 'Medio de pago'
+        },
+        {
+        field: 'fechavencimiento', displayName: 'Fecha de vencimiento'
+        },
+        {
+        field: 'completado', displayName: 'Estado del pago'
+        }
+      ],
+      header: '<h2 class="titulo">Comprobante de pago</h2>',
+      type: 'json'
+
+    })
+  }*/
 
 }
