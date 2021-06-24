@@ -59,7 +59,6 @@ export class StatasistenciasComponent implements OnInit {
  obtenerDatos(){
     let count:Array<number>=new Array<number>();
     for(let a of this.asistencias){
-      console.log(new Date(a.fecha).getDay());
       for(let i=0; i< this.dias.length;i++){
         //inicia los contadores en 0
         if (count[i]==null){
