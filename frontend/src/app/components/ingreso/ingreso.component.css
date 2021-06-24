@@ -9,17 +9,32 @@ main {
   padding: 5px 0;
   margin: 20px 0;
 }
+
 .btn-green {
   background-color: #2ec400;
   color: white;
   margin-bottom: 10px;
   margin-right: 10px;
 }
+
 .btn-green:hover {
   background-color: white;
   border: 1px solid #2ec400;
   color: #2ec400;
 }
+
+.btn-danger {
+  background-color: #c40000;
+  color: white;
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+.btn-danger:hover {
+  background-color: white;
+  border: 1px solid #c40000;
+  color: #c40000;
+}
+
 
 .active {
   background-color: white;

@@ -146,6 +146,22 @@ export class IngresoComponent implements OnInit {
     
   }
 
+  eliminarUsuario(form: NgForm){
+    this.alumnoService.deleteUsuario(this.idaux).subscribe(
+      result=>{
+        if(result.status=="1"){
+          this.toastr.info("Usuario eliminada correctamente", "Operación exitosa");
+          form.reset();
+          //this.cargarUsuario();
+        }
+      },
+      error=>{
+        console.log(error);
+        this.toastr.error("Error al eliminar el usuario", "Operación fallida");
+      }
+    )
+  }
+
   cargarUsuario(id:string){
     this.alumnoService.getUsuarioPorAlumno(id).subscribe(
       result=>{

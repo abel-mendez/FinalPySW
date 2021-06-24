@@ -109,6 +109,18 @@ export class AlumnoService {
     
      }
 
+     deleteUsuario(idUsuario:string):Observable<any>{
+      let option = {
+        headers: new HttpHeaders({
+
+        }),
+        params: new HttpParams({
+  
+        })
+      }
+      return this._http.delete(this.urlbase+"usuarios/" + idUsuario, option);
+     }
+
    //asistencias
    addAsistencia(idAlumno:string, asistencia:Asistencia):Observable<any>{
     let option = {

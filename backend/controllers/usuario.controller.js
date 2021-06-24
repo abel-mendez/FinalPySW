@@ -20,6 +20,8 @@ usuarioCtrl.createUsuario = async (req, res) => {
     })
   }
 }
+
+//Modificacion de usuario
 usuarioCtrl.editUsuario = async (req, res) => {
   const usuario = new Usuario(req.body);
   try {
@@ -32,6 +34,22 @@ usuarioCtrl.editUsuario = async (req, res) => {
     res.json({
       'status': '0',
       'msg': 'Error actualizando el usuario'
+    })
+  }
+}
+
+//Baja de usuario
+usuarioCtrl.deleteUsuario = async (req, res) => {
+  try {
+    await Usuario.deleteOne({ _id: req.params.id });
+    res.json({
+      status: '1',
+      msg: 'Usuario ELIMINADO'
+    })
+  } catch (error) {
+    res.json({
+      'status': '0',
+      'msg': 'Error eliminando el usuario'
     })
   }
 }
