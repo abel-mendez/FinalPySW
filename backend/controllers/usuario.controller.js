@@ -18,6 +18,21 @@ usuarioCtrl.createUsuario = async (req, res) => {
     })
   }
 }
+usuarioCtrl.editUsuario = async (req, res) => {
+  const usuario = new Usuario(req.body);
+  try {
+    await Usuario.updateOne({ _id: req.body._id }, usuario);
+    res.json({
+      'status': '1',
+      'msg': 'Usuario ACTUALIZADO'
+    })
+  } catch (error) {
+    res.json({
+      'status': '0',
+      'msg': 'Error actualizando el usuario'
+    })
+  }
+}
 
 //Pregunta si ya existe el nombre de usuario
 usuarioCtrl.getUsuario = async (req, res) => {
@@ -29,6 +44,11 @@ usuarioCtrl.getUsuario = async (req, res) => {
     existe = false;
   }
   res.json(existe);
+}
+
+usuarioCtrl.getUserEspecifico = async (req, res) => {
+  const usuario = await Usuario.findById(req.params.id);
+  res.json(usuario);
 }
 
 usuarioCtrl.loginUsuario = async (req, res) => {

@@ -14,7 +14,10 @@ router.put('/:id', alumnoCtrl.editAlumno);
 router.delete('/:id', alumnoCtrl.deleteAlumno);
 
 //PARA CREAR USUARIO
-router.post('/:id/usuario', alumnoCtrl.createUsuario)
+router.post('/:id/usuario', alumnoCtrl.createUsuario);
+//router.put('/usuario/:id/editaruser', alumnoCtrl.editUsuario);
+router.put('/:id/usuario/:idusuario', alumnoCtrl.editUsuario);
+router.get('/buscar/:id', alumnoCtrl.getUsuarioPorAlumno);
 
 router.post('/:id/asistencias', alumnoCtrl.addAsistencia);
 

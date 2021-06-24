@@ -1094,7 +1094,8 @@
                 </div>
               </div>
               <div class="col-12 buttons">
-                <button type="button" class="btn btn-green" (click)="agregarUsuario(usuarioForm)">Guardar</button>
+                <button type="button" class="btn btn-green" (click)="agregarUsuario(usuarioForm)" *ngIf="deseaagregar" [disabled]="deshabilitar">Guardar</button>
+                <button type="button" class="btn btn-green" (click)="actualizarUsuario(usuarioForm)" *ngIf="deseaagregar == false">Modificar</button>
                 <!--<button class="btn btn-grey">Modificar</button>-->
               </div>
             </form>
