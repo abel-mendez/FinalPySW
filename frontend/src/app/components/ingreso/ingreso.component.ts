@@ -45,8 +45,6 @@ export class IngresoComponent implements OnInit {
   ejercicio:Ejercicio = new Ejercicio();
   imgIng:boolean=false;
   controlFecha:boolean;
-  //comprobantepago: JSON;
-  //usernamedisp: boolean; 
 
   constructor(private activatedRoute: ActivatedRoute,
               private router:Router,
@@ -101,32 +99,20 @@ export class IngresoComponent implements OnInit {
     this.alumnoService.verificarUsuario(this.usuario.usuario).subscribe(
       result => {
         if (result == true){
-          //this.usernamedisp = false;
           console.log(result);
           this.toastr.error("El nombre de usuario ya existe", "Operación fallida");
-          //console.log(this.usuario.usuario);
-          //console.log(this.usernamedisp);
         }else{
-            //this.usernamedisp = true;
             console.log(result);
-            //if (this.usernamedisp == true){
               this.alumnoService.addUsuario(this.alumno._id, this.usuario).subscribe(
                 result => {
                   if (result.status == "1"){
                     this.toastr.success("El usuario se agregó correctamente", "Operación exitosa");
-                    //form.reset();
                   }
                 },
                 error => {
                   this.toastr.error("Error al agregar el usuario", "Operación fallida");
                 }
               )
-            //}else{
-              //this.toastr.error("El nombre de usuario ya existe", "Operación fallida");
-            //}
-            //console.log(this.usuario.usuario);
-            //console.log(this.usernamedisp);
-          
         }
       },
       error => {
@@ -253,9 +239,6 @@ export class IngresoComponent implements OnInit {
       }
     )
   }
-
-  //Usuario
-
  
 
   //Pagos
@@ -270,7 +253,6 @@ export class IngresoComponent implements OnInit {
   agregarPago(form: NgForm){
     this.alumnoService.addPago(this.alumno._id, this.pago).subscribe(
       result => {
-        console.log(result);
         if(result.status == "1"){
           this.toastr.success("El pago se agregó correctamente", "Operación exitosa");
           this.getPagos(this.alumno._id);
@@ -293,7 +275,6 @@ export class IngresoComponent implements OnInit {
           Object.assign(vPago, element);
           this.pagos.push(vPago);
         });
-        //this.comprobantepago = result;
       },
       error => {
         this.toastr.error("Error al cargar los pagos", "Operación fallida");
@@ -628,32 +609,5 @@ usarEjercicioSeleccionado(ejercicio:Ejercicio){
     )
   }
   
-
-
-  /*imprimirComprobante(){
-    printJS({
-      printable: this.comprobantepago,
-      properties: [
-        {
-        field: 'monto', displayName: 'Monto'
-        },
-        {
-        field: 'fechapago', displayName: 'Fecha del pago'
-        },
-        {
-        field: 'modopago', displayName: 'Medio de pago'
-        },
-        {
-        field: 'fechavencimiento', displayName: 'Fecha de vencimiento'
-        },
-        {
-        field: 'completado', displayName: 'Estado del pago'
-        }
-      ],
-      header: '<h2 class="titulo">Comprobante de pago</h2>',
-      type: 'json'
-
-    })
-  }*/
 
 }
