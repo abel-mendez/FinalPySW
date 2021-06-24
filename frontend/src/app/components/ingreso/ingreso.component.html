@@ -282,11 +282,11 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let pag of mf6.data">
-                    <td>{{ pag.monto}}</td>
-                    <td>{{ pag.fechapago }}</td>
+                    <td>{{ pag.monto | currency: 'AR$ '}}</td>
+                    <td>{{ pag.fechapago | date: 'dd/MM/yyyy' }}</td>
                     <td>{{ pag.modopago }}</td>
-                    <td>{{ pag.fechavencimiento }}</td>
-                    <td>{{ pag.completado }}</td>
+                    <td>{{ pag.fechavencimiento | date: 'dd/MM/yyyy' }}</td>
+                    <td>{{ pag.completado | traducirBool }}</td>
                     <td>
                       <!--<button class="btn btn-green" (click)="imprimirComprobante(pag)" >Imprimir</button>-->
                     </td>

@@ -28,6 +28,7 @@ import { AlifeFileToBase64Module } from 'alife-file-to-base64';
 import { LoginService } from './services/login/login.service';
 import { ControlPeso, ControlDuracion, ControlSeriesRep } from './directivas/validacion.directive';
 import { NgxPrintModule } from 'ngx-print';
+import { TraducirBoolPipe } from './pipes/traducir-bool.pipe';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { NgxPrintModule } from 'ngx-print';
     AlumnoFormComponent,
     ControlPeso,
     ControlDuracion,
-    ControlSeriesRep
+    ControlSeriesRep,
+    TraducirBoolPipe
   ],
   imports: [
     BrowserModule,
