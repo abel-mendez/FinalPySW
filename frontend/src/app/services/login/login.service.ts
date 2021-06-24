@@ -20,12 +20,15 @@ export class LoginService {
     let body = { username: usuario, password: password };
     return this.http.post(this.urlbase + 'usuarios/login', body, httpOption);
   }
+
   public logout() {
     //borro el vble almacenado mediante el storage
     sessionStorage.removeItem("user");
     sessionStorage.removeItem("perfil");
     sessionStorage.removeItem("user_id");
+    sessionStorage.removeItem("token");
   }
+
   public userLoggedIn() {
     var resultado = false;
     var usuario = sessionStorage.getItem("user");
@@ -35,12 +38,22 @@ export class LoginService {
     }
     return resultado;
   }
+
   public userLogged() {
     var usuario = sessionStorage.getItem("user");
     return usuario;
   }
+
   public idLogged() {
     var id = sessionStorage.getItem("user_id");
     return id;
+  }
+
+  getToken(): string {
+    if (sessionStorage.getItem("token") != null){
+      return sessionStorage.getItem("token");
+    }else{
+      return "";
+    }
   }
 }
