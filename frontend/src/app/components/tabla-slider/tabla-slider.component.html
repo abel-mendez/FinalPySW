@@ -1,6 +1,6 @@
 <main>
-  <h3 class="categorie mb-3">Modificar Datos</h3>
-
+  <!--<h3 class="categorie mb-3">Modificar Datos</h3>-->
+<section class="mt-4">
   <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
       <button
@@ -37,13 +37,16 @@
       aria-labelledby="nav-home-tab"
     >
       <h3 class="categorie mb-3">Slider</h3>
-      <button
-        class="btn-green btn mt-2 mb-2"
+      <div class="text-center">
+        <button
+        class="btn-green btn mt-2 mb-2 text-center"
         data-bs-toggle="modal"
         data-bs-target="#modalAgregarSlider"
-      >
-        Agregar
-      </button>
+       >
+        Agregar Slider
+        </button>
+      </div>
+      
 
       <!-- modal Agregar Slider -->
       <div
@@ -55,7 +58,7 @@
       >
         <div class="modal-dialog">
           <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header text-white bg-dark">
               <h5 class="modal-title" id="modalLabelAgregarSlider">
                 Agregar Slider
               </h5>
@@ -68,6 +71,7 @@
             </div>
             <div class="modal-body">
               <div class="container-fluid col-10 offset-1 mb-3">
+                <form class="row g-3" #sliderForm="ngForm">
                 <div class="col-12 mb-3">
                   <label for="imagen" class="form-label"
                     ><b>Agregar Imagen del Slider</b></label
@@ -79,7 +83,8 @@
                     class="form-control"
                     id="imagen"
                     name="imagen"
-                    required
+                    accept=".jpg,.png" 
+                    required 
                   />
                 </div>
                 <div class="col-12 mb-3">
@@ -94,9 +99,12 @@
                     [(ngModel)]="slider.descripcion"
                     placeholder="Porfavor, ingrese una descripcion"
                     rows="5"
+                    #descripcion="ngModel"
+                    minlength="5"
                     required
                   ></textarea>
                 </div>
+              </form>
               </div>
             </div>
             <div class="modal-footer">
@@ -105,6 +113,7 @@
                 class="btn btn-green"
                 (click)="agregarSlider()"
                 data-bs-dismiss="modal"
+                [disabled]="!sliderForm.form.valid"
               >
                 Guardar
               </button>
@@ -130,7 +139,7 @@
         >
           <thead>
             <tr>
-              <th style="width: 40%">
+              <th style="width: 40%" class="text-center">
                 <mfDefaultSorter by="imagen">Imagen</mfDefaultSorter>
               </th>
               <th style="width: 30%">
@@ -141,8 +150,8 @@
           </thead>
           <tbody>
             <tr *ngFor="let slider of mf.data">
-              <td><img src="{{ slider.img }}" alt="" width="50%" /></td>
-              <td>{{ slider.descripcion }}</td>
+              <td class="text-center"><img src="{{ slider.img }}" alt="" width="50%" /></td>
+              <td style="text-align: initial;">{{ slider.descripcion }}</td>
               <td>
                 <button
                   class="btn-green btn"
@@ -153,7 +162,7 @@
                   Modificar
                 </button>
                 <button
-                  class="btn-grey btn"
+                  class="btn-red btn"
                   data-bs-toggle="modal"
                   data-bs-target="#modalEliminarSlider"
                   (click)="seleccionar(slider)"
@@ -185,7 +194,7 @@
     >
       <div class="modal-dialog">
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header text-white bg-dark">
             <h5 class="modal-title" id="modalLabelEliminarSlider">
               Eliminar Slider
             </h5>
@@ -228,7 +237,7 @@
     >
       <div class="modal-dialog">
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header text-white bg-dark">
             <h5 class="modal-title" id="modalLabelModificarSlider">
               Modificar Slider
             </h5>
@@ -241,6 +250,7 @@
           </div>
           <div class="modal-body">
             <div class="container-fluid col-10 offset-1 mb-3">
+              <form class="row g-3" #pagoForm="ngForm">
               <div class="col-12 mb-3">
                 <label for="" class="form-label"
                   ><b>Modificar Imagen del Slider</b></label
@@ -268,6 +278,7 @@
                   required
                 ></textarea>
               </div>
+            </form>
             </div>
           </div>
           <div class="modal-footer">
@@ -293,13 +304,16 @@
       aria-labelledby="nav-profile-tab"
     >
       <h3 class="categorie mb-3">Planes</h3>
+
+      <div class="text-center">
       <button
         class="btn-green btn mt-2 mb-2"
         data-bs-toggle="modal"
         data-bs-target="#modalAgregarPlan"
       >
-        Agregar
+        Agregar Plan
       </button>
+    </div>
 
       <!-- modal Agregar Plan -->
       <div
@@ -311,7 +325,7 @@
       >
         <div class="modal-dialog">
           <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header text-white bg-dark">
               <h5 class="modal-title" id="modalLabelAgregarPlan">
                 Agregar Plan
               </h5>
@@ -324,6 +338,7 @@
             </div>
             <div class="modal-body">
               <div class="container-fluid col-10 offset-1 mb-3">
+                <form class="row g-3" #planForm="ngForm">
                 <div class="col-12 mb-3">
                   <label for="tipo" class="form-label"><b>Tipo Plan</b></label>
                   <input
@@ -332,6 +347,8 @@
                     id="tipo"
                     name="plan"
                     [(ngModel)]="plan.tipo"
+                    minlength="3"
+                    required
                   />
                 </div>
                 <div class="col-12 mb-3">
@@ -342,6 +359,7 @@
                     id="costo"
                     name="costo"
                     [(ngModel)]="plan.costo"
+                    required
                   />
                 </div>
                 <div class="col-12 mb-3">
@@ -352,8 +370,12 @@
                     id="frecuencia"
                     name="frecuencia"
                     [(ngModel)]="plan.frecuencia"
+                    minlength="3"
+                    maxlength="18"
+                    required
                   />
                 </div>
+              </form>
               </div>
             </div>
             <div class="modal-footer">
@@ -362,6 +384,7 @@
                 class="btn btn-green"
                 (click)="agregarPlan()"
                 data-bs-dismiss="modal"
+                [disabled]="!planForm.form.valid"
               >
                 Guardar
               </button>
@@ -402,7 +425,7 @@
           <tbody>
             <tr *ngFor="let plan of mf1.data">
               <td>{{ plan.tipo }}</td>
-              <td>{{ plan.costo || currency }}</td>
+              <td>{{ plan.costo | currency: 'ARS $ '}}</td>
               <td>{{ plan.frecuencia }}</td>
               <td>
                 <button
@@ -414,7 +437,7 @@
                   Modificar
                 </button>
                 <button
-                  class="btn-grey btn"
+                  class="btn-red btn"
                   data-bs-toggle="modal"
                   data-bs-target="#modalEliminarPlan"
                   (click)="seleccionarPlan(plan)"
@@ -446,7 +469,7 @@
   >
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header text-white bg-dark">
           <h5 class="modal-title" id="modalLabelEliminarPlan">
             Eliminar Slider
           </h5>
@@ -493,7 +516,7 @@
   >
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header text-white bg-dark">
           <h5 class="modal-title" id="modalLabelModificarPlan">
             Modificar Plan
           </h5>
@@ -565,4 +588,5 @@
     </div>
   </div>
   </div>
+</section>
 </main>
