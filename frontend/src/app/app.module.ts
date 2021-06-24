@@ -27,6 +27,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AlifeFileToBase64Module } from 'alife-file-to-base64';
 import { LoginService } from './services/login/login.service';
 import { ControlPeso, ControlDuracion, ControlSeriesRep } from './directivas/validacion.directive';
+import { NgxPrintModule } from 'ngx-print';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { ControlPeso, ControlDuracion, ControlSeriesRep } from './directivas/val
     ToastrModule.forRoot(),
     AlifeFileToBase64Module,
     FacebookModule.forRoot(),
+    NgxPrintModule,
   ],
   providers: [LoginService],
   bootstrap: [AppComponent]
