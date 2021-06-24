@@ -150,9 +150,10 @@ export class IngresoComponent implements OnInit {
     this.alumnoService.deleteUsuario(this.idaux).subscribe(
       result=>{
         if(result.status=="1"){
-          this.toastr.info("Usuario eliminada correctamente", "Operación exitosa");
+          this.toastr.info("Usuario eliminado correctamente", "Operación exitosa");
           form.reset();
           //this.cargarUsuario();
+          this.deshabilitar = true;
         }
       },
       error=>{
