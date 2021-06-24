@@ -10,6 +10,7 @@ import { Progreso } from 'src/app/models/progreso';
 import { Rutina } from 'src/app/models/rutina';
 import { Ejercicio } from 'src/app/models/ejercicio';
 import { Usuario } from 'src/app/models/usuario';
+import * as printJS from 'print-js';
 
 @Component({
   selector: 'app-alumno',
@@ -34,6 +35,10 @@ export class AlumnoComponent implements OnInit {
   id: string;
   user: string = sessionStorage.getItem("user")
   usernamedisp: boolean;
+  pagoImp:Pago = new Pago();
+  asistImp: Asistencia = new Asistencia();
+  pagoJSON: JSON;
+  asistenciaJSON: JSON;
 
   constructor(private loginService: LoginService,
     private router: Router,
@@ -90,7 +95,7 @@ export class AlumnoComponent implements OnInit {
           let vAsistencia = new Asistencia();
           Object.assign(vAsistencia, element);
           this.asistencias.push(vAsistencia);
-          
+          this.asistenciaJSON = result;
         });
         console.log("asitencias "+result);
       },
@@ -101,13 +106,7 @@ export class AlumnoComponent implements OnInit {
     )
   }
 
-  imprimirAsistencia() {
-
-  }
-
-  imprimirPago() {
-
-  }
+  
 
   getPagos(id: string) {
     this.pagos = new Array<Pago>();
@@ -118,6 +117,7 @@ export class AlumnoComponent implements OnInit {
           Object.assign(vPago, element);
           this.pagos.push(vPago);
         });
+        this.pagoJSON = result;
       },
       error => {
         console.log(error);
@@ -185,6 +185,50 @@ export class AlumnoComponent implements OnInit {
   //modales
   usarRutinaSeleccionada(rutina:Rutina){
     this.rutina=rutina;
+  }
+
+  usarPagoImprimir(pago:Pago){
+    this.pagoImp=pago;
+  }
+
+  usarAsistenciaImprimir(asistencia:Asistencia){
+    this.asistImp=asistencia;
+  }
+
+  imprimirAsistencias(){
+    printJS({
+      printable: this.asistenciaJSON,
+      properties: [
+        { field: 'fecha', displayName: 'Fecha de asistencia'},
+        { field: 'hora', displayName: 'Hora de asistencia'}
+      ],
+      header: '<h1 class="titulo">Green Gym<br>Todas tus asistencias</h1>',
+      style: '.titulo {text-align: center; color: #2ec400; font: helvetica neue}',
+      documentTitle: 'Mis Asistencias',
+      type: 'json',
+
+
+    })
+  }
+
+  imprimirPagos(){
+    printJS({
+      printable: this.pagoJSON,
+      properties: [
+        { field: 'monto', displayName: 'Monto'},
+        { field: 'fechapago', displayName: 'Fecha de pago'},
+        { field: 'modopago', displayName: 'Medio de pago'},
+        { field: 'fechavencimiento', displayName: 'Próximo vencimiento'},
+        { field: 'completado', displayName: 'Estado del pago'},
+
+      ],
+      header: '<h1 class="titulo">Green Gym<br>Todos tus pagoss</h1>',
+      style: '.titulo {text-align: center; color: #2ec400; font: helvetica neue}',
+      documentTitle: 'Mis Pagos',
+      type: 'json',
+
+
+    })
   }
 
   //usarRutinaSeleccionada(rutina:Rutina){

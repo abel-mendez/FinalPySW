@@ -174,6 +174,9 @@
         <section>
           <h3 class="categorie">Tu Asistencia</h3>
           <div class="table-responsive">
+            <button class="btn btn-primary" id="" type="button" (click)="imprimirAsistencias()">
+          Imprimir todas
+        </button>
             <table class="table table-striped" [mfData]="asistencias" #mf1="mfDataTable" [mfRowsOnPage]="5">
               <thead>
                 <tr>
@@ -198,7 +201,9 @@
                       data-bs-target="#modalVerAsistencia">
                       Ver
                     </button>
-                    <button class="btn btn-grey" (click)="imprimirAsistencia()">Imprimir</button>
+                    <button type="button" class="btn btn-dark" style="margin-bottom: 10px;
+                      margin-right: 10px" data-bs-toggle="modal"
+                      data-bs-target="#modalImprimirAsistencia" (click)="usarAsistenciaImprimir(asistencia)">Imprimir</button>
                   </td>
                 </tr>
               </tbody>
@@ -210,6 +215,43 @@
                 </tr>
               </tfoot>
             </table>
+          </div>
+          <!-- modal imprimir pago -->
+          <div class="modal fade" id="modalImprimirAsistencia" tabindex="-1" aria-labelledby="modalLabelImprimirAsistencia"
+          aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                  <div class="modal-header text-white bg-dark">
+                      <h5 class="modal-title" id="modalLabelImprimirAsistencia">Imprimir asistencia</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body" id="impresionasist">
+                      <div class="container-fluid col-10 offset-1 mb-3">
+                        <form class="row g-3" #asistForm="ngForm">
+                          <div class="col-md-6">
+                            <label for="" class="form-label">Fecha de asistencia:</label>
+                            <div class="alert alert-primary text-dark" role="alert">
+                              {{asistImp.fecha | date: 'dd/MM/yyyy'}}
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <label for="" class="form-label">Hora de asistencia:</label>
+                            <div class="alert alert-primary text-dark" role="alert">
+                              {{ asistImp.hora }}
+                            </div>
+                          </div>
+                          </form>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <!--<button class="btn btn-green" (click)="imprimirComprobante()" >Imprimir</button>-->
+                    <button type="button" class="btn btn-green" [useExistingCss]="true"
+                    printSectionId="impresionasist" printTitle="Comprobante de asistencia"
+                    ngxPrint>Imprimir</button>                      
+                    <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Close</button>
+                  </div>
+              </div>
+          </div>
           </div>
         </section>
 
@@ -462,6 +504,9 @@
         <section>
           <h3 class="categorie">Tus Pagos</h3>
           <div class="table-responsive">
+            <button class="btn btn-primary" id="" type="button" (click)="imprimirPagos()">
+              Imprimir todos
+            </button>
             <table class="table table-striped" [mfData]="pagos" #mf5="mfDataTable" [mfRowsOnPage]="5">
               <thead>
                 <tr>
@@ -492,12 +537,11 @@
                   <td class="text-right">{{pago.fechapago | date: 'dd/MM/yyyy'}}</td>
                   <td>{{pago.modopago}}</td>
                   <td class="text-right">{{pago.fechavencimiento | date: 'dd/MM/yyyy'}}</td>
-                  <td>{{pago.completado}}</td>
+                  <td>{{pago.completado | traducirBool}}</td>
                   <td>
-                    <button type="button" class="btn-grey btn" data-bs-toggle="modal" data-bs-target="#modalVerProgreso"
-                      (click)="imprimirPago()">
-                      Ver Imagen
-                    </button>
+                    <button type="button" class="btn btn-dark" style="margin-bottom: 10px;
+                      margin-right: 10px" data-bs-toggle="modal"
+                      data-bs-target="#modalImprimirPago" (click)="usarPagoImprimir(pago)">Imprimir</button>
                   </td>
                 </tr>
               </tbody>
@@ -534,6 +578,62 @@
                 </tr>
               </tbody>
             </table>-->
+          </div>
+          <!-- modal imprimir pago -->
+          <div class="modal fade" id="modalImprimirPago" tabindex="-1" aria-labelledby="modalLabelImprimirPago"
+          aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                  <div class="modal-header text-white bg-dark">
+                      <h5 class="modal-title" id="modalLabelImprimirPago">Imprimir pago</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body" id="impresion">
+                      <div class="container-fluid col-10 offset-1 mb-3">
+                        <form class="row g-3" #pagoForm="ngForm">
+                          <div class="col-md-6">
+                            <label for="" class="form-label">Monto:</label>
+                            <div class="alert alert-primary text-dark" role="alert">
+                              {{pagoImp.monto | currency: 'AR$ '}}
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <label for="" class="form-label">Fecha de pago efectuado:</label>
+                            <div class="alert alert-primary text-dark" role="alert">
+                              {{pagoImp.fechapago | date: 'dd/MM/yyyy'}}
+                            </div>
+                          </div>
+                          <div class="col-md-5">
+                            <label for="" class="form-label">Modo de pago:</label>
+                            <div class="alert alert-primary text-dark" role="alert">
+                              {{pagoImp.modopago}}
+                            </div>
+                          </div>
+                          <div class="col-md-5">
+                            <label for="" class="form-label">Fecha de vencimiento de cuota:</label>
+                            <div class="alert alert-primary text-dark" role="alert">
+                              {{pagoImp.fechavencimiento | date: 'dd/MM/yyyy'}}
+                            </div>
+                            
+                          </div>
+                          <div class="col-md-2">
+                              <label for="" class="form-label">Completado: </label>
+                              <div class="alert alert-primary text-dark" role="alert">
+                                {{pagoImp.completado | traducirBool}}
+                              </div>
+                            </div>
+                          </form>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <!--<button class="btn btn-green" (click)="imprimirComprobante()" >Imprimir</button>-->
+                    <button type="button" class="btn btn-green" [useExistingCss]="true"
+                    printSectionId="impresion" printTitle="Comprobante de pago"
+                    ngxPrint>Imprimir</button>                      
+                    <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Close</button>
+                  </div>
+              </div>
+          </div>
           </div>
         </section>
 
