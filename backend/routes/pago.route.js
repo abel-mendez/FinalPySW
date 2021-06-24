@@ -9,7 +9,9 @@ const router = express.Router();
 
 router.get('/', pagoCtrl.getAllPagos);
 router.get('/:fechapago', pagoCtrl.getPagosPorFecha)
-// router.post('/', planCtrl.createPlan);
+router.get('/pagos/:idpago', pagoCtrl.getPago);
+router.put('/pagos/:idpago', pagoCtrl.editPago);
+router.delete('/:idpago', pagoCtrl.deletePago);
 
 //exportamos el modulo de rutas
 module.exports = router;

@@ -188,46 +188,62 @@
           <div class="collapse show" id="collapsePagos">
             <div class="text-center">
               <button class="btn-green btn mt-2 mb-2" data-bs-toggle="modal"
-              data-bs-target="#modalAgregarPago">Agregar Pago</button>  
+              data-bs-target="#modalAgregarPago" (click)="nuevoPago(pagoForm)">Agregar Pago</button>  
             </div>
             <!-- modal Agregar pago -->
             <div class="modal fade" id="modalAgregarPago" tabindex="-1" aria-labelledby="modalLabelAgregarPago"
             aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header text-white bg-dark">
-                        <h5 class="modal-title" id="modalLabelAgregarPago">Nuevo Pago</h5>
+                        <h5 class="modal-title" id="modalLabelAgregarPago" *ngIf="accionPago=='new'">Nuevo Pago</h5>
+                        <h5 class="modal-title" id="modalLabelAgregarPago" *ngIf="accionPago=='update'">Modificar Pago</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body" id="impresion">
+                    <div class="modal-body">
                         <div class="container-fluid col-10 offset-1 mb-3">
 
                           <form class="row g-3" #pagoForm="ngForm">
                             <div class="col-md-6">
                               <label for="" class="form-label">Monto</label>
-                              <input type="number" class="form-control" id="" name="pagomonto" [(ngModel)]="pago.monto"/>
+                              <input type="number" class="form-control" id="" name="pagomonto" [(ngModel)]="pago.monto" 
+                              #montoPago="ngModel" control-monto required/>
+                              <div *ngIf="montoPago.invalid && (montoPago.touched || montoPago.dirty)" class="alert alert-danger">
+                                <div *ngIf="montoPago.errors.controlDeMonto"> No se permiten números negativos ni más de dos decimales</div>
+                                <div *ngIf="montoPago.errors.required"> El monto es requerido </div>
+                            </div>
                             </div>
                             <div class="col-md-6">
                               <label for="" class="form-label">Fecha de pago efectuado</label>
-                              <input type="date" class="form-control" id="" name="pagofecha" [(ngModel)]="pago.fechapago"/>
+                              <input type="date" class="form-control" id="" name="pagofecha" [(ngModel)]="pago.fechapago" 
+                              #fechaPago="ngModel" required/>
+                              <div *ngIf="fechaPago.invalid && (fechaPago.touched || fechaPago.dirty)" class="alert alert-danger">
+                                <div *ngIf="fechaPago.errors.required"> La fecha es requerida </div>
+                            </div>
                             </div>
                             <div class="col-md-6">
                               <label for="" class="form-label">Modo de pago</label>
-                              <select name="modopago" class="form-select" [(ngModel)]="pago.modopago">
-                                <option *ngFor="let item of mediospago" [ngValue]="item">{{ item }}</option>
+                              <select name="modopago" class="form-select" [(ngModel)]="pago.modopago" 
+                              #modoPago="ngModel" required>
+                              <option *ngFor="let item of mediospago" [ngValue]="item">{{ item }}</option> 
                               </select>
-
-                              
-                              <!--<input type="text" class="form-control" id="" name="pagomodo" [(ngModel)]="pago.modopago"/>-->
+                              <div *ngIf="modoPago.invalid && (modoPago.touched || modoPago.dirty)" class="alert alert-danger">
+                                <div *ngIf="modoPago.errors.required"> El modo de pago es requerido</div>
+                            </div>
                             </div>
                             <div class="col-md-6">
                               <label for="" class="form-label">Fecha de vencimiento de cuota</label>
-                              <input type="date" class="form-control" id="" name="pagofechavencimiento" [(ngModel)]="pago.fechavencimiento"/>
+                              <input type="date" class="form-control" id="" name="pagofechavencimiento" 
+                              #fechaVencimientoPago="ngModel" [(ngModel)]="pago.fechavencimiento" required/>
+                              <div *ngIf="fechaVencimientoPago.invalid && (fechaVencimientoPago.touched || fechaVencimientoPago.dirty)" class="alert alert-danger">
+                                <div *ngIf="fechaVencimientoPago.errors.required"> La fecha es requerida </div>
+                            </div>
                             </div>
                             <div class="col-md-6">
                               <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="" name="pagocompletado" [(ngModel)]="pago.completado">
-                                <label class="form-check-label" for="">
+                                <input class="form-check-input" type="checkbox" value="" id="checkPago" name="pagocompletado" 
+                                #completadoPago="ngModel" [(ngModel)]="pago.completado">
+                                <label class="form-check-label" for="checkPago">
                                   Completado
                                 </label>
                               </div>
@@ -237,23 +253,20 @@
                     </div>
                     <div class="modal-footer">
                       <!--<button class="btn btn-green" (click)="imprimirComprobante()" >Imprimir</button>-->
-                      <button type="button" class="btn btn-green" [useExistingCss]="true"
-                      printSectionId="impresion" printTitle="Comprobante de pago"
-                      ngxPrint>Imprimir</button>
+                      
                         <button type="button" class="btn btn-green"
-                             (click)="agregarPago(pagoForm)">Guardar</button>
+                        (click)="agregarPago(pagoForm)" data-bs-dismiss="modal" *ngIf="accionPago=='new'"
+                        [disabled]="pagoForm.invalid" >Guardar</button>
+                        <button type="button" class="btn btn-green"
+                        (click)="updatePago(pagoForm)" data-bs-dismiss="modal" *ngIf="accionPago=='update'" 
+                        [disabled]="pagoForm.invalid">Modificar</button>
                         <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
             </div>
 
-
-
-
-
-
-            <div class="card-body table-responsive-sm col-md-8 offset-md-2">
+            <div class="card-body table-responsive-sm col-12">
               <table
                 class="table table-striped"
                 [mfData]="pagos"
@@ -262,20 +275,23 @@
               >
                 <thead>
                   <tr>
-                    <th style="width: 50%">
+                    <th style="width: 10%">
                       <mfDefaultSorter by="monto">Monto</mfDefaultSorter>
                     </th>
-                    <th style="width: 50%">
+                    <th style="width: 15%">
                       <mfDefaultSorter by="fechapago">Fecha del pago</mfDefaultSorter>
                     </th>
-                    <th style="width: 50%">
+                    <th style="width: 15%">
                       <mfDefaultSorter by="modopago">Modo de pago</mfDefaultSorter>
                     </th>
-                    <th style="width: 50%">
+                    <th style="width: 15%">
                       <mfDefaultSorter by="fechavencimiento">Fecha de vencimiento</mfDefaultSorter>
                     </th>
-                    <th style="width: 50%">
+                    <th style="width: 15%">
                       <mfDefaultSorter by="completado">Completado</mfDefaultSorter>
+                    </th>
+                    <th style="width: 30%">
+                      <mfDefaultSorter by="completado">Acciones</mfDefaultSorter>
                     </th>
                     <th></th>
                   </tr>
@@ -288,7 +304,13 @@
                     <td>{{ pag.fechavencimiento | date: 'dd/MM/yyyy' }}</td>
                     <td>{{ pag.completado | traducirBool }}</td>
                     <td>
-                      <!--<button class="btn btn-green" (click)="imprimirComprobante(pag)" >Imprimir</button>-->
+                      <button type="button" class="btn btn-dark" style="  margin-bottom: 10px;
+                      margin-right: 10px" data-bs-toggle="modal"
+                      data-bs-target="#modalImprimirPago" (click)="usarPagoImprimir(pag)">Imprimir</button>
+                      <button type="button" class="btn btn-green" data-bs-toggle="modal"
+                      data-bs-target="#modalAgregarPago" (click)="cargarPago(pag._id)">Modificar</button>
+                      <button class="btn btn-red" (click)="usarPagoSeleccionado(pag)" data-bs-toggle="modal"
+                      data-bs-target="#modalEliminarPago">Eliminar</button>
                     </td>
                   </tr>
                 </tbody>
@@ -303,6 +325,89 @@
                 </tfoot>
               </table>
           </div>
+
+          <!-- modal imprimir pago -->
+          <div class="modal fade" id="modalImprimirPago" tabindex="-1" aria-labelledby="modalLabelImprimirPago"
+          aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                  <div class="modal-header text-white bg-dark">
+                      <h5 class="modal-title" id="modalLabelImprimirPago">Imprimir pago</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body" id="impresion">
+                      <div class="container-fluid col-10 offset-1 mb-3">
+                        <form class="row g-3" #pagoForm="ngForm">
+                          <div class="col-md-6">
+                            <label for="" class="form-label">Monto:</label>
+                            <div class="alert alert-primary text-dark" role="alert">
+                              {{pagoImp.monto | currency: 'AR$ '}}
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <label for="" class="form-label">Fecha de pago efectuado:</label>
+                            <div class="alert alert-primary text-dark" role="alert">
+                              {{pagoImp.fechapago | date: 'dd/MM/yyyy'}}
+                            </div>
+                          </div>
+                          <div class="col-md-5">
+                            <label for="" class="form-label">Modo de pago:</label>
+                            <div class="alert alert-primary text-dark" role="alert">
+                              {{pagoImp.modopago}}
+                            </div>
+                          </div>
+                          <div class="col-md-5">
+                            <label for="" class="form-label">Fecha de vencimiento de cuota:</label>
+                            <div class="alert alert-primary text-dark" role="alert">
+                              {{pagoImp.fechavencimiento | date: 'dd/MM/yyyy'}}
+                            </div>
+                            
+                          </div>
+                          <div class="col-md-2">
+                              <label for="" class="form-label">Completado: </label>
+                              <div class="alert alert-primary text-dark" role="alert">
+                                {{pagoImp.completado | traducirBool}}
+                              </div>
+                            </div>
+                          </form>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <!--<button class="btn btn-green" (click)="imprimirComprobante()" >Imprimir</button>-->
+                    <button type="button" class="btn btn-green" [useExistingCss]="true"
+                    printSectionId="impresion" printTitle="Comprobante de pago"
+                    ngxPrint>Imprimir</button>                      
+                    <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Close</button>
+                  </div>
+              </div>
+          </div>
+          </div>
+
+          <!-- modal eliminar pago-->
+          <div class="modal fade" id="modalEliminarPago" tabindex="-1" aria-labelledby="modalLabelEliminarPago"
+          aria-hidden="true">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header bg-dark text-white">
+                      <h5 class="modal-title" id="modalLabelEliminarPago">Eliminar Pago</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                      <div class="container-fluid col-10 offset-1 mb-3">
+                          <div class="col-12">
+                           <h6>¿Está seguro/a de que desea eliminar el pago?</h6>
+                         </div>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-red"
+                          data-bs-dismiss="modal" (click)="eliminarPago()">Eliminar</button>
+                      <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Close</button>
+                  </div>
+              </div>
+          </div>
+          </div>
+
             </div>
         </section>
       </div>
@@ -345,16 +450,16 @@
                         <div class="container-fluid col-10 offset-1 mb-3">
 
                           <form class="row g-3" #rutinaForm="ngForm">
-                            <div class="col-md-6">
+                            <div class="col-12">
                               <label for="" class="form-label">Duración (minutos)</label>
                               <input type="number" class="form-control" id="" name="rutinaDuracion" 
                               #duracionRutina="ngModel" [(ngModel)]="rutina.duracion" control-duracion required/>
                               <div *ngIf="duracionRutina.invalid && (duracionRutina.touched || duracionRutina.dirty)" class="alert alert-danger">
-                                <div *ngIf="duracionRutina.errors.controlDeDuracion"> Debe ingresar una duración en el rango [5-99] </div>
+                                <div *ngIf="duracionRutina.errors.controlDeDuracion"> Debe ingresar un número en el rango [5-99] y sin decimales </div>
                                 <div *ngIf="duracionRutina.errors.required"> La duración es requerida </div>
                             </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-12">
                               <label for="" class="form-label">Grupo muscular</label>
                               <input type="text" class="form-control" id="" name="rutinaGrupoM" 
                               #grupoMuscRutina="ngModel" [(ngModel)]="rutina.grupomuscular" 
@@ -534,7 +639,7 @@
                               <input type="number" class="form-control" id="" name="ejercicioSeries" 
                               #seriesEjercicio="ngModel" [(ngModel)]="ejercicio.series" control-seriesrep required/>
                               <div *ngIf="seriesEjercicio.invalid && (seriesEjercicio.touched || seriesEjercicio.dirty)" class="alert alert-danger">
-                                <div *ngIf="seriesEjercicio.errors.controlDeSeriesRep"> Debe ingresar un numero de series dentro del rango [1-30] </div>
+                                <div *ngIf="seriesEjercicio.errors.controlDeSeriesRep"> Debe ingresar un numero dentro del rango [1-30] y sin decimales </div>
                                 <div *ngIf="seriesEjercicio.errors.required"> El número de series es requerido </div>
                             </div>
                             </div>
@@ -543,7 +648,7 @@
                               <input type="number" class="form-control" id="" name="ejerciciosRep" 
                               #repeticionesEjercicio="ngModel" [(ngModel)]="ejercicio.repeticiones" control-seriesrep required/>
                               <div *ngIf="repeticionesEjercicio.invalid && (repeticionesEjercicio.touched || repeticionesEjercicio.dirty)" class="alert alert-danger">
-                                <div *ngIf="repeticionesEjercicio.errors.controlDeSeriesRep"> Debe ingresar un numero de repeticiones dentro del rango [1-30] </div>
+                                <div *ngIf="repeticionesEjercicio.errors.controlDeSeriesRep"> Debe ingresar un numero dentro del rango [1-30] y sin decimales </div>
                                 <div *ngIf="repeticionesEjercicio.errors.required"> El número de repeticiones es requerido </div>
                             </div>
                             </div>
@@ -671,7 +776,7 @@
                                     type="number" class="form-control" id="" placeholder="Peso en Kg" name="pesoProg" 
                                     #pesoProgreso="ngModel" [(ngModel)]="progreso.peso" control-peso required/>
                                     <div *ngIf="pesoProgreso.invalid && (pesoProgreso.touched || pesoProgreso.dirty)" class="alert alert-danger">
-                                      <div *ngIf="pesoProgreso.errors.controlDePeso"> Debe ingresar un peso en el rango [30-199] </div>
+                                      <div *ngIf="pesoProgreso.errors.controlDePeso"> Debe ingresar un peso en el rango [30-199] y hasta dos decimales</div>
                                       <div *ngIf="pesoProgreso.errors.required"> El peso es requerido </div>
                                   </div>
                                 </div>        

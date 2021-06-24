@@ -183,6 +183,42 @@ export class AlumnoService {
      return this._http.post(this.urlbase + "alumno/" + idalumno + "/pagos", body, option);
    }
 
+   getPago(idPago:string):Observable<any>{
+    let option = {
+      headers: new HttpHeaders({
+      }),
+      params: new HttpParams({
+
+      })
+    }
+    return this._http.get(this.urlbase+"pago/pagos/"+idPago, option); 
+   }
+   
+   updatePago(pago:Pago):Observable<any>{
+    let option = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      }),
+      params: new HttpParams({
+
+      })
+    }
+    let body = JSON.stringify(pago);
+    return this._http.put(this.urlbase+"pago/pagos/"+pago._id, body, option);
+  }
+
+  deletePago(idPago:string):Observable<any>{
+    let option = {
+      headers: new HttpHeaders({
+      }),
+      params: new HttpParams({
+
+      })
+    }
+    return this._http.delete(this.urlbase+"pago/"+idPago, option);
+   }
+
+
    //progresos
    addProgreso(idAlumno:string, progreso:Progreso):Observable<any>{
     let option = {

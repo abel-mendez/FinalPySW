@@ -15,7 +15,7 @@ alumnoCtrl.getAlumnos = async (req, res) => {
 
 //Obtener alumno
 alumnoCtrl.getAlumno = async (req, res) => {
-  const alumno = await Alumno.findById(req.params.id).populate("asistencias");
+  const alumno = await Alumno.findById(req.params.id).populate("asistencias").populate("pagos");
   res.json(alumno);
 }
 

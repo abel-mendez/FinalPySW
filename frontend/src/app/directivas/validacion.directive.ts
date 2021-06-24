@@ -6,7 +6,7 @@ function controlPeso(c:AbstractControl){
   if (c.value == null) return null;
   // si se ha ingresado un caracter especial en el titulo
   // la funcion test retornara true
-  if(/^([3-9][0-9]|1[0-9][0-9])$/.test(c.value) == false){
+  if(/^([3-9][0-9]|1[0-9][0-9])(?:.[0-9]{1,2})?$/.test(c.value) == false){
   // retorno un error mediante un objeto con un atributo booleado,
   // este atributo será parte del array de errors asociado al control.
   return {controlDePeso: true}
@@ -74,6 +74,59 @@ function controlSeriesRep(c:AbstractControl){
     ]
 })
 export class ControlSeriesRep {
+
+  constructor() { }
+
+}
+
+
+function controlMonto(c:AbstractControl){
+  // si el control no ha sido usado retorno null
+  if (c.value == null) return null;
+  // si se ha ingresado un caracter especial en el titulo
+  // la funcion test retornara true
+  if(/^[+]?[0-9]{1,9}(?:.[0-9]{1,2})?$/.test(c.value) == false){
+  // retorno un error mediante un objeto con un atributo booleado,
+  // este atributo será parte del array de errors asociado al control.
+  return {controlDeMonto: true}
+  }
+  // en cualquier otro caso retorno null (sin error)
+  return null;
+ } 
+
+ @Directive({
+  selector: '[control-monto]',
+  providers:[
+    {provide: NG_VALIDATORS, multi: true, useValue:controlMonto}
+    ]
+})
+export class ControlMonto {
+
+  constructor() { }
+
+}
+
+function controlMontoDecimales(c:AbstractControl){
+  // si el control no ha sido usado retorno null
+  if (c.value == null) return null;
+  // si se ha ingresado un caracter especial en el titulo
+  // la funcion test retornara true
+  if(/^\d+(?:.[0-9]{1,2})?$/.test(c.value) == false){
+  // retorno un error mediante un objeto con un atributo booleado,
+  // este atributo será parte del array de errors asociado al control.
+  return {controlDeMontoDecimales: true}
+  }
+  // en cualquier otro caso retorno null (sin error)
+  return null;
+ } 
+
+ @Directive({
+  selector: '[control-monto-decimales]',
+  providers:[
+    {provide: NG_VALIDATORS, multi: true, useValue:controlMontoDecimales}
+    ]
+})
+export class ControlMontoDecimales {
 
   constructor() { }
 

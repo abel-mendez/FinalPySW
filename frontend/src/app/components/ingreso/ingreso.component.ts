@@ -27,6 +27,7 @@ export class IngresoComponent implements OnInit {
   accionEj:string="new";
   accionAsist:string="new";
   accionProg:string="new";
+  accionPago:string="new";
   progreso: Progreso = new Progreso();
   progresos:Array<Progreso> = new Array<Progreso>();
   planes: Array<Plan> = new Array<Plan>();
@@ -36,6 +37,7 @@ export class IngresoComponent implements OnInit {
   usuario: Usuario = new Usuario();
   pagos: Array<Pago> = new Array<Pago>();
   pago: Pago = new Pago();
+  pagoImp:Pago = new Pago();
   mediospago: string[] = ["Efectivo", "Transferencia bancaria", "Tarjeta de Crédito", "Tarjeta de débito"];
   rutina: Rutina = new Rutina();
   rutinas:Array<Rutina> = new Array<Rutina>();
@@ -74,9 +76,7 @@ export class IngresoComponent implements OnInit {
           this.cargarAlumno(params.id);
           this.getRutinas(params.id);
           this.getPagos(params.id);
-          this.pago.completado = true;
           this.usuario.activo = true;
-          this.pago.modopago = "Efectivo";
           this.usuario.perfil = "alumno";
     });
   }
@@ -260,25 +260,27 @@ export class IngresoComponent implements OnInit {
 
   //Pagos
 
+  nuevoPago(form:NgForm){
+    form.reset();
+    this.pago=new Pago();
+    this.accionPago="new";
+    this.pago.completado=false;
+  }
+
   agregarPago(form: NgForm){
     this.alumnoService.addPago(this.alumno._id, this.pago).subscribe(
       result => {
-        
+        console.log(result);
         if(result.status == "1"){
           this.toastr.success("El pago se agregó correctamente", "Operación exitosa");
-          //this.comprobantepago = result;
           this.getPagos(this.alumno._id);
-          //form.reset();  //no deberia ir form reset ni en agregar pago ni en agregar 
-          //alumno, explicar bug
+          form.reset();
         }
       },
       error => {
         this.toastr.error("Error al agregar el pago", "Operación fallida");
       }
-      
-
-
-
+    
     )
   }
 
@@ -295,6 +297,56 @@ export class IngresoComponent implements OnInit {
       },
       error => {
         this.toastr.error("Error al cargar los pagos", "Operación fallida");
+      }
+    )
+  }
+
+
+  updatePago(form:NgForm){
+    this.alumnoService.updatePago(this.pago).subscribe(
+      result=>{
+        if(result.status=="1"){
+          this.toastr.success("El pago se modificó correctamente", "Operación exitosa");
+          this.getPagos(this.alumno._id);
+          form.reset();
+        }
+      },
+      error=>{
+        this.toastr.error("Error al modificar el pago", "Operación fallida");
+      }
+    )
+  }
+
+  cargarPago(idPago:string){
+    this.accionPago="update";
+    this.alumnoService.getPago(idPago).subscribe(
+      result=>{
+        Object.assign(this.pago,result);
+      },
+      error=>{
+        this.toastr.error("Error al cargar el pago", "Operación fallida");
+      }
+    )
+  }
+
+  usarPagoSeleccionado(pago:Pago){
+    this.pago= pago;
+  }
+
+  usarPagoImprimir(pago:Pago){
+    this.pagoImp=pago;
+  }
+
+  eliminarPago(){
+    this.alumnoService.deletePago(this.pago._id).subscribe(
+      result=>{
+        if(result.status=="1"){
+          this.toastr.info("Pago eliminado correctamente","Operación exitosa");
+          this.getPagos(this.alumno._id);
+        }
+      },
+      error=>{
+        this.toastr.error("Error al eliminar el pago","Operación fallida");
       }
     )
   }
@@ -576,6 +628,8 @@ usarEjercicioSeleccionado(ejercicio:Ejercicio){
     )
   }
   
+
+
   /*imprimirComprobante(){
     printJS({
       printable: this.comprobantepago,
