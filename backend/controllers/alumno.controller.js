@@ -15,7 +15,7 @@ alumnoCtrl.getAlumnos = async (req, res) => {
 
 //Obtener alumno
 alumnoCtrl.getAlumno = async (req, res) => {
-  const alumno = await Alumno.findById(req.params.id).populate("asistencias").populate("pagos");
+  const alumno = await Alumno.findById(req.params.id).populate("asistencias").populate("pagos").populate("usuario");
   res.json(alumno);
 }
 
@@ -358,6 +358,55 @@ alumnoCtrl.createUsuario = async (req, res) => {
       'msg': 'Error procesando operacion.'
     })
   }
+}
+
+alumnoCtrl.editUsuario = async (req, res) => {
+  const alumno = await Alumno.findById(req.params.id);
+  let usuario = await alumno.usuario.find(p => p._id == req.params.idusuario);
+  usuario.set(req.body);
+  const index = alumno.usuario.findIndex(element => element._id == req.params.idusuario );
+  alumno.usuario.set(index, usuario);
+  try {
+    await Alumno.updateOne({ _id: req.params.id }, alumno);
+    res.json({
+      'status': '1',
+      'msg': 'Usuario ACTUALIZADO'
+    })
+  } catch (error) {
+    res.json({
+      'status': '0',
+      'msg': 'Error actualizando el usuario'
+    })
+  }
+  /*const vAlumno = await Alumno.findById(req.params.id);
+  try {
+    if (req.body._id == vAlumno.usuario._id) {
+      const vUsuario = new Usuario (req.body);
+      await Usuario.updateOne({_id: req.body._id}, vUsuario);
+      vAlumno.usuario = vUsuario;
+      res.json({
+        'status': '1',
+        'msg': 'Usuario modificado.'
+      })
+    }
+    else {
+      res.json({
+        'status': '2',
+        'msg': 'Usuario no encontrado.'
+      })
+    }
+  } catch (error) {
+    res.json({
+      'status': '0',
+      'msg': 'Error procesando operacion.'
+    })
+  }*/
+}
+
+//Buscar usuario por alumno
+alumnoCtrl.getUsuarioPorAlumno = async (req, res) => {
+  const alumno = await Alumno.findById(req.params.id).select('usuario').populate("usuario");
+  res.json(alumno);
 }
 
 //Buscar alumno por DNI

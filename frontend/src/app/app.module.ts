@@ -30,6 +30,10 @@ import { ControlPeso, ControlDuracion, ControlSeriesRep, ControlMonto,
 ControlMontoDecimales,} from './directivas/validacion.directive';
 import { NgxPrintModule } from 'ngx-print';
 import { TraducirBoolPipe } from './pipes/traducir-bool.pipe';
+// importamos la librería HTTP_INTERCEPTOR
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import { TokenInterceptorService } from './services/login/token-interceptor.service';
+
 
 @NgModule({
   declarations: [
@@ -69,7 +73,14 @@ import { TraducirBoolPipe } from './pipes/traducir-bool.pipe';
     FacebookModule.forRoot(),
     NgxPrintModule,
   ],
-  providers: [LoginService],
+  providers: [
+    LoginService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

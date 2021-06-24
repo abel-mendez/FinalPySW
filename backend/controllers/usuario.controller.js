@@ -1,5 +1,7 @@
 const alumno = require('../models/alumno');
 const Usuario = require('../models/usuario')
+//importamos el manejador de token
+const jwt = require('jsonwebtoken');
 const usuarioCtrl = {}
 
 //Create Usuario
@@ -18,6 +20,21 @@ usuarioCtrl.createUsuario = async (req, res) => {
     })
   }
 }
+usuarioCtrl.editUsuario = async (req, res) => {
+  const usuario = new Usuario(req.body);
+  try {
+    await Usuario.updateOne({ _id: req.body._id }, usuario);
+    res.json({
+      'status': '1',
+      'msg': 'Usuario ACTUALIZADO'
+    })
+  } catch (error) {
+    res.json({
+      'status': '0',
+      'msg': 'Error actualizando el usuario'
+    })
+  }
+}
 
 //Pregunta si ya existe el nombre de usuario
 usuarioCtrl.getUsuario = async (req, res) => {
@@ -29,6 +46,11 @@ usuarioCtrl.getUsuario = async (req, res) => {
     existe = false;
   }
   res.json(existe);
+}
+
+usuarioCtrl.getUserEspecifico = async (req, res) => {
+  const usuario = await Usuario.findById(req.params.id);
+  res.json(usuario);
 }
 
 usuarioCtrl.loginUsuario = async (req, res) => {
@@ -53,13 +75,16 @@ usuarioCtrl.loginUsuario = async (req, res) => {
         msg: "not found"
       })
     } else {
+      //preparo un token para ser enviado en caso de login correcto
+      const unToken = jwt.sign({id: user._id}, "secretkey");
       res.json({
         status: 1,
         msg: "success",
         usuario: user.usuario,
         perfil: user.perfil,
         //algo asi seria pero no se como
-        user_id:user._id
+        user_id:user._id,
+        token: unToken
       });
     }
   })

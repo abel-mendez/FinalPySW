@@ -94,6 +94,21 @@ export class AlumnoService {
    
     }
 
+    updateUsuario(usuario: Usuario):Observable<any>{
+      let option = {
+        headers: new HttpHeaders({
+          "Content-Type": "application/json"
+        }),
+        params: new HttpParams({
+ 
+        })
+      }
+      let body = JSON.stringify(usuario);
+      return this._http.put(this.urlbase + "usuarios/edit/" + usuario._id, body, option);
+    
+    
+     }
+
    //asistencias
    addAsistencia(idAlumno:string, asistencia:Asistencia):Observable<any>{
     let option = {
@@ -423,4 +438,26 @@ export class AlumnoService {
     }
     return this._http.get(this.urlbase + 'alumno/usuario/'+usuario, httpOption);
    }
+
+   getUsuarioPorAlumno(id: string):Observable<any>{
+    let option = {
+      headers: new HttpHeaders ({
+
+      }),
+      params: new HttpParams ({
+
+      })
+    }
+    return this._http.get(this.urlbase + "usuarios/" + id, option);
+  }
+    /*let option = {
+      headers: new HttpHeaders ({
+
+      }),
+      params: new HttpParams ({
+
+      })
+    }
+    return this._http.get(this.urlbase + "alumno/buscar/" + id, option);
+   }*/
 }

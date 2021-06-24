@@ -45,6 +45,10 @@ export class IngresoComponent implements OnInit {
   ejercicio:Ejercicio = new Ejercicio();
   imgIng:boolean=false;
   controlFecha:boolean;
+  //resultado: string;
+  idaux: string;
+  deseaagregar: boolean = true;
+  deshabilitar: boolean;
 
   constructor(private activatedRoute: ActivatedRoute,
               private router:Router,
@@ -72,6 +76,7 @@ export class IngresoComponent implements OnInit {
           this.getProgresos(params.id);
           this.getAsistencias(params.id);
           this.cargarAlumno(params.id);
+          //this.cargarUsuario(this.idaux);
           this.getRutinas(params.id);
           this.getPagos(params.id);
           this.usuario.activo = true;
@@ -108,6 +113,10 @@ export class IngresoComponent implements OnInit {
                   if (result.status == "1"){
                     this.toastr.success("El usuario se agregó correctamente", "Operación exitosa");
                   }
+                  //this.cargarUsuario(this.alumno.usuario._id);
+                  //this.deseaagregar = false;
+                  this.deshabilitar = true;
+                  
                 },
                 error => {
                   this.toastr.error("Error al agregar el usuario", "Operación fallida");
@@ -122,16 +131,61 @@ export class IngresoComponent implements OnInit {
     
   }
 
+  actualizarUsuario(form: NgForm){
+    this.alumnoService.updateUsuario(this.usuario).subscribe(
+      result => {
+        if (result.status == "1"){
+          this.toastr.info("El usuario se modificó correctamente", "Operación exitosa");
+          //this.cargarAlumno(this.alumno._id);
+        }
+      },
+      error => {
+        this.toastr.error("Error al modificar el usuario", "Operación fallida");
+      }
+    )
+    
+  }
+
+  cargarUsuario(id:string){
+    this.alumnoService.getUsuarioPorAlumno(id).subscribe(
+      result=>{
+        //console.log("aa" + result);
+        //this.resultado = result;
+        Object.assign(this.usuario,result);
+        console.log(result);
+        if (this.usuario.password != ""){
+          this.deseaagregar = false;
+        }else{
+          this.deseaagregar = true;
+        }
+      },
+      error=>{
+        this.toastr.error("Error al cargar el Usuario", "Operación fallida");
+      }
+    )
+    
+  }
+
   cargarAlumno(id:string){
     this.alumnoService.getAlumno(id).subscribe(
       result=>{
+        //console.log("bb" + result);
         Object.assign(this.alumno,result);
+        //this.cargarUsuario(this.idaux);
+        console.log(this.alumno);
+        this.idaux = this.alumno.usuario._id;
+        this.cargarUsuario(this.idaux);
+        console.log("id del usuario" + this.idaux);
+        //Object.assign(this.usuario,result);
         //this.alumno.plan = this.planes.find(p=>(p._id == this.alumno.plan._id))
       },
       error=>{
         this.toastr.error("Error al cargar el alumno", "Operación fallida");
       }
+      
     )
+    
+    
   }
 
   actualizarAlumno(form: NgForm){
