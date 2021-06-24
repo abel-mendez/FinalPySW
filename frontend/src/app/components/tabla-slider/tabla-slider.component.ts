@@ -64,21 +64,15 @@ export class TablaSliderComponent implements OnInit {
     this.fb.init(initParams);
   }
   seleccionar(slider){
-   
     this.slider=slider;
-    console.log(this.slider);
   }
 
   seleccionarPlan(plan){
-   
     this.plan=plan;
-    console.log(this.plan);
   }
 
   onFileChanged(e) {
-    console.log(e);
     this.slider.img = e[0].base64;
-    console.log(this.slider)
   }
 
   //Slider
