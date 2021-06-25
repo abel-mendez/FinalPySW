@@ -130,6 +130,7 @@ export class TablaSliderComponent implements OnInit {
         this.sliders = new Array<Slider>();
         this.slider = new Slider();
         this.cargarSliders();
+        
       },
       error => {
         this.toastr.error("Error al modificar el slider", "Operación fallida");
