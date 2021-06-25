@@ -292,15 +292,15 @@
                       [(ngModel)]="slider.descripcion"
                       placeholder="Porfavor, ingrese una descripcion"
                       rows="5"
-                      #descripcion="ngModel"
+                      #descripcionM="ngModel"
                       minlength="5"
                       required
                     ></textarea>
-                    <div *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)" class="alert alert-danger">
-                      <div *ngIf="descripcion.errors.required">
+                    <div *ngIf="descripcionM.invalid && (descripcionM.dirty || descripcionM.touched)" class="alert alert-danger">
+                      <div *ngIf="descripcionM.errors.required">
                         Descripcion es requerido
                       </div>
-                      <div *ngIf="descripcion.errors.minlength">
+                      <div *ngIf="descripcionM.errors.minlength">
                         Descripcion debe tener almenos 5 caracteres
                       </div>
                     </div>
@@ -616,20 +616,20 @@
                   id="tipo"
                   name="tipo"
                   [(ngModel)]="plan.tipo"
-                  #tipo="ngModel"
-                  minlength="3"
+                  #tipoM="ngModel"
+                  minlength="4"
                   manlength="30"
                   placeholder="Ingrese un tipo de plan"
                   required
                 />
-                <div *ngIf="tipo.invalid && (tipo.dirty || tipo.touched)" class="alert alert-danger">
-                  <div *ngIf="tipo.errors.required">
+                <div *ngIf="tipoM.invalid && (tipoM.dirty || tipoM.touched)" class="alert alert-danger">
+                  <div *ngIf="tipoM.errors.required">
                     Tipo plan es requerido
                   </div> 
-                  <div *ngIf="tipo.errors.minlength">
-                    Tipo plan debe tener almenos 3 caracteres
+                  <div *ngIf="tipoM.errors.minlength">
+                    Tipo plan debe tener almenos 4 caracteres
                   </div>
-                  <div *ngIf="tipo.errors.maxlength">
+                  <div *ngIf="tipoM.errors.maxlength">
                     Tipo plan debe tener como máximo 30 caracteres
                   </div>
                 </div>
@@ -642,16 +642,16 @@
                   id="costo"
                   name="costo"
                   [(ngModel)]="plan.costo"
-                  #costo="ngModel"
+                  #costoM="ngModel"
                   control-monto
                   placeholder="Ingrese el costo del plan"
                   required
                 />
-                <div *ngIf="costo.invalid && (costo.dirty || costo.touched)" class="alert alert-danger">
-                  <div *ngIf="costo.errors.required">
+                <div *ngIf="costoM.invalid && (costoM.dirty || costoM.touched)" class="alert alert-danger">
+                  <div *ngIf="costoM.errors.required">
                     Costo es requerido
                   </div>
-                  <div *ngIf="costo.errors.controlDeMonto"> 
+                  <div *ngIf="costoM.errors.controlDeMonto"> 
                     No se permiten números negativos ni más de dos decimales
                   </div>
                   <!--<div *ngIf="costo.errors.minlength">
@@ -667,20 +667,20 @@
                   id="frecuencia"
                   name="frecuencia"
                   [(ngModel)]="plan.frecuencia"
-                  #frecuencia="ngModel"
+                  #frecuenciaM="ngModel"
                   minlength="3"
                   maxlength="25"
                   placeholder="ingrese la frecuencia del plan"
                   required
                 />
-                <div *ngIf="frecuencia.invalid && (frecuencia.dirty || frecuencia.touched)" class="alert alert-danger">
-                  <div *ngIf="frecuencia.errors.required">
+                <div *ngIf="frecuenciaM.invalid && (frecuenciaM.dirty || frecuenciaM.touched)" class="alert alert-danger">
+                  <div *ngIf="frecuenciaM.errors.required">
                     Frecuencia es requerido
                   </div>
-                  <div *ngIf="frecuencia.errors.minlength">
+                  <div *ngIf="frecuenciaM.errors.minlength">
                     Frecuencia debe tener almenos 5 caracteres
                   </div>
-                  <div *ngIf="frecuencia.errors.maxlength">
+                  <div *ngIf="frecuenciaM.errors.maxlength">
                     Frecuencia debe tener como máximo 25 caracteres
                   </div>
                 </div>
