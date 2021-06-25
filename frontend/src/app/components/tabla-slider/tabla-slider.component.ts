@@ -190,6 +190,7 @@ export class TablaSliderComponent implements OnInit {
         this.toastr.info("El Plan se eliminó correctamente", "Operación exitosa");
         this.planes = new Array<Plan>();
         this.cargarPlanes();
+        this.plan = new Plan();
       },
       error => {
         this.toastr.error("Error al eliminar el plan", "Operación fallida");
