@@ -36,11 +36,11 @@ export class TablaSliderComponent implements OnInit {
       if (sessionStorage.getItem("perfil") == "entrenador") {
 
       } else {
-        alert("No posee los permisos necesarios")
+        this.toastr.warning("No posee los permisos necesarios", "Error")
         this.router.navigate(['home']);
       }
     } else {
-      alert("Debe Loguearse para continuar")
+      this.toastr.info("Debe loguearse para continuar", "Usuario no identificado")
       this.router.navigate(['login']);
     }
   }
@@ -87,7 +87,7 @@ export class TablaSliderComponent implements OnInit {
         this.slider = new Slider();
       },
       error => {
-        console.log(error);
+        this.toastr.error("Error al agregar el slider", "Operación fallida");
       });
   }
 
@@ -101,7 +101,7 @@ export class TablaSliderComponent implements OnInit {
         });
       },
       error => {
-        alert('Error al cargar los Sliders')
+        this.toastr.error("Error al cargar los sliders", "Operación fallida");
       }
     )
   }
@@ -109,31 +109,16 @@ export class TablaSliderComponent implements OnInit {
   eliminarSlider(slider: Slider) {
     this.sliderService.deleteSlider(slider).subscribe(
       result => {
-        console.log(result);
         this.toastr.info("El Slider se eliminó correctamente", "Operación exitosa");
         this.sliders = new Array<Slider>();
         this.cargarSliders();
       },
       error => {
-        console.log("el slider no se ha podido eliminar")
+        this.toastr.error("Error al eliminar el slider", "Operación fallida");
+
       }
     );
   }
-
-  /*cargarSlider(slider:Slider) {
-    this.sliderService.getSlider(slider).subscribe(
-      result=>{
-          let slider = new Slider();
-          Object.assign(slider);
-          this.sliders.push(slider);
-          console.log("aaaaaa"+result);
-      },
-      error=>{
-        console.log(error);
-        alert("Error al cargar los Alumnos");
-      }
-    )
-  }*/
 
   modificarSlider(slider: Slider) {
     this.sliderService.modificarSlider(slider).subscribe(
@@ -144,7 +129,8 @@ export class TablaSliderComponent implements OnInit {
         this.cargarSliders();
       },
       error => {
-        console.log(error);
+        this.toastr.error("Error al modificar el slider", "Operación fallida");
+
       }
     )
   }
@@ -159,7 +145,8 @@ export class TablaSliderComponent implements OnInit {
         this.cargarPlanes();
       },
       error => {
-        console.log(error);
+        this.toastr.error("Error al agregar el plan", "Operación fallida");
+
       });
   }
 
@@ -174,7 +161,7 @@ export class TablaSliderComponent implements OnInit {
         });
       },
       error => {
-
+        this.toastr.error("Error al cargar los planes", "Operación fallida");
       }
     )
   }
@@ -188,7 +175,8 @@ export class TablaSliderComponent implements OnInit {
         this.cargarPlanes();
       },
       error => {
-        console.log(error);
+        this.toastr.error("Error al modificar los planes", "Operación fallida");
+
       }
     )
   }
@@ -196,14 +184,13 @@ export class TablaSliderComponent implements OnInit {
   eliminarPlan(plan: Plan) {
     this.planService.deletePlan(plan).subscribe(
       result => {
-        console.log(result);
         this.toastr.info("El Plan se eliminó correctamente", "Operación exitosa");
         this.planes = new Array<Plan>();
         this.cargarPlanes();
       },
       error => {
-        console.log(error)
-        console.log("el plan no se ha podido eliminar")
+        this.toastr.error("Error al eliminar el plan", "Operación fallida");
+
       }
     );
   }

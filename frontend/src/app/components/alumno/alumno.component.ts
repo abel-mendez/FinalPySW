@@ -50,12 +50,10 @@ export class AlumnoComponent implements OnInit {
 
       } else {
         this.toast.warning("No posee los permisos necesarios", "Error")
-        //alert("No posee los permisos necesarios")
         this.router.navigate(['home']);
       }
     } else {
       this.toast.info("Debe loguearse para continuar", "Usuario no identificado")
-      //alert("Debe Loguearse para continuar")
       this.router.navigate(['login']);
     }
     
@@ -71,7 +69,6 @@ export class AlumnoComponent implements OnInit {
     this.alumnoService.getAlumnoPorUsuario(this.loginService.userLogged()).subscribe(
       result => {
         Object.assign(this.alumno, result);
-        console.log(this.alumno[0]._id);
         this.getPagos(this.alumno[0]._id);
         this.getAsistencias(this.alumno[0]._id);
         this.getProgresos(this.alumno[0]._id);
@@ -79,7 +76,7 @@ export class AlumnoComponent implements OnInit {
         this.getEjercicios(this.alumno[0]._id);
       },
       error => {
-        
+        this.toast.error("Error al cargar los alumnos", "Operación fallida");
       }
      
     )
@@ -97,11 +94,9 @@ export class AlumnoComponent implements OnInit {
           this.asistencias.push(vAsistencia);
           this.asistenciaJSON = result;
         });
-        console.log("asitencias "+result);
       },
       error=>{
-        console.log(error)
-        console.log(id)
+        this.toast.error("Error al cargar las asistencias", "Operación fallida");
       }
     )
   }
@@ -120,8 +115,7 @@ export class AlumnoComponent implements OnInit {
         this.pagoJSON = result;
       },
       error => {
-        console.log(error);
-        alert("Error al cargar los pagos");
+        this.toast.error("Error al cargar los pagos", "Operación fallida");
       }
     )
   }
@@ -134,12 +128,10 @@ export class AlumnoComponent implements OnInit {
           let vProgreso = new Progreso();
           Object.assign(vProgreso, element);
           this.progresos.push(vProgreso);
-          console.log(result);
         });
       },
       error => {
-        console.log(error);
-        alert("Error al cargar los progresos");
+        this.toast.error("Error al cargar los progresos", "Operación fallida");
       }
     )
   }
@@ -152,12 +144,10 @@ export class AlumnoComponent implements OnInit {
           let vRutina = new Rutina();
           Object.assign(vRutina, element);
           this.rutinas.push(vRutina);
-          console.log(result);
         });
       },
       error => {
-        console.log(error);
-        alert("Error al cargar las rutinas");
+        this.toast.error("Error al cargar las rutinas", "Operación fallida");
       }
     )
   }
@@ -170,13 +160,10 @@ export class AlumnoComponent implements OnInit {
           let vEjercicio = new Ejercicio();
           Object.assign(vEjercicio, element);
           this.ejercicios.push(vEjercicio);
-          console.log(result);
-          console.log(this.ejercicios);
         });
       },
       error => {
-        console.log(error);
-        alert("Error al cargar los ejercicios");
+        this.toast.error("Error al cargar los ejercicios", "Operación fallida");
       }
     )
   }
@@ -231,7 +218,4 @@ export class AlumnoComponent implements OnInit {
     })
   }
 
-  //usarRutinaSeleccionada(rutina:Rutina){
-   // this.rutina=rutina;
-  //}
 }
