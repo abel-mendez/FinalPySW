@@ -4,30 +4,72 @@
   <div>
     <nav>
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <button class="btn btn-green nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
-          type="button" role="tab" aria-controls="nav-home" aria-selected="true">
+        <button
+          class="btn btn-green nav-link active"
+          id="nav-home-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#nav-home"
+          type="button"
+          role="tab"
+          aria-controls="nav-home"
+          aria-selected="true"
+        >
           Tu Progreso
         </button>
-        <button class="btn nav-link btn-green" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
-          type="button" role="tab" aria-controls="nav-profile" aria-selected="false">
+        <button
+          class="btn nav-link btn-green"
+          id="nav-profile-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#nav-profile"
+          type="button"
+          role="tab"
+          aria-controls="nav-profile"
+          aria-selected="false"
+        >
           Tu Asistencia
         </button>
-        <button class="btn nav-link btn-green" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact"
-          type="button" role="tab" aria-controls="nav-contact" aria-selected="false">
+        <button
+          class="btn nav-link btn-green"
+          id="nav-contact-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#nav-contact"
+          type="button"
+          role="tab"
+          aria-controls="nav-contact"
+          aria-selected="false"
+        >
           Tus Rutinas
         </button>
-        <button class="btn nav-link btn-green" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-pago"
-          type="button" role="tab" aria-controls="nav-pago" aria-selected="false">
+        <button
+          class="btn nav-link btn-green"
+          id="nav-contact-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#nav-pago"
+          type="button"
+          role="tab"
+          aria-controls="nav-pago"
+          aria-selected="false"
+        >
           Tus Pagos
         </button>
       </div>
     </nav>
     <div class="tab-content" id="nav-tabContent">
-      <div class="tab-pane fade show active cont" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+      <div
+        class="tab-pane fade show active cont"
+        id="nav-home"
+        role="tabpanel"
+        aria-labelledby="nav-home-tab"
+      >
         <section>
           <h3 class="categorie">Tu Progreso</h3>
           <div class="table-responsive">
-            <table class="table table-striped" [mfData]="progresos" #mf="mfDataTable" [mfRowsOnPage]="5">
+            <table
+              class="table table-striped"
+              [mfData]="progresos"
+              #mf="mfDataTable"
+              [mfRowsOnPage]="5"
+            >
               <thead>
                 <tr>
                   <th>
@@ -43,24 +85,30 @@
                     <mfDefaultSorter by="dieta">Dieta</mfDefaultSorter>
                   </th>
                   <th>
-                    <mfDefaultSorter by="observaciones">Observaciones</mfDefaultSorter>
+                    <mfDefaultSorter by="observaciones"
+                      >Observaciones</mfDefaultSorter
+                    >
                   </th>
-                  <th>
-                    Opciones
-                  </th>
-
+                  <th>Opciones</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let progreso of mf.data">
-                  <td class="text-right">{{progreso.fecha | date: 'dd/MM/yyyy'}}</td>
-                  <td>{{progreso.peso}} Kg</td>
+                  <td class="text-right">
+                    {{ progreso.fecha | date: "dd/MM/yyyy" }}
+                  </td>
+                  <td>{{ progreso.peso }} Kg</td>
                   <td><img src="{{ progreso.foto }}" alt="" width="50%" /></td>
-                  <td>{{progreso.dieta}}</td>
-                  <td>{{progreso.observaciones}}</td>
+                  <td>{{ progreso.dieta }}</td>
+                  <td>{{ progreso.observaciones }}</td>
                   <td>
-                    <button type="button" class="btn-green btn" data-bs-toggle="modal"
-                      data-bs-target="#modalVerProgreso" (click)="mostrarIdAlumno()">
+                    <button
+                      type="button"
+                      class="btn-green btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalVerProgreso"
+                      (click)="mostrarIdAlumno()"
+                    >
                       Ver Imagen
                     </button>
                   </td>
@@ -69,7 +117,9 @@
               <tfoot>
                 <tr>
                   <td colspan="4">
-                    <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+                    <mfBootstrapPaginator
+                      [rowsOnPageSet]="[5, 10, 25]"
+                    ></mfBootstrapPaginator>
                   </td>
                 </tr>
               </tfoot>
@@ -104,42 +154,52 @@
         </section>
 
         <!-- Modal Ver  Progreso -->
-        <div class="modal fade" id="modalVerProgreso" tabindex="-1" aria-labelledby="modalLabelVerProgreso"
-          aria-hidden="true">
+        <div
+          class="modal fade"
+          id="modalVerProgreso"
+          tabindex="-1"
+          aria-labelledby="modalLabelVerProgreso"
+          aria-hidden="true"
+        >
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="modalLabelVerProgreso">
                   Tu Progreso
                 </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
               </div>
               <div class="modal-body">
                 <div class="container-fluid col-10 offset-1 mb-3">
                   <div class="row mb-3">
                     <div class="col-md-4 text-init"><b>Fecha: </b></div>
-                    <div class="col-md-8 text-end">{{progreso.fecha}}</div>
+                    <div class="col-md-8 text-end">{{ progreso.fecha }}</div>
                   </div>
                   <div class="row mb-3">
                     <div class="col-md-4 text-init"><b>Peso: </b></div>
-                    <div class="col-md-8 text-end">{{progreso.peso}}</div>
+                    <div class="col-md-8 text-end">{{ progreso.peso }}</div>
                   </div>
                   <div class="row mb-3">
                     <div class="col-md-4 text-init"><b>Dieta: </b></div>
-                    <div class="col-md-8 text-end">{{progreso.dieta}}</div>
+                    <div class="col-md-8 text-end">{{ progreso.dieta }}</div>
                   </div>
                   <div class="row mb-3">
                     <div class="col-md-4 text-center">
                       <b>Observaciones: </b>
                     </div>
                     <div class="col-md-8 text-end">
-                      {{progreso.observaciones}}
+                      {{ progreso.observaciones }}
                     </div>
                   </div>
                 </div>
                 <div class="col-5 offset-4 mb-3">
                   <div class="col-md-4" style="width: 50%">
-                    <img src="{{progreso.foto}}" alt="" />
+                    <img src="{{ progreso.foto }}" alt="" />
                   </div>
                 </div>
 
@@ -161,7 +221,11 @@
           </div>-->
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-grey" data-bs-dismiss="modal">
+                <button
+                  type="button"
+                  class="btn btn-grey"
+                  data-bs-dismiss="modal"
+                >
                   Close
                 </button>
               </div>
@@ -169,112 +233,178 @@
           </div>
         </div>
       </div>
-      <div class="tab-pane fade cont" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+      <div
+        class="tab-pane fade cont"
+        id="nav-profile"
+        role="tabpanel"
+        aria-labelledby="nav-profile-tab"
+      >
         <!--          ver asistencia del alumno      -->
         <section>
           <h3 class="categorie">Tu Asistencia</h3>
           <div class="table-responsive">
-            <button class="btn btn-primary" id="" type="button" (click)="imprimirAsistencias()">
-          Imprimir todas
-        </button>
-            <table class="table table-striped" [mfData]="asistencias" #mf1="mfDataTable" [mfRowsOnPage]="5">
+            <button
+              class="btn btn-green"
+              id=""
+              type="button"
+              (click)="imprimirAsistencias()"
+            >
+              Imprimir todas
+            </button>
+            <table
+              class="table table-striped"
+              [mfData]="asistencias"
+              #mf1="mfDataTable"
+              [mfRowsOnPage]="5"
+            >
               <thead>
                 <tr>
-                  <th style="width:30%">
+                  <th style="width: 30%">
                     <mfDefaultSorter by="fecha">Fecha</mfDefaultSorter>
                   </th>
-                  <th style="width:30%">
+                  <th style="width: 30%">
                     <mfDefaultSorter by="hora">Hora</mfDefaultSorter>
                   </th>
-                  <th style="width:40%">
-                    Opciones
-                  </th>
-
+                  <th style="width: 40%">Opciones</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let asistencia of mf1.data">
-                  <td class="text-right">{{asistencia.fecha | date: 'dd/MM/yyyy'}}</td>
-                  <td>{{asistencia.hora}}</td>
+                  <td class="text-right">
+                    {{ asistencia.fecha | date: "dd/MM/yyyy" }}
+                  </td>
+                  <td>{{ asistencia.hora }}</td>
                   <td>
-                    <button type="button" class="btn-green btn" data-bs-toggle="modal"
-                      data-bs-target="#modalVerAsistencia">
+                    <button
+                      type="button"
+                      class="btn-green btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalVerAsistencia"
+                    >
                       Ver
                     </button>
-                    <button type="button" class="btn btn-dark" style="margin-bottom: 10px;
-                      margin-right: 10px" data-bs-toggle="modal"
-                      data-bs-target="#modalImprimirAsistencia" (click)="usarAsistenciaImprimir(asistencia)">Imprimir</button>
+                    <button
+                      type="button"
+                      class="btn btn-grey"
+                      style="margin-bottom: 10px; margin-right: 10px"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalImprimirAsistencia"
+                      (click)="usarAsistenciaImprimir(asistencia)"
+                    >
+                      Imprimir
+                    </button>
                   </td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <td colspan="4">
-                    <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+                    <mfBootstrapPaginator
+                      [rowsOnPageSet]="[5, 10, 25]"
+                    ></mfBootstrapPaginator>
                   </td>
                 </tr>
               </tfoot>
             </table>
           </div>
           <!-- modal imprimir pago -->
-          <div class="modal fade" id="modalImprimirAsistencia" tabindex="-1" aria-labelledby="modalLabelImprimirAsistencia"
-          aria-hidden="true">
-          <div class="modal-dialog modal-lg">
+          <div
+            class="modal fade"
+            id="modalImprimirAsistencia"
+            tabindex="-1"
+            aria-labelledby="modalLabelImprimirAsistencia"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog modal-lg">
               <div class="modal-content">
-                  <div class="modal-header text-white bg-dark">
-                      <h5 class="modal-title" id="modalLabelImprimirAsistencia">Imprimir asistencia</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body" id="impresionasist">
-                      <div class="container-fluid col-10 offset-1 mb-3">
-                        <form class="row g-3" #asistForm="ngForm">
-                          <div class="col-md-6">
-                            <label for="" class="form-label">Fecha de asistencia:</label>
-                            <div class="alert alert-primary text-dark" role="alert">
-                              {{asistImp.fecha | date: 'dd/MM/yyyy'}}
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <label for="" class="form-label">Hora de asistencia:</label>
-                            <div class="alert alert-primary text-dark" role="alert">
-                              {{ asistImp.hora }}
-                            </div>
-                          </div>
-                          </form>
+                <div class="modal-header text-white bg-dark">
+                  <h5 class="modal-title" id="modalLabelImprimirAsistencia">
+                    Imprimir asistencia
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body" id="impresionasist">
+                  <div class="container-fluid col-10 offset-1 mb-3">
+                    <form class="row g-3" #asistForm="ngForm">
+                      <div class="col-md-6">
+                        <label for="" class="form-label"
+                          >Fecha de asistencia:</label
+                        >
+                        <div class="alert alert-primary text-dark" role="alert">
+                          {{ asistImp.fecha | date: "dd/MM/yyyy" }}
+                        </div>
                       </div>
+                      <div class="col-md-6">
+                        <label for="" class="form-label"
+                          >Hora de asistencia:</label
+                        >
+                        <div class="alert alert-primary text-dark" role="alert">
+                          {{ asistImp.hora }}
+                        </div>
+                      </div>
+                    </form>
                   </div>
-                  <div class="modal-footer">
-                    <!--<button class="btn btn-green" (click)="imprimirComprobante()" >Imprimir</button>-->
-                    <button type="button" class="btn btn-green" [useExistingCss]="true"
-                    printSectionId="impresionasist" printTitle="Comprobante de asistencia"
-                    ngxPrint>Imprimir</button>                      
-                    <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Close</button>
-                  </div>
+                </div>
+                <div class="modal-footer">
+                  <!--<button class="btn btn-green" (click)="imprimirComprobante()" >Imprimir</button>-->
+                  <button
+                    type="button"
+                    class="btn btn-green"
+                    [useExistingCss]="true"
+                    printSectionId="impresionasist"
+                    printTitle="Comprobante de asistencia"
+                    ngxPrint
+                  >
+                    Imprimir
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-grey"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                </div>
               </div>
-          </div>
+            </div>
           </div>
         </section>
 
         <!-- Modal Ver Asistencia -->
-        <div class="modal fade" id="modalVerAsistencia" tabindex="-1" aria-labelledby="modalLabelVerAsistencia"
-          aria-hidden="true">
+        <div
+          class="modal fade"
+          id="modalVerAsistencia"
+          tabindex="-1"
+          aria-labelledby="modalLabelVerAsistencia"
+          aria-hidden="true"
+        >
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="modalLabelVerAsistencia">
                   Tu Asistencia
                 </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
               </div>
               <div class="modal-body">
                 <div class="container-fluid col-10 offset-1 mb-3">
                   <div class="row mb-3">
                     <div class="col-md-4 text-init"><b>Fecha: </b></div>
-                    <div class="col-md-8 text-end">{{asistencia.fecha}}</div>
+                    <div class="col-md-8 text-end">{{ asistencia.fecha }}</div>
                   </div>
                   <div class="row mb-3">
                     <div class="col-md-4 text-init"><b>Hora: </b></div>
-                    <div class="col-md-8 text-end">{{asistencia.hora}}</div>
+                    <div class="col-md-8 text-end">{{ asistencia.hora }}</div>
                   </div>
                 </div>
                 <!--<div class="col-5 offset-4 mb-3">
@@ -282,7 +412,11 @@
           </div>-->
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-grey" data-bs-dismiss="modal">
+                <button
+                  type="button"
+                  class="btn btn-grey"
+                  data-bs-dismiss="modal"
+                >
                   Close
                 </button>
               </div>
@@ -290,34 +424,54 @@
           </div>
         </div>
       </div>
-      <div class="tab-pane fade cont" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+      <div
+        class="tab-pane fade cont"
+        id="nav-contact"
+        role="tabpanel"
+        aria-labelledby="nav-contact-tab"
+      >
         <!--          ver rutinas del alumno      -->
         <section>
           <h3 class="categorie">Tus rutinas</h3>
           <div class="table-responsive">
             <div class="card-body table-responsive-sm">
-              <table class="table table-striped" [mfData]="rutinas" #mf2="mfDataTable" [mfRowsOnPage]="5">
+              <table
+                class="table table-striped"
+                [mfData]="rutinas"
+                #mf2="mfDataTable"
+                [mfRowsOnPage]="5"
+              >
                 <thead>
                   <tr>
                     <th>
                       <mfDefaultSorter by="duracion">Duración</mfDefaultSorter>
                     </th>
                     <th>
-                      <mfDefaultSorter by="grupomuscular">Grupo muscular</mfDefaultSorter>
+                      <mfDefaultSorter by="grupomuscular"
+                        >Grupo muscular</mfDefaultSorter
+                      >
                     </th>
                     <th>
-                      <mfDefaultSorter by="ejercicios">Ejercicios</mfDefaultSorter>
+                      <mfDefaultSorter by="ejercicios"
+                        >Ejercicios</mfDefaultSorter
+                      >
                     </th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let rutina of mf2.data">
-                    <td>{{ rutina.duracion}}</td>
+                    <td>{{ rutina.duracion }}</td>
                     <td>{{ rutina.grupomuscular }}</td>
                     <td>
-                      <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalMostrarEjercicios"
-                        (click)="getEjercicios(rutina._id)" (click)="usarRutinaSeleccionada(rutina)">Ver
-                        ejercicios</button>
+                      <button
+                        class="btn btn-grey"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalMostrarEjercicios"
+                        (click)="getEjercicios(rutina._id)"
+                        (click)="usarRutinaSeleccionada(rutina)"
+                      >
+                        Ver ejercicios
+                      </button>
                     </td>
                     <!--<td>
                       <button class="btn btn-green" data-bs-toggle="modal" data-bs-target="#modalAgregarRutina"
@@ -328,7 +482,9 @@
                 <tfoot>
                   <tr>
                     <td colspan="4">
-                      <mfBootstrapPaginator [rowsOnPageSet]="[5, 10, 25]"></mfBootstrapPaginator>
+                      <mfBootstrapPaginator
+                        [rowsOnPageSet]="[5, 10, 25]"
+                      ></mfBootstrapPaginator>
                     </td>
                   </tr>
                 </tfoot>
@@ -393,15 +549,25 @@
         </section>
 
         <!-- Modal ver Rutinas -->
-        <div class="modal fade" id="modalVerRutina" tabindex="-1" aria-labelledby="modalLabelVerRutina"
-          aria-hidden="true">
+        <div
+          class="modal fade"
+          id="modalVerRutina"
+          tabindex="-1"
+          aria-labelledby="modalLabelVerRutina"
+          aria-hidden="true"
+        >
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="modalLabelVerRutina">
                   Tus Rutinas
                 </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
               </div>
               <div class="modal-body">
                 <div class="container-fluid col-10 offset-1 mb-3">
@@ -432,7 +598,11 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-grey" data-bs-dismiss="modal">
+                <button
+                  type="button"
+                  class="btn btn-grey"
+                  data-bs-dismiss="modal"
+                >
                   Close
                 </button>
               </div>
@@ -442,72 +612,105 @@
       </div>
 
       <!-- modal ver ejercicios de rutina -->
-      <div class="modal fade" id="modalMostrarEjercicios" tabindex="-1" aria-labelledby="modalLabelMostrarEjercicios"
-      aria-hidden="true">
-      <div class="modal-dialog modal-lg modal-dialog-scrollable">
+      <div
+        class="modal fade"
+        id="modalMostrarEjercicios"
+        tabindex="-1"
+        aria-labelledby="modalLabelMostrarEjercicios"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
           <div class="modal-content">
-              <div class="modal-header bg-dark text-white">
-                  <h5 class="modal-title" id="modalLabelMostrarEjercicios">Ejercicios de rutina</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header bg-dark text-white">
+              <h5 class="modal-title" id="modalLabelMostrarEjercicios">
+                Ejercicios de rutina
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="table-responsive">
+                <table
+                  class="table table-striped"
+                  [mfData]="ejercicios"
+                  #mf3="mfDataTable"
+                  [mfRowsOnPage]="5"
+                >
+                  <thead>
+                    <tr>
+                      <th>
+                        <mfDefaultSorter by="nombre">Nombre</mfDefaultSorter>
+                      </th>
+                      <th>
+                        <mfDefaultSorter by="series">Series</mfDefaultSorter>
+                      </th>
+                      <th>
+                        <mfDefaultSorter by="repeticiones"
+                          >Repeticiones</mfDefaultSorter
+                        >
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let e of mf3.data">
+                      <td>{{ e.nombre }}</td>
+                      <td>{{ e.series }}</td>
+                      <td>{{ e.repeticiones }}</td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td colspan="4">
+                        <mfBootstrapPaginator
+                          [rowsOnPageSet]="[5, 10, 25]"
+                        ></mfBootstrapPaginator>
+                      </td>
+                    </tr>
+                  </tfoot>
+                </table>
               </div>
-              <div class="modal-body">
-                <div class="table-responsive">
-                  <table
-                    class="table table-striped"
-                    [mfData]="ejercicios"
-                    #mf3="mfDataTable"
-                    [mfRowsOnPage]="5"
-                  >
-                    <thead>
-                      <tr>
-                        <th >
-                          <mfDefaultSorter by="nombre">Nombre</mfDefaultSorter>
-                        </th>
-                        <th >
-                          <mfDefaultSorter by="series">Series</mfDefaultSorter>
-                        </th>
-                        <th >
-                          <mfDefaultSorter by="repeticiones">Repeticiones</mfDefaultSorter>
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let e of mf3.data">
-                        <td>{{ e.nombre}}</td>
-                        <td>{{ e.series }}</td>
-                        <td>{{ e.repeticiones}}</td>
-                      </tr>
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <td colspan="4">
-                          <mfBootstrapPaginator
-                            [rowsOnPageSet]="[5, 10, 25]"
-                          ></mfBootstrapPaginator>
-                        </td>
-                      </tr>
-                    </tfoot>
-                  </table>
-                </div>
-
-              </div>
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Close</button>
-              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-grey"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
           </div>
+        </div>
       </div>
-      </div>
-      
-      <div class="tab-pane fade cont" id="nav-pago" role="tabpanel" aria-labelledby="nav-pago-tab">
 
+      <div
+        class="tab-pane fade cont"
+        id="nav-pago"
+        role="tabpanel"
+        aria-labelledby="nav-pago-tab"
+      >
         <!--          ver pago de cuotas del alumno     -->
         <section>
           <h3 class="categorie">Tus Pagos</h3>
           <div class="table-responsive">
-            <button class="btn btn-primary" id="" type="button" (click)="imprimirPagos()">
+            <button
+              class="btn btn-green"
+              id=""
+              type="button"
+              (click)="imprimirPagos()"
+            >
               Imprimir todos
             </button>
-            <table class="table table-striped" [mfData]="pagos" #mf5="mfDataTable" [mfRowsOnPage]="5">
+            <table
+              class="table table-striped"
+              [mfData]="pagos"
+              #mf5="mfDataTable"
+              [mfRowsOnPage]="5"
+            >
               <thead>
                 <tr>
                   <th>
@@ -517,38 +720,54 @@
                     <mfDefaultSorter by="fechapago">Fecha Pago</mfDefaultSorter>
                   </th>
                   <th>
-                    <mfDefaultSorter by="modopago">Modo de Pago</mfDefaultSorter>
+                    <mfDefaultSorter by="modopago"
+                      >Modo de Pago</mfDefaultSorter
+                    >
                   </th>
                   <th>
-                    <mfDefaultSorter by="fechavencimiento">Fecha Vencimiento</mfDefaultSorter>
+                    <mfDefaultSorter by="fechavencimiento"
+                      >Fecha Vencimiento</mfDefaultSorter
+                    >
                   </th>
                   <th>
-                    <mfDefaultSorter by="completado">Completado</mfDefaultSorter>
+                    <mfDefaultSorter by="completado"
+                      >Completado</mfDefaultSorter
+                    >
                   </th>
-                  <th>
-                    Opciones
-                  </th>
-
+                  <th>Opciones</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let pago of mf5.data">
-                  <td>{{pago.monto}}</td>
-                  <td class="text-right">{{pago.fechapago | date: 'dd/MM/yyyy'}}</td>
-                  <td>{{pago.modopago}}</td>
-                  <td class="text-right">{{pago.fechavencimiento | date: 'dd/MM/yyyy'}}</td>
-                  <td>{{pago.completado | traducirBool}}</td>
+                  <td>{{ pago.monto }}</td>
+                  <td class="text-right">
+                    {{ pago.fechapago | date: "dd/MM/yyyy" }}
+                  </td>
+                  <td>{{ pago.modopago }}</td>
+                  <td class="text-right">
+                    {{ pago.fechavencimiento | date: "dd/MM/yyyy" }}
+                  </td>
+                  <td>{{ pago.completado | traducirBool }}</td>
                   <td>
-                    <button type="button" class="btn btn-dark" style="margin-bottom: 10px;
-                      margin-right: 10px" data-bs-toggle="modal"
-                      data-bs-target="#modalImprimirPago" (click)="usarPagoImprimir(pago)">Imprimir</button>
+                    <button
+                      type="button"
+                      class="btn btn-grey"
+                      style="margin-bottom: 10px; margin-right: 10px"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalImprimirPago"
+                      (click)="usarPagoImprimir(pago)"
+                    >
+                      Imprimir
+                    </button>
                   </td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <td colspan="4">
-                    <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+                    <mfBootstrapPaginator
+                      [rowsOnPageSet]="[5, 10, 25]"
+                    ></mfBootstrapPaginator>
                   </td>
                 </tr>
               </tfoot>
@@ -580,60 +799,88 @@
             </table>-->
           </div>
           <!-- modal imprimir pago -->
-          <div class="modal fade" id="modalImprimirPago" tabindex="-1" aria-labelledby="modalLabelImprimirPago"
-          aria-hidden="true">
-          <div class="modal-dialog modal-lg">
+          <div
+            class="modal fade"
+            id="modalImprimirPago"
+            tabindex="-1"
+            aria-labelledby="modalLabelImprimirPago"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog modal-lg">
               <div class="modal-content">
-                  <div class="modal-header text-white bg-dark">
-                      <h5 class="modal-title" id="modalLabelImprimirPago">Imprimir pago</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body" id="impresion">
-                      <div class="container-fluid col-10 offset-1 mb-3">
-                        <form class="row g-3" #pagoForm="ngForm">
-                          <div class="col-md-6">
-                            <label for="" class="form-label">Monto:</label>
-                            <div class="alert alert-primary text-dark" role="alert">
-                              {{pagoImp.monto | currency: 'AR$ '}}
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <label for="" class="form-label">Fecha de pago efectuado:</label>
-                            <div class="alert alert-primary text-dark" role="alert">
-                              {{pagoImp.fechapago | date: 'dd/MM/yyyy'}}
-                            </div>
-                          </div>
-                          <div class="col-md-5">
-                            <label for="" class="form-label">Modo de pago:</label>
-                            <div class="alert alert-primary text-dark" role="alert">
-                              {{pagoImp.modopago}}
-                            </div>
-                          </div>
-                          <div class="col-md-5">
-                            <label for="" class="form-label">Fecha de vencimiento de cuota:</label>
-                            <div class="alert alert-primary text-dark" role="alert">
-                              {{pagoImp.fechavencimiento | date: 'dd/MM/yyyy'}}
-                            </div>
-                            
-                          </div>
-                          <div class="col-md-2">
-                              <label for="" class="form-label">Completado: </label>
-                              <div class="alert alert-primary text-dark" role="alert">
-                                {{pagoImp.completado | traducirBool}}
-                              </div>
-                            </div>
-                          </form>
+                <div class="modal-header text-white bg-dark">
+                  <h5 class="modal-title" id="modalLabelImprimirPago">
+                    Imprimir pago
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body" id="impresion">
+                  <div class="container-fluid col-10 offset-1 mb-3">
+                    <form class="row g-3" #pagoForm="ngForm">
+                      <div class="col-md-6">
+                        <label for="" class="form-label">Monto:</label>
+                        <div class="alert alert-primary text-dark" role="alert">
+                          {{ pagoImp.monto | currency: "AR$ " }}
+                        </div>
                       </div>
+                      <div class="col-md-6">
+                        <label for="" class="form-label"
+                          >Fecha de pago efectuado:</label
+                        >
+                        <div class="alert alert-primary text-dark" role="alert">
+                          {{ pagoImp.fechapago | date: "dd/MM/yyyy" }}
+                        </div>
+                      </div>
+                      <div class="col-md-5">
+                        <label for="" class="form-label">Modo de pago:</label>
+                        <div class="alert alert-primary text-dark" role="alert">
+                          {{ pagoImp.modopago }}
+                        </div>
+                      </div>
+                      <div class="col-md-5">
+                        <label for="" class="form-label"
+                          >Fecha de vencimiento de cuota:</label
+                        >
+                        <div class="alert alert-primary text-dark" role="alert">
+                          {{ pagoImp.fechavencimiento | date: "dd/MM/yyyy" }}
+                        </div>
+                      </div>
+                      <div class="col-md-2">
+                        <label for="" class="form-label">Completado: </label>
+                        <div class="alert alert-primary text-dark" role="alert">
+                          {{ pagoImp.completado | traducirBool }}
+                        </div>
+                      </div>
+                    </form>
                   </div>
-                  <div class="modal-footer">
-                    <!--<button class="btn btn-green" (click)="imprimirComprobante()" >Imprimir</button>-->
-                    <button type="button" class="btn btn-green" [useExistingCss]="true"
-                    printSectionId="impresion" printTitle="Comprobante de pago"
-                    ngxPrint>Imprimir</button>                      
-                    <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Close</button>
-                  </div>
+                </div>
+                <div class="modal-footer">
+                  <!--<button class="btn btn-green" (click)="imprimirComprobante()" >Imprimir</button>-->
+                  <button
+                    type="button"
+                    class="btn btn-green"
+                    [useExistingCss]="true"
+                    printSectionId="impresion"
+                    printTitle="Comprobante de pago"
+                    ngxPrint
+                  >
+                    Imprimir
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-grey"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                </div>
               </div>
-          </div>
+            </div>
           </div>
         </section>
 

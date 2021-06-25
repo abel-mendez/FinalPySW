@@ -9,7 +9,7 @@
 <section id="cont-slid">
   <div
     id="carouselExampleControls"
-    class="carousel carousel-dark carousel-fade slide"
+    class="carousel carousel-fade slide"
     data-bs-ride="carousel"
     data-bs-pause="false"
   >
@@ -21,7 +21,7 @@
         data-bs-interval="2500"
       >
         <img src="{{ slid.img }}" class="d-block w-100" alt="..." />
-        <div class="carousel-caption d-none d-md-block">
+        <div class="carousel-caption desc d-none d-md-block">
           <h5>{{ slid.descripcion }}</h5>
         </div>
       </div>
@@ -87,7 +87,7 @@
           <td>{{ plan.frecuencia }}</td>
           <td>Acceso a nuestra Plataforma</td>
           <td>Entrenamiento Personalizado</td>
-          <td>{{ plan.costo | currency:'ARS $'}}</td>
+          <td>{{ plan.costo | currency: "ARS $" }}</td>
         </tr>
       </tbody>
     </table>

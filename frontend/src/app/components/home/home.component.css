@@ -37,3 +37,7 @@
   font-family: "Charmonman", cursive;
   font-size: 70px;
 }
+.desc {
+  background-color: rgba(63, 63, 63, 0.7);
+  border-radius: 5px;
+}

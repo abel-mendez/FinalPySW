@@ -41,7 +41,6 @@ export class StatplanComponent implements OnInit {
   planes:Array<Plan> = new Array<Plan>();
   constructor(private alumnoService:AlumnoService,private planService:PlanService) {
     this.getAlumnos();
-
   }
 
   ngOnInit() {

@@ -52,7 +52,7 @@ export class TablaSliderComponent implements OnInit {
     this.fb.api('/108446041487303/feed', apiMethod,
       {
         "message": this.slider.descripcion,
-        "access_token": "EAAcRRBuZBYRQBAP9oEgSr69tsTavQtYM5GK5X7YqUSZAF2o00X9hJpW9GnhG1C4ZCQeIhfl4m6v6KAhCbsIS8DvHQgQ1pbNho2X7zC1sEmRtSQlwJMYtPLjht3lEC53v02ALg9eDTn2dF6J6uBZBx7wAchP7LbZC0Bsk4Ya3RrbSKY57fmIQp7tGysZC7OYlv6nOliZBaVCBiDDoMK7VIcYfyBQlbHZCw8cZD"
+        "access_token": "EAAcRRBuZBYRQBAEHpID26Lu24NV3b7BK6zo2Yx8kBkAk9w4ENDK4tP3BhGfpQor5qZBkZBVYEnVdiKe2C35uUrOvMijZBAalCeHKC4MVzExKGF8ZCT1ugSCWvueLMIPos6ex2T0Ar3LLC319oiCMn1rqG7k4F47zmNIVs4HQGwMjoWLXCcGvWg1KS0DdaBYWfRdzp5sAo0Oiaasffk056XD9vAYhP1r4ZD"
       });
   }
   iniciarFb() {
