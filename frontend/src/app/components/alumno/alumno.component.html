@@ -392,7 +392,7 @@
                         Ver ejercicios
                       </button>
                       <button
-                        class="btn btn-grey"
+                        class="btn btn-green"
                         data-bs-toggle="modal"
                         data-bs-target="#modalVerRutina"
                         (click)="getEjercicios(rutina._id)"
@@ -438,7 +438,7 @@
                   aria-label="Close"
                 ></button>
               </div>
-              <div class="modal-body">
+              <div class="modal-body" id="rutina">
                 <div class="container-fluid col-10 offset-1 mb-3">
                   <div class="row mb-3">
                     <div class="col-md-5 text-init">
@@ -470,6 +470,16 @@
                 </div>
               </div>
               <div class="modal-footer">
+                <button
+                    type="button"
+                    class="btn btn-green"
+                    [useExistingCss]="true"
+                    printSectionId="rutina"
+                    printTitle="Informacion de tu rutina"
+                    ngxPrint
+                  >
+                    Imprimir
+                </button>
                 <button
                   type="button"
                   class="btn btn-grey"
