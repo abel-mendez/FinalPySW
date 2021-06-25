@@ -115,7 +115,7 @@
                       class="btn-green btn"
                       data-bs-toggle="modal"
                       data-bs-target="#modalVerProgreso"
-                      (click)="mostrarIdAlumno()"
+                      (click)="seleccionar(progreso)"
                     >
                       Ver Imagen
                     </button>
@@ -179,12 +179,9 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-5 offset-4 mb-3">
-                  <div class="col-md-4" style="width: 50%">
-                    <img src="{{ progreso.foto }}" alt="" />
-                  </div>
+                <div class="col-10 offset-1 text-center">
+                    <img src="{{ progreso.foto }}" alt="" width="100%" />
                 </div>
-
               </div>
               <div class="modal-footer">
                 <button
@@ -249,14 +246,6 @@
                   </td>
                   <td>{{ asistencia.hora }}</td>
                   <td>
-                    <button
-                      type="button"
-                      class="btn-green btn"
-                      data-bs-toggle="modal"
-                      data-bs-target="#modalVerAsistencia"
-                    >
-                      Ver
-                    </button>
                     <button
                       type="button"
                       class="btn btn-grey"
@@ -348,55 +337,6 @@
             </div>
           </div>
         </section>
-
-        <!-- Modal Ver Asistencia -->
-        <div
-          class="modal fade"
-          id="modalVerAsistencia"
-          tabindex="-1"
-          aria-labelledby="modalLabelVerAsistencia"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="modalLabelVerAsistencia">
-                  Tu Asistencia
-                </h5>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div class="modal-body">
-                <div class="container-fluid col-10 offset-1 mb-3">
-                  <div class="row mb-3">
-                    <div class="col-md-4 text-init"><b>Fecha: </b></div>
-                    <div class="col-md-8 text-end">{{ asistencia.fecha }}</div>
-                  </div>
-                  <div class="row mb-3">
-                    <div class="col-md-4 text-init"><b>Hora: </b></div>
-                    <div class="col-md-8 text-end">{{ asistencia.hora }}</div>
-                  </div>
-                </div>
-                <!--<div class="col-5 offset-4 mb-3">
-            <div class="col-md-4" style="width: 100%;"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStnsfMnETCJRaP7ZUn3-7dUjKKmAgEAO2kJA&usqp=CAU" alt=""></div>
-          </div>-->
-              </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-grey"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
       <div
         class="tab-pane fade cont"
@@ -451,6 +391,15 @@
                       >
                         Ver ejercicios
                       </button>
+                      <button
+                        class="btn btn-grey"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalVerRutina"
+                        (click)="getEjercicios(rutina._id)"
+                        (click)="usarRutinaSeleccionada(rutina)"
+                      >
+                        Ver
+                      </button>
                     </td>
                   </tr>
                 </tbody>
@@ -495,26 +444,29 @@
                     <div class="col-md-5 text-init">
                       <b>Grupo Muscular: </b>
                     </div>
-                    <div class="col-md-7 text-end">Piernas</div>
+                    <div class="col-md-7 text-end">{{rutina.grupomuscular}}</div>
                   </div>
                   <div class="row mb-3">
                     <div class="col-md-4 text-init"><b>Duración: </b></div>
-                    <div class="col-md-8 text-end">40 min</div>
+                    <div class="col-md-8 text-end">{{rutina.duracion}}</div>
                   </div>
-                  <div class="row mb-3">
-                    <div class="col-md-4 text-init"><b>Ejercicio: </b></div>
-                    <div class="col-md-8 text-end">Sentadillas</div>
+                  <div class="col-md-5 mb-3 text-init">
+                    <b>Ejercicios: </b>
                   </div>
-                  <div class="row mb-3">
-                    <div class="col-md-4 text-init"><b>Series: </b></div>
-                    <div class="col-md-8 text-end">5 series</div>
-                  </div>
-                  <div class="row mb-3">
-                    <div class="col-md-4 text-init">
-                      <b>Repeticiones: </b>
-                    </div>
-                    <div class="col-md-8 text-end">10 repeticiones</div>
-                  </div>
+                  <table
+                  class="table table-striped table-hover table-bordered"
+                  [mfData]="ejercicios"
+                  #mf6="mfDataTable"
+                  [mfRowsOnPage]="5"
+                >
+                  <tbody>
+                    <tr *ngFor="let e of mf6.data">
+                      <td>{{ e.nombre }}</td>
+                      <td>{{ e.series }}</td>
+                      <td>{{ e.repeticiones }}</td>
+                    </tr>
+                  </tbody> 
+                </table>
                 </div>
               </div>
               <div class="modal-footer">
@@ -574,7 +526,7 @@
                       </th>
                       <th>
                         <mfDefaultSorter by="repeticiones"
-                          >Repeticiones</mfDefaultSorter
+                          ><span class="text-white text-decoration-none text-decoration-underline">Repeticiones</span></mfDefaultSorter
                         >
                       </th>
                     </tr>

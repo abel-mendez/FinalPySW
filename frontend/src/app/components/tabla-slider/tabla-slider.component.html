@@ -85,7 +85,7 @@
                     class="form-control"
                     id="imagen"
                     name="imagen"
-                    accept=".jpg,.png" 
+                    accept=".jpg,.png,.jpeg" 
                     required 
                   />
                 </div>
@@ -105,6 +105,14 @@
                     minlength="5"
                     required
                   ></textarea>
+                  <div *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)" class="alert alert-danger">
+                    <div *ngIf="descripcion.errors.required">
+                      Descripcion es requerido
+                    </div>
+                    <div *ngIf="descripcion.errors.minlength">
+                      Descripcion debe tener almenos 5 caracteres
+                    </div>
+                  </div>
                 </div>
               </form>
               </div>
@@ -257,35 +265,47 @@
           </div>
           <div class="modal-body">
             <div class="container-fluid col-10 offset-1 mb-3">
-              <form class="row g-3" #pagoForm="ngForm">
-              <div class="col-12 mb-3">
-                <label for="" class="form-label"
-                  ><b>Modificar Imagen del Slider</b></label
-                >
-                <input
-                  type="file"
-                  alife-file-to-base64
-                  (onFileChanged)="onFileChanged($event)"
-                  class="form-control"
-                  id="imagen"
-                  name="imagen"
-                  required
-                />
-              </div>
-              <div class="col-12 mb-3">
-                <label for="" class="form-label"><b>Descripcion</b></label>
-                <textarea
-                  type="text"
-                  class="form-control"
-                  id="descripcion"
-                  name="descripcion"
-                  [(ngModel)]="slider.descripcion"
-                  placeholder="Porfavor, ingrese una descripcion"
-                  rows="5"
-                  required
-                ></textarea>
-              </div>
-            </form>
+                <form class="row g-3" #sliderForm="ngForm">
+                  <div class="col-12 mb-3">
+                    <label for="" class="form-label"
+                  ><b>Modificar Imagen del Slider</b></label>
+                    <input
+                      type="file"
+                      alife-file-to-base64
+                      (onFileChanged)="onFileChanged($event)"
+                      class="form-control"
+                      id="imagen"
+                      name="imagen"
+                      accept=".jpg,.png,.jpeg" 
+                      required 
+                    />
+                  </div>
+                  <div class="col-12 mb-3">
+                    <label for="descripcion" class="form-label"
+                      ><b>Descripcion</b></label
+                    >
+                    <textarea
+                      type="text"
+                      class="form-control"
+                      id="descripcion"
+                      name="descripcion"
+                      [(ngModel)]="slider.descripcion"
+                      placeholder="Porfavor, ingrese una descripcion"
+                      rows="5"
+                      #descripcion="ngModel"
+                      minlength="5"
+                      required
+                    ></textarea>
+                    <div *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)" class="alert alert-danger">
+                      <div *ngIf="descripcion.errors.required">
+                        Descripcion es requerido
+                      </div>
+                      <div *ngIf="descripcion.errors.minlength">
+                        Descripcion debe tener almenos 5 caracteres
+                      </div>
+                    </div>
+                  </div>
+                </form>
             </div>
           </div>
           <div class="modal-footer">
@@ -294,6 +314,7 @@
               class="btn btn-green"
               (click)="modificarSlider(slider)"
               data-bs-dismiss="modal"
+              [disabled]="!sliderForm.form.valid"
             >
               Guardar Cambios
             </button>
@@ -354,11 +375,25 @@
                     type="text"
                     class="form-control"
                     id="tipo"
-                    name="plan"
+                    name="tipo"
                     [(ngModel)]="plan.tipo"
+                    #tipo="ngModel"
                     minlength="3"
+                    manlength="30"
+                    placeholder="Ingrese un tipo de plan"
                     required
                   />
+                  <div *ngIf="tipo.invalid && (tipo.dirty || tipo.touched)" class="alert alert-danger">
+                    <div *ngIf="tipo.errors.required">
+                      Tipo plan es requerido
+                    </div> 
+                    <div *ngIf="tipo.errors.minlength">
+                      Tipo plan debe tener almenos 3 caracteres
+                    </div>
+                    <div *ngIf="tipo.errors.maxlength">
+                      Tipo plan debe tener como máximo 30 caracteres
+                    </div>
+                  </div>
                 </div>
                 <div class="col-12 mb-3">
                   <label for="costo" class="form-label"><b>Costo</b></label>
@@ -368,8 +403,22 @@
                     id="costo"
                     name="costo"
                     [(ngModel)]="plan.costo"
+                    #costo="ngModel"
+                    control-monto
+                    placeholder="Ingrese el costo del plan"
                     required
                   />
+                  <div *ngIf="costo.invalid && (costo.dirty || costo.touched)" class="alert alert-danger">
+                    <div *ngIf="costo.errors.required">
+                      Costo es requerido
+                    </div>
+                    <div *ngIf="costo.errors.controlDeMonto"> 
+                      No se permiten números negativos ni más de dos decimales
+                    </div>
+                    <!--<div *ngIf="costo.errors.minlength">
+                      Costo debe tener almenos 5 caracteres
+                    </div>-->
+                  </div>
                 </div>
                 <div class="col-12 mb-3">
                   <label for="" class="form-label"><b>Frecuencia</b></label>
@@ -379,10 +428,23 @@
                     id="frecuencia"
                     name="frecuencia"
                     [(ngModel)]="plan.frecuencia"
+                    #frecuencia="ngModel"
                     minlength="3"
-                    maxlength="18"
+                    maxlength="25"
+                    placeholder="ingrese la frecuencia del plan"
                     required
                   />
+                  <div *ngIf="frecuencia.invalid && (frecuencia.dirty || frecuencia.touched)" class="alert alert-danger">
+                    <div *ngIf="frecuencia.errors.required">
+                      Frecuencia es requerido
+                    </div>
+                    <div *ngIf="frecuencia.errors.minlength">
+                      Frecuencia debe tener almenos 5 caracteres
+                    </div>
+                    <div *ngIf="frecuencia.errors.maxlength">
+                      Frecuencia debe tener como máximo 25 caracteres
+                    </div>
+                  </div>
                 </div>
               </form>
               </div>
@@ -545,42 +607,85 @@
         </div>
         <div class="modal-body">
           <div class="container-fluid col-10 offset-1 mb-3">
-            <div class="col-12 mb-3">
-              <label for="tipo" class="form-label"
-                ><b>Tipo Plan</b></label
-              >
-              <input
-                type="text"
-                class="form-control"
-                id="tipo"
-                name="plan"
-                [(ngModel)]="plan.tipo"
-              />
-            </div>
-            <div class="col-12 mb-3">
-              <label for="costo" class="form-label"
-                ><b>Costo</b></label
-              >
-              <input
-                type="number"
-                class="form-control"
-                id="costo"
-                name="costo"
-                [(ngModel)]="plan.costo"
-              />
-            </div>
-            <div class="col-12 mb-3">
-              <label for="" class="form-label"
-                ><b>Frecuencia</b></label
-              >
-              <input
-                type="text"
-                class="form-control"
-                id="frecuencia"
-                name="frecuencia"
-                [(ngModel)]="plan.frecuencia"
-              />
-            </div>
+            <form class="row g-3" #planForm="ngForm">
+              <div class="col-12 mb-3">
+                <label for="tipo" class="form-label"><b>Tipo Plan</b></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="tipo"
+                  name="tipo"
+                  [(ngModel)]="plan.tipo"
+                  #tipo="ngModel"
+                  minlength="3"
+                  manlength="30"
+                  placeholder="Ingrese un tipo de plan"
+                  required
+                />
+                <div *ngIf="tipo.invalid && (tipo.dirty || tipo.touched)" class="alert alert-danger">
+                  <div *ngIf="tipo.errors.required">
+                    Tipo plan es requerido
+                  </div> 
+                  <div *ngIf="tipo.errors.minlength">
+                    Tipo plan debe tener almenos 3 caracteres
+                  </div>
+                  <div *ngIf="tipo.errors.maxlength">
+                    Tipo plan debe tener como máximo 30 caracteres
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 mb-3">
+                <label for="costo" class="form-label"><b>Costo</b></label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="costo"
+                  name="costo"
+                  [(ngModel)]="plan.costo"
+                  #costo="ngModel"
+                  control-monto
+                  placeholder="Ingrese el costo del plan"
+                  required
+                />
+                <div *ngIf="costo.invalid && (costo.dirty || costo.touched)" class="alert alert-danger">
+                  <div *ngIf="costo.errors.required">
+                    Costo es requerido
+                  </div>
+                  <div *ngIf="costo.errors.controlDeMonto"> 
+                    No se permiten números negativos ni más de dos decimales
+                  </div>
+                  <!--<div *ngIf="costo.errors.minlength">
+                    Costo debe tener almenos 5 caracteres
+                  </div>-->
+                </div>
+              </div>
+              <div class="col-12 mb-3">
+                <label for="" class="form-label"><b>Frecuencia</b></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="frecuencia"
+                  name="frecuencia"
+                  [(ngModel)]="plan.frecuencia"
+                  #frecuencia="ngModel"
+                  minlength="3"
+                  maxlength="25"
+                  placeholder="ingrese la frecuencia del plan"
+                  required
+                />
+                <div *ngIf="frecuencia.invalid && (frecuencia.dirty || frecuencia.touched)" class="alert alert-danger">
+                  <div *ngIf="frecuencia.errors.required">
+                    Frecuencia es requerido
+                  </div>
+                  <div *ngIf="frecuencia.errors.minlength">
+                    Frecuencia debe tener almenos 5 caracteres
+                  </div>
+                  <div *ngIf="frecuencia.errors.maxlength">
+                    Frecuencia debe tener como máximo 25 caracteres
+                  </div>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
         <div class="modal-footer">
@@ -589,6 +694,7 @@
             class="btn btn-green"
             (click)="modificarPlan(plan)"
             data-bs-dismiss="modal"
+            [disabled]="!planForm.form.valid"
           >
             Guardar Cambios
           </button>

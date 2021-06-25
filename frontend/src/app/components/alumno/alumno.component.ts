@@ -64,6 +64,10 @@ export class AlumnoComponent implements OnInit {
 
   }
 
+  seleccionar(progreso){
+    this.progreso=progreso;
+  }
+
   getAlumno() {
     this.alumnos = new Array<Alumno>();
     this.alumnoService.getAlumnoPorUsuario(this.loginService.userLogged()).subscribe(
