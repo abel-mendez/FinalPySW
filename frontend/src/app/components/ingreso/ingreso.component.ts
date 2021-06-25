@@ -113,8 +113,7 @@ export class IngresoComponent implements OnInit {
                   if (result.status == "1"){
                     this.toastr.success("El usuario se agregó correctamente", "Operación exitosa");
                   }
-                  //this.cargarUsuario(this.alumno.usuario._id);
-                  //this.deseaagregar = false;
+                  this.router.navigate(["alumnos"]);
                   this.deshabilitar = true;
                   
                 },
@@ -132,30 +131,18 @@ export class IngresoComponent implements OnInit {
   }
 
   actualizarUsuario(form: NgForm){
-    this.alumnoService.verificarUsuario(this.usuario.usuario).subscribe(
-      result => {
-        if (result == true){
-          this.toastr.error("El nombre de usuario ya existe", "Operación fallida");
-        } else{
-          this.alumnoService.updateUsuario(this.usuario).subscribe(
-            result => {
+      this.alumnoService.updateUsuario(this.usuario).subscribe(
+        result => {
               if (result.status == "1"){
                 this.toastr.info("El usuario se modificó correctamente", "Operación exitosa");
                 //this.cargarAlumno(this.alumno._id);
               }
             },
-            error => {
-              this.toastr.error("Error al modificar el usuario", "Operación fallida");
-            }
-          )
+        error => {
+          this.toastr.error("Error al modificar el usuario", "Operación fallida");
         }
-      },
-      error => {
-        
-      }
     )
-    
-    
+ 
   }
 
   eliminarUsuario(form: NgForm){
@@ -166,6 +153,7 @@ export class IngresoComponent implements OnInit {
           form.reset();
           //this.cargarUsuario();
           this.deshabilitar = true;
+          this.router.navigate(["alumnos"]);
         }
       },
       error=>{

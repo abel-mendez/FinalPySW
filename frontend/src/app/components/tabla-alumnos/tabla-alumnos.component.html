@@ -42,32 +42,44 @@
         </button>
     </div>
   </div>
-  <div class="card-body table-responsive-sm">
+  <div class="card-body table-responsive col-12">
     <table
-      class="table table-striped"
+      class="table table-striped table-hover"
       [mfData]="alumnos"
       #mf="mfDataTable"
       [mfRowsOnPage]="5"
     >
       <thead>
-        <tr>
+        <tr class="bg-dark">
           <th style="width: 15%">
-            <mfDefaultSorter by="apellido">Apellido</mfDefaultSorter>
+            <mfDefaultSorter by="apellido">
+              <span class="text-white text-decoration-none text-decoration-underline">Apellido</span>
+            </mfDefaultSorter>
           </th>
           <th style="width: 15%">
-            <mfDefaultSorter by="nombre">Nombre</mfDefaultSorter>
+            <mfDefaultSorter by="nombre">
+              <span class="text-white text-decoration-none text-decoration-underline">Nombre</span>
+            </mfDefaultSorter>
           </th>
           <th style="width: 15%">
-            <mfDefaultSorter by="dni">DNI</mfDefaultSorter>
+            <mfDefaultSorter by="dni">
+              <span class="text-white text-decoration-none text-decoration-underline">DNI</span>
+            </mfDefaultSorter>
           </th>
           <th style="width: 15%">
-            <mfDefaultSorter by="celular">Celular</mfDefaultSorter>
+            <mfDefaultSorter by="celular">
+              <span class="text-white text-decoration-none text-decoration-underline">Celular</span>
+            </mfDefaultSorter>
           </th>
           <th style="width: 15%">
-            <mfDefaultSorter by="email">Email</mfDefaultSorter>
+            <mfDefaultSorter by="email">
+              <span class="text-white text-decoration-none text-decoration-underline">Email</span>
+            </mfDefaultSorter>
           </th>
           <th style="width: 15%">
-            <mfDefaultSorter by="acciones"></mfDefaultSorter>
+            <mfDefaultSorter by="acciones">
+              <span class="text-white text-decoration-none text-decoration-underline"></span>
+            </mfDefaultSorter>
           </th>
         </tr>
       </thead>

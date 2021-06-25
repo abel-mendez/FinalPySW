@@ -121,50 +121,99 @@
             <h3 class="categorie">Datos del Alumno</h3>
           </a>
           <div class="collapse show" id="collapseDatos">
-            <form class="row g-3" #modAluForm="ngForm">
-              <div class="col-md-6">
-                <label for="" class="form-label">Apellido/s</label>
-                <input type="text" class="form-control" id="" name="apellido" [(ngModel)]="alumno.apellido"/>
-              </div>
-              <div class="col-md-6">
-                <label for="" class="form-label">Nombre/s</label>
-                <input type="text" class="form-control" id="" name="nombre" [(ngModel)]="alumno.nombre"/>
-              </div>
-              <div class="col-md-6">
-                <label for="" class="form-label">Fecha de nacimiento</label>
-                <input type="date" class="form-control" id="" name="fechanac" [(ngModel)]="alumno.fechanac"/>
-              </div>
-              <div class="col-md-6">
-                <label for="" class="form-label">Numero de Documento</label>
-                <input type="number" class="form-control" id="" name="dni" [(ngModel)]="alumno.dni"/>
-              </div>
-              <div class="col-12">
-                <label for="" class="form-label">Domicilio</label>
-                <input type="text" class="form-control" id="" name="domicilio" [(ngModel)]="alumno.domicilio"/>
-              </div>
-              <div class="col-12">
-                <label for="" class="form-label">E-mail</label>
-                <input type="text" class="form-control" id="" name="email" [(ngModel)]="alumno.email"/>
-              </div>
-              <div class="col-md-6">
-                <label for="" class="form-label">Numero de Celular</label>
-                <input type="number" class="form-control" id="" name="celular" [(ngModel)]="alumno.celular"/>
-              </div>
-              <div class="col-md-4">
-                <label for="inputState" class="form-label">Tipo de Plan</label>
-                  <select class="form-select" name="plan" [(ngModel)]="alumno.plan">
+            <div class="col-md-10 offset-md-1 cuadro bg-light">
+              <br />
+              <form class="row g-3 col-10 offset-1" #modAluForm="ngForm">
+                <div class="col-md-6">
+                  <label for="" class="form-label">Apellido/s</label>
+                  <input type="text" class="form-control" id="" name="apellido" [(ngModel)]="alumno.apellido" 
+                  #apellidoAlumno="ngModel" minlength="3" required/>
+                  <div *ngIf="apellidoAlumno.invalid && (apellidoAlumno.touched || apellidoAlumno.dirty)" class="alert alert-danger">
+                    <div *ngIf="apellidoAlumno.errors.required"> El apellido es requerido </div>
+                    <div *ngIf="apellidoAlumno.errors.minlength"> Se requiere al menos {{apellidoAlumno.errors.minlength.requiredLength}} caracteres </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label for="" class="form-label">Nombre/s</label>
+                  <input type="text" class="form-control" id="" name="nombre" [(ngModel)]="alumno.nombre"
+                  #nombreAlumno="ngModel" minlength="3" required/>
+                  <div *ngIf="nombreAlumno.invalid && (nombreAlumno.touched || nombreAlumno.dirty)" class="alert alert-danger">
+                    <div *ngIf="nombreAlumno.errors.required"> El nombre es requerido </div>
+                    <div *ngIf="nombreAlumno.errors.minlength"> Se requiere al menos {{nombreAlumno.errors.minlength.requiredLength}} caracteres </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label for="" class="form-label">Fecha de nacimiento</label>
+                  <input type="date" class="form-control" id="" name="fechanac" [(ngModel)]="alumno.fechanac"
+                  #fechanacAlumno="ngModel" required/>
+                  <div *ngIf="fechanacAlumno.invalid && (fechanacAlumno.touched || fechanacAlumno.dirty)" class="alert alert-danger">
+                    <div *ngIf="fechanacAlumno.errors.required"> La fecha de nacimiento es requerida </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label for="" class="form-label">Número de DNI</label>
+                  <input type="number" class="form-control" id="" name="dni" [(ngModel)]="alumno.dni"
+                  #dniAlumno="ngModel" control-dni required/>
+                  <div *ngIf="dniAlumno.invalid && (dniAlumno.touched || dniAlumno.dirty)" class="alert alert-danger">
+                    <div *ngIf="dniAlumno.errors.controlDeDni"> Debe ingresar un número de 7 u 8 dígitos</div>
+                    <div *ngIf="dniAlumno.errors.required"> El DNI es requerido</div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label for="" class="form-label">Domicilio</label>
+                  <input type="text" class="form-control" id="" name="domicilio" [(ngModel)]="alumno.domicilio"
+                  #domicilioAlumno="ngModel" minlength="5" required/>
+                  <div *ngIf="domicilioAlumno.invalid && (domicilioAlumno.touched || domicilioAlumno.dirty)" class="alert alert-danger">
+                    <div *ngIf="domicilioAlumno.errors.required"> El domicilio es requerido </div>
+                    <div *ngIf="domicilioAlumno.errors.minlength"> Se requiere al menos {{domicilioAlumno.errors.minlength.requiredLength}} caracteres </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label for="" class="form-label">E-mail</label>
+                  <input type="email" class="form-control" id="" name="email" [(ngModel)]="alumno.email"
+                  #emailAlumno="ngModel" control-email required/>
+                  <div *ngIf="emailAlumno.invalid && (emailAlumno.touched || emailAlumno.dirty)" class="alert alert-danger">
+                    <div *ngIf="emailAlumno.errors.controlDeEmail"> Debe ingresar un mail con un formato similar a "ejemplo@correo.com.ar"</div>
+                    <div *ngIf="emailAlumno.errors.required"> El mail es requerido</div>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <label for="" class="form-label">Numero de Celular</label>
+                  <input type="tel" class="form-control" id="" name="celular" [(ngModel)]="alumno.celular"
+                  #celularAlumno="ngModel" control-celular required/>
+                  <div *ngIf="celularAlumno.invalid && (celularAlumno.touched || celularAlumno.dirty)" class="alert alert-danger">
+                    <div *ngIf="celularAlumno.errors.controlDeCelular"> Debe ingresar un celular con el formato "388-1234567"</div>
+                    <div *ngIf="celularAlumno.errors.required"> El celular es requerido</div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <label for="inputState" class="form-label">Tipo de Plan</label>
+                  <select class="form-select" name="plan" [(ngModel)]="alumno.plan"
+                  #planAlumno="ngModel" required>
                     <option *ngFor="let p of planes" value="{{ p._id }}">{{p.tipo}} - {{p.frecuencia}}</option>
                   </select>
-              </div>
-              <div class="col-md-2">
-                <label for="" class="form-label">Fecha de inicio</label>
-                <input type="date" class="form-control" id="" name="fechainicio" [(ngModel)]="alumno.fechainicio"/>
-              </div>
-              <div class="col-12 buttons">
-                <button type="button" class="btn btn-green" (click)="actualizarAlumno(modAluForm)">Modificar</button>
-              </div>
-            </form>
+                  <div *ngIf="planAlumno.invalid && (planAlumno.touched || planAlumno.dirty)" class="alert alert-danger">
+                    <div *ngIf="planAlumno.errors.required"> El plan es requerido </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <label for="" class="form-label">Fecha de inicio</label>
+                  <input type="date" class="form-control" id="" name="fechainicio" [(ngModel)]="alumno.fechainicio"
+                  #fechainicioAlumno="ngModel" required/>
+                  <div *ngIf="fechainicioAlumno.invalid && (fechainicioAlumno.touched || fechainicioAlumno.dirty)" class="alert alert-danger">
+                    <div *ngIf="fechainicioAlumno.errors.required"> La fecha de inicio es requerida </div>
+                  </div>
+                </div>
+                <div class="col-12 buttons">
+                  <button type="button" class="btn btn-green" (click)="actualizarAlumno(modAluForm)" [disabled]="modAluForm.invalid">Modificar</button>
+                </div>
+              </form>
+              <br /><br />
+            </div>
+            <br />
+            <br />
           </div>
+          
         </section>
       </div>
       <div
@@ -266,34 +315,45 @@
             </div>
             </div>
 
-            <div class="card-body table-responsive-sm col-12">
+            <div class="card-body table-responsive col-12">
               <table
-                class="table table-striped"
+                class="table table-striped table-bordered table-hover"
                 [mfData]="pagos"
                 #mf6="mfDataTable"
                 [mfRowsOnPage]="5"
               >
                 <thead>
-                  <tr>
+                  <tr class="bg-dark">
                     <th style="width: 10%">
-                      <mfDefaultSorter by="monto">Monto</mfDefaultSorter>
+                      <mfDefaultSorter by="monto">
+                        <span class="text-white text-decoration-none text-decoration-underline">Monto</span>
+                      </mfDefaultSorter>
                     </th>
                     <th style="width: 15%">
-                      <mfDefaultSorter by="fechapago">Fecha del pago</mfDefaultSorter>
+                      <mfDefaultSorter by="fechapago">
+                        <span class="text-white text-decoration-none text-decoration-underline">Fecha del pago</span>
+                      </mfDefaultSorter>
                     </th>
                     <th style="width: 15%">
-                      <mfDefaultSorter by="modopago">Modo de pago</mfDefaultSorter>
+                      <mfDefaultSorter by="modopago">
+                        <span class="text-white text-decoration-none text-decoration-underline">Modo de pago</span>
+                      </mfDefaultSorter>
                     </th>
                     <th style="width: 15%">
-                      <mfDefaultSorter by="fechavencimiento">Fecha de vencimiento</mfDefaultSorter>
+                      <mfDefaultSorter by="fechavencimiento">
+                        <span class="text-white text-decoration-none text-decoration-underline">Fecha de vencimiento</span>
+                      </mfDefaultSorter>
                     </th>
                     <th style="width: 15%">
-                      <mfDefaultSorter by="completado">Completado</mfDefaultSorter>
+                      <mfDefaultSorter by="completado">
+                        <span class="text-white text-decoration-none text-decoration-underline">Completado</span>
+                      </mfDefaultSorter>
                     </th>
                     <th style="width: 30%">
-                      <mfDefaultSorter by="completado">Acciones</mfDefaultSorter>
+                      <mfDefaultSorter by="completado">
+                        <span class="text-white text-decoration-none text-decoration-underline">Acciones</span>
+                      </mfDefaultSorter>
                     </th>
-                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -488,26 +548,32 @@
 
 
             <!-- tabla de rutinas -->
-            <div class="card-body table-responsive-sm col-md-10 offset-md-1">
+            <div class="card-body table-responsive col-md-10 offset-md-1">
               <table
-                class="table table-striped"
+                class="table table-striped table-bordered table-hover table-borderless"
                 [mfData]="rutinas"
                 #mf3="mfDataTable"
                 [mfRowsOnPage]="5"
               >
                 <thead>
-                  <tr>
+                  <tr class="bg-dark">
                     <th style="width: 15%">
-                      <mfDefaultSorter by="duracion">Duración</mfDefaultSorter>
+                      <mfDefaultSorter by="duracion">
+                      <span class="text-white text-decoration-none text-decoration-underline">Duracion</span></mfDefaultSorter>
                     </th>
                     <th style="width: 25%">
-                      <mfDefaultSorter by="grupomuscular">Grupo muscular</mfDefaultSorter>
+                      <mfDefaultSorter by="grupomuscular">
+                        <span class="text-white text-decoration-none text-decoration-underline">Grupo muscular</span></mfDefaultSorter>
                     </th>
                     <th style="width: 20%">
-                      <mfDefaultSorter by="ejercicios">Ejercicios</mfDefaultSorter>
+                      <mfDefaultSorter by="ejercicios">
+                        <span class="text-white text-decoration-none text-decoration-underline">Ejercicios</span>
+                      </mfDefaultSorter>
                     </th>
                     <th style="width: 40%">
-                      <mfDefaultSorter by="acciones">Acciones</mfDefaultSorter>
+                      <mfDefaultSorter by="acciones">
+                        <span class="text-white text-decoration-none text-decoration-underline">Acciones</span>
+                      </mfDefaultSorter>
                     </th>
                   </tr>
                 </thead>
@@ -556,24 +622,32 @@
 
                       <div class="table-responsive">
                         <table
-                          class="table table-striped"
+                          class="table table-striped table-bordered table-borderless table-hover"
                           [mfData]="ejercicios"
                           #mf4="mfDataTable"
                           [mfRowsOnPage]="5"
                         >
                           <thead>
-                            <tr>
+                            <tr class="bg-dark">
                               <th style="width: 30%">
-                                <mfDefaultSorter by="nombre">Nombre</mfDefaultSorter>
+                                <mfDefaultSorter by="nombre">
+                                  <span class="text-white text-decoration-none text-decoration-underline">Nombre</span>
+                                </mfDefaultSorter>
                               </th>
                               <th style="width: 10%">
-                                <mfDefaultSorter by="series">Series</mfDefaultSorter>
+                                <mfDefaultSorter by="series">
+                                  <span class="text-white text-decoration-none text-decoration-underline">Series</span>
+                                </mfDefaultSorter>
                               </th>
                               <th style="width: 20%">
-                                <mfDefaultSorter by="repeticiones">Repeticiones</mfDefaultSorter>
+                                <mfDefaultSorter by="repeticiones">
+                                  <span class="text-white text-decoration-none text-decoration-underline">Repeticiones</span>
+                                </mfDefaultSorter>
                               </th>
                               <th style="width: 40%">
-                                <mfDefaultSorter by="accionesEjercicios">Acciones</mfDefaultSorter>
+                                <mfDefaultSorter by="accionesEjercicios">
+                                  <span class="text-white text-decoration-none text-decoration-underline">Acciones</span>
+                                </mfDefaultSorter>
                               </th>
                             </tr>
                           </thead>
@@ -825,30 +899,42 @@
   
             <div class="card-body table-responsive-sm col-md-12">
               <table
-                class="table table-striped"
+                class="table table-striped table-bordered table-hover"
                 [mfData]="progresos"
                 #mf2="mfDataTable"
                 [mfRowsOnPage]="5"
               >
                 <thead>
-                  <tr>
+                  <tr class="bg-dark">
                     <th style="width: 10%">
-                      <mfDefaultSorter by="fecha">Fecha</mfDefaultSorter>
+                      <mfDefaultSorter by="fecha">
+                        <span class="text-white text-decoration-none text-decoration-underline">Fecha</span>
+                      </mfDefaultSorter>
                     </th>
                     <th style="width: 10%">
-                      <mfDefaultSorter by="peso">Peso</mfDefaultSorter>
+                      <mfDefaultSorter by="peso">
+                        <span class="text-white text-decoration-none text-decoration-underline">Peso</span>
+                      </mfDefaultSorter>
                     </th>
                     <th style="width: 20%">
-                      <mfDefaultSorter by="dieta">Dieta</mfDefaultSorter>
+                      <mfDefaultSorter by="dieta">
+                        <span class="text-white text-decoration-none text-decoration-underline">Dieta</span>
+                      </mfDefaultSorter>
                     </th>
                     <th style="width: 20%">
-                      <mfDefaultSorter by="observaciones">Observaciones</mfDefaultSorter>
+                      <mfDefaultSorter by="observaciones">
+                        <span class="text-white text-decoration-none text-decoration-underline">Observaciones</span>
+                      </mfDefaultSorter>
                     </th>
                     <th style="width: 20%">
-                      <mfDefaultSorter by="foto">Foto</mfDefaultSorter>
+                      <mfDefaultSorter by="foto">
+                        <span class="text-white text-decoration-none text-decoration-underline">Foto</span>
+                      </mfDefaultSorter>
                     </th>
                     <th style="width: 20%">
-                      <mfDefaultSorter by="acciones">Acciones</mfDefaultSorter>
+                      <mfDefaultSorter by="acciones">
+                        <span class="text-white text-decoration-none text-decoration-underline">Acciones</span>
+                      </mfDefaultSorter>
                     </th>
                   </tr>
                 </thead>
@@ -1003,23 +1089,29 @@
             </div>
             </div>
             
-            <div class="card-body table-responsive-sm col-md-8 offset-md-2">
+            <div class="card-body table-responsive col-md-8 offset-md-2">
               <table
-                class="table table-striped"
+                class="table table-striped table-bordered table-hover"
                 [mfData]="asistencias"
                 #mf="mfDataTable"
                 [mfRowsOnPage]="5"
               >
                 <thead>
-                  <tr>
+                  <tr class="bg-dark">
                     <th style="width: 30%">
-                      <mfDefaultSorter by="fecha">Día</mfDefaultSorter>
+                      <mfDefaultSorter by="fecha">
+                        <span class="text-white text-decoration-none text-decoration-underline">Día</span>
+                      </mfDefaultSorter>
                     </th>
                     <th style="width: 30%">
-                      <mfDefaultSorter by="hora">Hora</mfDefaultSorter>
+                      <mfDefaultSorter by="hora">
+                        <span class="text-white text-decoration-none text-decoration-underline">Hora</span>
+                      </mfDefaultSorter>
                     </th>
                     <th style="width: 30%">
-                      <mfDefaultSorter by="acciones">Acciones</mfDefaultSorter>
+                      <mfDefaultSorter by="acciones">
+                        <span class="text-white text-decoration-none text-decoration-underline">Acciones</span>
+                      </mfDefaultSorter>
                     </th>
                   </tr>
                 </thead>
@@ -1066,111 +1158,111 @@
           >
             <h3 class="categorie">Usuario</h3>
           </a>
+          <br />
           <div class="collapse show" id="collapseUsuario">
-            <form class="row g-3" #usuarioForm="ngForm">
-              <div class="col-md-6">  
-                <label for="" class="form-label">Nombre de Usuario</label>
-                <input type="text" class="form-control" id="" name="usuarionombre" [(ngModel)]="usuario.usuario" #username="ngModel" minlength="3" required/>
-                <div *ngIf="username.invalid && (username.touched || username.dirty)" class="alert alert-danger">
-                  <div *ngIf="username.errors.required"> Ingrese un nombre de usuario </div>
-                  <div *ngIf="username.errors.minlength"> Se requieren al menos {{username.errors.minlength.requiredLength}} caracteres </div>
+            <div class="col-md-10 offset-md-1 cuadro bg-light">
+              <br />
+              <form class="row g-3 col-10 offset-1 " #usuarioForm="ngForm">
+                <div class="col-md-4">  
+                  <label for="" class="form-label">Nombre de Usuario</label>
+                  <input type="text" class="form-control" id="" name="usuarionombre" [(ngModel)]="usuario.usuario" 
+                  #username="ngModel" minlength="3" [disabled]="deseaagregar==false" required/>
+                  <div *ngIf="username.invalid && (username.touched || username.dirty)" class="alert alert-danger">
+                    <div *ngIf="username.errors.required"> Ingrese un nombre de usuario </div>
+                    <div *ngIf="username.errors.minlength"> Se requieren al menos {{username.errors.minlength.requiredLength}} caracteres </div>
+                  </div>
+  
                 </div>
-
-              </div>
-              <div class="col-md-6">
-                <label for="" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" id="" name="usuariopwd" [(ngModel)]="usuario.password" #pashword="ngModel" minlength="6" required/>
-                <div *ngIf="pashword.invalid && (pashword.touched || pashword.dirty)" class="alert alert-danger">
-                  <div *ngIf="pashword.errors.required"> Ingrese una contraseña </div>
-                  <div *ngIf="pashword.errors.minlength"> Se requieren al menos {{pashword.errors.minlength.requiredLength}} caracteres </div>
+                <div class="col-md-4">
+                  <label for="" class="form-label">Contraseña</label>
+                  <input type="password" class="form-control" id="" name="usuariopwd" [(ngModel)]="usuario.password" #pashword="ngModel" minlength="6" required/>
+                  <div *ngIf="pashword.invalid && (pashword.touched || pashword.dirty)" class="alert alert-danger">
+                    <div *ngIf="pashword.errors.required"> Ingrese una contraseña </div>
+                    <div *ngIf="pashword.errors.minlength"> Se requieren al menos {{pashword.errors.minlength.requiredLength}} caracteres </div>
+                  </div>
                 </div>
-              </div>
-              <!--<div class="col-md-6">
-                <label for="" class="form-label">Tipo de perfil</label>
-                <input type="text" class="form-control" id="" name="usuarioperfil" [(ngModel)]="usuario.perfil"/>
-              </div>-->
-              <div class="col-md-6">
-                <select class="form-select" aria-label="Disabled select example" id="" name="usuarioperfil" [(ngModel)]="usuario.perfil" disabled>
-                  <option value="alumno">Alumno</option>
-                </select>
-              </div>
-              <div class="col-md-12">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="" name="usuarioactivo" [(ngModel)]="usuario.activo">
-                  <label class="form-check-label" for="">
-                    Activo
-                  </label>
+                <div class="col-md-4">
+                  <label for="" class="form-label">Perfil</label>
+                  <select class="form-select" aria-label="Disabled select example" id="" name="usuarioperfil" [(ngModel)]="usuario.perfil" disabled>
+                    <option value="alumno">Alumno</option>
+                  </select>
                 </div>
-              </div>
-              <div class="col-12 buttons">
-                <button type="button" class="btn btn-green" (click)="agregarUsuario(usuarioForm)" *ngIf="deseaagregar" [disabled]="deshabilitar || usuarioForm.invalid">Guardar</button>
-                <button type="button" class="btn btn-green" data-bs-toggle="modal"
-                data-bs-target="#modalModificarUsuario" *ngIf="deseaagregar == false" [disabled]="deshabilitar || usuarioForm.invalid">Modificar</button>
-                <!--<button type="button" class="btn btn-danger" (click)="eliminarUsuario(usuarioForm)" *ngIf="deseaagregar == false">Eliminar</button>-->
-                <button class="btn btn-red" data-bs-toggle="modal"
-                      data-bs-target="#modalEliminarUsuario" *ngIf="deseaagregar == false" [disabled]="deshabilitar">Eliminar</button>
-                <!--<button class="btn btn-grey">Modificar</button>-->
-              </div>
-              <!-- modal eliminar usuario-->
-          <div class="modal fade" id="modalEliminarUsuario" tabindex="-1" aria-labelledby="modalLabelEliminarUsuario"
-          aria-hidden="true">
-          <div class="modal-dialog">
-              <div class="modal-content">
-                  <div class="modal-header bg-dark text-white">
-                      <h5 class="modal-title" id="modalLabelEliminarUsuario">Eliminar Usuario</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="col-md-12">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="" name="usuarioactivo" [(ngModel)]="usuario.activo">
+                    <label class="form-check-label" for="">
+                      Activo
+                    </label>
                   </div>
-                  <div class="modal-body">
-                      <div class="container-fluid col-10 offset-1 mb-3">
-                          <div class="col-12">
-                           <h6>¿Está seguro/a de que desea eliminar el usuario?</h6>
-                         </div>
-                      </div>
-                  </div>
-                  <div class="modal-footer">
-                      <button type="button" class="btn btn-red"
-                          data-bs-dismiss="modal" (click)="eliminarUsuario(usuarioForm)">Eliminar</button>
-                      <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Cerrar</button>
-                  </div>
-              </div>
-          </div>
-          </div>
-
-          <!-- modal modificar usuario-->
-          <div class="modal fade" id="modalModificarUsuario" tabindex="-1" aria-labelledby="modalLabelModificarUsuario"
-          aria-hidden="true">
-          <div class="modal-dialog">
-              <div class="modal-content">
-                  <div class="modal-header bg-dark text-white">
-                      <h5 class="modal-title" id="modalLabelModificarUsuario">Modificar Usuario</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                      <div class="container-fluid col-10 offset-1 mb-3">
-                          <div class="col-12">
-                           <h6>¿Está seguro/a de que desea modificar el usuario?</h6>
-                         </div>
-                      </div>
-                  </div>
-                  <div class="modal-footer">
-                      <button type="button" class="btn btn-green"
-                          data-bs-dismiss="modal" (click)="actualizarUsuario(usuarioForm)">Modificar</button>
-                      <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Cerrar</button>
-                  </div>
-              </div>
-          </div>
-          </div>
-            </form>
-            
-
-
-
+                </div>
+                <div class="col-12 buttons">
+                  <button type="button" class="btn btn-green" (click)="agregarUsuario(usuarioForm)" *ngIf="deseaagregar" [disabled]="deshabilitar || usuarioForm.invalid">Guardar</button>
+                  <button type="button" class="btn btn-green" data-bs-toggle="modal"
+                  data-bs-target="#modalModificarUsuario" *ngIf="deseaagregar == false" [disabled]="deshabilitar || usuarioForm.invalid">Modificar</button>
+                  <!--<button type="button" class="btn btn-danger" (click)="eliminarUsuario(usuarioForm)" *ngIf="deseaagregar == false">Eliminar</button>-->
+                  <button class="btn btn-red" data-bs-toggle="modal"
+                        data-bs-target="#modalEliminarUsuario" *ngIf="deseaagregar == false" [disabled]="deshabilitar">Eliminar</button>
+                  <!--<button class="btn btn-grey">Modificar</button>-->
+                </div>
+                <!-- modal eliminar usuario-->
+            <div class="modal fade" id="modalEliminarUsuario" tabindex="-1" aria-labelledby="modalLabelEliminarUsuario"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-dark text-white">
+                        <h5 class="modal-title" id="modalLabelEliminarUsuario">Eliminar Usuario</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid col-10 offset-1 mb-3">
+                            <div class="col-12">
+                             <h6>¿Está seguro/a de que desea eliminar el usuario?</h6>
+                           </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-red"
+                            data-bs-dismiss="modal" (click)="eliminarUsuario(usuarioForm)">Eliminar</button>
+                        <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+            </div>
+  
+            <!-- modal modificar usuario-->
+            <div class="modal fade" id="modalModificarUsuario" tabindex="-1" aria-labelledby="modalLabelModificarUsuario"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-dark text-white">
+                        <h5 class="modal-title" id="modalLabelModificarUsuario">Modificar Usuario</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid col-10 offset-1 mb-3">
+                            <div class="col-12">
+                             <h6>¿Está seguro/a de que desea modificar el usuario?</h6>
+                           </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-green"
+                            data-bs-dismiss="modal" (click)="actualizarUsuario(usuarioForm)">Modificar</button>
+                        <button type="button" class="btn btn-grey" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+            </div>
+              </form>
+              <br /><br />
+            </div>
 
             
           </div>
+          
         </section>
       </div>
-      
+      <br /><br />
     </div>
   </section>
 </main>

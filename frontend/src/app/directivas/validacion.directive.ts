@@ -133,3 +133,80 @@ export class ControlMontoDecimales {
 }
 
 
+function controlDni(c:AbstractControl){
+  // si el control no ha sido usado retorno null
+  if (c.value == null) return null;
+  // si se ha ingresado un caracter especial en el titulo
+  // la funcion test retornara true
+  if(/(^([0-9]{7,8})|^)$/.test(c.value) == false){
+  // retorno un error mediante un objeto con un atributo booleado,
+  // este atributo será parte del array de errors asociado al control.
+  return {controlDeDni: true}
+  }
+  // en cualquier otro caso retorno null (sin error)
+  return null;
+ } 
+
+ @Directive({
+  selector: '[control-dni]',
+  providers:[
+    {provide: NG_VALIDATORS, multi: true, useValue:controlDni}
+    ]
+})
+export class ControlDni {
+
+  constructor() { }
+
+}
+
+function controlEmail(c:AbstractControl){
+  // si el control no ha sido usado retorno null
+  if (c.value == null) return null;
+  // si se ha ingresado un caracter especial en el titulo
+  // la funcion test retornara true
+  if(/^(([^<>()\[\]\\.,;:\s@”]+(\.[^<>()\[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[a-zA-Z]{2,}))$/.test(c.value) == false){
+  // retorno un error mediante un objeto con un atributo booleado,
+  // este atributo será parte del array de errors asociado al control.
+  return {controlDeEmail: true}
+  }
+  // en cualquier otro caso retorno null (sin error)
+  return null;
+ } 
+
+ @Directive({
+  selector: '[control-email]',
+  providers:[
+    {provide: NG_VALIDATORS, multi: true, useValue:controlEmail}
+    ]
+})
+export class ControlEmail {
+
+  constructor() { }
+
+}
+
+function controlCelular(c:AbstractControl){
+  // si el control no ha sido usado retorno null
+  if (c.value == null) return null;
+  // si se ha ingresado un caracter especial en el titulo
+  // la funcion test retornara true
+  if(/^(388|0388)?[ -]*([0-9]){7}$/.test(c.value) == false){
+  // retorno un error mediante un objeto con un atributo booleado,
+  // este atributo será parte del array de errors asociado al control.
+  return {controlDeCelular: true}
+  }
+  // en cualquier otro caso retorno null (sin error)
+  return null;
+ } 
+
+ @Directive({
+  selector: '[control-celular]',
+  providers:[
+    {provide: NG_VALIDATORS, multi: true, useValue:controlCelular}
+    ]
+})
+export class ControlCelular {
+
+  constructor() { }
+
+}

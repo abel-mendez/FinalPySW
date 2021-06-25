@@ -222,7 +222,7 @@ export class AlumnoComponent implements OnInit {
         { field: 'completado', displayName: 'Estado del pago'},
 
       ],
-      header: '<h1 class="titulo">Green Gym<br>Todos tus pagoss</h1>',
+      header: '<h1 class="titulo">Green Gym<br>Todos tus pagos</h1>',
       style: '.titulo {text-align: center; color: #2ec400; font: helvetica neue}',
       documentTitle: 'Mis Pagos',
       type: 'json',

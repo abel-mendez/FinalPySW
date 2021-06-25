@@ -1,6 +1,6 @@
 <!--    Progreso del Alumno   -->
 <main>
-  <h3 class="categorie mb-3">Tus Datos</h3>
+  <br />
   <div>
     <nav>
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -63,33 +63,41 @@
       >
         <section>
           <h3 class="categorie">Tu Progreso</h3>
-          <div class="table-responsive">
+          <div class="table-responsive card-body col-12">
             <table
-              class="table table-striped"
+              class="table table-striped table-hover table-bordered"
               [mfData]="progresos"
               #mf="mfDataTable"
               [mfRowsOnPage]="5"
             >
               <thead>
-                <tr>
-                  <th>
-                    <mfDefaultSorter by="fecha">Fecha</mfDefaultSorter>
+                <tr class="bg-dark">
+                  <th style="width: 15%;">
+                    <mfDefaultSorter by="fecha">
+                      <span class="text-white text-decoration-none text-decoration-underline">Fecha</span>
+                    </mfDefaultSorter>
                   </th>
-                  <th>
-                    <mfDefaultSorter by="peso">Peso</mfDefaultSorter>
+                  <th style="width: 10%;">
+                    <mfDefaultSorter by="peso">
+                      <span class="text-white text-decoration-none text-decoration-underline">Peso</span>
+                    </mfDefaultSorter>
                   </th>
-                  <th>
-                    <mfDefaultSorter by="foto">Foto</mfDefaultSorter>
+                  <th style="width: 30%;">
+                    <mfDefaultSorter by="foto">
+                      <span class="text-white text-decoration-none text-decoration-underline">Foto</span>
+                    </mfDefaultSorter>
                   </th>
-                  <th>
-                    <mfDefaultSorter by="dieta">Dieta</mfDefaultSorter>
+                  <th style="width: 15%;">
+                    <mfDefaultSorter by="dieta">
+                      <span class="text-white text-decoration-none text-decoration-underline">Dieta</span>
+                    </mfDefaultSorter>
                   </th>
-                  <th>
+                  <th style="width: 30%;">
                     <mfDefaultSorter by="observaciones"
-                      >Observaciones</mfDefaultSorter
+                      ><span class="text-white text-decoration-none text-decoration-underline">Observaciones</span></mfDefaultSorter
                     >
                   </th>
-                  <th>Opciones</th>
+                  <th><span class="text-white text-decoration-none text-decoration-underline">Acciones</span></th>
                 </tr>
               </thead>
               <tbody>
@@ -98,7 +106,7 @@
                     {{ progreso.fecha | date: "dd/MM/yyyy" }}
                   </td>
                   <td>{{ progreso.peso }} Kg</td>
-                  <td><img src="{{ progreso.foto }}" alt="" width="50%" /></td>
+                  <td><img src="{{ progreso.foto }}" alt="" width="70%" /></td>
                   <td>{{ progreso.dieta }}</td>
                   <td>{{ progreso.observaciones }}</td>
                   <td>
@@ -124,32 +132,6 @@
                 </tr>
               </tfoot>
             </table>
-            <!-- codigo viejo
-              <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th scope="col" class="col-2">Fecha</th>
-                  <th scope="col" class="col-3">Observaciones</th>
-                  <th scope="col" class="col-3">Dieta</th>
-                  <th scope="col" class="col-3">Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th>17/03/2021</th>
-                  <td>
-                    Se observa una mejoria en la potencia y fuerza del alumno
-                  </td>
-                  <td></td>
-                  <td scope="col" class="col-2">
-                    <button type="button" class="btn-green btn" data-bs-toggle="modal"
-                      data-bs-target="#modalVerProgreso" (click)="getAlumno()">
-                      Ver Imagen
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>-->
           </div>
         </section>
 
@@ -203,22 +185,6 @@
                   </div>
                 </div>
 
-                <!--<div class="col-12 mb-3">
-            <label for="" class="form-label">Fecha</label>
-            <input type="date" class="form-control" id="" />
-          </div>
-          <div class="col-12 mb-3">
-            <label for="" class="form-label">Peso</label>
-            <input type="number" class="form-control" id="" />
-          </div>
-          <div class="col-12 mb-3">
-            <label for="" class="form-label">Observaciones</label>
-            <textarea type="text" class="form-control" id="" rows="5"></textarea>
-          </div>
-          <div class="col-12 mb-3">
-            <label for="" class="form-label">Agregar Imagen del Progreso</label>
-            <input type="file" class="form-control" id="" />
-          </div>-->
               </div>
               <div class="modal-footer">
                 <button
@@ -242,7 +208,7 @@
         <!--          ver asistencia del alumno      -->
         <section>
           <h3 class="categorie">Tu Asistencia</h3>
-          <div class="table-responsive">
+          <div class="text-center">
             <button
               class="btn btn-green"
               id=""
@@ -251,21 +217,29 @@
             >
               Imprimir todas
             </button>
+          </div>
+          <div class="table-responsive card-body col-md-8 offset-md-2">
             <table
-              class="table table-striped"
+              class="table table-striped table-bordered table-hover"
               [mfData]="asistencias"
               #mf1="mfDataTable"
               [mfRowsOnPage]="5"
             >
               <thead>
-                <tr>
+                <tr class="bg-dark">
                   <th style="width: 30%">
-                    <mfDefaultSorter by="fecha">Fecha</mfDefaultSorter>
+                    <mfDefaultSorter by="fecha">
+                      <span class="text-white text-decoration-none text-decoration-underline">Fecha</span>
+                    </mfDefaultSorter>
                   </th>
                   <th style="width: 30%">
-                    <mfDefaultSorter by="hora">Hora</mfDefaultSorter>
+                    <mfDefaultSorter by="hora">
+                      <span class="text-white text-decoration-none text-decoration-underline">Hora</span>
+                    </mfDefaultSorter>
                   </th>
-                  <th style="width: 40%">Opciones</th>
+                  <th style="width: 40%">
+                    <span class="text-white text-decoration-none text-decoration-underline">Acciones</span>
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -433,34 +407,39 @@
         <!--          ver rutinas del alumno      -->
         <section>
           <h3 class="categorie">Tus rutinas</h3>
-          <div class="table-responsive">
-            <div class="card-body table-responsive-sm">
+          <div class="table-responsive card-body">
+            <div class="card-body table-responsive col-md-8 offset-md-2">
               <table
-                class="table table-striped"
+                class="table table-striped table-bordered table-hover"
                 [mfData]="rutinas"
                 #mf2="mfDataTable"
                 [mfRowsOnPage]="5"
               >
                 <thead>
-                  <tr>
+                  <tr class="bg-dark">
                     <th>
-                      <mfDefaultSorter by="duracion">Duración</mfDefaultSorter>
+                      <mfDefaultSorter by="duracion">
+                        <span class="text-white text-decoration-none text-decoration-underline">Duración</span>
+                      </mfDefaultSorter>
                     </th>
                     <th>
                       <mfDefaultSorter by="grupomuscular"
-                        >Grupo muscular</mfDefaultSorter
+                        ><span class="text-white text-decoration-none text-decoration-underline">Grupo muscular</span>
+                        </mfDefaultSorter
                       >
                     </th>
                     <th>
                       <mfDefaultSorter by="ejercicios"
-                        >Ejercicios</mfDefaultSorter
+                        >
+                        <span class="text-white text-decoration-none text-decoration-underline">Ejercicios</span>
+                        </mfDefaultSorter
                       >
                     </th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let rutina of mf2.data">
-                    <td>{{ rutina.duracion }}</td>
+                    <td>{{ rutina.duracion }} minutos</td>
                     <td>{{ rutina.grupomuscular }}</td>
                     <td>
                       <button
@@ -473,10 +452,6 @@
                         Ver ejercicios
                       </button>
                     </td>
-                    <!--<td>
-                      <button class="btn btn-green" data-bs-toggle="modal" data-bs-target="#modalAgregarRutina"
-                        (click)="cargarRutina(r._id)">Ver</button>
-                        </td>-->
                   </tr>
                 </tbody>
                 <tfoot>
@@ -490,61 +465,6 @@
                 </tfoot>
               </table>
             </div>
-            <!--<table class="table table-striped" [mfData]="ejercicios" #mf3="mfDataTable" [mfRowsOnPage]="5">
-              <thead>
-                <tr>
-                  <th style="width: 30%">
-                    <mfDefaultSorter by="nombre">Nombre</mfDefaultSorter>
-                  </th>
-                  <th style="width: 10%">
-                    <mfDefaultSorter by="series">Series</mfDefaultSorter>
-                  </th>
-                  <th style="width: 20%">
-                    <mfDefaultSorter by="repeticiones">Repeticiones</mfDefaultSorter>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let ejercicio of mf3.data">
-                  <td>{{ ejercicio.nombre}}</td>
-                  <td>{{ ejercicio.series }}</td>
-                  <td>{{ ejercicio.repeticiones}}</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <td colspan="4">
-                    <mfBootstrapPaginator [rowsOnPageSet]="[5, 10, 25]"></mfBootstrapPaginator>
-                  </td>
-                </tr>
-              </tfoot>
-            </table>-->
-            <!-- codigo viejo
-              <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th scope="col" class="col-2">Dia</th>
-                  <th scope="col" class="col-3">Rutina</th>
-                  <th scope="col" class="col-2">Repeticiones</th>
-                  <th scope="col" class="col-2">Series</th>
-                  <th scope="col" class="col-3">Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th>Lunes 17</th>
-                  <td>Levantamiento de Mancuernas</td>
-                  <td>10</td>
-                  <td>3</td>
-                  <td>
-                    <button class="btn btn-green" data-bs-toggle="modal" data-bs-target="#modalVerRutina">
-                      Detalles
-                    </button>
-                    <button class="btn btn-grey">Imprimir</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>-->
           </div>
         </section>
 
@@ -633,20 +553,24 @@
               ></button>
             </div>
             <div class="modal-body">
-              <div class="table-responsive">
+              <div class="table-responsive card-body">
                 <table
-                  class="table table-striped"
+                  class="table table-striped table-hover table-bordered"
                   [mfData]="ejercicios"
                   #mf3="mfDataTable"
                   [mfRowsOnPage]="5"
                 >
                   <thead>
-                    <tr>
+                    <tr class="bg-dark">
                       <th>
-                        <mfDefaultSorter by="nombre">Nombre</mfDefaultSorter>
+                        <mfDefaultSorter by="nombre">
+                          <span class="text-white text-decoration-none text-decoration-underline">Nombre</span>
+                        </mfDefaultSorter>
                       </th>
                       <th>
-                        <mfDefaultSorter by="series">Series</mfDefaultSorter>
+                        <mfDefaultSorter by="series">
+                          <span class="text-white text-decoration-none text-decoration-underline">Series</span>
+                        </mfDefaultSorter>
                       </th>
                       <th>
                         <mfDefaultSorter by="repeticiones"
@@ -696,7 +620,7 @@
         <!--          ver pago de cuotas del alumno     -->
         <section>
           <h3 class="categorie">Tus Pagos</h3>
-          <div class="table-responsive">
+          <div class="text-center">
             <button
               class="btn btn-green"
               id=""
@@ -705,41 +629,57 @@
             >
               Imprimir todos
             </button>
+          </div>
+          <div class="table-responsive card-body">
+            
             <table
-              class="table table-striped"
+              class="table table-striped table-bordered table-hover"
               [mfData]="pagos"
               #mf5="mfDataTable"
               [mfRowsOnPage]="5"
             >
               <thead>
-                <tr>
+                <tr class="bg-dark">
                   <th>
-                    <mfDefaultSorter by="monto">Monto</mfDefaultSorter>
+                    <mfDefaultSorter by="monto">
+                      <span class="text-white text-decoration-none text-decoration-underline">Monto</span>
+                    </mfDefaultSorter>
                   </th>
                   <th>
-                    <mfDefaultSorter by="fechapago">Fecha Pago</mfDefaultSorter>
+                    <mfDefaultSorter by="fechapago">
+                      <span class="text-white text-decoration-none text-decoration-underline">Fecha del Pago</span>
+                    </mfDefaultSorter>
                   </th>
                   <th>
                     <mfDefaultSorter by="modopago"
-                      >Modo de Pago</mfDefaultSorter
+                      >
+                      <span class="text-white text-decoration-none text-decoration-underline">Modo de Pago</span>
+                      </mfDefaultSorter
                     >
                   </th>
                   <th>
                     <mfDefaultSorter by="fechavencimiento"
-                      >Fecha Vencimiento</mfDefaultSorter
+                      >
+                      <span class="text-white text-decoration-none text-decoration-underline">Fecha del vencimiento</span>
+                      </mfDefaultSorter
                     >
                   </th>
                   <th>
                     <mfDefaultSorter by="completado"
-                      >Completado</mfDefaultSorter
+                      >
+                      <span class="text-white text-decoration-none text-decoration-underline">Completado</span>
+                      </mfDefaultSorter
                     >
                   </th>
-                  <th>Opciones</th>
+                  <th>
+                    <span class="text-white text-decoration-none text-decoration-underline">Opciones</span>
+
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let pago of mf5.data">
-                  <td>{{ pago.monto }}</td>
+                  <td>{{ pago.monto | currency:'AR$ ' }}</td>
                   <td class="text-right">
                     {{ pago.fechapago | date: "dd/MM/yyyy" }}
                   </td>
@@ -772,31 +712,6 @@
                 </tr>
               </tfoot>
             </table>
-            <!--<table class="table table-hover">
-              <thead>
-                <tr>
-                  <th scope="col" class="col-2">Fecha</th>
-                  <th scope="col" class="col-2">Plan</th>
-                  <th scope="col" class="col-2">Monto</th>
-                  <th scope="col" class="col-3">Pago</th>
-                  <th scope="col" class="col-3">Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th>17/03/2021</th>
-                  <td>Plan Basico</td>
-                  <td>$1000</td>
-                  <td>Realizado con tarjeta de credito Visa</td>
-                  <td>
-                    <button class="btn btn-green" data-bs-toggle="modal" data-bs-target="#modalVerPago">
-                      Detalles
-                    </button>
-                    <button class="btn btn-grey">Imprimir</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>-->
           </div>
           <!-- modal imprimir pago -->
           <div
@@ -860,7 +775,6 @@
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <!--<button class="btn btn-green" (click)="imprimirComprobante()" >Imprimir</button>-->
                   <button
                     type="button"
                     class="btn btn-green"
@@ -884,52 +798,6 @@
           </div>
         </section>
 
-        <!-- Modal ver Pago -->
-        <!--<div class="modal fade" id="modalVerPago" tabindex="-1" aria-labelledby="modalLabelVerpago" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="modalLabelVerPago">Tus Pagos</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <div class="container-fluid col-10 offset-1 mb-3">
-                  <div class="row mb-3">
-                    <div class="col-md-5 text-init"><b>Monto: </b></div>
-                    <div class="col-md-7 text-end">{{pago.monto}}</div>
-                  </div>
-                  <div class="row mb-3">
-                    <div class="col-md-4 text-init"><b>Fecha de Pago: </b></div>
-                    <div class="col-md-8 text-end">{{pago.fechapago}}</div>
-                  </div>
-                  <div class="row mb-3">
-                    <div class="col-md-4 text-init">
-                      <b>Modo de Pago: </b>
-                    </div>
-                    <div class="col-md-8 text-end">{{pago.modopago}}</div>
-                  </div>
-                  <div class="row mb-3">
-                    <div class="col-md-4 text-init">
-                      <b>Fecha de Vencimiento: </b>
-                    </div>
-                    <div class="col-md-8 text-end">{{pago.fechavencimiento}}</div>
-                  </div>
-                  <div class="row mb-3">
-                    <div class="col-md-4 text-init">
-                      <b>Pago Completado: </b>
-                    </div>
-                    <div class="col-md-8 text-end">{{pago.completado}}</div>
-                  </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-grey" data-bs-dismiss="modal">
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>-->
       </div>
     </div>
   </div>

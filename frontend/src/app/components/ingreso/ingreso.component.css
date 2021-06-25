@@ -76,3 +76,9 @@ main {
   color: rgb(63, 63, 63) !important;
   border: none !important;
 }
+
+.table{
+  box-shadow: 1px 1px 5px;}
+
+.cuadro  {
+  box-shadow: 1px 1px 5px;}
