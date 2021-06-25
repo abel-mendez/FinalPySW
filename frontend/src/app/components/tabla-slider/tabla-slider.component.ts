@@ -85,12 +85,8 @@ export class TablaSliderComponent implements OnInit {
         this.slider = new Slider();
         this.cargarSliders();
         this.postFb();
-<<<<<<< HEAD
-        
-=======
         form.reset();
         this.slider = new Slider();
->>>>>>> c89f5c95a5764a55475ff6ce7044ba023eca2860
       },
       error => {
         this.toastr.error("Error al agregar el slider", "Operación fallida");
