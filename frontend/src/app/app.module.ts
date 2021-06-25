@@ -27,7 +27,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AlifeFileToBase64Module } from 'alife-file-to-base64';
 import { LoginService } from './services/login/login.service';
 import { ControlPeso, ControlDuracion, ControlSeriesRep, ControlMonto,
-ControlMontoDecimales,} from './directivas/validacion.directive';
+ControlMontoDecimales, ControlDni, ControlEmail, ControlCelular} from './directivas/validacion.directive';
 import { NgxPrintModule } from 'ngx-print';
 import { TraducirBoolPipe } from './pipes/traducir-bool.pipe';
 // importamos la librería HTTP_INTERCEPTOR
@@ -55,7 +55,10 @@ import { TokenInterceptorService } from './services/login/token-interceptor.serv
     ControlDuracion,
     ControlSeriesRep,
     ControlMonto,
+    ControlDni,
     ControlMontoDecimales,
+    ControlEmail,
+    ControlCelular,
     TraducirBoolPipe
   ],
   imports: [
