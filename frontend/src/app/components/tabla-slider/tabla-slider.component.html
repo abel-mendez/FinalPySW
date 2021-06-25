@@ -121,7 +121,7 @@
               <button
                 type="button"
                 class="btn btn-green"
-                (click)="agregarSlider()"
+                (click)="agregarSlider(sliderForm)"
                 data-bs-dismiss="modal"
                 [disabled]="!sliderForm.form.valid"
               >
@@ -453,7 +453,7 @@
               <button
                 type="button"
                 class="btn btn-green"
-                (click)="agregarPlan()"
+                (click)="agregarPlan(planForm)"
                 data-bs-dismiss="modal"
                 [disabled]="!planForm.form.valid"
               >

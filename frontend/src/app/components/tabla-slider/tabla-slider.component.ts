@@ -77,13 +77,14 @@ export class TablaSliderComponent implements OnInit {
   }
 
   //Slider
-  agregarSlider() {
+  agregarSlider(form: NgForm) {
     this.sliderService.postSlider(this.slider).subscribe(
       result => {
         this.toastr.success("El Slider se agregó correctamente", "Operación exitosa");
         this.sliders = new Array<Slider>();
         this.cargarSliders();
         this.postFb();
+        form.reset();
         this.slider = new Slider();
       },
       error => {
@@ -136,13 +137,14 @@ export class TablaSliderComponent implements OnInit {
   }
 
   //Plan
-  agregarPlan() {
+  agregarPlan(form: NgForm) {
     this.planService.postPlan(this.plan).subscribe(
       result => {
         this.toastr.success("El Plan se agregó correctamente", "Operación exitosa");
         this.planes = new Array<Plan>();
         this.plan = new Plan();
         this.cargarPlanes();
+        form.reset();
       },
       error => {
         this.toastr.error("Error al agregar el plan", "Operación fallida");
