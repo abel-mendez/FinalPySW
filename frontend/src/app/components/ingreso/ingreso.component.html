@@ -1070,11 +1070,20 @@
             <form class="row g-3" #usuarioForm="ngForm">
               <div class="col-md-6">  
                 <label for="" class="form-label">Nombre de Usuario</label>
-                <input type="text" class="form-control" id="" name="usuarionombre" [(ngModel)]="usuario.usuario"/>
+                <input type="text" class="form-control" id="" name="usuarionombre" [(ngModel)]="usuario.usuario" #username="ngModel" minlength="3" required/>
+                <div *ngIf="username.invalid && (username.touched || username.dirty)" class="alert alert-danger">
+                  <div *ngIf="username.errors.required"> Ingrese un nombre de usuario </div>
+                  <div *ngIf="username.errors.minlength"> Se requieren al menos {{username.errors.minlength.requiredLength}} caracteres </div>
+                </div>
+
               </div>
               <div class="col-md-6">
                 <label for="" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" id="" name="usuariopwd" [(ngModel)]="usuario.password"/>
+                <input type="password" class="form-control" id="" name="usuariopwd" [(ngModel)]="usuario.password" #pashword="ngModel" minlength="6" required/>
+                <div *ngIf="pashword.invalid && (pashword.touched || pashword.dirty)" class="alert alert-danger">
+                  <div *ngIf="pashword.errors.required"> Ingrese una contraseña </div>
+                  <div *ngIf="pashword.errors.minlength"> Se requieren al menos {{pashword.errors.minlength.requiredLength}} caracteres </div>
+                </div>
               </div>
               <!--<div class="col-md-6">
                 <label for="" class="form-label">Tipo de perfil</label>
@@ -1094,9 +1103,9 @@
                 </div>
               </div>
               <div class="col-12 buttons">
-                <button type="button" class="btn btn-green" (click)="agregarUsuario(usuarioForm)" *ngIf="deseaagregar" [disabled]="deshabilitar">Guardar</button>
+                <button type="button" class="btn btn-green" (click)="agregarUsuario(usuarioForm)" *ngIf="deseaagregar" [disabled]="deshabilitar || usuarioForm.invalid">Guardar</button>
                 <button type="button" class="btn btn-green" data-bs-toggle="modal"
-                data-bs-target="#modalModificarUsuario" *ngIf="deseaagregar == false" [disabled]="deshabilitar">Modificar</button>
+                data-bs-target="#modalModificarUsuario" *ngIf="deseaagregar == false" [disabled]="deshabilitar || usuarioForm.invalid">Modificar</button>
                 <!--<button type="button" class="btn btn-danger" (click)="eliminarUsuario(usuarioForm)" *ngIf="deseaagregar == false">Eliminar</button>-->
                 <button class="btn btn-red" data-bs-toggle="modal"
                       data-bs-target="#modalEliminarUsuario" *ngIf="deseaagregar == false" [disabled]="deshabilitar">Eliminar</button>

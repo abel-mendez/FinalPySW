@@ -132,17 +132,29 @@ export class IngresoComponent implements OnInit {
   }
 
   actualizarUsuario(form: NgForm){
-    this.alumnoService.updateUsuario(this.usuario).subscribe(
+    this.alumnoService.verificarUsuario(this.usuario.usuario).subscribe(
       result => {
-        if (result.status == "1"){
-          this.toastr.info("El usuario se modificó correctamente", "Operación exitosa");
-          //this.cargarAlumno(this.alumno._id);
+        if (result == true){
+          this.toastr.error("El nombre de usuario ya existe", "Operación fallida");
+        } else{
+          this.alumnoService.updateUsuario(this.usuario).subscribe(
+            result => {
+              if (result.status == "1"){
+                this.toastr.info("El usuario se modificó correctamente", "Operación exitosa");
+                //this.cargarAlumno(this.alumno._id);
+              }
+            },
+            error => {
+              this.toastr.error("Error al modificar el usuario", "Operación fallida");
+            }
+          )
         }
       },
       error => {
-        this.toastr.error("Error al modificar el usuario", "Operación fallida");
+        
       }
     )
+    
     
   }
 
