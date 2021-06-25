@@ -18,7 +18,8 @@ const routes: Routes = [
   {path:'alumno-form',component: AlumnoFormComponent},
   {path:'estadisticas',component: EstadisticasComponent},
   {path:'alumno-detalles/:id',component: IngresoComponent},
-  {path:'configuracion',component: TablaSliderComponent}
+  {path:'configuracion',component: TablaSliderComponent},
+  {path:'**',redirectTo:'home',pathMatch:'full'},
 ];
 
 @NgModule({
