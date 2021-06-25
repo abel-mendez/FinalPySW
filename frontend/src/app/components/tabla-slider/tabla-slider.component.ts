@@ -113,6 +113,7 @@ export class TablaSliderComponent implements OnInit {
         this.toastr.info("El Slider se eliminó correctamente", "Operación exitosa");
         this.sliders = new Array<Slider>();
         this.cargarSliders();
+        this.slider= new Slider();
       },
       error => {
         this.toastr.error("Error al eliminar el slider", "Operación fallida");
