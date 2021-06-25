@@ -82,9 +82,10 @@ export class TablaSliderComponent implements OnInit {
       result => {
         this.toastr.success("El Slider se agregó correctamente", "Operación exitosa");
         this.sliders = new Array<Slider>();
+        this.slider = new Slider();
         this.cargarSliders();
         this.postFb();
-        this.slider = new Slider();
+        
       },
       error => {
         this.toastr.error("Error al agregar el slider", "Operación fallida");

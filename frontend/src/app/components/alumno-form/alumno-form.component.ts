@@ -20,17 +20,17 @@ export class AlumnoFormComponent implements OnInit {
   constructor(private planService:PlanService,
               private alumnoService:AlumnoService,
               private router:Router,
-              private toastr:ToastrService,
+              private toast:ToastrService,
               private loginService:LoginService) { 
                 if(this.loginService.userLoggedIn()==true){
                   if(sessionStorage.getItem("perfil")== "entrenador"){
 
                   }else{
-                    alert("No posee los permisos necesarios")
-                  this.router.navigate(['home']);
+                    this.toast.warning("No posee los permisos necesarios", "Error")
+                    this.router.navigate(['home']);
                   }
                 }else{
-                  alert("Debe Loguearse para continuar")
+                  this.toast.info("Debe loguearse para continuar", "Usuario no identificado")
                   this.router.navigate(['login']);
                 }
               }
@@ -50,7 +50,7 @@ export class AlumnoFormComponent implements OnInit {
         });
       },
       error=>{
-        this.toastr.error("Error al cargar los planes" ,"Operación fallida");
+        this.toast.error("Error al cargar los planes" ,"Operación fallida");
       }
     )
   }
@@ -59,12 +59,12 @@ export class AlumnoFormComponent implements OnInit {
     this.alumnoService.addAlumno(this.alumno).subscribe(
       result=>{
         if(result.status=="1"){
-          this.toastr.success("El alumno se agregó correctamente", "Operación exitosa");
+          this.toast.success("El alumno se agregó correctamente", "Operación exitosa");
           this.router.navigate(["alumnos"]);
         }
       },
       error=>{
-        this.toastr.error("Error al agregar el alumno", "Operación fallida");
+        this.toast.error("Error al agregar el alumno", "Operación fallida");
       }
 
     )

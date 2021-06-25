@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Chart } from 'chart.js';
+import { ToastrService } from 'ngx-toastr';
 import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
@@ -11,16 +12,17 @@ import { LoginService } from 'src/app/services/login/login.service';
 export class EstadisticasComponent implements OnInit {
 
   constructor(private loginService:LoginService,
-    private router:Router) { 
+    private router:Router,
+    private toastr:ToastrService) { 
       if(this.loginService.userLoggedIn()==true){
         if(sessionStorage.getItem("perfil")== "entrenador"){
 
         }else{
-          alert("No posee los permisos necesarios")
+          this.toastr.warning("No posee los permisos necesarios", "Error")
         this.router.navigate(['home']);
         }
       }else{
-        alert("Debe Loguearse para continuar")
+        this.toastr.info("Debe loguearse para continuar", "Usuario no identificado")
         this.router.navigate(['login']);
       }
     }
