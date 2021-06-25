@@ -77,7 +77,7 @@ export class TablaSliderComponent implements OnInit {
   }
 
   //Slider
-  agregarSlider() {
+  agregarSlider(form: NgForm) {
     this.sliderService.postSlider(this.slider).subscribe(
       result => {
         this.toastr.success("El Slider se agregó correctamente", "Operación exitosa");
@@ -85,7 +85,12 @@ export class TablaSliderComponent implements OnInit {
         this.slider = new Slider();
         this.cargarSliders();
         this.postFb();
+<<<<<<< HEAD
         
+=======
+        form.reset();
+        this.slider = new Slider();
+>>>>>>> c89f5c95a5764a55475ff6ce7044ba023eca2860
       },
       error => {
         this.toastr.error("Error al agregar el slider", "Operación fallida");
@@ -113,6 +118,7 @@ export class TablaSliderComponent implements OnInit {
         this.toastr.info("El Slider se eliminó correctamente", "Operación exitosa");
         this.sliders = new Array<Slider>();
         this.cargarSliders();
+        this.slider= new Slider();
       },
       error => {
         this.toastr.error("Error al eliminar el slider", "Operación fallida");
@@ -137,13 +143,14 @@ export class TablaSliderComponent implements OnInit {
   }
 
   //Plan
-  agregarPlan() {
+  agregarPlan(form: NgForm) {
     this.planService.postPlan(this.plan).subscribe(
       result => {
         this.toastr.success("El Plan se agregó correctamente", "Operación exitosa");
         this.planes = new Array<Plan>();
         this.plan = new Plan();
         this.cargarPlanes();
+        form.reset();
       },
       error => {
         this.toastr.error("Error al agregar el plan", "Operación fallida");
@@ -188,6 +195,7 @@ export class TablaSliderComponent implements OnInit {
         this.toastr.info("El Plan se eliminó correctamente", "Operación exitosa");
         this.planes = new Array<Plan>();
         this.cargarPlanes();
+        this.plan = new Plan();
       },
       error => {
         this.toastr.error("Error al eliminar el plan", "Operación fallida");

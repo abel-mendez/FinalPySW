@@ -104,10 +104,8 @@ export class IngresoComponent implements OnInit {
     this.alumnoService.verificarUsuario(this.usuario.usuario).subscribe(
       result => {
         if (result == true){
-          console.log(result);
           this.toastr.error("El nombre de usuario ya existe", "Operación fallida");
         }else{
-            console.log(result);
               this.alumnoService.addUsuario(this.alumno._id, this.usuario).subscribe(
                 result => {
                   if (result.status == "1"){
@@ -169,7 +167,6 @@ export class IngresoComponent implements OnInit {
         //console.log("aa" + result);
         //this.resultado = result;
         Object.assign(this.usuario,result);
-        console.log(result);
         if (this.usuario.password != ""){
           this.deseaagregar = false;
         }else{
@@ -189,10 +186,8 @@ export class IngresoComponent implements OnInit {
         //console.log("bb" + result);
         Object.assign(this.alumno,result);
         //this.cargarUsuario(this.idaux);
-        console.log(this.alumno);
         this.idaux = this.alumno.usuario._id;
         this.cargarUsuario(this.idaux);
-        console.log("id del usuario" + this.idaux);
         //Object.assign(this.usuario,result);
         //this.alumno.plan = this.planes.find(p=>(p._id == this.alumno.plan._id))
       },
@@ -643,7 +638,6 @@ usarEjercicioSeleccionado(ejercicio:Ejercicio){
     this.alumnoService.getEjercicio(this.alumno._id,this.rutina._id, idEjercicio).subscribe(
       result=>{
         Object.assign(this.ejercicio,result);
-        console.log(this.ejercicio);
       },
       error=>{
         this.toastr.error("Error al cargar el ejercicio","Operación fallida");

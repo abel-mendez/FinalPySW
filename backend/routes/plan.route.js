@@ -8,7 +8,7 @@ const router = express.Router();
 
 //definimos las rutas para la gestion de alumno
 
-router.get('/', autCtrl.verifyToken, planCtrl.getPlanes);
+router.get('/', planCtrl.getPlanes);
 router.get('/:id', autCtrl.verifyToken, planCtrl.getPlan);
 router.post('/', autCtrl.verifyToken, planCtrl.createPlan);
 router.get('/:tipo', autCtrl.verifyToken, planCtrl.getIDporTipo);
